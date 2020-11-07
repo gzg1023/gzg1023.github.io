@@ -7,35 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Fri, 06 Nov 2020 16:01:23 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 06 Mar 2018 16:01:23 +0800</lastBuildDate>
     
 	<atom:link href="https://gzg.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>docs</title>
-      <link>https://gzg.me/categories/docs/</link>
-      <pubDate>Fri, 06 Nov 2020 16:01:23 +0800</pubDate>
-      
-      <guid>https://gzg.me/categories/docs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>index</title>
       <link>https://gzg.me/categories/index/</link>
-      <pubDate>Fri, 06 Nov 2020 16:01:23 +0800</pubDate>
+      <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
       <guid>https://gzg.me/categories/index/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>math</title>
-      <link>https://gzg.me/categories/math/</link>
-      <pubDate>Fri, 06 Nov 2020 16:01:23 +0800</pubDate>
+      <title>shortcodes</title>
+      <link>https://gzg.me/categories/shortcodes/</link>
+      <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://gzg.me/categories/math/</guid>
+      <guid>https://gzg.me/categories/shortcodes/</guid>
       <description></description>
     </item>
     

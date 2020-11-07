@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JavaScript on 沽默清尘的博客</title>
+    <link>https://gzg.me/tags/javascript/</link>
+    <description>Recent content in JavaScript on 沽默清尘的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>gzg1023</copyright>
+    <lastBuildDate>Wed, 25 Dec 2019 22:32:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gzg.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【技术笔记】JS的Array的各种API</title>
+      <link>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</link>
+      <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【技术笔记】JS的String的各种API</title>
+      <link>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Fri, 06 Sep 2019 22:32:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;p&gt;String是js最常用的数据结果，本文最常见操作做一个总结&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

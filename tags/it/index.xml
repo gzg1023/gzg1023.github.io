@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT on 沽默清尘的博客</title>
+    <link>https://gzg.me/tags/it/</link>
+    <description>Recent content in IT on 沽默清尘的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>gzg1023</copyright>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gzg.me/tags/it/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【电脑优化】Window电脑优化运行速度技巧</title>
+      <link>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文针对Window系统总结一些常见的优化技巧，便于提高电脑运行速度；总共分为两大部分，硬件和软件部分。以及会说明一下市面常见所谓『优化系统』的弊端及推荐一些没有任何副作用的优化软件。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

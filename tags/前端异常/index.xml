@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端异常 on 沽默清尘的博客</title>
+    <link>https://gzg.me/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</link>
+    <description>Recent content in 前端异常 on 沽默清尘的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>gzg1023</copyright>
+    <lastBuildDate>Thu, 31 Oct 2019 21:28:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gzg.me/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【技术分享】前端异常监控之异常信息采集</title>
+      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</guid>
+      <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>【技术分享】前端调试（chrome开发者工具的使用） - 沽默清尘的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="gzg1023" />
+  <meta name="description" content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。
+" />
+
+  <meta name="keywords" content="沽默清尘, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3" />
+
+
+<link rel="canonical" href="https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.f1e506a781bf25d33ffc18aa6b4e972a965c58049d27d4f92b7db2e9bf28e4bf.css" integrity="sha256-8eUGp4G/JdM//Biqa06XKpZcWASdJ9T5K32y6b8o5L8=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="【技术分享】前端调试（chrome开发者工具的使用）" />
+<meta property="og:description" content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/" />
+<meta property="article:published_time" content="2019-08-07T22:50:00+00:00" />
+<meta property="article:modified_time" content="2019-08-07T22:50:00+00:00" />
+<meta itemprop="name" content="【技术分享】前端调试（chrome开发者工具的使用）">
+<meta itemprop="description" content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。">
+<meta itemprop="datePublished" content="2019-08-07T22:50:00+00:00" />
+<meta itemprop="dateModified" content="2019-08-07T22:50:00+00:00" />
+<meta itemprop="wordCount" content="3837">
+
+
+
+<meta itemprop="keywords" content="前端,调试," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="【技术分享】前端调试（chrome开发者工具的使用）"/>
+<meta name="twitter:description" content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">沽默清尘</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/about/">About</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      沽默清尘
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/about/">About</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">【技术分享】前端调试（chrome开发者工具的使用）</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-08-07" class="post-time">
+          2019-08-07
+        </time>
+        
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前端调试研究分析">前端调试研究分析</a></li>
+    <li><a href="#1-什么是调试">1. 什么是调试</a></li>
+    <li><a href="#2cssdom调试">2.	CSS(DOM)调试</a></li>
+    <li><a href="#3chrome-devtools调试">3.	Chrome DevTools调试</a>
+      <ul>
+        <li><a href="#31console面板">3.1	Console面板</a></li>
+        <li><a href="#32-network面板">3.2	 Network面板</a></li>
+        <li><a href="#33application面板">3.3	Application面板</a></li>
+        <li><a href="#34sources面板">3.4	Sources面板</a></li>
+        <li><a href="#35vue-devtools工具">3.5	vue-devtools工具</a></li>
+        <li><a href="#36其他功能">3.6	其他功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#4ie浏览器调试">4.	IE浏览器调试</a>
+      <ul>
+        <li><a href="#41ie11异同">4.1	IE11+异同</a></li>
+      </ul>
+    </li>
+    <li><a href="#5常见bug定位">5.	常见bug定位</a>
+      <ul>
+        <li><a href="#51状态码定位">5.1	状态码定位</a></li>
+        <li><a href="#52控制台定位">5.2	控制台定位</a></li>
+      </ul>
+    </li>
+    <li><a href="#6基础常识">6.	基础常识</a>
+      <ul>
+        <li><a href="#61cookie和local-storage的区别">6.1	Cookie和Local Storage的区别</a></li>
+        <li><a href="#62pxemremvw等单位的区别">6.2	px,em,rem,vw等单位的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#7官方文档">7.官方文档</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p>公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。</p>
+<h2 id="前端调试研究分析">前端调试研究分析</h2>
+<h2 id="1-什么是调试">1. 什么是调试</h2>
+<p>用手工或编译程序等方法进行测试，修正语法错误和逻辑错误的过程称为调试，前端调试主要分为CSS（DOM）调试和JavaScript调试。Javascript我们主要用Chrome Devtools进行调试。</p>
+<h2 id="2cssdom调试">2.	CSS(DOM)调试</h2>
+<p>CSS调试用于页面样式和DOM结构调试，通过开发者工具选中DOM元素（如图1.1），整个页面的结构都在Elements功能模块渲染。
+<img src="https://s2.ax1x.com/2019/09/08/n8w7Ue.png" alt="请输入图片描述"></p>
+<p>（图1.1）</p>
+<p>如图1.2所示，我们在Elements调试功能面板（Styles模块），可以看到已选择元素的所有CSS属性，可以在element.style {  }里面动态为当前DOM元素添加我们需要测试的样式，也可以选择某个CSS选择器来为整个存在该选择器的CSS添加样式。通过勾选CSS伪类属性，可以看到元素触发伪类后的样式内容。
+<img src="https://s2.ax1x.com/2019/09/08/n8wH4H.png" alt="请输入图片描述"></p>
+<p>（图1.2）</p>
+<p>如图1.3所示，我们在Elements调试功能面板（Computed模块），可以看到当前选中元素的CSS盒子模型和当前元素的所有CSS属性，并且通过点击每个属性，可以定位到该属性在文件的位置</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wIHO.png" alt="请输入图片描述"></p>
+<p>（图1.3）<!-- raw HTML omitted -->
+如图1.4所示，我们在Elements调试功能面板（Event Lissteners模块），可以看到当前元素所绑定的事件都会在列表里面展现，并且根据自己的需求进行筛选。
+<img src="https://s2.ax1x.com/2019/09/08/n8w5DK.png" alt="请输入图片描述"></p>
+<p>（图1.4）<!-- raw HTML omitted -->
+如图1.5所示，我们在Elements调试功能面板（DOM  Breakpoints模块），可以看到我们设置的DOM断点，当元素触发时，就会自动转跳到实施该事件的源码地址处（图1.6）</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wTED.png" alt="请输入图片描述"></p>
+<p>（图1.5）<!-- raw HTML omitted --></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wqCd.png" alt="请输入图片描述"></p>
+<p>（图1.6）
+如图1.7所示，我们在Elements调试功能面板（Properties模块），可以看到当前dom元素节点的各种属性，方面我们查询调试。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n80pVS.png" alt="请输入图片描述"></p>
+<p>（图1.7）</p>
+<h2 id="3chrome-devtools调试">3.	Chrome DevTools调试</h2>
+<p>Chrome开发者工具集成了前端调试所用到的全部功能，如下图所示，我们可以切换不同的面板来调试不同的功能。
+<img src="https://s2.ax1x.com/2019/09/08/n809Ug.png" alt="请输入图片描述"></p>
+<h3 id="31console面板">3.1	Console面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wXvt.png" alt="请输入图片描述"></p>
+<p>（图2.1）<!-- raw HTML omitted -->
+在日常开发者，我们会在程序里输入console.log来打印日志内容，除了打印我们预先设定好的内容外，还可以在控制台输入代码段来运行。除了正常文本或变量的值，我们还可以加上一个参数来格式化打印效果。如下图（图2.2）所示</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wzb8.png" alt="描述"></p>
+<p>（图2.2）</p>
+<p>除了console.log意外， console对象还有其他方法，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log()</td>
+<td>输出信息</td>
+<td>console.log(&ldquo;123&rdquo;)</td>
+</tr>
+<tr>
+<td>error()</td>
+<td>输出错误信息，并显示错误发生的堆栈</td>
+<td>console.error(&ldquo;Error: %s (%i)&rdquo;, &ldquo;err&rdquo;,500)</td>
+</tr>
+<tr>
+<td>group()</td>
+<td>用于将显示的信息分组</td>
+<td>console.group(&lsquo;第一层&rsquo;);<!-- raw HTML omitted -->console.group(&lsquo;第二层&rsquo;);</td>
+</tr>
+<tr>
+<td>table()</td>
+<td>将类型已表格形式输出</td>
+<td>var obj= { a:{ num: &ldquo;1&rdquo;}}; <!-- raw HTML omitted -->console.table(obj);</td>
+</tr>
+<tr>
+<td>time()<!-- raw HTML omitted -->timeEnd()</td>
+<td>输出程序运行时间，配合使用，在开头和结尾</td>
+<td>console.time(&lsquo;开始&rsquo;);<!-- raw HTML omitted -->for (var i = 0; i &lt; 100; i++) {} <!-- raw HTML omitted -->console.timeEnd(&lsquo;结束&rsquo;);</td>
+</tr>
+<tr>
+<td>trace()</td>
+<td>追踪函数的调用过程</td>
+<td>function d(a) { <!-- raw HTML omitted -->console.trace();<!-- raw HTML omitted -->return a;<!-- raw HTML omitted -->}<!-- raw HTML omitted -->function b(a) {<!-- raw HTML omitted --> return c(a);<!-- raw HTML omitted -->}<!-- raw HTML omitted -->function c(a) {<!-- raw HTML omitted --> return d(a);<!-- raw HTML omitted -->}<!-- raw HTML omitted -->var a = b(&lsquo;123&rsquo;);</td>
+</tr>
+<tr>
+<td>warn()</td>
+<td>输出警告信息</td>
+<td>console.warn(&ldquo;警告&rdquo;)</td>
+</tr>
+</tbody>
+</table>
+<p>在console面板也可以通过选择器来操作元素，查看相关的属性，直接在控制台面板输入相关的命令即可。具体用法见下表</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>参数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelector()返回第一个匹配dom的引用</td>
+</tr>
+<tr>
+<td>$$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelectorAll()返回全部匹配dom引用的数组</td>
+</tr>
+<tr>
+<td>$x(xpath)</td>
+<td>Xpath路径</td>
+<td>返回一个与给定 XPath 表达式匹配的 DOM 元素数组</td>
+</tr>
+<tr>
+<td>copy(object)</td>
+<td>Dom节点对象</td>
+<td>将指定DOM对象的字符串表示形式复制到剪贴板</td>
+</tr>
+<tr>
+<td>$_</td>
+<td>&ndash;</td>
+<td>返回最近评估的表达式的值,  $0~$4	0-4	最近5个你选择过的DOM节点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-network面板">3.2	 Network面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BYSs.png" alt="请输入图片描述"></p>
+<p>（图2.3）
+程序运行环境，网络请求是必不可少的，由上图我们可以看到一个完成网络请求的构成部分，一般情况下我们会选择XHR请求来调试。如图2.4所示，我们可以在header看请求的参数以及配置的请求头信息等。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BlTS.png" alt="请输入图片描述"></p>
+<p>（图2.4） <!-- raw HTML omitted -->
+在用户的操作环境中，我们不知道网络情况怎么样，可以用开发者工具的网络模拟功能，来测试在不同网络情况下网站能否正常运行。如图2.5所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Btln.png" alt="请输入图片描述"></p>
+<p>（图2.5）</p>
+<h3 id="33application面板">3.3	Application面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BNyq.png" alt="请输入图片描述"></p>
+<p>（图2.6）
+如图2.6所示，我们在Elements调试功能面板（Application模块），在子模块Storage可以看到当前网站存储的信息,比如cookie，local Storage等信息，并可以直观的进行增删改查。子模块Cache可以看到缓存的数据。Frames可以看到当前网站的一些静态资源。</p>
+<h3 id="34sources面板">3.4	Sources面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BdmV.png" alt="请输入图片描述"></p>
+<p>（图2.7）
+在日常开发中，调试程序可以通过直接在代码中加上debugger（如图2.7所示），然后刷新页面，浏览器就会自己跳入断点，然后就可以进行调试。而如果想在浏览器中加入断点调试，我们需要先定位到改行代码，然后点击行号即可添加断点。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BUO0.png" alt="请输入图片描述"></p>
+<p>（图2.8）
+当我们添加好断点后，就可以一步一步调试代码了，如图2.9所示，我们可以一步一步运行调试，也可以跳过功能，详细操作如图2.10所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BwwT.png" alt="请输入图片描述"></p>
+<p>（图2.9）</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Dc4g.png" alt="请输入图片描述"></p>
+<p>（图2.10）</p>
+<h3 id="35vue-devtools工具">3.5	vue-devtools工具</h3>
+<p>vue开发者工具是vue官方开发的chrome插件，只能在chrome浏览器上使用，可以通过Select来选中自己要调试的组件，vuex可以看到当前组件的集中管理的状态。Event可以查看当前组件所触发的事件，Routing可以看到当前浏览过的路由和所有路由信息。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DyE8.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DDDP.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DrHf.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DBut.png" alt="请输入图片描述"></p>
+<h3 id="36其他功能">3.6	其他功能</h3>
+<p>如果需要调试移动设备的页面，就可以切换开发者工具到移动端，可以选择不同的设备，或者是切换网络，横批显示等功能。如图2.12所示</p>
+<p><img src="https://s2.ax1x.com/2019/09/14/nsyJdP.png" alt="请输入图片描述"></p>
+<p>（图2.12）</p>
+<p>Chrome开发者工具也有自己的命令行窗口，我们按键盘的shift+ctrl+p即可调出窗口。如图2.13所示.可以找到自己需要的功能。命令行的功能大部分是控制一些功能的显示，或者一些快捷功能，可根据名称自由控制。比如我们要通过浏览器截屏，那么可以直接在命令窗口输入screen,然后根据需要选择，如图2.14所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8D2CQ.png" alt="请输入图片描述"></p>
+<p>（图2.13）
+<img src="https://s2.ax1x.com/2019/09/08/n8DR3j.png" alt="请输入图片描述"></p>
+<p>（图2.14）</p>
+<h2 id="4ie浏览器调试">4.	IE浏览器调试</h2>
+<p>在开始IE浏览器调试之前，推荐使用管理员权限打开软件。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rLo8.png" alt="请输入图片描述"></p>
+<h3 id="41ie11异同">4.1	IE11+异同</h3>
+<p>在调试本地资源时，chrome开发者工具可以通过Application面板直观的管理cookie，local storage信息等，在IE浏览器中，如果我们要查看cookie，需要到网络面板，然后选中要查看的请求来查看Cookie，如图3.2所示，如果要查询Local Storage或者是Session Storage信息，我们需要在控制台打印输出，如图3.3所示。如果要清新存储信息，输入localStorage.clear（）即可。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8r7Lt.png" alt="请输入图片描述"></p>
+<p>(图3.2)</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rqdf.png" alt="请输入图片描述"></p>
+<p>(图3.3)</p>
+<p>IE浏览器自带仿真功能，你可以在文档模式切换不同的IE版本进行兼容性测试，如图3.4所示。选中版本后页面会自动根据你选中的版本进行渲染。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rTsI.png" alt="请输入图片描述"></p>
+<p>(图3.4)</p>
+<h2 id="5常见bug定位">5.	常见bug定位</h2>
+<h3 id="51状态码定位">5.1	状态码定位</h3>
+<p>在前后端交互中，我们通过接口交付数据，每一个接口都会返回一个状态码和一个提示信息，如图4.1所示，我们可以通过这两个数据来初步判断是服务器端(后端)产生了bug，还是客户端(前端)产生了bug。详细对照表如表4.1所示。</p>
+<p>（图4.1）</p>
+<blockquote>
+<p>本表是根据公司内部情况设置的状态码,非http状态码，根据实际情况匹配</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>前端</th>
+<th>后端</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>请求成功,如无数据则显示暂无数据，如果有数据没展示，则是前端问题</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>需要结合errMsg来确定问题的发生</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td>有问题</td>
+<td>&mdash;</td>
+<td>一般是发生的数据不对或者没权限</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>&mdash;</td>
+<td>有问题</td>
+<td>后端服务器处理出问题</td>
+</tr>
+<tr>
+<td>（表4.1）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52控制台定位">5.2	控制台定位</h3>
+<p>如果页面白屏或者是有内容加载不出来，那么需要查看控制台的信息，如果是xxx is not undefined一般有两种情况，一种情况可能是前端没有做异常数据的错误处理，导致报错。还有可能就是后端返回的数据不规范而造成的。报错信息一般会展示堆栈调用记录，我们就可以看到具体的位置来解决bug。如果网络请求有问题也会在控制台看到报错。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8spyn.png" alt="请输入图片描述"></p>
+<p>（图4.2）</p>
+<h2 id="6基础常识">6.	基础常识</h2>
+<h3 id="61cookie和local-storage的区别">6.1	Cookie和Local Storage的区别</h3>
+<p>首先说明的是cookie，local Storage，session Storage都是客户端（浏览器）的存储技术，用来保存一些数据，每个网站都不会共用这些信息。 <!-- raw HTML omitted -->
+Cookie一般来说是用来保存服务端传来的session信息，大小最多为4kb，可以设置有效期，域名信息，缓存等信息。 <!-- raw HTML omitted -->
+local Storage是html5新出的标准前端存储技术，通过key-value的方式存储。大小一般为5M。提供了一系列的增删改查API，local Storage一直在浏览器存储，除了用户主动删除，是一直存在的。 <!-- raw HTML omitted -->
+session Storage和local storage使用方法相同，不同的地方是只在一次会话过程中有效，如果关闭浏览器会自动清除。</p>
+<h3 id="62pxemremvw等单位的区别">6.2	px,em,rem,vw等单位的区别</h3>
+<p>这些都是CSS的长度单位，不同的是他们大小的计算方式不同，所展示的效果就不同，具体对比如下表 <!-- raw HTML omitted -->
+单位	备注</p>
+<ul>
+<li>px	相对长度单位，相对于屏幕的分辨率而言的</li>
+<li>em	相对长度单位，相对于当前元素父类的字体大小（font-size）而言</li>
+<li>rem	相对长度单位，想对于当前文档根元素(html)的字体大小而言</li>
+<li>vw	相对长度单位，相对于当前视口而定,全部屏幕的width为100vw</li>
+</ul>
+<h2 id="7官方文档">7.官方文档</h2>
+<p>谷歌官方文档 <a href="https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn">https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn</a></p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gzg1023</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2019-08-07
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://gzg.me/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="https://gzg.me/tags/%E8%B0%83%E8%AF%95/">调试</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">【技术分享】从前端的角度，谈谈解决跨域的一些方案</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/rap2%E5%B7%A5%E5%85%B7/">
+            <span class="next-text nav-default">【技术分享】rap2接口管理工具使用分享</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="https://twitter.com/fish_rub" rel="me noopener" class="iconfont"
+      title="twitter"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1264 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M1229.8616 18.043658c0 0-117.852626 63.135335-164.151872 67.344358-105.225559-164.151872-505.082682-92.598492-437.738325 223.078185C278.622548 312.675223 89.216542 47.506814 89.216542 47.506814s-117.852626 189.406006 75.762402 345.139833C127.097743 396.85567 55.544363 371.601535 55.544363 371.601535S26.081207 535.753407 253.368414 615.724832c-21.045112 29.463156-113.643603 8.418045-113.643603 8.418045s25.254134 143.10676 231.496229 180.987961c-143.10676 130.479693-387.230056 92.598492-370.393967 105.225559 206.242095 189.406006 1119.599946 231.496229 1128.01799-643.98042C1179.353331 249.539887 1263.533778 123.269217 1263.533778 123.269217s-130.479693 37.881201-138.897738 33.672179C1225.652577 98.015083 1229.8616 18.043658 1229.8616 18.043658"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/gzg1023" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.instagram.com/gzg1023/" rel="me noopener" class="iconfont"
+      title="instagram"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M853.333333 277.333333C853.333333 289.28 843.946667 298.666667 832 298.666667L746.666667 298.666667C734.72 298.666667 725.333333 289.28 725.333333 277.333333L725.333333 192C725.333333 180.053333 734.72 170.666667 746.666667 170.666667L832 170.666667C843.946667 170.666667 853.333333 180.053333 853.333333 192M192 853.333333C180.053333 853.333333 170.666667 843.946667 170.666667 832L170.666667 469.333333 259.84 469.333333C257.28 482.986667 256 497.493333 256 512 256 653.226667 370.773333 768 512 768 653.226667 768 768 653.226667 768 512 768 497.493333 766.293333 482.986667 764.16 469.333333L853.333333 469.333333 853.333333 832C853.333333 843.946667 843.946667 853.333333 832 853.333333M512 341.333333C606.293333 341.333333 682.666667 417.706667 682.666667 512 682.666667 606.293333 606.293333 682.666667 512 682.666667 417.706667 682.666667 341.333333 606.293333 341.333333 512 341.333333 417.706667 417.706667 341.333333 512 341.333333M853.333333 85.333333 170.666667 85.333333C123.306667 85.333333 85.333333 123.306667 85.333333 170.666667L85.333333 853.333333C85.333333 900.266667 123.733333 938.666667 170.666667 938.666667L853.333333 938.666667C900.266667 938.666667 938.666667 900.266667 938.666667 853.333333L938.666667 170.666667C938.666667 123.306667 900.266667 85.333333 853.333333 85.333333Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://gzg.me/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        gzg1023
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.98f63ab19f2b660774b61375dabb94a461e433f15b41c1d986a022fd16b4db59.js" integrity="sha256-mPY6sZ8rZgd0thN12ruUpGHkM/FbQcHZhqAi/Ra021k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

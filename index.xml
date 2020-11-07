@@ -7,224 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Fri, 06 Nov 2020 16:01:23 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://gzg.me/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>hello world</title>
-      <link>https://gzg.me/post/math-preview/</link>
-      <pubDate>Fri, 06 Nov 2020 16:01:23 +0800</pubDate>
+      <title>Jane 主题预览</title>
+      <link>https://gzg.me/template/</link>
+      <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://gzg.me/post/math-preview/</guid>
+      <guid>https://gzg.me/template/</guid>
       
-        <description>&lt;p&gt;&lt;a href=&#34;https://www.intmath.com/cg5/katex-mathjax-comparison.php&#34;&gt;KaTeX and MathJax Comparison Demo, currently processed as KaTex&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;repeating-fractions&#34;&gt;Repeating fractions&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} \equiv 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;summation-notation&#34;&gt;Summation notation&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;sum-of-a-series&#34;&gt;Sum of a Series&lt;/h2&gt;
-
-&lt;p&gt;I broke up the next two examples into separate lines so it behaves better on a mobile phone. That&#39;s why they include \displaystyle.&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle\sum_{i=1}^{k+1}i
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle= \left(\sum_{i=1}^{k}i\right) +(k+1)
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle= \frac{k(k+1)}{2}+k+1
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle= \frac{k(k+1)+2(k+1)}{2}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle= \frac{(k+1)(k+2)}{2}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle= \frac{(k+1)((k+1)+1)}{2}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;product-notation&#34;&gt;Product notation&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\displaystyle 1 + \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \displaystyle \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \displaystyle\text{ for }\lvert q\rvert &lt; 1.
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;inline-math&#34;&gt;Inline math&lt;/h2&gt;
-
-&lt;p&gt;And here is some in-line math: &lt;span  class=&#34;math&#34;&gt;\( k_{n+1} = n^2 + k_n^2 - k_{n-1} \)&lt;/span&gt; , followed by some more text.&lt;/p&gt;
-
-&lt;h2 id=&#34;greek-letters&#34;&gt;Greek Letters&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\Gamma\ \Delta\ \Theta\ \Lambda\ \Xi\ \Pi\ \Sigma\ \Upsilon\ \Phi\ \Psi\ \Omega
-\alpha\ \beta\ \gamma\ \delta\ \epsilon\ \zeta\ \eta\ \theta\ \iota\ \kappa\ \lambda\ \mu\ \nu\ \xi \ \omicron\ \pi\ \rho\ \sigma\ \tau\ \upsilon\ \phi\ \chi\ \psi\ \omega\ \varepsilon\ \vartheta\ \varpi\ \varrho\ \varsigma\ \varphi
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;arrows&#34;&gt;Arrows&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\gets\ \to\ \leftarrow\ \rightarrow\ \uparrow\ \Uparrow\ \downarrow\ \Downarrow\ \updownarrow\ \Updownarrow
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\Leftarrow\ \Rightarrow\ \leftrightarrow\ \Leftrightarrow\ \mapsto\ \hookleftarrow
-\leftharpoonup\ \leftharpoondown\ \rightleftharpoons\ \longleftarrow\ \Longleftarrow\ \longrightarrow
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\Longrightarrow\ \longleftrightarrow\ \Longleftrightarrow\ \longmapsto\ \hookrightarrow\ \rightharpoonup
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\rightharpoondown\ \leadsto\ \nearrow\ \searrow\ \swarrow\ \nwarrow
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;symbols&#34;&gt;Symbols&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\surd\ \barwedge\ \veebar\ \odot\ \oplus\ \otimes\ \oslash\ \circledcirc\ \boxdot\ \bigtriangleup
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\bigtriangledown\ \dagger\ \diamond\ \star\ \triangleleft\ \triangleright\ \angle\ \infty\ \prime\ \triangle
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;calculus&#34;&gt;Calculus&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\int u \frac{dv}{dx}\,dx=uv-\int \frac{du}{dx}v\,dx
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\oint \vec{F} \cdot d\vec{s}=0
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;lorenz-equations&#34;&gt;Lorenz Equations&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\begin{aligned} \dot{x} &amp; = \sigma(y-x) \\ \dot{y} &amp; = \rho x - y - xz \\ \dot{z} &amp; = -\beta z + xy \end{aligned}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;cross-product&#34;&gt;Cross Product&lt;/h2&gt;
-
-&lt;p&gt;This works in KaTeX, but the separation of fractions in this environment is not so good.&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\mathbf{V}_1 \times \mathbf{V}_2 = \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \\ \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \end{vmatrix}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Here&#39;s a workaround: make the fractions smaller with an extra class that targets the spans with &amp;quot;mfrac&amp;quot; class (makes no difference in the MathJax case):&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\mathbf{V}_1 \times \mathbf{V}_2 = \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \\ \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \end{vmatrix}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;accents&#34;&gt;Accents&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\hat{x}\ \vec{x}\ \ddot{x}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;stretchy-brackets&#34;&gt;Stretchy brackets&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\left(\frac{x^2}{y^3}\right)
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;evaluation-at-limits&#34;&gt;Evaluation at limits&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\left.\frac{x^3}{3}\right|_0^1
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;case-definitions&#34;&gt;Case definitions&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-f(n) = \begin{cases} \frac{n}{2}, &amp; \text{if } n\text{ is even} \\ 3n+1, &amp; \text{if } n\text{ is odd} \end{cases}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;maxwells-equations&#34;&gt;Maxwell&#39;s Equations&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\begin{aligned} \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\ \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\ \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\ \nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;These equations are quite cramped. We can add vertical spacing using (for example) [1em] after each line break (\). as you can see here:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\begin{aligned} \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\[1em] \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\[0.5em] \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\[1em] \nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;statistics&#34;&gt;Statistics&lt;/h2&gt;
-
-&lt;p&gt;Definition of combination:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\frac{n!}{k!(n-k)!} = {^n}C_k
-{n \choose k}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;fractions-on-fractions&#34;&gt;Fractions on fractions&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\frac{\frac{1}{x}+\frac{1}{y}}{y-z}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;nth-root&#34;&gt;n-th root&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\sqrt[n]{1+x+x^2+x^3+\ldots}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;matrices&#34;&gt;Matrices&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23}\\ a_{31} &amp; a_{32} &amp; a_{33} \end{pmatrix}
-\begin{bmatrix} 0 &amp; \cdots &amp; 0 \\ \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; \cdots &amp; 0 \end{bmatrix}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;punctuation&#34;&gt;Punctuation&lt;/h2&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-f(x) = \sqrt{1+x} \quad (x \ge -1)
-f(x) \sim x^2 \quad (x\to\infty)
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Now with punctuation:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-f(x) = \sqrt{1+x}, \quad x \ge -1
-f(x) \sim x^2, \quad x\to\infty
-\]&lt;/span&gt;&lt;/p&gt;</description>
+        <description></description>
       
     </item>
     
     <item>
-      <title>关于我</title>
+      <title>About</title>
       <link>https://gzg.me/about/</link>
-      <pubDate>Sun, 09 Feb 2020 12:03:13 +0000</pubDate>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://gzg.me/about/</guid>
       
@@ -237,6 +39,2227 @@ f(x) \sim x^2, \quad x\to\infty
 &lt;li&gt;希望自己拥有独立思考的能力&lt;/li&gt;
 &lt;/ul&gt;
 </description>
+      
+    </item>
+    
+    <item>
+      <title>【生活感悟】2020疫情时代下的生活思考</title>
+      <link>https://gzg.me/post/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/</link>
+      <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;从疫情爆发到现在，已经过了半年多。生活状态也算稳定下来，简单谈谈我的感受。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;由于每个国家的疫情控制政策不一样，所以彻底结束这场疫情； 必须等到有效的疫苗出现或者是形成大面积的群体免疫。而疫情是不会离开人类的，这才爆发以后 不知道下次在什么时候会再次爆发，除非地球被碾碎人类全体灭绝可能病毒才会消失，随意要用平和心去看待这种事情的发生。&lt;/p&gt;
+&lt;p&gt;我国的疫情防控政策简单来说就是“封城”阻断疫情的传播，这种方法最好的地方就是可以阻断传播源减少传播面积，进而在短时间内控制疫情的扩散，然后就是治疗患者。但是坏的地方就在于社会成本太大，如果同时封掉多座城市，经济会扛不住，到时候就会出现饿死的人比疫情导致的人员伤亡还要惨重。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【电脑优化】Window电脑优化运行速度技巧</title>
+      <link>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;本文针对Window系统总结一些常见的优化技巧，便于提高电脑运行速度；总共分为两大部分，硬件和软件部分。以及会说明一下市面常见所谓『优化系统』的弊端及推荐一些没有任何副作用的优化软件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;硬件&#34;&gt;硬件&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于电脑运行来说，如果电脑配置很差就算不打开应用程序也会卡成PPT(一帧一帧运行)，所以如果想提高电脑运行速度 在经济合适的条件下可以对电脑配置进行补充来优化，效果要比优化软件强很多。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;固态硬盘&#34;&gt;固态硬盘&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E7%94%B5%E8%84%91%E7%A1%AC%E7%9B%98/8686272?fromtitle=%E7%A1%AC%E7%9B%98&amp;amp;fromid=159825&amp;amp;fr=aladdin&#34;&gt;硬盘&lt;/a&gt;通俗点来说就是存储你电子资料的介质，现在大部分电脑都是 512G,1024G(1t),这里所说的&lt;a href=&#34;https://baike.baidu.com/item/%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98/453510?fr=aladdin&#34;&gt;固态硬盘&lt;/a&gt;就是属于硬盘的一种新型存储技术方式。
+我们普通的机械硬盘读写速度大概在100M/S ,固态普遍可以达到400-500M/S甚至更多。这里不能理解为电脑运行速度可以提高4-5倍，因为还有很多因素决定。以我个人电脑来看，提高2倍以上绝对是有的。
+所以大家经济合适可以，选择一个适合自己固态硬盘。一般一个128G的固态硬盘作为&lt;a href=&#34;https://baike.baidu.com/item/%E7%B3%BB%E7%BB%9F%E7%9B%98/5434999?fr=aladdin&#34;&gt;系统盘&lt;/a&gt;即可。推荐购买三星，金士顿。&lt;/p&gt;
+&lt;h4 id=&#34;内存条&#34;&gt;内存条&lt;/h4&gt;
+&lt;p&gt;内存条通俗来讲就是我们运行程序时候处理从硬盘到CPU的一个介质，内存读取速度很快是硬盘的几十倍甚至上百倍。普遍的电脑现在是4G内存-16G不等。如果你每次都会打开好几个软件同时运行，那么就可以考虑增加内存条，来提升电脑运行速度了。推荐金士顿和海盗船&lt;/p&gt;
+&lt;h3 id=&#34;软件&#34;&gt;软件&lt;/h3&gt;
+&lt;p&gt;软件也需要合理的优化，况且是我国无敌垃圾捆绑软件 居多。做一些优化是必须的。这里的软件大致分为两类。一种是系统内置软件，另一种是自己安装的第三方软件。&lt;/p&gt;
+&lt;h4 id=&#34;开机启动项&#34;&gt;开机启动项&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E9%A1%B9/8502313?fr=aladdin&#34;&gt;开机启动项&lt;/a&gt;指的是，你电脑开机后随着电脑启动自动运行的程序，比如你的杀毒软件 或者是 看视频的软件等&amp;hellip;&lt;br&gt;
+这里我推荐，除了系统运行程序和杀毒软件，禁用所有第三方程序，例如爱奇艺，腾讯视频等等。当需要用到这些程序时候重新打开即可，没必要再开机时候启动。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开启动项管理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.windows10zj.com/jiaocheng/11846.html&#34;&gt;设置启动项教程&lt;/a&gt;   &amp;laquo;&amp;lt;====点他&lt;/p&gt;
+&lt;p&gt;如果是win10电脑的系统，会引导你到任务管理器设置。步骤同上一致。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要注意的是，如果是自己安装的软件建议全部禁用，如果是系统内置启动项大部分会提示不建议禁止。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;虚拟内存&#34;&gt;虚拟内存&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://jingyan.baidu.com/article/c1a3101e6fe366de656debec.html&#34;&gt;设置虚拟内存教程&lt;/a&gt;  &amp;laquo;&amp;lt;====点他&lt;/p&gt;
+&lt;p&gt;合理虚拟内存，可以提高运行速度发挥软件作用。这条适合有特殊要求的人，进行优化，不建议随意设置虚拟内存&lt;/p&gt;
+&lt;h4 id=&#34;流氓软件&#34;&gt;流氓软件&lt;/h4&gt;
+&lt;p&gt;影响运行速度还有一个方面就是存在各种流氓软件，有的会更改你的浏览器主页，有的会在你使用过程中弹出一个广告框 或者是在在系统中运行一个看不到的服务 占用资源。&lt;/p&gt;
+&lt;p&gt;解决流氓软件的办法一般有两种，一种是直接找到软件然后进行卸载，另外就是找不到问题所在，通过第三方的程序来强制拦截这些弹窗。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;卸载软件方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;卸载软件方法，通过控制面板卸载安装的程序，如下图所示，打开控制面板 然后点击卸载程序即可。需要注意的是不能同时卸载多个，需要一个一个卸载。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/JmOOIO&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/04/18/JmOOIO.png&#34; alt=&#34;JmOOIO.png&#34;&gt;&lt;/a&gt;
+&lt;a href=&#34;https://imgchr.com/i/JmOjiD&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/04/18/JmOjiD.png&#34; alt=&#34;JmOjiD.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;通过杀毒软件的强力卸载，或者卸载软件的工具。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;杀毒软件的强力卸载就不介绍，这里给一个卸载软件的第三方工具下载链接，有需要可以自取 &lt;a href=&#34;https://share.weiyun.com/5qM46Lv&#34;&gt;Total Uninstall 下载&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;解决弹窗方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;如上所示，直接卸载垃圾软件解决弹窗&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过第三方软件拦截弹窗。我这里用的是火绒杀毒自带的弹窗拦截。大部分杀毒软件都自带，根据自己情况进行弹窗拦截即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/JmOLdK&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/04/18/JmOLdK.png&#34; alt=&#34;JmOLdK.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;有的弹窗没有设置关闭，只能强制拦截，有的弹窗关闭按钮旁边会有设置按钮，设置为永不弹出即可。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;软件推荐&#34;&gt;软件推荐&lt;/h3&gt;
+&lt;p&gt;通过合理的工具可以也可以对优化系统有一定的作用，我这里推荐两个方便大家使用。&lt;/p&gt;
+&lt;p&gt;Dism++ 优化系统工具 ： &lt;a href=&#34;http://www.chuyu.me/zh-Hans/index.html&#34;&gt;http://www.chuyu.me/zh-Hans/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CCleaner清理垃圾工具 下载链接：https://pan.baidu.com/s/1AgKXc9mAek-GQdRghXZ7HQ 提取码：pne7&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【前端技术】移动端h5项目调试技巧与总结</title>
+      <link>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;移动端真机调试的方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;准备工具&#34;&gt;准备工具&lt;/h3&gt;
+&lt;p&gt;移动端调试工具&lt;a href=&#34;https://github.com/liriliri/eruda&#34;&gt;eruda地址&lt;/a&gt;
+Fiddler2抓包工具&lt;a href=&#34;https://sm.myapp.com/original/Development/fiddler2setup_2.6.2.3.exe&#34;&gt;下载地址&lt;/a&gt;
+草料二维码&lt;a href=&#34;https://cli.im/&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装配置&#34;&gt;安装配置&lt;/h3&gt;
+&lt;h4 id=&#34;1-项目安装eruda&#34;&gt;1. 项目安装eruda&lt;/h4&gt;
+&lt;p&gt;1）方法一，通过npm安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    npm install eruda 
+    import eruda from &#39;eruda&#39;
+    eruda.init()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;方法二，CDN加载&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;2-修改host&#34;&gt;2. 修改host&lt;/h4&gt;
+&lt;p&gt;先找到hosts文件(windows系统) /c/Windows/System32/drivers/etc/hosts，如果不存在就新建一个名为hosts的文件；没有后缀（如果不能新建就在桌面新建一个然后复制进来）
+强烈推荐使用&lt;a href=&#34;https://github.com/oldj/SwitchHosts&#34;&gt;SwitchHosts&lt;/a&gt;工具&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXQYT.png&#34; alt=&#34;3uXQYT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这里修改127.0.0.1本机地址为gzg1023.company.com&lt;/strong&gt;
+&lt;strong&gt;gzg1023是自己的名称，company.com是自定义公司的域名，方便共享Cooike。&lt;/strong&gt;(也可以自定义任意的域名)
+现在把项目跑起来。地址由localhost:8080改为gzg1023.company.com:8080,进行访问如果成功，如下图所示，说明host修改成功了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXlfU.jpg&#34; alt=&#34;3uXlfU.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;注意如果是vue-cli搭建的项目需要设置vue.config.js文件如下。关闭默认的host地址检测&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; devServer:{
+    disableHostCheck:true
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-fiddler代理修改手机代理&#34;&gt;3. Fiddler代理，修改手机代理&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;配置好电脑host以后，我们打开下载的Fiddler，如下图所示右上角有一个online，我们查看当前电脑的局域网IP。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXZOs.jpg&#34; alt=&#34;3uXZOs.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后打开手机来配置代理，、如下图所示，先打开wifi找到与电脑同一个局域网，然后点击进入详情&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXmmn.png&#34; alt=&#34;3uXmmn.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXuT0.png&#34; alt=&#34;3uXuT0.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在详情最下方，找到配置代理，然后进去&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXnwq.png&#34; alt=&#34;3uXnwq.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入电脑的IP端口号默认为8888，然后我们手机随便访问一个网页，观察Fiddler是否有新的网络请求。&lt;/p&gt;
+&lt;h4 id=&#34;4-通过二维码访问&#34;&gt;4. 通过二维码访问&lt;/h4&gt;
+&lt;p&gt;配置好代理后，我们通过草料二维码生成当前网站的二维码，通过手机来访问。这里推荐安装草料二维码的浏览器插件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXElQ.png&#34; alt=&#34;3uXElQ.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uXMkV.png&#34; alt=&#34;3uXMkV.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;项目调试&#34;&gt;项目调试&lt;/h3&gt;
+&lt;p&gt;配置好代理后，我们通过eruda来调试项目了，点击右下方的的小按钮，如下所示。展开工具可以看到调试面板，进行功能调试了。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/3uzdDH&#34;&gt;&lt;img src=&#34;https://s2.ax1x.com/2020/02/21/3uzdDH.md.jpg&#34; alt=&#34;3uzdDH.md.jpg&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【前端技术】Vue递归组件的简单运用</title>
+      <link>https://gzg.me/post/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6/</link>
+      <pubDate>Mon, 03 Feb 2020 21:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;后台管理系统的菜单，树结构&amp;hellip;当需求超过二级菜单时候，就要考虑使用递归组件了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;顾名思义，递归组件就是组件调用自身；从而不管数据包含基层，都能顺利遍历的结构。构建一个基础的递归组件主要是两个部分组成，其一就是有一份可循环递归的数据。然后就是调用自身的DOM结构。
+优秀递归组件：ElementUI的Tree组件&lt;a href=&#34;https://github.com/ElemeFE/element/tree/dev/packages/tree&#34;&gt;源码&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dom结构&#34;&gt;DOM结构&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// menu-item.vue
+&amp;lt;ul&amp;gt;
+&amp;lt;li v-for=&amp;quot;(item,index) in list&amp;quot; :key=&amp;quot;index&amp;quot;&amp;gt; // 循环遍历数据
+  &amp;lt;p v-show=&amp;quot;item.show&amp;quot; class=&amp;quot;title&amp;quot; @click=&amp;quot;clickHandle(item,index)&amp;quot;&amp;gt;{{item.name}}&amp;lt;/p&amp;gt; // 子项
+  &amp;lt;div&amp;gt;
+        &amp;lt;menu-item v-if=&amp;quot;item.child&amp;quot; :list=&amp;quot;item.child&amp;quot;&amp;gt;&amp;lt;/menu-item&amp;gt; // 递归调用
+  &amp;lt;/div&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+
+// index.vue
+&amp;lt;menu-item :list=&amp;quot;info&amp;quot;&amp;gt;&amp;lt;/menu-item&amp;gt; // 父组件调用，并通过props传入数据
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;js结构&#34;&gt;JS结构&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt; // menu-item.vue
+ props:{
+  list: Array
+},
+methods:{
+    clickHandle(item,index){
+        console.log(item,index)
+    }
+}
+
+// index.vue
+
+ info:[  // 组件需要遍历的数据，如果数组对象有child属性，说明包含子菜单
+    {
+      name:&#39;超级菜单&#39;,
+      show:true,
+      child:[
+         {
+           name : &#39;超级菜单二级菜单1&#39;,
+           show: false,
+         },
+         {
+           name : &#39;超级菜单二级菜单2&#39;,
+           show: false,
+         }
+      ]
+    },
+    {
+    name:&#39;设置菜单&#39;,
+    show:true,
+    child:[
+         {
+           name : &#39;设置菜单二级菜单1&#39;,
+           show: false,
+         },
+         {
+           name : &#39;设置菜单二级菜单2&#39;,
+           show: false,
+         }
+      ]
+    }
+    ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;本文是一个简单例示，在示例项目中会存在各种情况。如果在处理数据事件处理时可以考虑以下优化方案&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用event事件委托进行元素事件处理&lt;/li&gt;
+&lt;li&gt;提取为两个组件，大层负责控制总统，内部负责每一项的展示和计算（参考ElementUI的Tree组件）&lt;/li&gt;
+&lt;li&gt;添加CSS3过渡效果，提升用户体验&lt;/li&gt;
+&lt;/ol&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【非官方科普】谈谈中国互联网的历史和现状</title>
+      <link>https://gzg.me/post/%E4%B8%AD%E5%9B%BD%E4%BA%92%E8%81%94%E7%BD%91/</link>
+      <pubDate>Thu, 30 Jan 2020 22:23:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E4%B8%AD%E5%9B%BD%E4%BA%92%E8%81%94%E7%BD%91/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;截止到2020年，互联网可以说是推动社会进步最重要的“产品&amp;rdquo;，中国的互联网也是近10年高速发展经历了很多，本文就来谈谈中国的互联网&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;历史&#34;&gt;历史&lt;/h3&gt;
+&lt;p&gt;中华人民共和国的互联网接入于1994年5月17日。并于1998 年建设网络长城(墙）并逐年加强&amp;quot;高度&amp;rdquo;。2008年12月，中国大陆地区成为拥有世界上第一大用户群体的互联网络。&lt;/p&gt;
+&lt;h3 id=&#34;现状&#34;&gt;现状&lt;/h3&gt;
+&lt;p&gt;截至2019年6月，中国网民规模达8.54亿，互联网普及率为61.2%；中国手机网民规模达8.47亿。&lt;a href=&#34;http://www.cac.gov.cn/2019-08/30/c_1124938750.htm&#34;&gt;第44次《中国互联网络发展状况统计报告》&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以说当下的中国是互联网的中国，抛去没有上网能力（老人和小孩以及其贫困地区），绝大多数中国人都在使用互联网。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;指标（中国人口）&lt;/th&gt;
+&lt;th&gt;比重&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0-15岁（含不满16周岁）&lt;/td&gt;
+&lt;td&gt;17.8%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16-59岁（含不满60周岁）&lt;/td&gt;
+&lt;td&gt;64.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;60周岁及以上&lt;/td&gt;
+&lt;td&gt;17.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.stats.gov.cn/tjsj/zxfb/201902/t20190228_1651265.html&#34;&gt;2018年国民经济和社会发展统计公报&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;网络社会&amp;quot;是一个非常庞大的群体，充斥着各种信息，我们需要有一定的&lt;a href=&#34;https://gzg.me/ck6j2klfy001364uj03up3e17/&#34;&gt;判断力&lt;/a&gt;去分辨正确客观的信息。不能只是单纯做一个互联网&amp;quot;井底之蛙&amp;quot;见什么是什么。&lt;/p&gt;
+&lt;p&gt;关于我国客观的互联网情况,此处引用一位国外技术分析师的&lt;a href=&#34;https://danwang.co/2019-letter/&#34;&gt;文章&lt;/a&gt;/&lt;a href=&#34;ruanyifeng.com/blog/2020/01/china-technology-review.html&#34;&gt;(译)&lt;/a&gt;总结的一句话。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;中国确实拥有活跃的消费者互联网，但这不意味着中国处于世界领先的技术地位，我们应该放弃这种观念。玩线上游戏、在线购物、食品外卖的大量人口，并不能使一个国家成为技术或科学领导者。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们作为当下的青年人，有义务去更好的建设社会，但一定要有判断力，不能仅凭几个APP就认为中国处于世界领先的技术地位，盲目自信，固步自封。&lt;/p&gt;
+&lt;p&gt;信息来源:
+维基百科 &lt;a href=&#34;https://zh.wikipedia.org/&#34;&gt;https://zh.wikipedia.org/&lt;/a&gt;
+中国网信网 &lt;a href=&#34;http://www.cac.gov.cn/&#34;&gt;http://www.cac.gov.cn/&lt;/a&gt;
+国家统计局 &lt;a href=&#34;http://www.stats.gov.cn&#34;&gt;http://www.stats.gov.cn&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【生活感悟】做个有思想，有判断力的人</title>
+      <link>https://gzg.me/post/%E5%88%A4%E6%96%AD%E5%8A%9B/</link>
+      <pubDate>Fri, 10 Jan 2020 23:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%88%A4%E6%96%AD%E5%8A%9B/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;从一个互联网从业者的角度来说说，怎么样做一个有判断力的人&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;从2010到2020年中国互联网高速发展，各种软件层出不穷；如何正确的判断这些信息是一个当代人必备的技能。&lt;/p&gt;
+&lt;p&gt;大家经常刷微博，看抖音 充斥着大量”可传播“信息。然而很多人根本没有辨别信息的能力，看到这些信息以后就没有任何思考的信以为真，然后到处传播一个不正确的信息（比如：我妈）。如今中国的“互联网社会”已经存在大量的这种信息，有的是商业公司为了流量写出“震惊，真更半夜居然这种事&amp;hellip;.” 或是单纯的看脸喜欢上一个完全不了解的人，就想和他浪迹天涯。。。&lt;/p&gt;
+&lt;p&gt;以上的行为不一定是每个人都有的，但是客观存在的，而且人数不少，尤其是未成年的同学。那么这些信息我们要怎么识别并作出判断呢，怎么样可以得到一个相对来说比较正确的答案呢？我总结了以下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不要完全相信官方消息（例：&lt;!-- raw HTML omitted --&gt;李文亮医生&lt;!-- raw HTML omitted --&gt;）&lt;/li&gt;
+&lt;li&gt;从多个角度来思考事情（如对立面，路人甲等）&lt;/li&gt;
+&lt;li&gt;不要总用自己的惯有思维去思考事情（例：想到蔡徐坤就是鸡你太美）&lt;/li&gt;
+&lt;li&gt;对自己熟悉或胜任的事情也不能立马下决定，而是经过一些思考&lt;/li&gt;
+&lt;li&gt;如果选择做旁观者，就不要随意发表自己言论&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;网络的信息缤纷复杂，比如现在我说我是一个小偷，而如果需要证明这件事是真的，只需要调监控录像看到我的偷盗记录或者是警察在现场直接把我抓住。那么这个事就成立了，但是如果我想证明我不是一个小偷，我需要出示各种证件，调取全世界的摄像头，问过全世界的警察&amp;hellip;. 还不一定可以证明我不是小偷。&lt;/p&gt;
+&lt;p&gt;这件事想说的就是，每一件事都有不为人知或是与真相背离的时候，而我们需要自己进行思考和辨别。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术笔记】JS的Array的各种API</title>
+      <link>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</link>
+      <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;属性&#34;&gt;属性&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Array.prototype.constructor&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所有的数组实例都继承了这个属性，它的值就是 Array，表明了所有的数组都是由 Array 构造出来的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Array.prototype.length&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因为 Array.prototype 也是个数组，所以它也有 length 属性，这个值为 0，因为它是个空数组。&lt;/p&gt;
+&lt;h4 id=&#34;静态方法&#34;&gt;静态方法&lt;/h4&gt;
+&lt;h5 id=&#34;concat方法&#34;&gt;concat方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;concat 连接 2 个或更多数组，并返回结果&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;    [1,2,3].concat([4,5,6]) // [1,2,3,4,5,6]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;every方法&#34;&gt;every方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;every 对数组中的每个元素运行给定函数，如果该函数对每个元素都返回 true ，则返回 true&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;    var arr = [1,2,3,4,5,6]
+    arr.every((item)=&amp;gt; item !== 7) //true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;some方法&#34;&gt;some方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;some 对数组中的每个元素运行给定函数，如果该函数有一个元素都返回 true ，则返回 true&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.some((item)=&amp;gt; item === 7 )  // false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;foreach方法&#34;&gt;forEach方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;forEach 对数组中的每个元素运行给定函数。这个方法没有返回值&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.forEach((item)=&amp;gt; console.log(item)) // 1 2 3 4 5 6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;map方法&#34;&gt;map方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;map 对数组中的每个元素运行给定函数，返回每次函数调用的结果组成的数组&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.map((item)=&amp;gt; console.log(item)) // 1 2 3 4 5 6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;filter方法&#34;&gt;filter方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;filter 对数组中的每个元素运行给定函数，返回该函数会返回 true 的元素组成的数组&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.filter((item)=&amp;gt; item &amp;gt; 3) // [4,5,6]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;reduce方法&#34;&gt;reduce方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.reduce((item,item2)=&amp;gt; item+item2) // 21
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;join方法&#34;&gt;join方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;join 将所有的数组元素连接成一个字符串&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.join() // 1,2,3,4,5,6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;indexof方法&#34;&gt;indexOf方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;indexOf 返回第一个与给定参数相等的数组元素的索引，没有找到则返回 -1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.indexOf(1) // 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;lastindexof方法&#34;&gt;lastIndexOf方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;lastIndexOf 返回在数组中搜索到的与给定参数相等的元素的索引里最大的值&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6,1]
+arr.lastIndexOf(1) // 6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;reverse方法&#34;&gt;reverse方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;reverse 颠倒数组中元素的顺序，原先第一个元素现在变成最后一个，同样原先的最后一个元素变成了现在的第一个&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.reverse() // [6,5,4,3,2,1]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;slice方法&#34;&gt;slice方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;slice 传入索引值，将数组里对应索引范围内的元素作为新数组返回&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr = [1,2,3,4,5,6]
+arr.slice(2) // [3,4,5,6]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;splice方法&#34;&gt;splice方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;splice 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt; var arr = [1,2,3,4,5,6]
+arr.splice(2,1) //[3]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;sort方法&#34;&gt;sort方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sort 按照字母顺序对数组排序，支持传入指定排序方法的函数作为参数(有bug)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt; var arr = [6,5,4,3,2,1]
+arr.sort() // [1,2,3,4,5,6]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;tostring方法&#34;&gt;toString方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;toString 将数组作为字符串返回&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt; var arr =  [1,2,3,4,5,6]
+arr.toString() // &amp;quot;1,2,3,4,5,6&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;copywithin方法&#34;&gt;copyWithin方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;copyWithin 复制数组中一系列元素到同一数组指定的起始位置(浅拷贝)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;var arr =  [1,2,3,4,5,6]
+arr.copyWithin(1,2) // [1, 3, 4, 5, 6, 6]&lt;/p&gt;
+&lt;h5 id=&#34;includes方法&#34;&gt;includes方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;includes 如果数组中存在某个元素则返回 true ，否则返回 false&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5,6]
+arr.includes(1) // true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;find方法&#34;&gt;find方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;find 根据回调函数给定的条件从数组中查找元素，如果找到则返回该元素&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5,6]
+arr.find(item=&amp;gt;item &amp;gt; 1) // 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;findindex方法&#34;&gt;findIndex方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;findIndex 根据回调函数给定的条件从数组中查找元素，如果找到则返回该元素在数组中的索引&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5,6]
+arr.findIndex(item=&amp;gt;item == 3) // 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;fill方法&#34;&gt;fill方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fill() 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5]
+arr.fill(0,2,4) //  [1, 2, 0, 0, 5]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;其他方法&#34;&gt;其他方法&lt;/h4&gt;
+&lt;h5 id=&#34;arrayfrom方法&#34;&gt;Array.from方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;from 根据已有数组创建一个新数组(浅拷贝)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5]
+var arr2 = Array.from(arr)  //  [1, 2, 3, 4, 5]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;arrayisarray方法&#34;&gt;Array.isArray方法&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Array.isArray() 用于确定传递的值是否是一个 Array&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var arr =  [1,2,3,4,5]
+Array.isArray(arr)  //true&lt;/code&gt;&lt;/pre&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术笔记】了解Eslint及其常用规则配置</title>
+      <link>https://gzg.me/post/eslint%E8%A7%84%E5%88%99/</link>
+      <pubDate>Tue, 10 Dec 2019 15:14:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/eslint%E8%A7%84%E5%88%99/</guid>
+      
+        <description>&lt;p&gt;前几天用vue-cli3测试一个小功能，当我输入console.log以后，一直报错。。很纳闷，原来是在最新的脚手架工具中默认关闭了console。于是本篇文章总结一下Elint的配置规则。&lt;/p&gt;
+&lt;h2 id=&#34;1eslint是什么&#34;&gt;1.Eslint是什么&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方解释:可组装的JavaScript和JSX检查工具
+直白解释：预先设置一些代码编写规则，如果你的代码编写不规范就会自动帮你规范&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;2文件设置eslint&#34;&gt;2.文件设置Eslint&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你的项目很小那么建议直接在&lt;code&gt;package.json&lt;/code&gt;中编写&lt;/li&gt;
+&lt;li&gt;如果需要设置很多规范甚至添加自己的规范。那么可以新建一个&lt;code&gt;.eslintrc&lt;/code&gt;文件，配置你需要的规范。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/15/QfKbHs.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/15/QfKHBj.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3配置eslint规范&#34;&gt;3.配置Eslint规范&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;true&lt;/code&gt;表示打开该规则，&lt;code&gt;false&lt;/code&gt;表示关闭该规则&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;off&amp;quot; 或 0&lt;/code&gt; - 关闭规则&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;warn&amp;quot; 或 1 &lt;/code&gt;- 开启规则，使用警告级别的错误：warn (不会导致程序退出),&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;error&amp;quot; 或 2&lt;/code&gt; - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4检查规则&#34;&gt;4.检查规则&lt;/h2&gt;
+&lt;p&gt;在项目中，我们一般使用&lt;code&gt;npm run serve/dev&lt;/code&gt;来启动项目，可以通过&lt;code&gt;npm run lint&lt;/code&gt; 来调用Eslint的检查。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/15/QfK7uQ.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5详细规则参考&#34;&gt;5.详细规则参考&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方配置参考链接 &lt;a href=&#34;https://cn.eslint.org/docs/rules/&#34;&gt;https://cn.eslint.org/docs/rules/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;{
+  // 环境定义了预定义的全局变量。
+  &amp;quot;env&amp;quot;: {
+      &amp;quot;browser&amp;quot;: true,
+      &amp;quot;node&amp;quot;: true,
+      &amp;quot;commonjs&amp;quot;: true,
+      &amp;quot;amd&amp;quot;: true,
+      &amp;quot;es6&amp;quot;:true,
+      &amp;quot;mocha&amp;quot;:true
+  },
+  // JavaScript 语言选项
+  &amp;quot;parserOptions&amp;quot;: {
+      // ECMAScript 版本
+      &amp;quot;ecmaVersion&amp;quot;: 6,
+      &amp;quot;sourceType&amp;quot;: &amp;quot;script&amp;quot;,//module
+      // 想使用的额外的语言特性:
+      &amp;quot;ecmaFeatures&amp;quot;: {
+          // 允许在全局作用域下使用 return 语句
+          &amp;quot;globalReturn&amp;quot;:true,
+          // impliedStric
+          &amp;quot;impliedStrict&amp;quot;:true,
+          // 启用 JSX
+          &amp;quot;jsx&amp;quot;:true
+      }
+  },
+  &amp;quot;rules&amp;quot;: {
+
+      ////////////////
+      // 可能的错误  //
+      ////////////////
+
+      // 禁止条件表达式中出现赋值操作符
+      &amp;quot;no-cond-assign&amp;quot;: 2,
+      // 禁用 console
+      &amp;quot;no-console&amp;quot;: 0,
+      // 禁止在条件中使用常量表达式
+      // if (false) {
+      //     doSomethingUnfinished();
+      // } //cuowu
+      &amp;quot;no-constant-condition&amp;quot;: 2,
+      // 禁止在正则表达式中使用控制字符 ：new RegExp(&amp;quot;\x1f&amp;quot;)
+      &amp;quot;no-control-regex&amp;quot;: 2,
+      // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
+      // always-multiline：多行模式必须带逗号，单行模式不能带逗号
+      &amp;quot;comma-dangle&amp;quot;: [1, &amp;quot;always-multiline&amp;quot;],
+      // 禁用 debugger
+      &amp;quot;no-debugger&amp;quot;: 2,
+      // 禁止 function 定义中出现重名参数
+      &amp;quot;no-dupe-args&amp;quot;: 2,
+      // 禁止对象字面量中出现重复的 key
+      &amp;quot;no-dupe-keys&amp;quot;: 2,
+      // 禁止重复的 case 标签
+      &amp;quot;no-duplicate-case&amp;quot;: 2,
+      // 禁止空语句块
+      &amp;quot;no-empty&amp;quot;: 2,
+      // 禁止在正则表达式中使用空字符集 (/^abc[]/)
+      &amp;quot;no-empty-character-class&amp;quot;: 2,
+      // 禁止对 catch 子句的参数重新赋值
+      &amp;quot;no-ex-assign&amp;quot;: 2,
+      // 禁止不必要的布尔转换
+      &amp;quot;no-extra-boolean-cast&amp;quot;: 2,
+      //  禁止不必要的括号 //(a * b) + c;//报错
+      &amp;quot;no-extra-parens&amp;quot;: 0,
+      // 禁止不必要的分号
+      &amp;quot;no-extra-semi&amp;quot;: 2,
+      // 禁止对 function 声明重新赋值
+      &amp;quot;no-func-assign&amp;quot;: 2,
+      //  禁止在嵌套的块中出现 function 或 var 声明
+      &amp;quot;no-inner-declarations&amp;quot;: [2, &amp;quot;functions&amp;quot;],
+      // 禁止 RegExp 构造函数中无效的正则表达式字符串
+      &amp;quot;no-invalid-regexp&amp;quot;: 2,
+      // 禁止在字符串和注释之外不规则的空白
+      &amp;quot;no-irregular-whitespace&amp;quot;: 2,
+      // 禁止在 in 表达式中出现否定的左操作数
+      &amp;quot;no-negated-in-lhs&amp;quot;: 2,
+      //   禁止把全局对象 (Math 和 JSON) 作为函数调用  错误：var math = Math();
+      &amp;quot;no-obj-calls&amp;quot;: 2,
+      // 禁止直接使用 Object.prototypes 的内置属性
+      &amp;quot;no-prototype-builtins&amp;quot;:0,
+      // 禁止正则表达式字面量中出现多个空格
+      &amp;quot;no-regex-spaces&amp;quot;: 2,
+      // 禁用稀疏数组
+      &amp;quot;no-sparse-arrays&amp;quot;: 2,
+      // 禁止出现令人困惑的多行表达式
+      &amp;quot;no-unexpected-multiline&amp;quot;: 2,
+      // 禁止在return、throw、continue 和 break语句之后出现不可达代码
+      /*
+          function foo() {
+          return true;
+          console.log(&amp;quot;done&amp;quot;);
+          }//错误
+      */
+      &amp;quot;no-unreachable&amp;quot;: 2,
+      // 要求使用 isNaN() 检查 NaN
+      &amp;quot;use-isnan&amp;quot;: 2,
+      // 强制使用有效的 JSDoc 注释
+      &amp;quot;valid-jsdoc&amp;quot;: 1,
+      // 强制 typeof 表达式与有效的字符串进行比较
+      // typeof foo === &amp;quot;undefimed&amp;quot; 错误
+      &amp;quot;valid-typeof&amp;quot;: 2,
+
+
+      //////////////
+      // 最佳实践 //
+      //////////////
+
+      // 定义对象的set存取器属性时，强制定义get
+      &amp;quot;accessor-pairs&amp;quot;: 2,
+      // 强制数组方法的回调函数中有 return 语句
+      &amp;quot;array-callback-return&amp;quot;:0,
+      // 强制把变量的使用限制在其定义的作用域范围内
+      &amp;quot;block-scoped-var&amp;quot;: 0,
+      // 限制圈复杂度，也就是类似if else能连续接多少个
+      &amp;quot;complexity&amp;quot;: [2, 9],
+      //  要求 return 语句要么总是指定返回的值，要么不指定
+      &amp;quot;consistent-return&amp;quot;: 0,
+      // 强制所有控制语句使用一致的括号风格
+      &amp;quot;curly&amp;quot;: [2, &amp;quot;all&amp;quot;],
+      // switch 语句强制 default 分支，也可添加 // no default 注释取消此次警告
+      &amp;quot;default-case&amp;quot;: 2,
+      // 强制object.key 中 . 的位置，参数:
+      //      property，&#39;.&#39;号应与属性在同一行
+      //      object, &#39;.&#39; 号应与对象名在同一行
+      &amp;quot;dot-location&amp;quot;: [2, &amp;quot;property&amp;quot;],
+      // 强制使用.号取属性
+      //    参数： allowKeywords：true 使用保留字做属性名时，只能使用.方式取属性
+      //                          false 使用保留字做属性名时, 只能使用[]方式取属性 e.g [2, {&amp;quot;allowKeywords&amp;quot;: false}]
+      //           allowPattern:  当属性名匹配提供的正则表达式时，允许使用[]方式取值,否则只能用.号取值 e.g [2, {&amp;quot;allowPattern&amp;quot;: &amp;quot;^[a-z]+(_[a-z]+)+$&amp;quot;}]
+      &amp;quot;dot-notation&amp;quot;: [2, { &amp;quot;allowKeywords&amp;quot;: false }],
+      // 使用 === 替代 == allow-null允许null和undefined==
+      &amp;quot;eqeqeq&amp;quot;: [2, &amp;quot;allow-null&amp;quot;],
+      // 要求 for-in 循环中有一个 if 语句
+      &amp;quot;guard-for-in&amp;quot;: 2,
+      // 禁用 alert、confirm 和 prompt
+      &amp;quot;no-alert&amp;quot;: 0,
+      // 禁用 arguments.caller 或 arguments.callee
+      &amp;quot;no-caller&amp;quot;: 2,
+      // 不允许在 case 子句中使用词法声明
+      &amp;quot;no-case-declarations&amp;quot;:2,
+      // 禁止除法操作符显式的出现在正则表达式开始的位置
+      &amp;quot;no-div-regex&amp;quot;: 2,
+      // 禁止 if 语句中有 return 之后有 else
+      &amp;quot;no-else-return&amp;quot;: 0,
+      // 禁止出现空函数.如果一个函数包含了一条注释，它将不会被认为有问题。
+      &amp;quot;no-empty-function&amp;quot;:2,
+      // 禁止使用空解构模式no-empty-pattern
+      &amp;quot;no-empty-pattern&amp;quot;:2,
+      // 禁止在没有类型检查操作符的情况下与 null 进行比较
+      &amp;quot;no-eq-null&amp;quot;: 1,
+      // 禁用 eval()
+      &amp;quot;no-eval&amp;quot;: 2,
+      // 禁止扩展原生类型
+      &amp;quot;no-extend-native&amp;quot;: 2,
+      // 禁止不必要的 .bind() 调用
+      &amp;quot;no-extra-bind&amp;quot;: 2,
+      // 禁用不必要的标签
+      &amp;quot;no-extra-label:&amp;quot;:0,
+      // 禁止 case 语句落空
+      &amp;quot;no-fallthrough&amp;quot;: 2,
+      // 禁止数字字面量中使用前导和末尾小数点
+      &amp;quot;no-floating-decimal&amp;quot;: 2,
+      // 禁止使用短符号进行类型转换(!!fOO)
+      &amp;quot;no-implicit-coercion&amp;quot;:0,
+      // 禁止在全局范围内使用 var 和命名的 function 声明
+      &amp;quot;no-implicit-globals&amp;quot;:1,
+      // 禁止使用类似 eval() 的方法
+      &amp;quot;no-implied-eval&amp;quot;: 2,
+      // 禁止 this 关键字出现在类和类对象之外
+      &amp;quot;no-invalid-this&amp;quot;:0,
+      // 禁用 __iterator__ 属性
+      &amp;quot;no-iterator&amp;quot;: 2,
+      //  禁用标签语句
+      &amp;quot;no-labels&amp;quot;: 2,
+      // 禁用不必要的嵌套块
+      &amp;quot;no-lone-blocks&amp;quot;: 2,
+      // 禁止在循环中出现 function 声明和表达式
+      &amp;quot;no-loop-func&amp;quot;:1,
+      // 禁用魔术数字(3.14什么的用常量代替)
+      &amp;quot;no-magic-numbers&amp;quot;:[1,{ &amp;quot;ignore&amp;quot;: [0,-1,1] }],
+      // 禁止使用多个空格
+      &amp;quot;no-multi-spaces&amp;quot;: 2,
+      // 禁止使用多行字符串，在 JavaScript 中，可以在新行之前使用斜线创建多行字符串
+      &amp;quot;no-multi-str&amp;quot;: 2,
+      // 禁止对原生对象赋值
+      &amp;quot;no-native-reassign&amp;quot;: 2,
+      // 禁止在非赋值或条件语句中使用 new 操作符
+      &amp;quot;no-new&amp;quot;: 2,
+      // 禁止对 Function 对象使用 new 操作符
+      &amp;quot;no-new-func&amp;quot;: 0,
+      // 禁止对 String，Number 和 Boolean 使用 new 操作符
+      &amp;quot;no-new-wrappers&amp;quot;: 2,
+      // 禁用八进制字面量
+      &amp;quot;no-octal&amp;quot;: 2,
+      // 禁止在字符串中使用八进制转义序列
+      &amp;quot;no-octal-escape&amp;quot;: 2,
+      // 不允许对 function 的参数进行重新赋值
+      &amp;quot;no-param-reassign&amp;quot;: 0,
+      // 禁用 __proto__ 属性
+      &amp;quot;no-proto&amp;quot;: 2,
+      // 禁止使用 var 多次声明同一变量
+      &amp;quot;no-redeclare&amp;quot;: 2,
+      // 禁用指定的通过 require 加载的模块
+      &amp;quot;no-return-assign&amp;quot;: 0,
+      // 禁止使用 javascript: url
+      &amp;quot;no-script-url&amp;quot;: 0,
+      // 禁止自我赋值
+      &amp;quot;no-self-assign&amp;quot;:2,
+      // 禁止自身比较
+      &amp;quot;no-self-compare&amp;quot;: 2,
+      // 禁用逗号操作符
+      &amp;quot;no-sequences&amp;quot;: 2,
+      // 禁止抛出非异常字面量
+      &amp;quot;no-throw-literal&amp;quot;: 2,
+      // 禁用一成不变的循环条件
+      &amp;quot;no-unmodified-loop-condition&amp;quot;:2,
+      // 禁止出现未使用过的表达式
+      &amp;quot;no-unused-expressions&amp;quot;: 0,
+      // 禁用未使用过的标签
+      &amp;quot;no-unused-labels&amp;quot;:2,
+      // 禁止不必要的 .call() 和 .apply()
+      &amp;quot;no-useless-call&amp;quot;:2,
+      // 禁止不必要的字符串字面量或模板字面量的连接
+      &amp;quot;no-useless-concat&amp;quot;:2,
+      // 禁用不必要的转义字符
+      &amp;quot;no-useless-escape&amp;quot;:0,
+      // 禁用 void 操作符
+      &amp;quot;no-void&amp;quot;: 0,
+      // 禁止在注释中使用特定的警告术语
+      &amp;quot;no-warning-comments&amp;quot;: 0,
+      // 禁用 with 语句
+      &amp;quot;no-with&amp;quot;: 2,
+      // 强制在parseInt()使用基数参数
+      &amp;quot;radix&amp;quot;: 2,
+      // 要求所有的 var 声明出现在它们所在的作用域顶部
+      &amp;quot;vars-on-top&amp;quot;: 0,
+      // 要求 IIFE 使用括号括起来
+      &amp;quot;wrap-iife&amp;quot;: [2, &amp;quot;any&amp;quot;],
+      // 要求或禁止 “Yoda” 条件
+      &amp;quot;yoda&amp;quot;: [2, &amp;quot;never&amp;quot;],
+      // 要求或禁止使用严格模式指令
+      &amp;quot;strict&amp;quot;: 0,
+
+
+      //////////////
+      //  变量声明 //
+      //////////////
+
+      // 要求或禁止 var 声明中的初始化(初值)
+      &amp;quot;init-declarations&amp;quot;:0,
+      // 不允许 catch 子句的参数与外层作用域中的变量同名
+      &amp;quot;no-catch-shadow&amp;quot;: 0,
+      // 禁止删除变量
+      &amp;quot;no-delete-var&amp;quot;: 2,
+      // 不允许标签与变量同名
+      &amp;quot;no-label-var&amp;quot;: 2,
+      // 禁用特定的全局变量
+      &amp;quot;no-restricted-globals&amp;quot;:0,
+      // 禁止 var 声明 与外层作用域的变量同名
+      &amp;quot;no-shadow&amp;quot;: 0,
+      // 禁止覆盖受限制的标识符
+      &amp;quot;no-shadow-restricted-names&amp;quot;: 2,
+      // 禁用未声明的变量，除非它们在 /*global */ 注释中被提到
+      &amp;quot;no-undef&amp;quot;: 2,
+      // 禁止将变量初始化为 undefined
+      &amp;quot;no-undef-init&amp;quot;: 2,
+      // 禁止将 undefined 作为标识符
+      &amp;quot;no-undefined&amp;quot;: 0,
+      // 禁止出现未使用过的变量
+      &amp;quot;no-unused-vars&amp;quot;: [2, { &amp;quot;vars&amp;quot;: &amp;quot;all&amp;quot;, &amp;quot;args&amp;quot;: &amp;quot;none&amp;quot; }],
+      // 不允许在变量定义之前使用它们
+      &amp;quot;no-use-before-define&amp;quot;: 0,
+
+      //////////////////////////
+      // Node.js and CommonJS //
+      //////////////////////////
+
+      // require return statements after callbacks
+      &amp;quot;callback-return&amp;quot;:0,
+      // 要求 require() 出现在顶层模块作用域中
+      &amp;quot;global-require&amp;quot;: 1,
+      // 要求回调函数中有容错处理
+      &amp;quot;handle-callback-err&amp;quot;: [2, &amp;quot;^(err|error)$&amp;quot;],
+      // 禁止混合常规 var 声明和 require 调用
+      &amp;quot;no-mixed-requires&amp;quot;: 0,
+      // 禁止调用 require 时使用 new 操作符
+      &amp;quot;no-new-require&amp;quot;: 2,
+      // 禁止对 __dirname 和 __filename进行字符串连接
+      &amp;quot;no-path-concat&amp;quot;: 0,
+      // 禁用 process.env
+      &amp;quot;no-process-env&amp;quot;: 0,
+      // 禁用 process.exit()
+      &amp;quot;no-process-exit&amp;quot;: 0,
+      // 禁用同步方法
+      &amp;quot;no-sync&amp;quot;: 0,
+
+      //////////////
+      // 风格指南  //
+      //////////////
+
+      // 指定数组的元素之间要以空格隔开(, 后面)， never参数：[ 之前和 ] 之后不能带空格，always参数：[ 之前和 ] 之后必须带空格
+      &amp;quot;array-bracket-spacing&amp;quot;: [2, &amp;quot;never&amp;quot;],
+      // 禁止或强制在单行代码块中使用空格(禁用)
+      &amp;quot;block-spacing&amp;quot;:[1,&amp;quot;never&amp;quot;],
+      //强制使用一致的缩进 第二个参数为 &amp;quot;tab&amp;quot; 时，会使用tab，
+      // if while function 后面的{必须与if在同一行，java风格。
+      &amp;quot;brace-style&amp;quot;: [2, &amp;quot;1tbs&amp;quot;, { &amp;quot;allowSingleLine&amp;quot;: true }],
+      // 双峰驼命名格式
+      &amp;quot;camelcase&amp;quot;: 2,
+      // 控制逗号前后的空格
+      &amp;quot;comma-spacing&amp;quot;: [2, { &amp;quot;before&amp;quot;: false, &amp;quot;after&amp;quot;: true }],
+      // 控制逗号在行尾出现还是在行首出现 (默认行尾)
+      // http://eslint.org/docs/rules/comma-style
+      &amp;quot;comma-style&amp;quot;: [2, &amp;quot;last&amp;quot;],
+      //&amp;quot;SwitchCase&amp;quot; (默认：0) 强制 switch 语句中的 case 子句的缩进水平
+      // 以方括号取对象属性时，[ 后面和 ] 前面是否需要空格, 可选参数 never, always
+      &amp;quot;computed-property-spacing&amp;quot;: [2, &amp;quot;never&amp;quot;],
+      // 用于指统一在回调函数中指向this的变量名，箭头函数中的this已经可以指向外层调用者，应该没卵用了
+      // e.g [0,&amp;quot;that&amp;quot;] 指定只能 var that = this. that不能指向其他任何值，this也不能赋值给that以外的其他值
+      &amp;quot;consistent-this&amp;quot;:  [1,&amp;quot;that&amp;quot;],
+      // 强制使用命名的 function 表达式
+      &amp;quot;func-names&amp;quot;: 0,
+      // 文件末尾强制换行
+      &amp;quot;eol-last&amp;quot;: 2,
+      &amp;quot;indent&amp;quot;: [2, 4, { &amp;quot;SwitchCase&amp;quot;: 1 }],
+      // 强制在对象字面量的属性中键和值之间使用一致的间距
+      &amp;quot;key-spacing&amp;quot;: [2, { &amp;quot;beforeColon&amp;quot;: false, &amp;quot;afterColon&amp;quot;: true }],
+      // 强制使用一致的换行风格
+      &amp;quot;linebreak-style&amp;quot;: [1,&amp;quot;unix&amp;quot;],
+      // 要求在注释周围有空行      ( 要求在块级注释之前有一空行)
+      &amp;quot;lines-around-comment&amp;quot;: [1,{&amp;quot;beforeBlockComment&amp;quot;:true}],
+      //  强制一致地使用函数声明或函数表达式，方法定义风格，参数：
+      //    declaration: 强制使用方法声明的方式，function f(){} e.g [2, &amp;quot;declaration&amp;quot;]
+      //    expression：强制使用方法表达式的方式，var f = function() {}  e.g [2, &amp;quot;expression&amp;quot;]
+      //    allowArrowFunctions: declaration风格中允许箭头函数。 e.g [2, &amp;quot;declaration&amp;quot;, { &amp;quot;allowArrowFunctions&amp;quot;: true }]
+      &amp;quot;func-style&amp;quot;: 0,
+      // 强制回调函数最大嵌套深度 5层
+      &amp;quot;max-nested-callbacks&amp;quot;: [1,5],
+      // 禁止使用指定的标识符
+      &amp;quot;id-blacklist&amp;quot;:0,
+      // 强制标识符的最新和最大长度
+      &amp;quot;id-length&amp;quot;:0,
+      // 要求标识符匹配一个指定的正则表达式
+      &amp;quot;id-match&amp;quot;:0,
+      // 强制在 JSX 属性中一致地使用双引号或单引号
+      &amp;quot;jsx-quotes&amp;quot;:0,
+      // 强制在关键字前后使用一致的空格 (前后腰需要)
+      &amp;quot;keyword-spacing&amp;quot;:2,
+      // 强制一行的最大长度
+      &amp;quot;max-len&amp;quot;:[1,200],
+      // 强制最大行数
+      &amp;quot;max-lines&amp;quot;:0,
+      // 强制 function 定义中最多允许的参数数量
+      &amp;quot;max-params&amp;quot;:[1,7],
+      // 强制 function 块最多允许的的语句数量
+      &amp;quot;max-statements&amp;quot;:[1,200],
+      // 强制每一行中所允许的最大语句数量
+      &amp;quot;max-statements-per-line&amp;quot;:0,
+      // 要求构造函数首字母大写  （要求调用 new 操作符时有首字母大小的函数，允许调用首字母大写的函数时没有 new 操作符。）
+      &amp;quot;new-cap&amp;quot;: [2, { &amp;quot;newIsCap&amp;quot;: true, &amp;quot;capIsNew&amp;quot;: false }],
+      // 要求调用无参构造函数时有圆括号
+      &amp;quot;new-parens&amp;quot;: 2,
+      // 要求或禁止 var 声明语句后有一行空行
+      &amp;quot;newline-after-var&amp;quot;: 0,
+      // 禁止使用 Array 构造函数
+      &amp;quot;no-array-constructor&amp;quot;: 2,
+      // 禁用按位运算符
+      &amp;quot;no-bitwise&amp;quot;:0,
+      // 要求 return 语句之前有一空行
+      &amp;quot;newline-before-return&amp;quot;:0,
+      // 要求方法链中每个调用都有一个换行符
+      &amp;quot;newline-per-chained-call&amp;quot;:1,
+      // 禁用 continue 语句
+      &amp;quot;no-continue&amp;quot;: 0,
+      // 禁止在代码行后使用内联注释
+      &amp;quot;no-inline-comments&amp;quot;: 0,
+      // 禁止 if 作为唯一的语句出现在 else 语句中
+      &amp;quot;no-lonely-if&amp;quot;: 0,
+      // 禁止混合使用不同的操作符
+      &amp;quot;no-mixed-operators&amp;quot;:0,
+      // 不允许空格和 tab 混合缩进
+      &amp;quot;no-mixed-spaces-and-tabs&amp;quot;: 2,
+      // 不允许多个空行
+      &amp;quot;no-multiple-empty-lines&amp;quot;: [2, { &amp;quot;max&amp;quot;: 2 }],
+      // 不允许否定的表达式
+      &amp;quot;no-negated-condition&amp;quot;:0,
+      // 不允许使用嵌套的三元表达式
+      &amp;quot;no-nested-ternary&amp;quot;: 0,
+      // 禁止使用 Object 的构造函数
+      &amp;quot;no-new-object&amp;quot;: 2,
+      // 禁止使用一元操作符 ++ 和 --
+      &amp;quot;no-plusplus&amp;quot;:0,
+      // 禁止使用特定的语法
+      &amp;quot;no-restricted-syntax&amp;quot;:0,
+      // 禁止 function 标识符和括号之间出现空格
+      &amp;quot;no-spaced-func&amp;quot;: 2,
+      // 不允许使用三元操作符
+      &amp;quot;no-ternary&amp;quot;: 0,
+      //  禁用行尾空格
+      &amp;quot;no-trailing-spaces&amp;quot;: 2,
+      // 禁止标识符中有悬空下划线_bar
+      &amp;quot;no-underscore-dangle&amp;quot;: 0,
+      // 禁止可以在有更简单的可替代的表达式时使用三元操作符
+      &amp;quot;no-unneeded-ternary&amp;quot;: 2,
+      // 禁止属性前有空白
+      &amp;quot;no-whitespace-before-property&amp;quot;:0,
+      // 强制花括号内换行符的一致性
+      &amp;quot;object-curly-newline&amp;quot;:0,
+      // 强制在花括号中使用一致的空格
+      &amp;quot;object-curly-spacing&amp;quot;: 0,
+      // 强制将对象的属性放在不同的行上
+      &amp;quot;object-property-newline&amp;quot;:0,
+      // 强制函数中的变量要么一起声明要么分开声明
+      &amp;quot;one-var&amp;quot;: [2, { &amp;quot;initialized&amp;quot;: &amp;quot;never&amp;quot; }],
+      // 要求或禁止在 var 声明周围换行
+      &amp;quot;one-var-declaration-per-line&amp;quot;:0,
+      // 要求或禁止在可能的情况下要求使用简化的赋值操作符
+      &amp;quot;operator-assignment&amp;quot;: 0,
+      // 强制操作符使用一致的换行符
+      &amp;quot;operator-linebreak&amp;quot;: [2, &amp;quot;after&amp;quot;, { &amp;quot;overrides&amp;quot;: { &amp;quot;?&amp;quot;: &amp;quot;before&amp;quot;, &amp;quot;:&amp;quot;: &amp;quot;before&amp;quot; } }],
+      // 要求或禁止块内填充
+      &amp;quot;padded-blocks&amp;quot;: 0,
+      // 要求对象字面量属性名称用引号括起来
+      &amp;quot;quote-props&amp;quot;: 0,
+      // 强制使用一致的反勾号、双引号或单引号
+      &amp;quot;quotes&amp;quot;: [2, &amp;quot;single&amp;quot;, &amp;quot;avoid-escape&amp;quot;],
+      // 要求使用 JSDoc 注释
+      &amp;quot;require-jsdoc&amp;quot;:1,
+      // 要求或禁止使用分号而不是 ASI（这个才是控制行尾部分号的，）
+      &amp;quot;semi&amp;quot;: [2, &amp;quot;always&amp;quot;],
+      // 强制分号之前和之后使用一致的空格
+      &amp;quot;semi-spacing&amp;quot;: 0,
+      // 要求同一个声明块中的变量按顺序排列
+      &amp;quot;sort-vars&amp;quot;: 0,
+      // 强制在块之前使用一致的空格
+      &amp;quot;space-before-blocks&amp;quot;: [2, &amp;quot;always&amp;quot;],
+      // 强制在 function的左括号之前使用一致的空格
+      &amp;quot;space-before-function-paren&amp;quot;: [2, &amp;quot;always&amp;quot;],
+      // 强制在圆括号内使用一致的空格
+      &amp;quot;space-in-parens&amp;quot;: [2, &amp;quot;never&amp;quot;],
+      // 要求操作符周围有空格
+      &amp;quot;space-infix-ops&amp;quot;: 2,
+      // 强制在一元操作符前后使用一致的空格
+      &amp;quot;space-unary-ops&amp;quot;: [2, { &amp;quot;words&amp;quot;: true, &amp;quot;nonwords&amp;quot;: false }],
+      // 强制在注释中 // 或 /* 使用一致的空格
+      &amp;quot;spaced-comment&amp;quot;: [2, &amp;quot;always&amp;quot;, { &amp;quot;markers&amp;quot;: [&amp;quot;global&amp;quot;, &amp;quot;globals&amp;quot;, &amp;quot;eslint&amp;quot;, &amp;quot;eslint-disable&amp;quot;, &amp;quot;*package&amp;quot;, &amp;quot;!&amp;quot;] }],
+      // 要求或禁止 Unicode BOM
+      &amp;quot;unicode-bom&amp;quot;: 0,
+      //  要求正则表达式被括号括起来
+      &amp;quot;wrap-regex&amp;quot;: 0,
+
+      //////////////
+      // ES6.相关 //
+      //////////////
+
+      // 要求箭头函数体使用大括号
+      &amp;quot;arrow-body-style&amp;quot;: 2,
+      // 要求箭头函数的参数使用圆括号
+      &amp;quot;arrow-parens&amp;quot;: 2,
+      &amp;quot;arrow-spacing&amp;quot;:[2,{ &amp;quot;before&amp;quot;: true, &amp;quot;after&amp;quot;: true }],
+      // 强制在子类构造函数中用super()调用父类构造函数，TypeScrip的编译器也会提示
+      &amp;quot;constructor-super&amp;quot;: 0,
+      // 强制 generator 函数中 * 号周围使用一致的空格
+      &amp;quot;generator-star-spacing&amp;quot;: [2, { &amp;quot;before&amp;quot;: true, &amp;quot;after&amp;quot;: true }],
+      // 禁止修改类声明的变量
+      &amp;quot;no-class-assign&amp;quot;:2,
+      // 不允许箭头功能，在那里他们可以混淆的比较
+      &amp;quot;no-confusing-arrow&amp;quot;:0,
+      // 禁止修改 const 声明的变量
+      &amp;quot;no-const-assign&amp;quot;:2,
+      // 禁止类成员中出现重复的名称
+      &amp;quot;no-dupe-class-members&amp;quot;:2,
+      // 不允许复制模块的进口
+      &amp;quot;no-duplicate-imports&amp;quot;:0,
+      // 禁止 Symbol  的构造函数
+      &amp;quot;no-new-symbol&amp;quot;:2,
+      // 允许指定模块加载时的进口
+      &amp;quot;no-restricted-imports&amp;quot;:0,
+      // 禁止在构造函数中，在调用 super() 之前使用 this 或 super
+      &amp;quot;no-this-before-super&amp;quot;: 2,
+      // 禁止不必要的计算性能键对象的文字
+      &amp;quot;no-useless-computed-key&amp;quot;:0,
+      // 要求使用 let 或 const 而不是 var
+      &amp;quot;no-var&amp;quot;: 0,
+      // 要求或禁止对象字面量中方法和属性使用简写语法
+      &amp;quot;object-shorthand&amp;quot;: 0,
+      // 要求使用箭头函数作为回调
+      &amp;quot;prefer-arrow-callback&amp;quot;:0,
+      // 要求使用 const 声明那些声明后不再被修改的变量
+      &amp;quot;prefer-const&amp;quot;: 0,
+      // 要求在合适的地方使用 Reflect 方法
+      &amp;quot;prefer-reflect&amp;quot;:0,
+      // 要求使用扩展运算符而非 .apply()
+      &amp;quot;prefer-spread&amp;quot;:0,
+      // 要求使用模板字面量而非字符串连接
+      &amp;quot;prefer-template&amp;quot;:0,
+      // Suggest using the rest parameters instead of arguments
+      &amp;quot;prefer-rest-params&amp;quot;:0,
+      // 要求generator 函数内有 yield
+      &amp;quot;require-yield&amp;quot;:0,
+      // enforce spacing between rest and spread operators and their expressions
+      &amp;quot;rest-spread-spacing&amp;quot;:0,
+      // 强制模块内的 import 排序
+      &amp;quot;sort-imports&amp;quot;:0,
+      // 要求或禁止模板字符串中的嵌入表达式周围空格的使用
+      &amp;quot;template-curly-spacing&amp;quot;:1,
+      // 强制在 yield* 表达式中 * 周围使用空格
+      &amp;quot;yield-star-spacing&amp;quot;:2
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【前端技术】基于vue的webpack打包优化浅析</title>
+      <link>https://gzg.me/post/%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Tue, 19 Nov 2019 13:24:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96/</guid>
+      
+        <description>&lt;p&gt;在项目迭代的过程中，打包后的资源越来越大。于是我们通过一些优化手段减小打包后的静态资源&lt;/p&gt;
+&lt;h2 id=&#34;webpack优化基于vue-cli3&#34;&gt;webpack优化（基于vue-cli3）&lt;/h2&gt;
+&lt;p&gt;前端webpack优化研究&lt;/p&gt;
+&lt;h2 id=&#34;1打包优化&#34;&gt;1.	打包优化&lt;/h2&gt;
+&lt;p&gt;优化webpack打包项目，从两方面来解决问题，一方面是检查项目中未使用或只使用了部分的功能模块（js库），我们进行按需加载。另一方面是引入一些打包优化的loader和plugins。
+首先我们安装webpack-bundle-analyzer模块，来查看项目构建模块的大小。如下图所示，项目比较大的资源文件都是引入的UI库和一些图表，时间的插件组成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtcvWD.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;赘余优化
+我们可以看到，项目中最大的组件是element-ui，由于我们项目中使用了90%的组件，这里就不再进行按需加载，全部引入即可。看图中项目构建结构，发现moment.js库是比较大的，而在项目中我们只是用的一部分的API。由于该组件没有办法进行按需加载，我们使用IgnorePlugin插件进行优化。我们看到引入了该插件后，打包后的资源从2.16M变成了1.95M&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtczSe.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;插件优化
+在项目构建的过程中，默认情况下项目会自动为我们分解多个chunk，此时可能有的文件只有几B，但是也会产生多一次的http请求。于是我们考虑使用LimitChunkCountPlugin插件来分离chunk，减少http请求优化我们的项目。该插件的方法很简单，通过MaxChunks来限制chunk产生的数量，通过minChunkSize来设置每个chunk最小的值。如下图所示，我们配置好该plugin，然后构建项目，发现项目的大小从1.95M变成的1.79M.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtcLo6.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2构建优化&#34;&gt;2.	构建优化&lt;/h2&gt;
+&lt;p&gt;在项目的构建过程中，有时候会很耗时，影响开发效率，我们引入UglifyJsPlugin插件来提高构建速度，如下所示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtcjJO.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果是大型项目，我们需要引入DLLplugin插件来实现bundles&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/Qtcqdx.jpg&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到进行一系列的优化后，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtgSQH.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/Qtgpyd.jpg&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/Qtg9OA.jpg&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/07/QtgPeI.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3参考链接&#34;&gt;3.	参考链接&lt;/h2&gt;
+&lt;p&gt;Webpack plugins插件 &lt;a href=&#34;https://webpack.docschina.org/plugins/&#34;&gt;https://webpack.docschina.org/plugins/&lt;/a&gt;
+Vue-cli 配置https://cli.vuejs.org/zh/config/&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】前端异常监控之异常信息采集</title>
+      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</guid>
+      
+        <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;
+&lt;h2 id=&#34;1常见前端异常&#34;&gt;1.	常见前端异常&lt;/h2&gt;
+&lt;p&gt;在软件开发过程中，会出现很多异常情况，在前端开发中，有以下一些常见的异常情况。在发生异常后，我们通过一些JavaScript的方法，来捕获不同的错误，达到监控的目的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JS 语法错误、代码异常&lt;/li&gt;
+&lt;li&gt;AJAX 请求异常&lt;/li&gt;
+&lt;li&gt;静态资源加载异常&lt;/li&gt;
+&lt;li&gt;Promise 异常&lt;/li&gt;
+&lt;li&gt;Iframe 异常&lt;/li&gt;
+&lt;li&gt;跨域 Script error&lt;/li&gt;
+&lt;li&gt;崩溃和卡顿&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-捕获异常方案&#34;&gt;2 捕获异常方案&lt;/h2&gt;
+&lt;p&gt;在JavaScript程序中捕获异常有很多办法，下面我们依次对不同类型的错误，捕获的方法进行分析。通过下面不同的方法，可以捕获到软件系统在运行时所产生的异常，然后通过上报异常，来解决问题。&lt;/p&gt;
+&lt;h3 id=&#34;1捕获trycatch的异常&#34;&gt;1）	捕获try/catch的异常&lt;/h3&gt;
+&lt;p&gt;在开发过程中，我们通过try/catch语句对有可能产生问题的地址进行错误捕获，然后获取程序本身运行的异常错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiMn0.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2捕获同步代码的异常&#34;&gt;2）	捕获同步代码的异常&lt;/h3&gt;
+&lt;p&gt;通过window.onerror可以捕获到程序运行时，同步的错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTi3AU.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3捕获静态资源的异常&#34;&gt;3）	捕获静态资源的异常&lt;/h3&gt;
+&lt;p&gt;当一些图片资源加载失败后，会触发Event的error事件，我们通过addEventListener来对错误添加监听事件，然后进行错误的捕获。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTil7T.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4捕获promise的异常&#34;&gt;4）	捕获promise的异常&lt;/h3&gt;
+&lt;p&gt;在promise中，我们可以通过catch来对错误信息进行捕获，但是有一些情况没有写catch，系统会通过unhandledrejection事件来触发Promise Error ,我们通过addEventListener来添加监听，然后进行错误的捕获。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiQBV.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5捕获vue项目的异常&#34;&gt;5）	捕获VUE项目的异常&lt;/h3&gt;
+&lt;p&gt;Vue官方为我们提供了一个是错误捕获函数，通过errHandler来捕获相关的错误&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiGh4.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;32异常上报&#34;&gt;3.2异常上报&lt;/h2&gt;
+&lt;h3 id=&#34;1通过程序上报&#34;&gt;1）通过程序上报&lt;/h3&gt;
+&lt;p&gt;当我们捕获到异常信息后，我们可以通过预先设计好的接口来上报程序运行中发生的异常信息，然后在后台管理处，查看相关的信息，并根据实际的情况，做相关的处理操作。&lt;/p&gt;
+&lt;h3 id=&#34;2通过用户反馈上报&#34;&gt;2）通过用户反馈上报&lt;/h3&gt;
+&lt;p&gt;我们也可以在页面添加异常上报接口和页面，然后让用户主动反馈异常的信息，进行异常捕获并上报。&lt;/p&gt;
+&lt;h2 id=&#34;4总结&#34;&gt;4.	总结&lt;/h2&gt;
+&lt;p&gt;前端异常监控，是一套完整的软件运行体系。流程如下。我们在捕获到程序运行中所产生的异常，目的是为了解决本次异常，并在下一次的开发过程中，预防异常的发生。提高软件的健壮性。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiY9J.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;业界流行系统：
+fundebug: &lt;a href=&#34;https://www.fundebug.com/&#34;&gt;https://www.fundebug.com/&lt;/a&gt;&lt;br&gt;
+Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5实例解析&#34;&gt;5.	实例解析&lt;/h2&gt;
+&lt;h3 id=&#34;51静态资源异常&#34;&gt;5.1静态资源异常&lt;/h3&gt;
+&lt;p&gt;我们在上线项目后，有时候图片未正常加载，如图所示，图片未显示。我们通过window.addEventListener(‘error’)添加静态资源错误的监听，就可以捕获到相关发生的位置。然后通过我们设定好的回调函数，把相关的错误信息反馈会管理平台。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTit39.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;52网络请求异常&#34;&gt;5.2网络请求异常&lt;/h3&gt;
+&lt;p&gt;如下图所示，我们在进行异步请求的过程中，如果发生了异常信息，我们没有进行catch，那么可以通过window.addEventListener(&amp;lsquo;unhandledrejection&amp;rsquo;)来监听异步错误信息的内容，然后我们根据需求，把所需要的参数提交后台.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiNcR.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在捕获异常信息后，我们需要先对异常信息进行数据整理，然后把有效的信息发送回反馈平台。我们通过错误事件对象拿到改错误的具体信息，如下所示，对于一个网络请求错误来说，我们通过e.reason对象来获取相关的信息。下面我们对一个完整的网络请求进行有效参数整理。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/10/31/KTiUj1.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术笔记】web页面构建标准及规范</title>
+      <link>https://gzg.me/post/%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86/</link>
+      <pubDate>Sun, 20 Oct 2019 12:18:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86/</guid>
+      
+        <description>&lt;p&gt;整理了一些前端开发时候需要注意的知识点&lt;/p&gt;
+&lt;h2 id=&#34;前端开发构建标准及规范&#34;&gt;前端开发构建标准及规范&lt;/h2&gt;
+&lt;p&gt;本文章总结一些，前端开发过程中对页面的思考和一些规范化的标准，以提高自己的页面构建能力。这些内容都是日常开发经常用到的，平时有的地方会有遗漏，故整理出一篇内容。规范不仅是为了当下可以开发出程序，也是为了后期维护。
+有的特殊部分会进行标注，比如移动端和pc不同的差异。&lt;/p&gt;
+&lt;h2 id=&#34;1-构建标准&#34;&gt;1. 构建标准&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;页面布局&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;在不考虑IE9及以下浏览器的情况下，尽量使用flex布局。让页面更灵活&lt;/li&gt;
+&lt;li&gt;考虑不同分辨率的屏幕，及刘海异形屏的兼容问题&lt;/li&gt;
+&lt;li&gt;使用float布局时，考虑对其他元素的影响，及时清除浮动。&lt;/li&gt;
+&lt;li&gt;尽量不定高，而是通过内容撑开盒子模型，也就是触发BFC&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;表单&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;表单校验和规范&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;控制 《空值，极限值，特殊类型（邮箱，手机号&amp;hellip;），空格，回车》的输入，并根据页面需求，设置不同的校验。&lt;/li&gt;
+&lt;li&gt;表单元素设置的默认值，如果是单选那么需要设置一个初始默认选择态，部分表单元素内容添加清空按钮。&lt;/li&gt;
+&lt;li&gt;当输入或选择内容后，用户关闭了该页面。要注意清空输入的值和校验状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;页面适应&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在不同屏幕尺寸情况下，表单布局的正常显示，横纵的排列方式&lt;/li&gt;
+&lt;li&gt;文本内容输入过多的显示方式，滚动还是修改布局长度或高度&lt;/li&gt;
+&lt;li&gt;动态添加的表单，页面的显示方式等&lt;/li&gt;
+&lt;li&gt;文本过长显示省略号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;表格&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;表格内容如果过长，需要显示省略号，并添加hover显示全部内容的效果&lt;/li&gt;
+&lt;li&gt;注意不同需求，固定表头和表列的操作，以及合并单元格&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2开发标准&#34;&gt;2.开发标准&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;变量命名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;JS变量名称 以，大驼峰或者小驼峰&lt;/li&gt;
+&lt;li&gt;CSS命名 id以单个单词为准，class用 - 横线命名方式&lt;/li&gt;
+&lt;li&gt;vue文件以 - 小写方式命名&lt;/li&gt;
+&lt;li&gt;简洁清晰的注释内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3开发准备&#34;&gt;3.开发准备&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;理解需求&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;根据原型图&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】vue-cli3脚手架工具搭建多页面应用</title>
+      <link>https://gzg.me/post/%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Fri, 20 Sep 2019 21:02:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8/</guid>
+      
+        <description>&lt;p&gt;公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。&lt;/p&gt;
+&lt;h3 id=&#34;第一步用脚手架搭建一个vue项目&#34;&gt;第一步：用脚手架搭建一个vue项目&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;话不多说先创建项目 vue create 项目名称   这里我们选sfa默认配置，然后直接把项目跑起来&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/20/nvBzrT.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;第二步手动添加一个vueconfigjs来配置webpack&#34;&gt;第二步：手动添加一个vue.config.js来配置webpack&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/20/nvrvHU.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;在vue-cli3的项目中我们通过pages对象来配置多页应用&#34;&gt;在vue-cli3的项目中，我们通过pages对象来配置多页应用&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考链接  &lt;a href=&#34;https://cli.vuejs.org/zh/config/#pages&#34;&gt;https://cli.vuejs.org/zh/config/#pages&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如下所示，我们通过pages对象来配置多页应用的入口及其他参数，project1和project2是两个单页，我们分别对其进行配置入口文件及模板来源，其他配置信息可点击上方参考链接。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/20/nvgCdK.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;第三步配置项目结构&#34;&gt;第三步：配置项目结构&lt;/h3&gt;
+&lt;p&gt;在配置为入口后，我们现在pulic文件夹建好模板文件 project1.html 和 project2.html ,然后在我们的src目录建一个文件夹pages 里面放我们两个应用的源码。正常项目vuex和vue-router都是封装起来的，这边我们只演示内容。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/21/nvg4YD.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;第四步重启项目访问&#34;&gt;第四步：重启项目，访问&lt;/h3&gt;
+&lt;p&gt;我们在最初的项目url上加上相应页面的路由信息，就可以访问了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/21/nv20Bt.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术笔记】JS的String的各种API</title>
+      <link>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Fri, 06 Sep 2019 22:32:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</guid>
+      
+        <description>&lt;p&gt;String是js最常用的数据结果，本文最常见操作做一个总结&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;操作字符串是前端开发中最常见的任务之一，本文总结操作字符串的一些方法，包括ES5,ES6版本及一些常见业务场景的例示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;方法开头有&lt;!-- raw HTML omitted --&gt;改&lt;!-- raw HTML omitted --&gt;字的代表该方法会改变原Srting。
+有&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt;字的代表，该方法不会改变原Srting&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h3 id=&#34;基础知识&#34;&gt;基础知识&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;字符串可以视为字符数组可以用下标来访问（只读属性）。如：str[0]。## 标题文字 ##&lt;/li&gt;
+&lt;li&gt;通过String(5)把任意类型转为字符串&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;静态方法&#34;&gt;静态方法&lt;/h3&gt;
+&lt;h4 id=&#34;charat方法&#34;&gt;charAt方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;改&lt;!-- raw HTML omitted --&gt;String.prototype.charAt() 方法返回指定位置的字符&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;hello&#39;.charAt(1) // &amp;quot;e&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;concat方法&#34;&gt;concat方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt; String.prototype.concat() 方法用于连字符串，可以多选&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;   &#39;hello&#39;.concat(&#39;world&#39;) // &amp;quot;helloworld&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;slice方法&#34;&gt;slice方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt; String.prototype.slice() 方法用原字符串提取子字符串。第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;hello&#39;.slice(0,2) // he
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;substr方法&#34;&gt;substr方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt; String.prototype.substr()可在字符串中抽取从 start 下标开始的指定数目的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;hello&#39;.substr(3) // lo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;substring方法&#34;&gt;substring方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt; String.prototype.substring() 方法用于提取字符串中介于两个指定下标之间的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  hello&#39;.substring(3) // lo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;indexof方法&#34;&gt;indexOf方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt; String.prototype.indexOf() / lastIndexOf()  方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配 (lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;hello world&#39;.indexOf(&#39;o&#39;) // 4
+  &#39;hello world&#39;.lastindexOf(&#39;o&#39;) // 7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;trim方法&#34;&gt;trim方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt;String.prototype.trim()方法用于去除字符串两端的空格&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39; fdf &#39;.trim()  //&#39;fdf&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;tolowercase方法&#34;&gt;toLowerCase方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt;String.prototype.toLowerCase()  / toUpperCase() 将一个字符串全部转为小写 / 大写&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;Hello World&#39;.toLowerCase()// &amp;quot;hello world&amp;quot;
+  &#39;Hello World&#39;.toUpperCase()// &amp;quot;HELLO WORLD&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;match方法&#34;&gt;match方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;原&lt;!-- raw HTML omitted --&gt;String.prototype.match()方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  var matches = &#39;cat, bat, sat, fat&#39;.match(&#39;at&#39;); &amp;lt;br&amp;gt;
+  matches.index // 1
+  matches.input // &amp;quot;cat, bat, sat, fat&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;split方法&#34;&gt;split方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.split() 方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组. 第一个参数是分割规则，第二个参数，限定返回数组的最大成员数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;a|b|c&#39;.split(&#39;|&#39;) // [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;relapce方法&#34;&gt;relapce方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.relapce()  用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;Im your father&#39;.replace(&#39;father&#39;,&#39;mother&#39;) // Im your mother
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;search方法&#34;&gt;search方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;\ String.prototype.search() 强于indxOf)  检索字符串中指定的子字符串，或检索&lt;!-- raw HTML omitted --&gt;正则表达式&lt;!-- raw HTML omitted --&gt;相匹配的子字符串。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;123456ONE&#39;.search(&#39;O&#39;) // 6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;localecompare方法&#34;&gt;localeCompare方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.localeCompare()方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;apple&#39;.localeCompare(&#39;banana&#39;) // -1
+  &#39;apple&#39;.localeCompare(&#39;apple&#39;) // 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;includes方法&#34;&gt;includes方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.includes() 方法用于判断一个字符串是否包含在另一个字符串中，根据情况返回 true 或 false。第一个参数是要在此字符串中搜索的字符串，第二个参数是从当前字符串的哪个索引位置开始搜寻子字符串，默认值为0 (区分大小写)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;Blue Whale&#39;.includes(&#39;blue&#39;); // returns false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;startswith方法&#34;&gt;startsWith方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false (区分大小写)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &amp;quot;To be, or not to &amp;quot;.startsWith(&amp;quot;To be&amp;quot;); // returns true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;padstart方法&#34;&gt;padStart方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;String.prototype.padStart() / padEnd() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。填充从当前字符串的开始(左侧) / (右侧)应用的。 第一个参数 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身，第二个参数 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 &amp;quot; &amp;ldquo;（U+0020）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  &#39;abc&#39;.padStart(10, &amp;quot;foo&amp;quot;);  // &amp;quot;foofoofabc&amp;quot;
+  &#39;abc&#39;.padEnd(10, &amp;quot;foo&amp;quot;);   // &amp;quot;abcfoofoof&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;其他方法&#34;&gt;其他方法&lt;/h3&gt;
+&lt;h4 id=&#34;btoa方法&#34;&gt;btoa方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;btoa() 把任意值转为Base编码&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  btoa(&#39;hello world&#39;) // &amp;quot;SGVsbG8gV29ybGQh&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;atob方法&#34;&gt;atob方法&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;atob() 把Base64编码转为原来的值&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;  atob(&amp;quot;SGVsbG8gV29ybGQh&amp;quot;) // &#39;hello world&#39;
+&lt;/code&gt;&lt;/pre&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】从前端的角度，谈谈解决跨域的一些方案</title>
+      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/</link>
+      <pubDate>Sat, 31 Aug 2019 23:08:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/</guid>
+      
+        <description>&lt;p&gt;跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。&lt;/p&gt;
+&lt;h2 id=&#34;前端跨域研究&#34;&gt;前端跨域研究&lt;/h2&gt;
+&lt;h2 id=&#34;1-什么是跨域&#34;&gt;1. 什么是跨域&lt;/h2&gt;
+&lt;p&gt;在所有支持JavaScript的浏览器中，都有一个约定叫同源策略。所谓同源是指&amp;quot;协议+域名+端口&amp;quot;三者相同。如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。如果应用程序违反了同源策略进行通信，那么就会产生跨域问题。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;同源策略有以下几种行为限制：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Cookie、Local Storage 和 Index DB 无法读取&lt;/li&gt;
+&lt;li&gt;DOM和JS对象无法获得&lt;/li&gt;
+&lt;li&gt;AJAX 请求不能发送&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在DOM结构中，有三个标签可以进行跨域行为&lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;，有一种解决跨域的方式叫JSONP，利用的就是script可以跨域的特性。解决跨域有很多办法，如果是在企业内部开发中，最推荐的是设置CORS和跨域代理。
+前端项目设置跨域代理都是通过&lt;code&gt;http-proxy-middleware&lt;/code&gt;模块实现的。&lt;/p&gt;
+&lt;h2 id=&#34;2-cors配置跨域&#34;&gt;2. CORS配置跨域&lt;/h2&gt;
+&lt;p&gt;由后端程序员直接设置CORS响应字段，这种情况不支持IE10以下的浏览器。
+1）	&lt;code&gt;Access-Control-Allow-Origin&lt;/code&gt;：必选
+  它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。
+2）	&lt;code&gt;Access-Control-Allow-Credentials&lt;/code&gt;：可选
+  它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。
+3）	&lt;code&gt;Access-Control-Expose-Headers&lt;/code&gt;：可选
+  CORS请求时，XMLHttpRequest对象的&lt;code&gt;getResponseHeader()&lt;/code&gt;方法只能拿到6个基本字段：&lt;code&gt;Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma&lt;/code&gt;。如果想拿到其他字段，就必须在&lt;code&gt;Access-Control-Expose-Headers&lt;/code&gt;里面指定。上面的例子指定，&lt;code&gt;getResponseHeader(&#39;FooBar&#39;)&lt;/code&gt;可以返回&lt;code&gt;FooBar&lt;/code&gt;字段的值。
+&amp;lt;&lt;/p&gt;
+&lt;h2 id=&#34;3vue-cli2配置跨域代理&#34;&gt;3.	Vue-cli2配置跨域代理&lt;/h2&gt;
+&lt;p&gt;由于vue-cli2是配合webpack2使用的，首先需要找到config文件夹的index.js文件然后配置proxyTable参数，如下所示，具体参数如表1.1所示参数说明：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;proxyTable: {
+      &#39;/api/&#39;: {
+        target: &#39;http://192.168.1.22:9001&#39;,
+        changeOrigin: true,
+        pathRewrite: {
+          &#39;^/api/&#39;: &#39;&#39;
+      }
+      }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;lsquo;/api&amp;rsquo;&lt;/td&gt;
+&lt;td&gt;api对象&lt;/td&gt;
+&lt;td&gt;捕获API的标志，如果API中有这个字符串，那么就开始匹配代理比如API请求/api/users, 会被代理到请求 http:baidu.com/api/users&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target&lt;/td&gt;
+&lt;td&gt;域名/IP地址&lt;/td&gt;
+&lt;td&gt;代理的API地址，就是需要跨域的API地址，地址可以是域名,如：http://www.baidu.com 也可以是IP地址：http://192.168.1.22:9001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pathRewrite&lt;/td&gt;
+&lt;td&gt;&amp;lsquo;^/api/&#39;: &#39; &#39;&lt;/td&gt;
+&lt;td&gt;路径重写，也就是说会修改最终请求的API路径比如访问的API路径：/api/users, 设置pathRewrite: {&amp;lsquo;^/api&amp;rsquo; : &amp;lsquo;&#39;},后，最终代理访问http://www.baidu.com/users， 这个参数的目的是给代理命名后，在访问时把命名删除掉&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;changeOrigin&lt;/td&gt;
+&lt;td&gt;布尔值&lt;/td&gt;
+&lt;td&gt;如果后端服务是一个IP对应多个域名。需要通过域名区分服务，则该值必须是true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;secure&lt;/td&gt;
+&lt;td&gt;布尔值&lt;/td&gt;
+&lt;td&gt;设置false(默认)后，可以接受运行在 HTTPS 上，可以使用无效证书的后端服务器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;(表1.1)&lt;/p&gt;
+&lt;h2 id=&#34;4vue-cli3配置跨域代理&#34;&gt;4.	Vue-cli3配置跨域代理&lt;/h2&gt;
+&lt;p&gt;Vue-cli3的配置项目没有cli2那么多文件结构了，只需要在devServe对象(所有 webpack-dev-server都可以在这配置)里面配置proxy对象即可，如下所示。具体参数和表1.1相同。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;proxy: {
+    &#39;/api&#39;: {
+      target: &#39;http://192.168.1.21:9101/daas&#39;,
+      changeOrigin: true,
+      pathRewrite: {
+        &#39;/api&#39;: &#39;&#39;
+       }
+      }
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;5koa配置跨域代理&#34;&gt;5.	Koa配置跨域代理&lt;/h2&gt;
+&lt;p&gt;我们创建一个js文件(例如proxy.js)，来构建代理服务，先实例化一个koa对象，然后配置app对象的proxy属性，详情参数见表1.1。配置到代理属性，需要本地启动一个node服务，然后我们通过命令行启动该服务node  proxy.js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const app = new Koa()  // 创建koa对象
+  app.use(async (ctx, next) =&amp;gt; {
+    ctx.respond = false //绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response
+      return proxy({
+        target: &#39;http://192.168.1.21:9003&#39;,
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+        &#39;^/proxyAPI&#39;: &#39;&#39;
+        }
+      })(ctx.req, ctx.res, next)
+    }
+    return next()
+  })
+  app.listen(3000, () =&amp;gt; {
+      console.log(&#39;Listening 3000...&#39;)
+  })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;6nuxtjs配置跨域代理&#34;&gt;6.	Nuxt.js配置跨域代理&lt;/h2&gt;
+&lt;p&gt;在nuxt项目中首先安装proxy代理库 npm i @nuxtjs/proxy -D 然后在next.config.js配置文件中添加模块设置代理&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; modules: [
+    &#39;@nuxtjs/axios&#39;,
+     &#39;@nuxtjs/proxy&#39;
+  ],
+   axios: {
+    proxy: true
+  },
+    proxy: {
+      &#39;/api&#39;: {
+          target: &#39;http://example.com&#39;,
+        pathRewrite: {
+       &#39;^/api&#39; : &#39;/&#39;
+     }
+   }
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;7nginx配置跨域代理&#34;&gt;7.	Nginx配置跨域代理&lt;/h2&gt;
+&lt;p&gt;通过nginx的反向代理，把客户端的请求转发到服务端，然后服务端返回数据以后，在转发回客户端。
+如果是开发环境需要配置两个代理，一个是把项目代理到本地nginx服务器，另一个是代理服务器传来的数据。
+如果是打包线上环境，那么只要配置一个代理做转发即可。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  server {
+    listen       8085;
+    server_name  localhost;
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+    location /daas/api {
+        proxy_pass http://192.168.1.21:9097/daas;
+        rewrite ^/api/(.*)$ /$1 break;
+    }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;8apache配置跨域代理&#34;&gt;8.	Apache配置跨域代理&lt;/h2&gt;
+&lt;p&gt;Apache和nginx原理相同，都是做反向代理。只是需要修改相关的配置文件来完成
+&amp;lt;&lt;code&gt;proxy &lt;/code&gt; &lt;code&gt;http://192.168.1.21:9091/daas&lt;/code&gt;&amp;gt;
+&lt;code&gt;AllowOverride None&lt;/code&gt;
+&lt;code&gt; Order Deny,Allow&lt;/code&gt;
+&lt;code&gt;Allow from all&lt;/code&gt;
+&amp;lt;/&lt;code&gt;proxy&lt;/code&gt;&amp;gt;&lt;/p&gt;
+&lt;h2 id=&#34;9chrome插件配置跨域代理&#34;&gt;9.	Chrome插件配置跨域代理&lt;/h2&gt;
+&lt;p&gt;通过安装&lt;code&gt;Allow-Control-Allow-Origin&lt;/code&gt;浏览器插件，来解决跨域问题，前提是后端会判断你是否存在跨域权限，发送一个options请求先预判断，然后在进行跨域处理。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
+      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      
+        <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;
+&lt;h2 id=&#34;前端调试研究分析&#34;&gt;前端调试研究分析&lt;/h2&gt;
+&lt;h2 id=&#34;1-什么是调试&#34;&gt;1. 什么是调试&lt;/h2&gt;
+&lt;p&gt;用手工或编译程序等方法进行测试，修正语法错误和逻辑错误的过程称为调试，前端调试主要分为CSS（DOM）调试和JavaScript调试。Javascript我们主要用Chrome Devtools进行调试。&lt;/p&gt;
+&lt;h2 id=&#34;2cssdom调试&#34;&gt;2.	CSS(DOM)调试&lt;/h2&gt;
+&lt;p&gt;CSS调试用于页面样式和DOM结构调试，通过开发者工具选中DOM元素（如图1.1），整个页面的结构都在Elements功能模块渲染。
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8w7Ue.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.1）&lt;/p&gt;
+&lt;p&gt;如图1.2所示，我们在Elements调试功能面板（Styles模块），可以看到已选择元素的所有CSS属性，可以在element.style {  }里面动态为当前DOM元素添加我们需要测试的样式，也可以选择某个CSS选择器来为整个存在该选择器的CSS添加样式。通过勾选CSS伪类属性，可以看到元素触发伪类后的样式内容。
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wH4H.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.2）&lt;/p&gt;
+&lt;p&gt;如图1.3所示，我们在Elements调试功能面板（Computed模块），可以看到当前选中元素的CSS盒子模型和当前元素的所有CSS属性，并且通过点击每个属性，可以定位到该属性在文件的位置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wIHO.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.3）&lt;!-- raw HTML omitted --&gt;
+如图1.4所示，我们在Elements调试功能面板（Event Lissteners模块），可以看到当前元素所绑定的事件都会在列表里面展现，并且根据自己的需求进行筛选。
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8w5DK.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.4）&lt;!-- raw HTML omitted --&gt;
+如图1.5所示，我们在Elements调试功能面板（DOM  Breakpoints模块），可以看到我们设置的DOM断点，当元素触发时，就会自动转跳到实施该事件的源码地址处（图1.6）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wTED.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.5）&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wqCd.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.6）
+如图1.7所示，我们在Elements调试功能面板（Properties模块），可以看到当前dom元素节点的各种属性，方面我们查询调试。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n80pVS.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图1.7）&lt;/p&gt;
+&lt;h2 id=&#34;3chrome-devtools调试&#34;&gt;3.	Chrome DevTools调试&lt;/h2&gt;
+&lt;p&gt;Chrome开发者工具集成了前端调试所用到的全部功能，如下图所示，我们可以切换不同的面板来调试不同的功能。
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n809Ug.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;31console面板&#34;&gt;3.1	Console面板&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wXvt.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.1）&lt;!-- raw HTML omitted --&gt;
+在日常开发者，我们会在程序里输入console.log来打印日志内容，除了打印我们预先设定好的内容外，还可以在控制台输入代码段来运行。除了正常文本或变量的值，我们还可以加上一个参数来格式化打印效果。如下图（图2.2）所示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8wzb8.png&#34; alt=&#34;描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.2）&lt;/p&gt;
+&lt;p&gt;除了console.log意外， console对象还有其他方法，如下表所示。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;实例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Log()&lt;/td&gt;
+&lt;td&gt;输出信息&lt;/td&gt;
+&lt;td&gt;console.log(&amp;ldquo;123&amp;rdquo;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;error()&lt;/td&gt;
+&lt;td&gt;输出错误信息，并显示错误发生的堆栈&lt;/td&gt;
+&lt;td&gt;console.error(&amp;ldquo;Error: %s (%i)&amp;rdquo;, &amp;ldquo;err&amp;rdquo;,500)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;group()&lt;/td&gt;
+&lt;td&gt;用于将显示的信息分组&lt;/td&gt;
+&lt;td&gt;console.group(&amp;lsquo;第一层&amp;rsquo;);&lt;!-- raw HTML omitted --&gt;console.group(&amp;lsquo;第二层&amp;rsquo;);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;table()&lt;/td&gt;
+&lt;td&gt;将类型已表格形式输出&lt;/td&gt;
+&lt;td&gt;var obj= { a:{ num: &amp;ldquo;1&amp;rdquo;}}; &lt;!-- raw HTML omitted --&gt;console.table(obj);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;time()&lt;!-- raw HTML omitted --&gt;timeEnd()&lt;/td&gt;
+&lt;td&gt;输出程序运行时间，配合使用，在开头和结尾&lt;/td&gt;
+&lt;td&gt;console.time(&amp;lsquo;开始&amp;rsquo;);&lt;!-- raw HTML omitted --&gt;for (var i = 0; i &amp;lt; 100; i++) {} &lt;!-- raw HTML omitted --&gt;console.timeEnd(&amp;lsquo;结束&amp;rsquo;);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trace()&lt;/td&gt;
+&lt;td&gt;追踪函数的调用过程&lt;/td&gt;
+&lt;td&gt;function d(a) { &lt;!-- raw HTML omitted --&gt;console.trace();&lt;!-- raw HTML omitted --&gt;return a;&lt;!-- raw HTML omitted --&gt;}&lt;!-- raw HTML omitted --&gt;function b(a) {&lt;!-- raw HTML omitted --&gt; return c(a);&lt;!-- raw HTML omitted --&gt;}&lt;!-- raw HTML omitted --&gt;function c(a) {&lt;!-- raw HTML omitted --&gt; return d(a);&lt;!-- raw HTML omitted --&gt;}&lt;!-- raw HTML omitted --&gt;var a = b(&amp;lsquo;123&amp;rsquo;);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;warn()&lt;/td&gt;
+&lt;td&gt;输出警告信息&lt;/td&gt;
+&lt;td&gt;console.warn(&amp;ldquo;警告&amp;rdquo;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;在console面板也可以通过选择器来操作元素，查看相关的属性，直接在控制台面板输入相关的命令即可。具体用法见下表&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;选择器&lt;/th&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;$(selector)&lt;/td&gt;
+&lt;td&gt;Css选择器&lt;/td&gt;
+&lt;td&gt;相当于js中的document.querySelector()返回第一个匹配dom的引用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$$(selector)&lt;/td&gt;
+&lt;td&gt;Css选择器&lt;/td&gt;
+&lt;td&gt;相当于js中的document.querySelectorAll()返回全部匹配dom引用的数组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$x(xpath)&lt;/td&gt;
+&lt;td&gt;Xpath路径&lt;/td&gt;
+&lt;td&gt;返回一个与给定 XPath 表达式匹配的 DOM 元素数组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;copy(object)&lt;/td&gt;
+&lt;td&gt;Dom节点对象&lt;/td&gt;
+&lt;td&gt;将指定DOM对象的字符串表示形式复制到剪贴板&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$_&lt;/td&gt;
+&lt;td&gt;&amp;ndash;&lt;/td&gt;
+&lt;td&gt;返回最近评估的表达式的值,  $0~$4	0-4	最近5个你选择过的DOM节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;32-network面板&#34;&gt;3.2	 Network面板&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BYSs.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.3）
+程序运行环境，网络请求是必不可少的，由上图我们可以看到一个完成网络请求的构成部分，一般情况下我们会选择XHR请求来调试。如图2.4所示，我们可以在header看请求的参数以及配置的请求头信息等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BlTS.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.4） &lt;!-- raw HTML omitted --&gt;
+在用户的操作环境中，我们不知道网络情况怎么样，可以用开发者工具的网络模拟功能，来测试在不同网络情况下网站能否正常运行。如图2.5所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8Btln.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.5）&lt;/p&gt;
+&lt;h3 id=&#34;33application面板&#34;&gt;3.3	Application面板&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BNyq.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.6）
+如图2.6所示，我们在Elements调试功能面板（Application模块），在子模块Storage可以看到当前网站存储的信息,比如cookie，local Storage等信息，并可以直观的进行增删改查。子模块Cache可以看到缓存的数据。Frames可以看到当前网站的一些静态资源。&lt;/p&gt;
+&lt;h3 id=&#34;34sources面板&#34;&gt;3.4	Sources面板&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BdmV.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.7）
+在日常开发中，调试程序可以通过直接在代码中加上debugger（如图2.7所示），然后刷新页面，浏览器就会自己跳入断点，然后就可以进行调试。而如果想在浏览器中加入断点调试，我们需要先定位到改行代码，然后点击行号即可添加断点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BUO0.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.8）
+当我们添加好断点后，就可以一步一步调试代码了，如图2.9所示，我们可以一步一步运行调试，也可以跳过功能，详细操作如图2.10所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8BwwT.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.9）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8Dc4g.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.10）&lt;/p&gt;
+&lt;h3 id=&#34;35vue-devtools工具&#34;&gt;3.5	vue-devtools工具&lt;/h3&gt;
+&lt;p&gt;vue开发者工具是vue官方开发的chrome插件，只能在chrome浏览器上使用，可以通过Select来选中自己要调试的组件，vuex可以看到当前组件的集中管理的状态。Event可以查看当前组件所触发的事件，Routing可以看到当前浏览过的路由和所有路由信息。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8DyE8.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8DDDP.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8DrHf.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8DBut.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;36其他功能&#34;&gt;3.6	其他功能&lt;/h3&gt;
+&lt;p&gt;如果需要调试移动设备的页面，就可以切换开发者工具到移动端，可以选择不同的设备，或者是切换网络，横批显示等功能。如图2.12所示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/14/nsyJdP.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.12）&lt;/p&gt;
+&lt;p&gt;Chrome开发者工具也有自己的命令行窗口，我们按键盘的shift+ctrl+p即可调出窗口。如图2.13所示.可以找到自己需要的功能。命令行的功能大部分是控制一些功能的显示，或者一些快捷功能，可根据名称自由控制。比如我们要通过浏览器截屏，那么可以直接在命令窗口输入screen,然后根据需要选择，如图2.14所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8D2CQ.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.13）
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8DR3j.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图2.14）&lt;/p&gt;
+&lt;h2 id=&#34;4ie浏览器调试&#34;&gt;4.	IE浏览器调试&lt;/h2&gt;
+&lt;p&gt;在开始IE浏览器调试之前，推荐使用管理员权限打开软件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8rLo8.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;41ie11异同&#34;&gt;4.1	IE11+异同&lt;/h3&gt;
+&lt;p&gt;在调试本地资源时，chrome开发者工具可以通过Application面板直观的管理cookie，local storage信息等，在IE浏览器中，如果我们要查看cookie，需要到网络面板，然后选中要查看的请求来查看Cookie，如图3.2所示，如果要查询Local Storage或者是Session Storage信息，我们需要在控制台打印输出，如图3.3所示。如果要清新存储信息，输入localStorage.clear（）即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8r7Lt.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;(图3.2)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8rqdf.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;(图3.3)&lt;/p&gt;
+&lt;p&gt;IE浏览器自带仿真功能，你可以在文档模式切换不同的IE版本进行兼容性测试，如图3.4所示。选中版本后页面会自动根据你选中的版本进行渲染。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8rTsI.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;(图3.4)&lt;/p&gt;
+&lt;h2 id=&#34;5常见bug定位&#34;&gt;5.	常见bug定位&lt;/h2&gt;
+&lt;h3 id=&#34;51状态码定位&#34;&gt;5.1	状态码定位&lt;/h3&gt;
+&lt;p&gt;在前后端交互中，我们通过接口交付数据，每一个接口都会返回一个状态码和一个提示信息，如图4.1所示，我们可以通过这两个数据来初步判断是服务器端(后端)产生了bug，还是客户端(前端)产生了bug。详细对照表如表4.1所示。&lt;/p&gt;
+&lt;p&gt;（图4.1）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本表是根据公司内部情况设置的状态码,非http状态码，根据实际情况匹配&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;状态码&lt;/th&gt;
+&lt;th&gt;前端&lt;/th&gt;
+&lt;th&gt;后端&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;请求成功,如无数据则显示暂无数据，如果有数据没展示，则是前端问题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3xx&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;需要结合errMsg来确定问题的发生&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4xx&lt;/td&gt;
+&lt;td&gt;有问题&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;一般是发生的数据不对或者没权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5xx&lt;/td&gt;
+&lt;td&gt;&amp;mdash;&lt;/td&gt;
+&lt;td&gt;有问题&lt;/td&gt;
+&lt;td&gt;后端服务器处理出问题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;（表4.1）&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;52控制台定位&#34;&gt;5.2	控制台定位&lt;/h3&gt;
+&lt;p&gt;如果页面白屏或者是有内容加载不出来，那么需要查看控制台的信息，如果是xxx is not undefined一般有两种情况，一种情况可能是前端没有做异常数据的错误处理，导致报错。还有可能就是后端返回的数据不规范而造成的。报错信息一般会展示堆栈调用记录，我们就可以看到具体的位置来解决bug。如果网络请求有问题也会在控制台看到报错。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/08/n8spyn.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（图4.2）&lt;/p&gt;
+&lt;h2 id=&#34;6基础常识&#34;&gt;6.	基础常识&lt;/h2&gt;
+&lt;h3 id=&#34;61cookie和local-storage的区别&#34;&gt;6.1	Cookie和Local Storage的区别&lt;/h3&gt;
+&lt;p&gt;首先说明的是cookie，local Storage，session Storage都是客户端（浏览器）的存储技术，用来保存一些数据，每个网站都不会共用这些信息。 &lt;!-- raw HTML omitted --&gt;
+Cookie一般来说是用来保存服务端传来的session信息，大小最多为4kb，可以设置有效期，域名信息，缓存等信息。 &lt;!-- raw HTML omitted --&gt;
+local Storage是html5新出的标准前端存储技术，通过key-value的方式存储。大小一般为5M。提供了一系列的增删改查API，local Storage一直在浏览器存储，除了用户主动删除，是一直存在的。 &lt;!-- raw HTML omitted --&gt;
+session Storage和local storage使用方法相同，不同的地方是只在一次会话过程中有效，如果关闭浏览器会自动清除。&lt;/p&gt;
+&lt;h3 id=&#34;62pxemremvw等单位的区别&#34;&gt;6.2	px,em,rem,vw等单位的区别&lt;/h3&gt;
+&lt;p&gt;这些都是CSS的长度单位，不同的是他们大小的计算方式不同，所展示的效果就不同，具体对比如下表 &lt;!-- raw HTML omitted --&gt;
+单位	备注&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;px	相对长度单位，相对于屏幕的分辨率而言的&lt;/li&gt;
+&lt;li&gt;em	相对长度单位，相对于当前元素父类的字体大小（font-size）而言&lt;/li&gt;
+&lt;li&gt;rem	相对长度单位，想对于当前文档根元素(html)的字体大小而言&lt;/li&gt;
+&lt;li&gt;vw	相对长度单位，相对于当前视口而定,全部屏幕的width为100vw&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7官方文档&#34;&gt;7.官方文档&lt;/h2&gt;
+&lt;p&gt;谷歌官方文档 &lt;a href=&#34;https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn&#34;&gt;https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】rap2接口管理工具使用分享</title>
+      <link>https://gzg.me/post/rap2%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/rap2%E5%B7%A5%E5%85%B7/</guid>
+      
+        <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;
+&lt;h2 id=&#34;1-什么是rap2&#34;&gt;1. 什么是rap2&lt;/h2&gt;
+&lt;p&gt;RAP是一个可视化接口管理工具 通过分析接口结构，动态生成模拟数据，校验真实接口正确性， 围绕接口定义，通过一系列自动化工具提升我们团队开发的协作效率。&lt;/p&gt;
+&lt;h2 id=&#34;2-为什么要用rap&#34;&gt;2. 为什么要用rap&lt;/h2&gt;
+&lt;p&gt;在前端开发过程中，我们需要实时与后端进行数据交互。然而大多数时候，前端开发都是在没有后端数据提供的情况下进行的，这时我们就需要用到假数据模拟。rap2是一款在线模拟数据生成器，可以拦截Ajax请求，其作用在于帮助前端工程师独立于后端进行开发，实现前后端分离。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持mock.js语法：RAP本身基于mcok.js&lt;/li&gt;
+&lt;li&gt;支持接口管理：可管理url地址，不同模块分类。&lt;/li&gt;
+&lt;li&gt;支持团队协作：拥有团队仓库&lt;/li&gt;
+&lt;li&gt;支持历史修改操作查看：可查看接口修改情况，但不支持操作回溯。&lt;/li&gt;
+&lt;li&gt;接口共享：不需要重复编写接口&lt;/li&gt;
+&lt;li&gt;自动化测试：一键测试接口情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-怎么使用rap&#34;&gt;3. 怎么使用rap&lt;/h2&gt;
+&lt;p&gt;3.1   搭建rap环境 
+3.2 用户使用Rap&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/06/nQPdWF.jpg&#34; alt=&#34;rap&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如上图所示，在我们在定义好Rap接口后，在生成规则部分填写我们的Mock语句，Rap系统就会自动生成数据。
+如果我们前端想在项目中进行Mock，需要用npm在项目中安装Mockjs模块，然后在项目中的Mock.js中配置需要Mock的属性项
+3.3 Mock.js数据模板规则
+数据模板中的每个属性由 3 部分构成：属性名、生成规则、属性值：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;属性名   name&lt;/li&gt;
+&lt;li&gt;生成规则 rule&lt;/li&gt;
+&lt;li&gt;属性值   value
+生成的规则如 &amp;lsquo;name|rule&amp;rsquo;: value&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;name是规则的属性值，对应真实数据结构的key&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rule（生成规则）解析：必须写在|后面。生成规则依赖于属性值（value）的
+类型&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;min-max&lt;/td&gt;
+&lt;td&gt;最小值到最大值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;count&lt;/td&gt;
+&lt;td&gt;数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min-max.dmin-dmax&lt;/td&gt;
+&lt;td&gt;最小值到最大值及小数点后保留的位数范围&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;min-max.dcount&lt;/td&gt;
+&lt;td&gt;最小值到最大值及小数点后保留dcount位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;count.dmin-dmax&lt;/td&gt;
+&lt;td&gt;数量及小数点后保留的位数范围&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;count.dcount&lt;/td&gt;
+&lt;td&gt;数量及小数点后保留dcount位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;+/-step&lt;/td&gt;
+&lt;td&gt;从value递增/减&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;value解析&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;属性值是字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Number&lt;/td&gt;
+&lt;td&gt;属性值是数字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;属性值是布尔值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;属性值是对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;属性值是数组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Function&lt;/td&gt;
+&lt;td&gt;属性值是函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RegExp&lt;/td&gt;
+&lt;td&gt;属性值是正则&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4.	数据占位符规范&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;占位符只是在属性值字符串中占个位置，并不会出现在最终的属性值中。&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;格式：&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;@占位符&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;@占位符(参数 [, 参数])&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用 @ 来标识其后的字符串是 占位符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;占位符 引用的是 Mock.Random 中的方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过 Mock.Random.extend() 来扩展自定义占位符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;占位符 也可以引用 数据模板 中的属性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;占位符 会优先引用 数据模板 中的属性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;占位符 支持 相对路径 和 绝对路径。
+3.4 Rap2-Mock数据模板规则
+如下表所示，如果需要特定的数据时候，只需在占位符前面加上@符合即可
+（例：@date,随机产生一个时间）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;占位符&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Basic（基础类）&lt;/td&gt;
+&lt;td&gt;boolean, natural, integer, float, character, string, range, date, time, datetime, now&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Image（图片）&lt;/td&gt;
+&lt;td&gt;image, dataImage&lt;/td&gt;
+&lt;td&gt;图片地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Color（颜色值）&lt;/td&gt;
+&lt;td&gt;color&lt;/td&gt;
+&lt;td&gt;16进制字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Text&lt;/td&gt;
+&lt;td&gt;paragraph, sentence, word, title, cparagraph, csentence, cword, ctitle&lt;/td&gt;
+&lt;td&gt;段落，标题等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;first, last, name, cfirst, clast, cname&lt;/td&gt;
+&lt;td&gt;姓名，姓，名占位符最前面是c的代表产生中文数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Web&lt;/td&gt;
+&lt;td&gt;url, domain, email, ip, tld&lt;/td&gt;
+&lt;td&gt;地址，域名，邮箱，ip地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Address&lt;/td&gt;
+&lt;td&gt;area, region&lt;/td&gt;
+&lt;td&gt;地区，方向&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Helper&lt;/td&gt;
+&lt;td&gt;capitalize, upper, lower, pick, shuffle&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Miscellaneous&lt;/td&gt;
+&lt;td&gt;guid, id&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;特殊类型例示&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;初始值&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;纯数字&lt;/td&gt;
+&lt;td&gt;@integer(1,100)&lt;/td&gt;
+&lt;td&gt;括号里面1-100表示随机生成一个1-100里面的数字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定长度的字符串&lt;/td&gt;
+&lt;td&gt;@string(5,8)&lt;/td&gt;
+&lt;td&gt;括号里面5-8表示随机生成一个5-8位的字符串，写一个数字代表，指定长度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定类型的日期&lt;/td&gt;
+&lt;td&gt;@date(yyyy-MM-dd)&lt;/td&gt;
+&lt;td&gt;括号里面(yyyy-MM-dd)代表格式日期的规范，如果想要指定年份，月份直接修改字符串如@date(2019-01-dd)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;纯数字数组&lt;/td&gt;
+&lt;td&gt;[5]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;纯字符串数组&lt;/td&gt;
+&lt;td&gt;[&amp;lsquo;a&amp;rsquo;,&amp;lsquo;b&amp;rsquo;]&lt;/td&gt;
+&lt;td&gt;只需要给数据加上引号即可&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;4--维护和持续使用mock&#34;&gt;4.  维护和持续使用Mock&lt;/h2&gt;
+&lt;p&gt;持续使用rap需要前端和后端一起配合，当确定项目需求后，后端程序员开始定义数据库和rap接口的数据结构。由前端进行Mock的语法规则编写。Rap定义完成后，我们可以直接通过网页url来查询Mock数据是否自动生成。然后前后端就可以分别进行各自的开发工作了。
+如果在项目的开发过程中缺少参数或接口，要先沟通清楚产品需求，在进行Rap的更改，并标明哪些是新添加的字段或接口。&lt;/p&gt;
+&lt;p&gt;通过rap平台，可以直接Mock数据供开发使用，我们直接点击接口地址，就可以打开Mock数据的链接了。
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/06/nQkPRU.jpg&#34; alt=&#34;图4.3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;当打开链接路径为http://192.168.1.24/api/app/mock/57/table 但是没有匹配到需要的数据，此时我们的请求是post请求，在postman中测试即可得到数据。如图4.4所示。就可以拿到想要的数据了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/06/nQkkM4.jpg&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;4.2.在Mock.js中使用&lt;/p&gt;
+&lt;p&gt;1)获取列表数据Mock实例&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;router.post(&#39;/amdin/getOrderList&#39;, async (ctx) =&amp;gt; {
+      let items = Mock.mock({
+       &#39;items|10&#39;: [
+          {
+        &#39;orderId|1-8&#39;: &#39;1&#39;,
+        &#39;applicantUserId|1-999&#39;: 1,
+        &#39;productName&#39;: &#39;@productName&#39;,
+        &#39;productId|1-10&#39;: &#39;2&#39;,
+        &#39;departmentName&#39;: &#39;@departmentName&#39;,
+        &#39;departmentDn&#39;: &#39;@departmentDn&#39;,
+        &#39;applicationType|1-3&#39;: &#39;1&#39;,
+        &#39;description|1-3&#39;: &#39;调整配置&#39;,
+        &#39;applicationTime&#39;: &#39;@time&#39;,
+        &#39;applicationId&#39;: &#39;@applicationId&#39;
+          }
+    ]
+  })
+  await sleep(2000)
+  res.data = { ...page, ...items }
+  ctx.body = res
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;5附录&#34;&gt;5.	附录&lt;/h2&gt;
+&lt;p&gt;(1).Mock数据规则查询http://mockjs.com/examples.html &lt;!-- raw HTML omitted --&gt;
+(2)Rap2官网http://rap2.taobao.org/&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【出行游乐】广州塔一日游，来看看广州的地标</title>
+      <link>https://gzg.me/post/%E5%B9%BF%E5%B7%9E%E5%A1%94%E4%B9%8B%E6%97%85/</link>
+      <pubDate>Fri, 07 Jun 2019 22:21:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E5%B9%BF%E5%B7%9E%E5%A1%94%E4%B9%8B%E6%97%85/</guid>
+      
+        <description>&lt;p&gt;端午节和朋友一起来广州塔看看，天天看屏幕也是不行的&lt;/p&gt;
+&lt;h3 id=&#34;1700从住处出发和朋友630在广州塔集合平时都是天天对着手机和电脑屏幕来广州第一次出来看风景&#34;&gt;17：00从住处出发，和朋友6.30在广州塔集合。平时都是天天对着手机和电脑屏幕，来广州第一次出来看风景。&lt;/h3&gt;
+&lt;h4 id=&#34;鸡汤感悟人生就像广州塔一样刚开始比较粗壮因为你需要强大的根基来支持你继续前行慢慢的你会碰到很多障碍知道碰到瓶颈期变得很瘦然后在你突破瓶颈期以后你会发现更广阔的世界&#34;&gt;鸡汤感悟：人生就像广州塔一样刚开始比较粗壮，因为你需要强大的根基来支持你继续前行，慢慢的你会碰到很多障碍，知道碰到瓶颈期变得很瘦。然后在你突破瓶颈期以后你会发现更广阔的世界。&lt;/h4&gt;
+&lt;h3 id=&#34;五颜六色的广州塔&#34;&gt;五颜六色的广州塔&lt;/h3&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;有时候的你绿的犹豫&#34;&gt;有时候的你,绿的犹豫&lt;/h3&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;人生有很种颜色也会随时变色最重要的就是保持初心一路向前&#34;&gt;人生有很种颜色，也会随时变色，最重要的就是保持初心，一路向前&lt;/h3&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【人生感悟】人生有多少四年值得纪念和奋斗？</title>
+      <link>https://gzg.me/post/%E6%84%9F%E6%82%9F/</link>
+      <pubDate>Thu, 09 May 2019 22:23:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/%E6%84%9F%E6%82%9F/</guid>
+      
+        <description>&lt;p&gt;随着“咔嚓”教室门的一锁，2019届本科生论文答辩结束了。&lt;/p&gt;
+&lt;p&gt;时间过得真快，还在想自己踢正步的丑姿一下子就答辩完要走上社会。有的同学不慌不忙，有的同学为了请几天假和老板磨嘴商量。
+回想自己这四年，不算什么耀眼生活，但也是有滋有味。社团，比赛，公益一个也没落下。越长大越孤单，自己四年很后悔的就是没有找好方向努力的学习，没有认识更多的人。人生的路还很长，一步一个脚印，少说话多做事&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
+      <link>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</link>
+      <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</guid>
+      
+        <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;
+&lt;p&gt;在传统css布局中，一般来说是采用float+margin+positon来解决常见问题。但是随着移动端的普及，尤其是各种“小程序&amp;quot;的出现显然传统的布局是由很多弊端的，比如垂直居中就不好实现。（flex布局兼容到ie10以上）&lt;/p&gt;
+&lt;p&gt;flex弹性盒子的结构是父容器和子元素组成的，由父元素包裹，子元素组成基本结构如下。需要注意的是在flex布局中，有的属性是作用在父元素，有的属性是作用在子元素，以下介绍相关的属性。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FatherWrap&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;display:flex&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Child1&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Child2&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;开门见山，比如使用flex布局实现一个垂直居中,只需要把父类盒子设置为flex，然后给子属性添加margin:0;即可&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div style=&amp;quot;display:flex&amp;quot;&amp;gt;
+    &amp;lt;div style=&amp;quot;margin:auto&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOwNp8.png&#34; alt=&#34;请输入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;flexb-colorred父b容器布局属性&#34;&gt;flex&lt;!-- raw HTML omitted --&gt;父&lt;!-- raw HTML omitted --&gt;容器布局属性&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;详细说明&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;属性值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-direction&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;决定主轴的方向（即项目的排列方向）&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;row(水平方向，起点在左端) ，row-reverse(起点在右端)  ，column(主轴为垂直方向，起点在上沿)  ，column-reverse(起点在下沿)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-wrap&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;控制Flex容器是单行显示还是多行显示，而交叉轴的方向就决定着新线的排列方向&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;nowrap(不换行) , wrap(换行) , wrap-reverse(换行与wrap相似，但行的顺序是倒过来的)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-flow&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;flex-flow属性是flex-direction属性和flex-wrap属性的简写&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;flex-flow属性是flex-direction属性和flex-wrap属性的简写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;justify-content&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;定义了Flex项目在主轴方向上的对齐方式&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;flex-start(类似于左浮动) , flex-end(类似于右浮动) , center(Flex项居中) , space-between(两端对齐容器，各个Flex项目之间的间距相等) , space-around(每一个Flex项目两侧的间隔相等)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;align-items&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;定义项目在交叉轴上的对齐方式&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , baseline(Flex项目第一行文字基线对齐) ,  stretch(如果Flex项目未定义高度或者设置为auto，Flex项目将占满整个窗口的高度)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;align-content&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;定义了多根轴线的对齐方式，如果只有一条轴线，那么此属性不起作用&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , space-between(交叉轴两端对齐，轴线这间的间隔平均分布) , space-around(Flex项目（沿交叉轴方向）之间的间隔相等) , stretch(Flex项目（沿交叉轴方向）占满整个交叉轴)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;juestify-conent&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBszT.jpg&#34; alt=&#34;juestify-conent&#34;&gt;
+&lt;strong&gt;align-items图示&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBrWV.jpg&#34; alt=&#34;align-items&#34;&gt;
+&lt;strong&gt;align-conent图示&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBDJ0.jpg&#34; alt=&#34;align-conent&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;flexb-colorred子b元素布局属性&#34;&gt;flex&lt;!-- raw HTML omitted --&gt;子&lt;!-- raw HTML omitted --&gt;元素布局属性&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性&lt;/th&gt;
+&lt;th&gt;值&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;order&lt;/td&gt;
+&lt;td&gt;length&lt;/td&gt;
+&lt;td&gt;设置子元素排列顺序。数值越小，排列越靠前,（默认为0）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-grow&lt;/td&gt;
+&lt;td&gt;length&lt;/td&gt;
+&lt;td&gt;设置字元素放大占比。数值越大，占比越大（默认为0）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-shrink&lt;/td&gt;
+&lt;td&gt;length&lt;/td&gt;
+&lt;td&gt;设置字元素缩小占比。数值越大，占比越小（默认为1）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex-basis&lt;/td&gt;
+&lt;td&gt;length&lt;/td&gt;
+&lt;td&gt;设置字元素占比宽度。默认为auto&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flex&lt;/td&gt;
+&lt;td&gt;flex-grow, flex-shrink , flex-basis&lt;/td&gt;
+&lt;td&gt;默认值为0 1 auto。后两个属性可选。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;align-self&lt;/td&gt;
+&lt;td&gt;auto,flex-start,flex-end,center,baseline,stretch&lt;/td&gt;
+&lt;td&gt;设置字元素的对其方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;flex-shrink&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBwon.jpg&#34; alt=&#34;flex-shrink&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;flex-basis&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOB6QU.jpg&#34; alt=&#34;flex-basis&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;align-self&lt;/strong&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBcyF.jpg&#34; alt=&#34;align-self&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       
     </item>
     
