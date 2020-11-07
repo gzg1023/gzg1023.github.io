@@ -13,17 +13,6 @@
     
     
     <item>
-      <title>Jane 主题预览</title>
-      <link>https://gzg.me/template/</link>
-      <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
-      
-      <guid>https://gzg.me/template/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>About</title>
       <link>https://gzg.me/about/</link>
       <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
@@ -2260,6 +2249,17 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
 &lt;p&gt;&lt;strong&gt;align-self&lt;/strong&gt;
 &lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBcyF.jpg&#34; alt=&#34;align-self&#34;&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>模版文件</title>
+      <link>https://gzg.me/template/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/template/</guid>
+      
+        <description></description>
       
     </item>
     
