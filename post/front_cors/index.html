@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>【技术分享】从前端的角度，谈谈解决跨域的一些方案 - 沽默清尘的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="gzg1023" />
+  <meta name="description" content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。
+" />
+
+  <meta name="keywords" content="沽默清尘, theme, jane, gzg1023, 前端博客, front end, front blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3" />
+
+
+<link rel="canonical" href="https://gzg.me/post/front_cors/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.f1e506a781bf25d33ffc18aa6b4e972a965c58049d27d4f92b7db2e9bf28e4bf.css" integrity="sha256-8eUGp4G/JdM//Biqa06XKpZcWASdJ9T5K32y6b8o5L8=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="【技术分享】从前端的角度，谈谈解决跨域的一些方案" />
+<meta property="og:description" content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gzg.me/post/front_cors/" />
+<meta property="article:published_time" content="2019-08-31T23:08:00+00:00" />
+<meta property="article:modified_time" content="2019-08-31T23:08:00+00:00" />
+<meta itemprop="name" content="【技术分享】从前端的角度，谈谈解决跨域的一些方案">
+<meta itemprop="description" content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。">
+<meta itemprop="datePublished" content="2019-08-31T23:08:00+00:00" />
+<meta itemprop="dateModified" content="2019-08-31T23:08:00+00:00" />
+<meta itemprop="wordCount" content="2235">
+
+
+
+<meta itemprop="keywords" content="前端," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="【技术分享】从前端的角度，谈谈解决跨域的一些方案"/>
+<meta name="twitter:description" content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">沽默清尘</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/about/">About</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      沽默清尘
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/">Home</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gzg.me/about/">About</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">【技术分享】从前端的角度，谈谈解决跨域的一些方案</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-08-31" class="post-time">
+          2019-08-31
+        </time>
+        
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      <p>跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。</p>
+<h2 id="前端跨域研究">前端跨域研究</h2>
+<h2 id="1-什么是跨域">1. 什么是跨域</h2>
+<p>在所有支持JavaScript的浏览器中，都有一个约定叫同源策略。所谓同源是指&quot;协议+域名+端口&quot;三者相同。如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。如果应用程序违反了同源策略进行通信，那么就会产生跨域问题。</p>
+<blockquote>
+<p>同源策略有以下几种行为限制：</p>
+</blockquote>
+<ul>
+<li>Cookie、Local Storage 和 Index DB 无法读取</li>
+<li>DOM和JS对象无法获得</li>
+<li>AJAX 请求不能发送</li>
+</ul>
+<p>在DOM结构中，有三个标签可以进行跨域行为<code>&lt;link&gt;</code>，<code>&lt;img&gt;</code>，<code>&lt;script&gt;</code>，有一种解决跨域的方式叫JSONP，利用的就是script可以跨域的特性。解决跨域有很多办法，如果是在企业内部开发中，最推荐的是设置CORS和跨域代理。
+前端项目设置跨域代理都是通过<code>http-proxy-middleware</code>模块实现的。</p>
+<h2 id="2-cors配置跨域">2. CORS配置跨域</h2>
+<p>由后端程序员直接设置CORS响应字段，这种情况不支持IE10以下的浏览器。
+1）	<code>Access-Control-Allow-Origin</code>：必选
+  它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。
+2）	<code>Access-Control-Allow-Credentials</code>：可选
+  它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。
+3）	<code>Access-Control-Expose-Headers</code>：可选
+  CORS请求时，XMLHttpRequest对象的<code>getResponseHeader()</code>方法只能拿到6个基本字段：<code>Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma</code>。如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定。上面的例子指定，<code>getResponseHeader('FooBar')</code>可以返回<code>FooBar</code>字段的值。
+&lt;</p>
+<h2 id="3vue-cli2配置跨域代理">3.	Vue-cli2配置跨域代理</h2>
+<p>由于vue-cli2是配合webpack2使用的，首先需要找到config文件夹的index.js文件然后配置proxyTable参数，如下所示，具体参数如表1.1所示参数说明：</p>
+<pre><code>proxyTable: {
+      '/api/': {
+        target: 'http://192.168.1.22:9001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/': ''
+      }
+      }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lsquo;/api&rsquo;</td>
+<td>api对象</td>
+<td>捕获API的标志，如果API中有这个字符串，那么就开始匹配代理比如API请求/api/users, 会被代理到请求 http:baidu.com/api/users</td>
+</tr>
+<tr>
+<td>target</td>
+<td>域名/IP地址</td>
+<td>代理的API地址，就是需要跨域的API地址，地址可以是域名,如：http://www.baidu.com 也可以是IP地址：http://192.168.1.22:9001</td>
+</tr>
+<tr>
+<td>pathRewrite</td>
+<td>&lsquo;^/api/': ' '</td>
+<td>路径重写，也就是说会修改最终请求的API路径比如访问的API路径：/api/users, 设置pathRewrite: {&lsquo;^/api&rsquo; : &lsquo;'},后，最终代理访问http://www.baidu.com/users， 这个参数的目的是给代理命名后，在访问时把命名删除掉</td>
+</tr>
+<tr>
+<td>changeOrigin</td>
+<td>布尔值</td>
+<td>如果后端服务是一个IP对应多个域名。需要通过域名区分服务，则该值必须是true</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>布尔值</td>
+<td>设置false(默认)后，可以接受运行在 HTTPS 上，可以使用无效证书的后端服务器</td>
+</tr>
+</tbody>
+</table>
+<p>(表1.1)</p>
+<h2 id="4vue-cli3配置跨域代理">4.	Vue-cli3配置跨域代理</h2>
+<p>Vue-cli3的配置项目没有cli2那么多文件结构了，只需要在devServe对象(所有 webpack-dev-server都可以在这配置)里面配置proxy对象即可，如下所示。具体参数和表1.1相同。</p>
+<pre><code>proxy: {
+    '/api': {
+      target: 'http://192.168.1.21:9101/daas',
+      changeOrigin: true,
+      pathRewrite: {
+        '/api': ''
+       }
+      }
+  }
+</code></pre>
+<h2 id="5koa配置跨域代理">5.	Koa配置跨域代理</h2>
+<p>我们创建一个js文件(例如proxy.js)，来构建代理服务，先实例化一个koa对象，然后配置app对象的proxy属性，详情参数见表1.1。配置到代理属性，需要本地启动一个node服务，然后我们通过命令行启动该服务node  proxy.js</p>
+<pre><code>const app = new Koa()  // 创建koa对象
+  app.use(async (ctx, next) =&gt; {
+    ctx.respond = false //绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response
+      return proxy({
+        target: 'http://192.168.1.21:9003',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+        '^/proxyAPI': ''
+        }
+      })(ctx.req, ctx.res, next)
+    }
+    return next()
+  })
+  app.listen(3000, () =&gt; {
+      console.log('Listening 3000...')
+  })
+</code></pre>
+<h2 id="6nuxtjs配置跨域代理">6.	Nuxt.js配置跨域代理</h2>
+<p>在nuxt项目中首先安装proxy代理库 npm i @nuxtjs/proxy -D 然后在next.config.js配置文件中添加模块设置代理</p>
+<pre><code> modules: [
+    '@nuxtjs/axios',
+     '@nuxtjs/proxy'
+  ],
+   axios: {
+    proxy: true
+  },
+    proxy: {
+      '/api': {
+          target: 'http://example.com',
+        pathRewrite: {
+       '^/api' : '/'
+     }
+   }
+  }
+</code></pre>
+<h2 id="7nginx配置跨域代理">7.	Nginx配置跨域代理</h2>
+<p>通过nginx的反向代理，把客户端的请求转发到服务端，然后服务端返回数据以后，在转发回客户端。
+如果是开发环境需要配置两个代理，一个是把项目代理到本地nginx服务器，另一个是代理服务器传来的数据。
+如果是打包线上环境，那么只要配置一个代理做转发即可。</p>
+<pre><code>  server {
+    listen       8085;
+    server_name  localhost;
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+    location /daas/api {
+        proxy_pass http://192.168.1.21:9097/daas;
+        rewrite ^/api/(.*)$ /$1 break;
+    }
+ }
+</code></pre>
+<h2 id="8apache配置跨域代理">8.	Apache配置跨域代理</h2>
+<p>Apache和nginx原理相同，都是做反向代理。只是需要修改相关的配置文件来完成
+&lt;<code>proxy </code> <code>http://192.168.1.21:9091/daas</code>&gt;
+<code>AllowOverride None</code>
+<code> Order Deny,Allow</code>
+<code>Allow from all</code>
+&lt;/<code>proxy</code>&gt;</p>
+<h2 id="9chrome插件配置跨域代理">9.	Chrome插件配置跨域代理</h2>
+<p>通过安装<code>Allow-Control-Allow-Origin</code>浏览器插件，来解决跨域问题，前提是后端会判断你是否存在跨域权限，发送一个options请求先预判断，然后在进行跨域处理。</p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gzg1023</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2019-08-31
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://gzg.me/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/string%E6%93%8D%E4%BD%9C/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">【技术笔记】JS的String的各种API</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/front_debug/">
+            <span class="next-text nav-default">【技术分享】前端调试（chrome开发者工具的使用）</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="https://twitter.com/fish_rub" rel="me noopener" class="iconfont"
+      title="twitter"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1264 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M1229.8616 18.043658c0 0-117.852626 63.135335-164.151872 67.344358-105.225559-164.151872-505.082682-92.598492-437.738325 223.078185C278.622548 312.675223 89.216542 47.506814 89.216542 47.506814s-117.852626 189.406006 75.762402 345.139833C127.097743 396.85567 55.544363 371.601535 55.544363 371.601535S26.081207 535.753407 253.368414 615.724832c-21.045112 29.463156-113.643603 8.418045-113.643603 8.418045s25.254134 143.10676 231.496229 180.987961c-143.10676 130.479693-387.230056 92.598492-370.393967 105.225559 206.242095 189.406006 1119.599946 231.496229 1128.01799-643.98042C1179.353331 249.539887 1263.533778 123.269217 1263.533778 123.269217s-130.479693 37.881201-138.897738 33.672179C1225.652577 98.015083 1229.8616 18.043658 1229.8616 18.043658"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/gzg1023" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.instagram.com/gzg1023/" rel="me noopener" class="iconfont"
+      title="instagram"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M853.333333 277.333333C853.333333 289.28 843.946667 298.666667 832 298.666667L746.666667 298.666667C734.72 298.666667 725.333333 289.28 725.333333 277.333333L725.333333 192C725.333333 180.053333 734.72 170.666667 746.666667 170.666667L832 170.666667C843.946667 170.666667 853.333333 180.053333 853.333333 192M192 853.333333C180.053333 853.333333 170.666667 843.946667 170.666667 832L170.666667 469.333333 259.84 469.333333C257.28 482.986667 256 497.493333 256 512 256 653.226667 370.773333 768 512 768 653.226667 768 768 653.226667 768 512 768 497.493333 766.293333 482.986667 764.16 469.333333L853.333333 469.333333 853.333333 832C853.333333 843.946667 843.946667 853.333333 832 853.333333M512 341.333333C606.293333 341.333333 682.666667 417.706667 682.666667 512 682.666667 606.293333 606.293333 682.666667 512 682.666667 417.706667 682.666667 341.333333 606.293333 341.333333 512 341.333333 417.706667 417.706667 341.333333 512 341.333333M853.333333 85.333333 170.666667 85.333333C123.306667 85.333333 85.333333 123.306667 85.333333 170.666667L85.333333 853.333333C85.333333 900.266667 123.733333 938.666667 170.666667 938.666667L853.333333 938.666667C900.266667 938.666667 938.666667 900.266667 938.666667 853.333333L938.666667 170.666667C938.666667 123.306667 900.266667 85.333333 853.333333 85.333333Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://gzg.me/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2019 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        gzg1023
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.e0eb868feaa630ce308690f15d141bc3809772a0ea8d52cae81951e4ec5c5940.js" integrity="sha256-4OuGj&#43;qmMM4whpDxXRQbw4CXcqDqjVLK6BlR5OxcWUA=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

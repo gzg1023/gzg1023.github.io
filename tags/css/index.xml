@@ -5,7 +5,7 @@
     <link>https://gzg.me/tags/css/</link>
     <description>Recent content in CSS on 沽默清尘的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <copyright>gzg1023</copyright>
     <lastBuildDate>Fri, 15 Mar 2019 15:14:00 +0000</lastBuildDate>
     
@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
-      <link>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</link>
+      <link>https://gzg.me/post/flex_box/</link>
       <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</guid>
+      <guid>https://gzg.me/post/flex_box/</guid>
       <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;</description>
     </item>
     

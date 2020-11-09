@@ -5,7 +5,7 @@
     <link>https://gzg.me/tags/javascript/</link>
     <description>Recent content in JavaScript on 沽默清尘的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <copyright>gzg1023</copyright>
     <lastBuildDate>Wed, 25 Dec 2019 22:32:00 +0000</lastBuildDate>
     
@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术笔记】JS的Array的各种API</title>
-      <link>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</link>
+      <link>https://gzg.me/post/array_handle-/</link>
       <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</guid>
+      <guid>https://gzg.me/post/array_handle-/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
 &lt;/blockquote&gt;</description>

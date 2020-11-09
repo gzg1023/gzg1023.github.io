@@ -5,9 +5,9 @@
     <link>https://gzg.me/</link>
     <description>Recent content on 沽默清尘的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Sat, 05 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://gzg.me/index.xml" rel="self" type="application/rss+xml" />
     
@@ -32,11 +32,160 @@
     </item>
     
     <item>
+      <title>【技术笔记】工具类css</title>
+      <link>https://gzg.me/post/util_css/</link>
+      <pubDate>Sun, 08 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/util_css/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;总结一些常用的css工具类&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;省略号控制&#34;&gt;省略号控制&lt;/h3&gt;
+&lt;h4 id=&#34;单行显示省略号&#34;&gt;单行显示省略号&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.ellipsis{
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;n行显示省略号&#34;&gt;n行显示省略号&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.ellipsis-wrap {
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;   
+    -webkit-line-clamp: 3;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;文字换行控制&#34;&gt;文字换行控制&lt;/h3&gt;
+&lt;h5 id=&#34;不换行&#34;&gt;不换行&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.nowrap {
+  white-space:nowrap;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;自动换行&#34;&gt;自动换行&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.wrap-auto {
+  word-wrap: break-word;
+  word-break: normal;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;强制换行&#34;&gt;强制换行&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.break-wrap {
+  word-break:break-all;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;文本两端对齐&#34;&gt;文本两端对齐&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.text-justify {
+    text-align: justify;
+    text-justify: distribute-all-lines;  
+    text-align-last: justify; 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;操作控制&#34;&gt;操作控制&lt;/h3&gt;
+&lt;h4 id=&#34;禁止用户双击屏幕或者选中某些内容&#34;&gt;禁止用户双击屏幕或者选中某些内容&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.none-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-none: none;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;不同的鼠标图案&#34;&gt;不同的鼠标图案&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;  cursor：pointer; //小手指；
+  cursor：help; //箭头加问号；
+  cursor：wait; //转圈圈；
+  cursor：move; //移动光标；
+  cursor：crosshair; //十字光标
+  cursor: not-allowed; // 禁止选中
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;css使用硬件加速&#34;&gt;css使用硬件加速&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.fast-machine{
+  transform: translateZ(0);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;css转换文字大小&#34;&gt;css转换文字大小&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.text-opp {text-transform: uppercase}  // 将所有字母变成大写字母
+.text-low {text-transform: lowercase}  // 将所有字母变成小写字母
+.text-cap {text-transform: capitalize} // 首字母大写
+.text-small {font-variant: small-caps}   // 将字体变成小型的大写字母
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;小于10px的字体显示&#34;&gt;小于10px的字体显示&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;  font-size: 20px;
+  transform: scale(0.5);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;自定义滚动条&#34;&gt;自定义滚动条&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;overflow-y: scroll;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;整个滚动条&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;::-webkit-scrollbar {
+    width: 5px;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;滚动条的轨道&#34;&gt;滚动条的轨道&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;::-webkit-scrollbar-track {
+    background-color: #ffa336;
+    border-radius: 5px;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;滚动条的滑块&#34;&gt;滚动条的滑块&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;::-webkit-scrollbar-thumb {
+    background-color: #ffc076;
+    border-radius: 5px;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;flex相关&#34;&gt;flex相关&lt;/h3&gt;
+&lt;h5 id=&#34;设置为flex&#34;&gt;设置为flex&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.flex{
+  display: flex;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flex垂直居中&#34;&gt;flex垂直居中&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flex居中分侧&#34;&gt;flex居中，分侧&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;.flex-center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;常用动画&#34;&gt;常用动画&lt;/h4&gt;
+&lt;h5 id=&#34;转圈圈&#34;&gt;转圈圈&lt;/h5&gt;
+&lt;p&gt;animation: rotaCircle 1.5s linear infinite;
+@keyframes rotaCircle {
+0% {
+transform: rotate(0deg);
+}
+25% {
+transform: rotate(90deg);
+}
+50% {
+transform: rotate(180deg);
+}
+75% {
+transform: rotate(270deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}&lt;/p&gt;
+&lt;h5 id=&#34;渐变&#34;&gt;渐变&lt;/h5&gt;
+&lt;p&gt;animation: gradientOpacity 1.5s linear infinite;
+@keyframes gradientOpacity {
+0% {
+transform: opacity(0);
+}
+25% {
+transform: opacity(0.2);
+}
+50% {
+transform: opacity(0.6);
+}
+75% {
+transform: opacity(0.8);
+}
+100% {
+transform: opacity(1);
+}
+}&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>【生活感悟】2020疫情时代下的生活思考</title>
-      <link>https://gzg.me/post/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/</link>
+      <link>https://gzg.me/post/life_status/</link>
       <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/</guid>
+      <guid>https://gzg.me/post/life_status/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;从疫情爆发到现在，已经过了半年多。生活状态也算稳定下来，简单谈谈我的感受。&lt;/p&gt;
@@ -48,10 +197,10 @@
     
     <item>
       <title>【电脑优化】Window电脑优化运行速度技巧</title>
-      <link>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</link>
+      <link>https://gzg.me/post/computer/</link>
       <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://gzg.me/post/computer/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;本文针对Window系统总结一些常见的优化技巧，便于提高电脑运行速度；总共分为两大部分，硬件和软件部分。以及会说明一下市面常见所谓『优化系统』的弊端及推荐一些没有任何副作用的优化软件。&lt;/p&gt;
@@ -121,10 +270,10 @@
     
     <item>
       <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <link>https://gzg.me/post/mobile_debug/</link>
       <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      <guid>https://gzg.me/post/mobile_debug/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;移动端真机调试的方法&lt;/p&gt;
@@ -182,10 +331,10 @@ Fiddler2抓包工具&lt;a href=&#34;https://sm.myapp.com/original/Development/fi
     
     <item>
       <title>【前端技术】Vue递归组件的简单运用</title>
-      <link>https://gzg.me/post/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6/</link>
+      <link>https://gzg.me/post/recursion_compoent/</link>
       <pubDate>Mon, 03 Feb 2020 21:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6/</guid>
+      <guid>https://gzg.me/post/recursion_compoent/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;后台管理系统的菜单，树结构&amp;hellip;当需求超过二级菜单时候，就要考虑使用递归组件了。&lt;/p&gt;
@@ -261,10 +410,10 @@ methods:{
     
     <item>
       <title>【非官方科普】谈谈中国互联网的历史和现状</title>
-      <link>https://gzg.me/post/%E4%B8%AD%E5%9B%BD%E4%BA%92%E8%81%94%E7%BD%91/</link>
+      <link>https://gzg.me/post/china_network/</link>
       <pubDate>Thu, 30 Jan 2020 22:23:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E4%B8%AD%E5%9B%BD%E4%BA%92%E8%81%94%E7%BD%91/</guid>
+      <guid>https://gzg.me/post/china_network/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;截止到2020年，互联网可以说是推动社会进步最重要的“产品&amp;rdquo;，中国的互联网也是近10年高速发展经历了很多，本文就来谈谈中国的互联网&amp;hellip;&lt;/p&gt;
@@ -312,10 +461,10 @@ methods:{
     
     <item>
       <title>【生活感悟】做个有思想，有判断力的人</title>
-      <link>https://gzg.me/post/%E5%88%A4%E6%96%AD%E5%8A%9B/</link>
+      <link>https://gzg.me/post/judge/</link>
       <pubDate>Fri, 10 Jan 2020 23:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%88%A4%E6%96%AD%E5%8A%9B/</guid>
+      <guid>https://gzg.me/post/judge/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;从一个互联网从业者的角度来说说，怎么样做一个有判断力的人&lt;/p&gt;
@@ -337,10 +486,10 @@ methods:{
     
     <item>
       <title>【技术笔记】JS的Array的各种API</title>
-      <link>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</link>
+      <link>https://gzg.me/post/array_handle-/</link>
       <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/array%E6%93%8D%E4%BD%9C-/</guid>
+      <guid>https://gzg.me/post/array_handle-/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
@@ -512,10 +661,10 @@ Array.isArray(arr)  //true&lt;/code&gt;&lt;/pre&gt;</description>
     
     <item>
       <title>【技术笔记】了解Eslint及其常用规则配置</title>
-      <link>https://gzg.me/post/eslint%E8%A7%84%E5%88%99/</link>
+      <link>https://gzg.me/post/eslint_rules/</link>
       <pubDate>Tue, 10 Dec 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/eslint%E8%A7%84%E5%88%99/</guid>
+      <guid>https://gzg.me/post/eslint_rules/</guid>
       
         <description>&lt;p&gt;前几天用vue-cli3测试一个小功能，当我输入console.log以后，一直报错。。很纳闷，原来是在最新的脚手架工具中默认关闭了console。于是本篇文章总结一下Elint的配置规则。&lt;/p&gt;
 &lt;h2 id=&#34;1eslint是什么&#34;&gt;1.Eslint是什么&lt;/h2&gt;
@@ -1059,10 +1208,10 @@ Array.isArray(arr)  //true&lt;/code&gt;&lt;/pre&gt;</description>
     
     <item>
       <title>【前端技术】基于vue的webpack打包优化浅析</title>
-      <link>https://gzg.me/post/%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96/</link>
+      <link>https://gzg.me/post/pack_opt/</link>
       <pubDate>Tue, 19 Nov 2019 13:24:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://gzg.me/post/pack_opt/</guid>
       
         <description>&lt;p&gt;在项目迭代的过程中，打包后的资源越来越大。于是我们通过一些优化手段减小打包后的静态资源&lt;/p&gt;
 &lt;h2 id=&#34;webpack优化基于vue-cli3&#34;&gt;webpack优化（基于vue-cli3）&lt;/h2&gt;
@@ -1095,10 +1244,10 @@ Vue-cli 配置https://cli.vuejs.org/zh/config/&lt;/p&gt;</description>
     
     <item>
       <title>【技术分享】前端异常监控之异常信息采集</title>
-      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</link>
+      <link>https://gzg.me/post/front_error/</link>
       <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</guid>
+      <guid>https://gzg.me/post/front_error/</guid>
       
         <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;
 &lt;h2 id=&#34;1常见前端异常&#34;&gt;1.	常见前端异常&lt;/h2&gt;
@@ -1154,10 +1303,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术笔记】web页面构建标准及规范</title>
-      <link>https://gzg.me/post/%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86/</link>
+      <link>https://gzg.me/post/dev_stand/</link>
       <pubDate>Sun, 20 Oct 2019 12:18:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86/</guid>
+      <guid>https://gzg.me/post/dev_stand/</guid>
       
         <description>&lt;p&gt;整理了一些前端开发时候需要注意的知识点&lt;/p&gt;
 &lt;h2 id=&#34;前端开发构建标准及规范&#34;&gt;前端开发构建标准及规范&lt;/h2&gt;
@@ -1224,10 +1373,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】vue-cli3脚手架工具搭建多页面应用</title>
-      <link>https://gzg.me/post/%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8/</link>
+      <link>https://gzg.me/post/more_page/</link>
       <pubDate>Fri, 20 Sep 2019 21:02:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://gzg.me/post/more_page/</guid>
       
         <description>&lt;p&gt;公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。&lt;/p&gt;
 &lt;h3 id=&#34;第一步用脚手架搭建一个vue项目&#34;&gt;第一步：用脚手架搭建一个vue项目&lt;/h3&gt;
@@ -1391,10 +1540,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】从前端的角度，谈谈解决跨域的一些方案</title>
-      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/</link>
+      <link>https://gzg.me/post/front_cors/</link>
       <pubDate>Sat, 31 Aug 2019 23:08:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/</guid>
+      <guid>https://gzg.me/post/front_cors/</guid>
       
         <description>&lt;p&gt;跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。&lt;/p&gt;
 &lt;h2 id=&#34;前端跨域研究&#34;&gt;前端跨域研究&lt;/h2&gt;
@@ -1547,10 +1696,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
-      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <link>https://gzg.me/post/front_debug/</link>
       <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      <guid>https://gzg.me/post/front_debug/</guid>
       
         <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;
 &lt;h2 id=&#34;前端调试研究分析&#34;&gt;前端调试研究分析&lt;/h2&gt;
@@ -1796,10 +1945,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【技术分享】rap2接口管理工具使用分享</title>
-      <link>https://gzg.me/post/rap2%E5%B7%A5%E5%85%B7/</link>
+      <link>https://gzg.me/post/rap2_util/</link>
       <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/rap2%E5%B7%A5%E5%85%B7/</guid>
+      <guid>https://gzg.me/post/rap2_util/</guid>
       
         <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;
 &lt;h2 id=&#34;1-什么是rap2&#34;&gt;1. 什么是rap2&lt;/h2&gt;
@@ -2091,10 +2240,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【出行游乐】广州塔一日游，来看看广州的地标</title>
-      <link>https://gzg.me/post/%E5%B9%BF%E5%B7%9E%E5%A1%94%E4%B9%8B%E6%97%85/</link>
+      <link>https://gzg.me/post/gz_pagoda/</link>
       <pubDate>Fri, 07 Jun 2019 22:21:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%B9%BF%E5%B7%9E%E5%A1%94%E4%B9%8B%E6%97%85/</guid>
+      <guid>https://gzg.me/post/gz_pagoda/</guid>
       
         <description>&lt;p&gt;端午节和朋友一起来广州塔看看，天天看屏幕也是不行的&lt;/p&gt;
 &lt;h3 id=&#34;1700从住处出发和朋友630在广州塔集合平时都是天天对着手机和电脑屏幕来广州第一次出来看风景&#34;&gt;17：00从住处出发，和朋友6.30在广州塔集合。平时都是天天对着手机和电脑屏幕，来广州第一次出来看风景。&lt;/h3&gt;
@@ -2109,10 +2258,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【人生感悟】人生有多少四年值得纪念和奋斗？</title>
-      <link>https://gzg.me/post/%E6%84%9F%E6%82%9F/</link>
+      <link>https://gzg.me/post/perception/</link>
       <pubDate>Thu, 09 May 2019 22:23:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E6%84%9F%E6%82%9F/</guid>
+      <guid>https://gzg.me/post/perception/</guid>
       
         <description>&lt;p&gt;随着“咔嚓”教室门的一锁，2019届本科生论文答辩结束了。&lt;/p&gt;
 &lt;p&gt;时间过得真快，还在想自己踢正步的丑姿一下子就答辩完要走上社会。有的同学不慌不忙，有的同学为了请几天假和老板磨嘴商量。
@@ -2122,19 +2271,19 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
-      <link>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</link>
+      <link>https://gzg.me/post/flex_box/</link>
       <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/flex%E7%9B%92%E5%AD%90/</guid>
+      <guid>https://gzg.me/post/flex_box/</guid>
       
         <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;
 &lt;p&gt;在传统css布局中，一般来说是采用float+margin+positon来解决常见问题。但是随着移动端的普及，尤其是各种“小程序&amp;quot;的出现显然传统的布局是由很多弊端的，比如垂直居中就不好实现。（flex布局兼容到ie10以上）&lt;/p&gt;
 &lt;p&gt;flex弹性盒子的结构是父容器和子元素组成的，由父元素包裹，子元素组成基本结构如下。需要注意的是在flex布局中，有的属性是作用在父元素，有的属性是作用在子元素，以下介绍相关的属性。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;FatherWrap&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;display:flex&amp;#34;&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Child1&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Child2&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;开门见山，比如使用flex布局实现一个垂直居中,只需要把父类盒子设置为flex，然后给子属性添加margin:0;即可&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;FatherWrap&amp;quot; style=&amp;quot;display:flex&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;Child1&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div class=&amp;quot;Child2&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开门见山，比如使用flex布局实现一个垂直居中,只需要把父类盒子设置为flex，然后给子属性添加margin:0;即可&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;div style=&amp;quot;display:flex&amp;quot;&amp;gt;
     &amp;lt;div style=&amp;quot;margin:auto&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
 &amp;lt;/div&amp;gt;

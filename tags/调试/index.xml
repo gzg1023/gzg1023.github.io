@@ -5,7 +5,7 @@
     <link>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</link>
     <description>Recent content in 调试 on 沽默清尘的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <copyright>gzg1023</copyright>
     <lastBuildDate>Fri, 21 Feb 2020 12:00:00 +0000</lastBuildDate>
     
@@ -14,10 +14,10 @@
     
     <item>
       <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <link>https://gzg.me/post/mobile_debug/</link>
       <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      <guid>https://gzg.me/post/mobile_debug/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;移动端真机调试的方法&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
-      <link>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</link>
+      <link>https://gzg.me/post/front_debug/</link>
       <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95/</guid>
+      <guid>https://gzg.me/post/front_debug/</guid>
       <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;</description>
     </item>
     
