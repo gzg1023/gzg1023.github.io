@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JavaScript · 沽默清尘的博客</title>
+  <title>【技术分享】函数式编程入门初探 - 沽默清尘的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="gzg1023" />
-  <meta name="description" content="沽默清尘的博客." />
+  <meta name="description" content=" JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。
+" />
+
   <meta name="keywords" content="沽默清尘, theme, jane, gzg1023, 前端博客, front end, front blog" />
 
 
@@ -34,8 +36,8 @@
 <meta name="generator" content="Hugo 0.74.3" />
 
 
-<link rel="canonical" href="https://gzg.me/tags/javascript/" />
-<link href="/tags/javascript/index.xml" rel="alternate" type="application/rss+xml" title="沽默清尘的博客" />
+<link rel="canonical" href="https://gzg.me/post/functional_programming/" />
+
 
 
 
@@ -58,16 +60,30 @@
 
 
 
-<meta property="og:title" content="JavaScript" />
-<meta property="og:description" content="沽默清尘的博客." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gzg.me/tags/javascript/" />
-<meta property="og:updated_time" content="2019-12-25T22:32:00+00:00" />
-<meta itemprop="name" content="JavaScript">
-<meta itemprop="description" content="沽默清尘的博客.">
+<meta property="og:title" content="【技术分享】函数式编程入门初探" />
+<meta property="og:description" content="
+JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gzg.me/post/functional_programming/" />
+<meta property="article:published_time" content="2020-11-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-27T00:00:00+00:00" />
+<meta itemprop="name" content="【技术分享】函数式编程入门初探">
+<meta itemprop="description" content="
+JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。
+">
+<meta itemprop="datePublished" content="2020-11-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1773">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JavaScript"/>
-<meta name="twitter:description" content="沽默清尘的博客."/>
+<meta name="twitter:title" content="【技术分享】函数式编程入门初探"/>
+<meta name="twitter:description" content="
+JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -266,66 +282,351 @@
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-
-<section id="archive" class="archive">
-  
+          <article class="post bg-white">
     
-      <div class="archive-title tag">
-        <h2 class="archive-name">Tag: JavaScript</h2>
+    <header class="post-header">
+      <h1 class="post-title">【技术分享】函数式编程入门初探</h1>
+      
+      <div class="post-meta">
+        <time datetime="2020-11-27" class="post-time">
+          2020-11-27
+        </time>
+        
+        
+
+        
+        
+
+        
+        
       </div>
+    </header>
+
     
-  
+    
 
-  
-    <div class="archive-post">
-      <time datetime="2019-12-25" class="archive-post-time">
-        2019-12-25
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/array_handle-/" class="archive-post-link">
-          【技术笔记】JS的Array的各种API
-        </a>
-      </span>
+    
+    <div class="post-content">
+      <blockquote>
+<p>JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。</p>
+</blockquote>
+<p>函数式编程用来描述数据（函数）之间的映射关系。简单点来说就是把操作数据的过程用函数封装起来，就是函数式编程的思维。
+FP编程特点：子任务，纯函数、函子、无状态。</p>
+<p>部分手写代码地址： <a href="https://github.com/gzg1023/fackAchieve">https://github.com/gzg1023/fackAchieve</a></p>
+<h2 id="使用fp思维开发的产物">使用FP思维开发的产物</h2>
+<ul>
+<li><strong><a href="https://fe.rualc.com/note/redux.html">Redux</a></strong></li>
+<li><strong><a href="https://immutable-js.github.io/immutable-js/">Immutable</a></strong></li>
+</ul>
+<pre><code>//传统方式计算两数之和
+let result1 = a + b
+let result2 = c + d
+
+// 函数式编程计算两数之和
+function addFun(a,b){
+   return a + b
+}
+let result3 = addFun(e,f)
+</code></pre><h2 id="函数式编程特点">函数式编程特点</h2>
+<h3 id="1函数是一等公民">1.函数是&quot;一等公民&rdquo;</h3>
+<ul>
+<li>函数可以存储在变量中</li>
+<li>函数作为参数</li>
+<li>函数作为返回值</li>
+</ul>
+<blockquote>
+<p>高阶函数</p>
+</blockquote>
+<p>如：map, filter, forEach</p>
+<p>实现见 <a href="https://github.com/gzg1023/fackAchieve">https://github.com/gzg1023/fackAchieve</a></p>
+<h3 id="2纯函数数学上的函数">2.纯函数（数学上的函数）</h3>
+<p>相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用。</p>
+<p>好处：</p>
+<ul>
+<li>可缓存，因为每次输入会输入一样的结果。</li>
+<li>可测试，纯函数可以让测试更方便</li>
+<li>并行处理，纯函数不需要共享变量（用在web worker）</li>
+</ul>
+<p>副作用包括不限于：</p>
+<ul>
+<li>更改文件系统</li>
+<li>往数据库插入记录</li>
+<li>发送一个 http 请求</li>
+<li>可变数据</li>
+<li>打印/log</li>
+<li>获取用户输入</li>
+<li>DOM 查询</li>
+<li>访问系统状态</li>
+</ul>
+<h3 id="3柯里化">3.柯里化</h3>
+<ol>
+<li>只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。</li>
+<li>内部使用闭包缓存参数，让函数变的更灵活，函数的粒度更小</li>
+<li>当一个函数有多个参数的时候先传递一部分参数调用它(这部分参数以后永远不变)当一个函数有多个参数的时候先传递一部分参数调用它(这部分参数以后永远不变)</li>
+</ol>
+<p>然后返回一个新的函数接收剩余的参数，返回结果.</p>
+<pre><code>const _ = require('lodash') // 要柯里化的函数
+function getSum (a, b, c) {
+  return a + b + c
+}
+// 柯里化后的函数
+let curried = _.curry(getSum) // 测试
+console.log(curried(1, 2, 3)) 
+console.log(curried(1)(2)(3))
+console.log(curried(1, 2)(3))
+</code></pre><h3 id="4函数组合">4.函数组合</h3>
+<ol>
+<li>函数就像是数据的管道，函数组合就是把这些管道连接起来，让数据穿过多个管道形成最终结果</li>
+<li>函数组合默认是从右到左执行</li>
+</ol>
+<pre><code>var loudLastUpper = compose(exclaim, toUpperCase, head, reverse)
+
+loudLastUpper(['jumpkick', 'roundhouse', 'uppercut']);
+//=&gt; 'UPPERCUT!'
+</code></pre><h3 id="pointfree">pointfree</h3>
+<p>概念：不使用所要处理的值，只合成运算过程</p>
+<p>特点：函数无须提及将要操作的数据是什么样的，pointfree 模式能够帮助我们减少不必要的命名，让代码保持简洁和通用。</p>
+<pre><code>const fp = require('lodash/fp')
+// pointfree
+// 字符提取
+const firstLetterToUpper = fp.flowRight(join('. '),
+
+fp.map(fp.flowRight(fp.first, fp.toUpper)), split(' '))
+
+console.log(firstLetterToUpper('world wild web')) // =&gt; W. W. W
+</code></pre><h3 id="5-debug">5. debug</h3>
+<p>定义trace函数，然后插入到要调试到函数位置后面进行打印。</p>
+<pre><code>var trace = curry(function(tag, x){
+  console.log(tag, x);
+  return x;
+});
+</code></pre><h3 id="6-functor-函子">6. Functor 函子</h3>
+<p>容器:包含值和值的变形关系(这个变形关系就是函数)</p>
+<p>函子:是一个特殊的容器，通过一个普通的对象来实现，该对象具有 map 方法，map 方法可以运 行一个函数对值进行处理(变形关系)</p>
+<p>其中实现了of方法的函子就是<em>Pointed函子</em></p>
+<pre><code>// 函子容器
+class Containser {
+    constructor(value){
+        this._value = value
+    }
+    static of (value){
+        return new Containser(value)
+    }
+    map(fn){
+        return Containser.of(fn(this._value))
+    }
+}
+let a =  Containser.of(5).map(x=&gt;x+1).map(x=&gt;x*x)
+console.log(a)
+</code></pre><p>特性总结：</p>
+<ul>
+<li>函数式编程的运算不直接操作值，而是由函子完成</li>
+<li>函子就是一个实现了 map 契约的对象</li>
+<li>我们可以把函子想象成一个盒子，这个盒子里封装了一个值</li>
+<li>想要处理盒子中的值，我们需要给盒子的 map 方法传递一个处理值的函数(纯函数)，由这
+个函数来对值进行处理</li>
+<li>最终 map 方法返回一个包含新值的盒子(函子)</li>
+</ul>
+<h3 id="maybe函子">MayBe函子</h3>
+<p>进行异常处理的函子</p>
+<pre><code>class MayBe {
+    constructor(value){
+        this._value = value
+    }
+    static  of (value){
+        return new MayBe(value)
+    }
+     map (fn) {
+        return this.isNot() ? MayBe.of(null) : MayBe.of(fn(this._value)) 
+    }
+    isNot(){
+        return this._value === undefined || this._value === null
+    }
+
+}
+let a =  MayBe.of(null).map(x =&gt; x.toUpperCase())
+let b =  MayBe.of('tset Maybe').map(x =&gt; x.toUpperCase())
+console.log(a)
+console.log(b)
+
+</code></pre><h3 id="either函子">Either函子</h3>
+<p>Either函子容器,可以进行异常处理的函子，Either定义两个子函数（可以定义多个，类似if/else）作为处理数据的基准， 如果正确进入右函子继续执行，如果报错，进入左函子打印出异常</p>
+<pre><code>class leftEither {
+    constructor(value) {
+        this._value = value
+    }
+    static of(value) {
+        return new leftEither(value)
+    }
+    map(fn) {
+        return this._value
+    }
+}
+class rightEither {
+    constructor(value) {
+        this._value = value
+    }
+    static of(value) {
+        return new rightEither(value)
+    }
+    map(fn) {
+        return rightEither.of((this._value))
+    }
+}
+function parseJSON(json) {
+    try {
+        return rightEither.of(JSON.parse(json));
+    } catch (e) {
+        return leftEither.of({ error: e.message });
+    }
+}
+
+let l = parseJSON('{ &quot;name&quot;: zs }').map(x =&gt; x.name.toUpperCase())
+let r = parseJSON('{ &quot;name&quot;: &quot;zs&quot; }').map(x =&gt; x.name.toUpperCase())
+console.log(l)
+console.log(r)
+</code></pre><h3 id="log调试函子技巧">log（调试函子技巧）</h3>
+<p>通过一个中间函数，打打印日志</p>
+<pre><code>const _ = require('lodash')
+const trace = _.curry((tag, v) =&gt; { console.log(tag, v)
+return v
+})
+const split = _.curry((sep, str) =&gt; _.split(str, sep)) 
+const join = _.curry((sep, array) =&gt; _.join(array, sep)) 
+const map = _.curry((fn, array) =&gt; _.map(array, fn))
+const f = _.flowRight(join('-'), trace('map 之后'), map(_.toLower), trace('split 之后'), split(' '))
+console.log(f('NEVER SAY DIE'))
+</code></pre><h3 id="io函子惰性执行">IO函子（惰性执行）</h3>
+<ul>
+<li>IO 函子中的 _value 是一个函数，在io函子中把函数作为值来处理</li>
+<li>IO 函子可以把不纯的动作存储到 _value 中，延迟执行这个不纯的操作(惰性执行)，包装当前的操作纯</li>
+<li>把不纯的操作交给调用者来处理</li>
+</ul>
+<pre><code>class IO {
+    constructor(fn) {
+        this._value = fn
+    }
+
+    static of(value) {
+        return new IO(function () {
+            return value
+        })
+    }
+
+    map(fn) {
+      return  new IO(_flowRight(fn, this._value))
+    }
+}
+let obj = {
+    msg: 'hello io'
+}
+let a = IO.of(obj).map(p =&gt; p.msg)
+console.log(a._value())
+</code></pre><h3 id="monad单子函子">monad（单子）函子</h3>
+<p><em>Monad 函子是可以变扁的 Pointed 函子，IO(IO(x))，一个函子如果具有 join 和 of 两个方法并遵守一些定律就是一个 Monad</em></p>
+<pre><code>const fs = require('fs')
+const fp = require('lodash/fp') // IO Monad
+class IO {
+    static of(x) {
+        return new IO(function () {
+            return x
+        })
+    }
+    constructor(fn) {
+        this._value = fn
+    }
+    map(fn) {
+        return new IO(fp.flowRight(fn, this._value))
+    }
+    join() {
+        return this._value()
+    }
+    flatMap(fn) {
+        return this.map(fn).join()
+    }
+}
+let readFile = function (filename) { return new IO(function() {
+    return fs.readFileSync(filename, 'utf-8') })
+    }
+    let print = function(x) { return new IO(function() {
+        console.log(x)
+    return x })
+    }
+let r = readFile('package.json').map(fp.toUpper)
+    .flatMap(print)
+    .join()
+</code></pre>
     </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gzg1023</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2020-11-27
+      
+    </span>
+  </p>
   
-    <div class="archive-post">
-      <time datetime="2019-09-06" class="archive-post-time">
-        2019-09-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/string_handle/" class="archive-post-link">
-          【技术笔记】JS的String的各种API
-        </a>
-      </span>
-    </div>
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/util_css/">
+            <span class="next-text nav-default">【技术笔记】工具类css</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
   
-</section>
-
-
-
-
-
-
-  
-  
   
 
   
   
 
   
-  
 
   
   
 
   
+
   
 
+  
 
+    
 
-
+  
 
         </div>
       </div>

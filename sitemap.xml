@@ -3,27 +3,34 @@
   
   <url>
     <loc>https://gzg.me/about/</loc>
-    <lastmod>2020-11-07T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://gzg.me/post/</loc>
-    <lastmod>2020-11-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/util_css/</loc>
-    <lastmod>2020-11-09T00:00:00+00:00</lastmod>
+    <loc>https://gzg.me/post/functional_programming/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://gzg.me/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/post/util_css/</loc>
     <lastmod>2020-11-09T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -191,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</loc>
+    <loc>https://gzg.me/post/string_handle/</loc>
     <lastmod>2019-09-06T22:32:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

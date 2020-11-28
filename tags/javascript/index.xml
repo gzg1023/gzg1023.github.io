@@ -25,10 +25,10 @@
     
     <item>
       <title>【技术笔记】JS的String的各种API</title>
-      <link>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</link>
+      <link>https://gzg.me/post/string_handle/</link>
       <pubDate>Fri, 06 Sep 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/string%E6%93%8D%E4%BD%9C/</guid>
+      <guid>https://gzg.me/post/string_handle/</guid>
       <description>&lt;p&gt;String是js最常用的数据结果，本文最常见操作做一个总结&lt;/p&gt;</description>
     </item>
     

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JavaScript · 沽默清尘的博客</title>
+  <title>【技术笔记】JS的String的各种API - 沽默清尘的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="gzg1023" />
-  <meta name="description" content="沽默清尘的博客." />
+  <meta name="description" content="String是js最常用的数据结果，本文最常见操作做一个总结
+" />
+
   <meta name="keywords" content="沽默清尘, theme, jane, gzg1023, 前端博客, front end, front blog" />
 
 
@@ -34,8 +36,8 @@
 <meta name="generator" content="Hugo 0.74.3" />
 
 
-<link rel="canonical" href="https://gzg.me/tags/javascript/" />
-<link href="/tags/javascript/index.xml" rel="alternate" type="application/rss+xml" title="沽默清尘的博客" />
+<link rel="canonical" href="https://gzg.me/post/string_handle/" />
+
 
 
 
@@ -58,16 +60,24 @@
 
 
 
-<meta property="og:title" content="JavaScript" />
-<meta property="og:description" content="沽默清尘的博客." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://gzg.me/tags/javascript/" />
-<meta property="og:updated_time" content="2019-12-25T22:32:00+00:00" />
-<meta itemprop="name" content="JavaScript">
-<meta itemprop="description" content="沽默清尘的博客.">
+<meta property="og:title" content="【技术笔记】JS的String的各种API" />
+<meta property="og:description" content="String是js最常用的数据结果，本文最常见操作做一个总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gzg.me/post/string_handle/" />
+<meta property="article:published_time" content="2019-09-06T22:32:00+00:00" />
+<meta property="article:modified_time" content="2019-09-06T22:32:00+00:00" />
+<meta itemprop="name" content="【技术笔记】JS的String的各种API">
+<meta itemprop="description" content="String是js最常用的数据结果，本文最常见操作做一个总结">
+<meta itemprop="datePublished" content="2019-09-06T22:32:00+00:00" />
+<meta itemprop="dateModified" content="2019-09-06T22:32:00+00:00" />
+<meta itemprop="wordCount" content="1710">
+
+
+
+<meta itemprop="keywords" content="前端,JavaScript," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JavaScript"/>
-<meta name="twitter:description" content="沽默清尘的博客."/>
+<meta name="twitter:title" content="【技术笔记】JS的String的各种API"/>
+<meta name="twitter:description" content="String是js最常用的数据结果，本文最常见操作做一个总结"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -266,66 +276,246 @@
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          
-
-<section id="archive" class="archive">
-  
+          <article class="post bg-white">
     
-      <div class="archive-title tag">
-        <h2 class="archive-name">Tag: JavaScript</h2>
+    <header class="post-header">
+      <h1 class="post-title">【技术笔记】JS的String的各种API</h1>
+      
+      <div class="post-meta">
+        <time datetime="2019-09-06" class="post-time">
+          2019-09-06
+        </time>
+        
+        
+
+        
+        
+
+        
+        
       </div>
+    </header>
+
     
-  
+    
 
-  
-    <div class="archive-post">
-      <time datetime="2019-12-25" class="archive-post-time">
-        2019-12-25
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/array_handle-/" class="archive-post-link">
-          【技术笔记】JS的Array的各种API
-        </a>
-      </span>
+    
+    <div class="post-content">
+      <p>String是js最常用的数据结果，本文最常见操作做一个总结</p>
+<blockquote>
+<p>操作字符串是前端开发中最常见的任务之一，本文总结操作字符串的一些方法，包括ES5,ES6版本及一些常见业务场景的例示</p>
+</blockquote>
+<p><!-- raw HTML omitted -->方法开头有<!-- raw HTML omitted -->改<!-- raw HTML omitted -->字的代表该方法会改变原Srting。
+有<!-- raw HTML omitted -->原<!-- raw HTML omitted -->字的代表，该方法不会改变原Srting<!-- raw HTML omitted --></p>
+<h3 id="基础知识">基础知识</h3>
+<ul>
+<li>字符串可以视为字符数组可以用下标来访问（只读属性）。如：str[0]。## 标题文字 ##</li>
+<li>通过String(5)把任意类型转为字符串</li>
+</ul>
+<h3 id="静态方法">静态方法</h3>
+<h4 id="charat方法">charAt方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->改<!-- raw HTML omitted -->String.prototype.charAt() 方法返回指定位置的字符</p>
+</blockquote>
+<pre><code>  'hello'.charAt(1) // &quot;e&quot;
+</code></pre>
+<h4 id="concat方法">concat方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted --> String.prototype.concat() 方法用于连字符串，可以多选</p>
+</blockquote>
+<pre><code>   'hello'.concat('world') // &quot;helloworld&quot;
+</code></pre>
+<h4 id="slice方法">slice方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted --> String.prototype.slice() 方法用原字符串提取子字符串。第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）</p>
+</blockquote>
+<pre><code>  'hello'.slice(0,2) // he
+</code></pre>
+<h4 id="substr方法">substr方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted --> String.prototype.substr()可在字符串中抽取从 start 下标开始的指定数目的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  'hello'.substr(3) // lo
+</code></pre>
+<h4 id="substring方法">substring方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted --> String.prototype.substring() 方法用于提取字符串中介于两个指定下标之间的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  hello'.substring(3) // lo
+</code></pre>
+<h4 id="indexof方法">indexOf方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted --> String.prototype.indexOf() / lastIndexOf()  方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配 (lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。)</p>
+</blockquote>
+<pre><code>  'hello world'.indexOf('o') // 4
+  'hello world'.lastindexOf('o') // 7
+</code></pre>
+<h4 id="trim方法">trim方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted -->String.prototype.trim()方法用于去除字符串两端的空格</p>
+</blockquote>
+<pre><code>  ' fdf '.trim()  //'fdf'
+</code></pre>
+<h4 id="tolowercase方法">toLowerCase方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted -->String.prototype.toLowerCase()  / toUpperCase() 将一个字符串全部转为小写 / 大写</p>
+</blockquote>
+<pre><code>  'Hello World'.toLowerCase()// &quot;hello world&quot;
+  'Hello World'.toUpperCase()// &quot;HELLO WORLD&quot;
+</code></pre>
+<h4 id="match方法">match方法</h4>
+<blockquote>
+<p><!-- raw HTML omitted -->原<!-- raw HTML omitted -->String.prototype.match()方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null</p>
+</blockquote>
+<pre><code>  var matches = 'cat, bat, sat, fat'.match('at'); &lt;br&gt;
+  matches.index // 1
+  matches.input // &quot;cat, bat, sat, fat&quot;
+</code></pre>
+<h4 id="split方法">split方法</h4>
+<blockquote>
+<p>String.prototype.split() 方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组. 第一个参数是分割规则，第二个参数，限定返回数组的最大成员数。</p>
+</blockquote>
+<pre><code>  'a|b|c'.split('|') // [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+</code></pre>
+<h4 id="relapce方法">relapce方法</h4>
+<blockquote>
+<p>String.prototype.relapce()  用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+</blockquote>
+<pre><code>  'Im your father'.replace('father','mother') // Im your mother
+</code></pre>
+<h4 id="search方法">search方法</h4>
+<blockquote>
+<p>\ String.prototype.search() 强于indxOf)  检索字符串中指定的子字符串，或检索<!-- raw HTML omitted -->正则表达式<!-- raw HTML omitted -->相匹配的子字符串。</p>
+</blockquote>
+<pre><code>  '123456ONE'.search('O') // 6
+</code></pre>
+<h4 id="localecompare方法">localeCompare方法</h4>
+<blockquote>
+<p>String.prototype.localeCompare()方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串</p>
+</blockquote>
+<pre><code>  'apple'.localeCompare('banana') // -1
+  'apple'.localeCompare('apple') // 0
+</code></pre>
+<h4 id="includes方法">includes方法</h4>
+<blockquote>
+<p>String.prototype.includes() 方法用于判断一个字符串是否包含在另一个字符串中，根据情况返回 true 或 false。第一个参数是要在此字符串中搜索的字符串，第二个参数是从当前字符串的哪个索引位置开始搜寻子字符串，默认值为0 (区分大小写)</p>
+</blockquote>
+<pre><code>  'Blue Whale'.includes('blue'); // returns false
+</code></pre>
+<h4 id="startswith方法">startsWith方法</h4>
+<blockquote>
+<p>String.prototype.startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false (区分大小写)</p>
+</blockquote>
+<pre><code>  &quot;To be, or not to &quot;.startsWith(&quot;To be&quot;); // returns true
+</code></pre>
+<h4 id="padstart方法">padStart方法</h4>
+<blockquote>
+<p>String.prototype.padStart() / padEnd() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。填充从当前字符串的开始(左侧) / (右侧)应用的。 第一个参数 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身，第二个参数 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 &quot; &ldquo;（U+0020）</p>
+</blockquote>
+<pre><code>  'abc'.padStart(10, &quot;foo&quot;);  // &quot;foofoofabc&quot;
+  'abc'.padEnd(10, &quot;foo&quot;);   // &quot;abcfoofoof&quot;
+</code></pre>
+<h3 id="其他方法">其他方法</h3>
+<h4 id="btoa方法">btoa方法</h4>
+<blockquote>
+<p>btoa() 把任意值转为Base编码</p>
+</blockquote>
+<pre><code>  btoa('hello world') // &quot;SGVsbG8gV29ybGQh&quot;
+</code></pre>
+<h4 id="atob方法">atob方法</h4>
+<blockquote>
+<p>atob() 把Base64编码转为原来的值</p>
+</blockquote>
+<pre><code>  atob(&quot;SGVsbG8gV29ybGQh&quot;) // 'hello world'
+</code></pre>
     </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gzg1023</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2019-09-06
+      
+    </span>
+  </p>
   
-    <div class="archive-post">
-      <time datetime="2019-09-06" class="archive-post-time">
-        2019-09-06
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/string_handle/" class="archive-post-link">
-          【技术笔记】JS的String的各种API
-        </a>
-      </span>
-    </div>
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://gzg.me/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+          <a href="https://gzg.me/tags/javascript/">JavaScript</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/more_page/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">【技术分享】vue-cli3脚手架工具搭建多页面应用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/front_cors/">
+            <span class="next-text nav-default">【技术分享】从前端的角度，谈谈解决跨域的一些方案</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
   
-</section>
-
-
-
-
-
-
-  
-  
   
 
   
   
 
   
-  
 
   
   
 
   
+
   
 
+  
 
+    
 
-
+  
 
         </div>
       </div>
