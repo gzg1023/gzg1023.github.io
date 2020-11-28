@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://gzg.me/tags/javascript/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gzg.me/post/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,7 +23,28 @@
   </url>
   
   <url>
+    <loc>https://gzg.me/tags/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gzg.me/post/functional_programming/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -32,13 +60,6 @@
   <url>
     <loc>https://gzg.me/post/util_css/</loc>
     <lastmod>2020-11-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/tags/</loc>
-    <lastmod>2020-11-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -86,13 +107,6 @@
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2020-02-21T12:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</loc>
     <lastmod>2020-02-21T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -123,13 +137,6 @@
   <url>
     <loc>https://gzg.me/post/judge/</loc>
     <lastmod>2020-01-10T23:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/tags/javascript/</loc>
-    <lastmod>2019-12-25T22:32:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

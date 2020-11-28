@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>函数式编程 on 沽默清尘的博客</title>
+    <link>https://gzg.me/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 函数式编程 on 沽默清尘的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>gzg1023</copyright>
+    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gzg.me/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【技术分享】函数式编程入门初探</title>
+      <link>https://gzg.me/post/functional_programming/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/functional_programming/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
