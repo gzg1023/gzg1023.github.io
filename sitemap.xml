@@ -9,21 +9,56 @@
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/css/</loc>
-    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+    <loc>https://gzg.me/tags/docker/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/tags/mongdb/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://gzg.me/post/</loc>
-    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://gzg.me/tags/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/post/docker_mongo/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/tags/css/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -45,13 +80,6 @@
   
   <url>
     <loc>https://gzg.me/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -122,13 +150,6 @@
   
   <url>
     <loc>https://gzg.me/post/mobile_debug/</loc>
-    <lastmod>2020-02-21T12:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</loc>
     <lastmod>2020-02-21T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

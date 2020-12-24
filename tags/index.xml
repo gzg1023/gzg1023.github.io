@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://gzg.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>docker</title>
+      <link>https://gzg.me/tags/docker/</link>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongdb</title>
+      <link>https://gzg.me/tags/mongdb/</link>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/tags/mongdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>调试</title>
+      <link>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CSS</title>
@@ -81,15 +108,6 @@
       <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://gzg.me/tags/%E4%BC%98%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>调试</title>
-      <link>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</link>
-      <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
-      
-      <guid>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</guid>
       <description></description>
     </item>
     

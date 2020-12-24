@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Dec 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://gzg.me/index.xml" rel="self" type="application/rss+xml" />
     
@@ -29,6 +29,84 @@
 &lt;/ul&gt;
 &lt;p&gt;关于博客名称：沽采自家乡，默希望自己多做事少说话，清尘希望经常反省自己。&lt;/p&gt;
 </description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】配置开发环境脑壳痛，docker真香！</title>
+      <link>https://gzg.me/post/docker_mongo/</link>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/docker_mongo/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;某一天习惯性的把电脑升级到最新版，升级完成后有一个软件打开崩溃，平时没有用到过。索性就直接删除。直到前段时间，想学习下MongoDB，按照官网教程安装时候就出现了问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;无效操作&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;通过brew安装后，一直显示Mac系统版本高，然后服务运行不起来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过下载压缩包跑服务，运行起来以后还是显示stop服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;搞了半天脑壳痛，还是安装不起来。查资料也没有太多Mac新系统的解决办法。于是就想到了用docker试一下，很早就听说过docker这个技术，但是自己一直没有接触过，这次就简单的基于docker安装一个mongo进行简单的了解。不得不说是真的很方便，安装简单，天然沙箱。&lt;/p&gt;
+&lt;h3 id=&#34;1-安装docker客户端&#34;&gt;1. 安装docker客户端&lt;/h3&gt;
+&lt;p&gt;因为国内网络的问题，brew也总出现问题，这里直接下载dmg安装文件进行安装，下面是链接&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://download.docker.com/mac/edge/Docker.dmg&#34;&gt;https://download.docker.com/mac/edge/Docker.dmg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;直接拖动安装，就得到了这条小鲸鱼&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rgRvnS&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rgRvnS.png&#34; alt=&#34;rgRvnS.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-注册docker账号并配置docker镜像&#34;&gt;2. 注册docker账号，并配置docker镜像&lt;/h3&gt;
+&lt;p&gt;注册账号就不说了，直接输入邮箱，收个验证码就可以了，
+&lt;a href=&#34;https://www.docker.com/&#34;&gt;https://www.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后我们打开docker登陆账号，就看到下面的一个页面&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2ACq&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2ACq.md.png&#34; alt=&#34;rg2ACq.md.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;依然是国内的网络问题，我们配置docker的镜像源，如下图所示，在Dashboard配置镜像，这里采用七牛云和网易的镜像源服务。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    {
+    &amp;quot;registry-mirrors&amp;quot;: [
+        &amp;quot;https://reg-mirror.qiniu.com&amp;quot;,
+        &amp;quot;https://hub-mirror.c.163.com/&amp;quot;
+    ],
+    &amp;quot;features&amp;quot;: {
+        &amp;quot;buildkit&amp;quot;: true
+    },
+    &amp;quot;experimental&amp;quot;: false
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2iUs&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2iUs.md.png&#34; alt=&#34;rg2iUs.md.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置完成后，重启一下docker客户端。到这里docker安装配置就完成了。&lt;/p&gt;
+&lt;h3 id=&#34;3-docker下载mongodb&#34;&gt;3. docker下载MongoDB&lt;/h3&gt;
+&lt;p&gt;打开命令行输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker pull mongo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以下载mongo的docker镜像，稍等一下下。完成后在命令行输入，如下图可以看到电脑中所有的镜像。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2E80&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2E80.png&#34; alt=&#34;rg2E80.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;4-运行docker镜像&#34;&gt;4. 运行docker镜像&lt;/h4&gt;
+&lt;p&gt;在配置好环境，下载好镜像。我们通过命令行运行一个mongo的容器，默认不需要密码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -itd --name mongo-name -p 27017:27017 mongo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;参数解释&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;--name 是自己指定一个docker的名称如：mongo-name
+-p 27017:27017 ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后在命令行输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2mKU&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2mKU.md.png&#34; alt=&#34;rg2mKU.md.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如下图所示，就可以看到运行的docker容器了，同时我们也可以在docker客户端的面板看到刚创建的服务。&lt;/p&gt;
+&lt;p&gt;创建好容器服务后，我们在命令行输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it mongo-name mongo admin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;就进入了docker的mongo命令行后终端。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2ZvT&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2ZvT.md.png&#34; alt=&#34;rg2ZvT.md.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;也可以通过面板直接可视化的点击启动。打开mongo服务并进入终端或停止服务等&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgchr.com/i/rg2F5n&#34;&gt;&lt;img src=&#34;https://s3.ax1x.com/2020/12/24/rg2F5n.md.png&#34; alt=&#34;rg2F5n.md.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;5-项目中使用&#34;&gt;5. 项目中使用&lt;/h4&gt;
+&lt;p&gt;在前面，我们配置了-p 27017:27017 ，也就是docker的mongo服务端口号映射到本地一致的端口号上面，我们直接打开项目，连接运行即可。
+如果映射了不同的端口号，或者多个服务，记得修改相关映射即可。&lt;/p&gt;</description>
       
     </item>
     
