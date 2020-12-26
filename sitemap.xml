@@ -9,6 +9,27 @@
   </url>
   
   <url>
+    <loc>https://gzg.me/post/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/post/2020_summary/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gzg.me/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gzg.me/tags/docker/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,13 +44,6 @@
   </url>
   
   <url>
-    <loc>https://gzg.me/post/</loc>
-    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://gzg.me/tags/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -38,13 +52,6 @@
   
   <url>
     <loc>https://gzg.me/post/docker_mongo/</loc>
-    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
