@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术分享】rap2接口管理工具使用分享</title>
-      <link>https://gzg.me/post/rap2_util/</link>
+      <link>https://gzg.me/post/2019/rap2_util/</link>
       <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/rap2_util/</guid>
+      <guid>https://gzg.me/post/2019/rap2_util/</guid>
       <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;</description>
     </item>
     

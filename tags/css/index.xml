@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术笔记】vue中滑动事件触发怎么失灵了？！</title>
-      <link>https://gzg.me/post/scroll_fix/</link>
+      <link>https://gzg.me/post/2020/scroll_fix/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/scroll_fix/</guid>
+      <guid>https://gzg.me/post/2020/scroll_fix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;理想中的滑动，写完列表加一个@scroll，监听一下。怎么有时候到了局部区域就不触发了呢？&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
-      <link>https://gzg.me/post/flex_box/</link>
+      <link>https://gzg.me/post/2019/flex_box/</link>
       <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/flex_box/</guid>
+      <guid>https://gzg.me/post/2019/flex_box/</guid>
       <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;</description>
     </item>
     

@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术分享】前端异常监控之异常信息采集</title>
-      <link>https://gzg.me/post/front_error/</link>
+      <link>https://gzg.me/post/2019/front_error/</link>
       <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_error/</guid>
+      <guid>https://gzg.me/post/2019/front_error/</guid>
       <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;</description>
     </item>
     

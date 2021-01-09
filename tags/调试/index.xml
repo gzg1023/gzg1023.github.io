@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术分享】配置开发环境脑壳痛，docker真香！</title>
-      <link>https://gzg.me/post/docker_mongo/</link>
+      <link>https://gzg.me/post/2020/docker_mongo/</link>
       <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/docker_mongo/</guid>
+      <guid>https://gzg.me/post/2020/docker_mongo/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;某一天习惯性的把电脑升级到最新版，升级完成后有一个软件打开崩溃，平时没有用到过。索性就直接删除。直到前段时间，想学习下MongoDB，按照官网教程安装时候就出现了问题。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>https://gzg.me/post/mobile_debug/</link>
+      <link>https://gzg.me/post/2020/mobile_debug/</link>
       <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/mobile_debug/</guid>
+      <guid>https://gzg.me/post/2020/mobile_debug/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;移动端真机调试的方法&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -36,10 +36,10 @@
     
     <item>
       <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
-      <link>https://gzg.me/post/front_debug/</link>
+      <link>https://gzg.me/post/2019/front_debug/</link>
       <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_debug/</guid>
+      <guid>https://gzg.me/post/2019/front_debug/</guid>
       <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;</description>
     </item>
     

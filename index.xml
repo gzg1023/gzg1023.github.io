@@ -7,37 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://gzg.me/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About</title>
-      <link>https://gzg.me/about/</link>
-      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://gzg.me/about/</guid>
-      
-        <description>&lt;p&gt;&lt;img src=&#34;https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=825594567,3947418068&amp;amp;fm=26&amp;amp;gp=0.jpg&#34; alt=&#34;home&#34;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;前端社畜，人笨且不努力😢&lt;/li&gt;
-&lt;li&gt;生于北方,南方工作&lt;/li&gt;
-&lt;li&gt;性格比较外向，和谁都能聊几句&lt;/li&gt;
-&lt;li&gt;向往自由职业，喜欢旅行&lt;/li&gt;
-&lt;li&gt;希望自己拥有独立思考的能力&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;关于博客名称：沽采自家乡，默希望自己多做事少说话，清尘希望经常反省自己。&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
       <title>【生活总结】2020年总结和2021年展望</title>
-      <link>https://gzg.me/post/2020_summary/</link>
+      <link>https://gzg.me/post/2020/2020_summary/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2020_summary/</guid>
+      <guid>https://gzg.me/post/2020/2020_summary/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;2020时间飞逝，做一个年终总结。也对未来的2021年做一些计划。&lt;/p&gt;
@@ -89,11 +69,151 @@
     </item>
     
     <item>
+      <title>About</title>
+      <link>https://gzg.me/about/</link>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/about/</guid>
+      
+        <description>&lt;p&gt;&lt;img src=&#34;https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=825594567,3947418068&amp;amp;fm=26&amp;amp;gp=0.jpg&#34; alt=&#34;home&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前端社畜，人笨且不努力😢&lt;/li&gt;
+&lt;li&gt;生于北方,南方工作&lt;/li&gt;
+&lt;li&gt;性格比较外向，和谁都能聊几句&lt;/li&gt;
+&lt;li&gt;向往自由职业，喜欢旅行&lt;/li&gt;
+&lt;li&gt;希望自己拥有独立思考的能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关于博客名称：沽采自家乡，默希望自己多做事少说话，清尘希望经常反省自己。&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>【技术分享】观察者模式VS发布/订阅模式</title>
+      <link>https://gzg.me/post/2021/designpatterns/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/2021/designpatterns/</guid>
+      
+        <description>&lt;blockquote&gt;
+&lt;p&gt;在vue中，观察者模式和发布/订阅模式被用到了方方面面，在刚开始了解时候感觉这两者总是分不清楚，本文对两者来个区分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;概念&#34;&gt;概念&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;观察者模式&lt;/code&gt;：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;发布/订阅模式&lt;/code&gt; ：发布者不会将消息直接发送给特定的接收者（称为订阅者）。而是将发布的消息分为不同的类别，无需了解哪些订阅者（如果有的话）可能存在。同样的，订阅者可以表达对一个或多个类别的兴趣，只接收感兴趣的消息，无需了解哪些发布者（如果有的话）存在。&lt;/p&gt;
+&lt;h3 id=&#34;观察者模式&#34;&gt;观察者模式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;观察者模式不存在接收器（中间商）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过notify方法跟更新所有依赖&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   // 发布者目标
+  class Dep {
+      constructor(){
+          // 记录所有订阅者
+          this.subs = []
+      }
+      // 添加订阅者
+      addSub(sub) {
+          if(sub &amp;amp;&amp;amp; sub.update){
+              this.subs.push(sub)
+          }
+      }
+      // 发布通知
+      notify() {
+          // 调用每个订阅者的方法
+          this.subs.forEach((sub)=&amp;gt;{
+              sub.update()
+          })
+      }
+  }
+
+  // 观察者
+  class Watcher{
+      update() {
+          console.log(&#39;update&#39;)
+      }
+  }
+
+  let dep = new Dep()
+  let wather1 = new Watcher()
+  let wather2 = new Watcher()
+  dep.addSub(wather1)
+  dep.addSub(wather2)
+  dep.notify()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;发布订阅模式&#34;&gt;发布/订阅模式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A组件负责发布消息，B,C,D&amp;hellip;组件可以订阅A组件发送的事件，从而接收&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依靠事件中心来完成发布和订阅&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发布者不需要知道订阅者的存在&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; // 发布订阅的事件中心
+  class EventEmitter{
+      constructor(){
+          // 不需要原型的空对象
+          // 可以注册多个事件，多个函数 {&#39;click&#39;:[fn1,fn2],&#39;change&#39;:[fn1,fn2]}
+          this.subs = Object.create(null)
+      }
+
+      // 注册事件
+      $on (eventType,handler) {
+          //  如果方法不存在则传递一个空数组，保证eventType是数组结构
+          this.subs[eventType] = this.subs[eventType] || []
+          this.subs[eventType].push(handler)
+      }
+
+      // 触发事件
+      $emit (eventType) {
+          // 依次执行订阅的函数,如果有值则挨个执行，没有的话就不处理
+          if(this.subs[eventType]){
+              this.subs[eventType].forEach((eventHandle) =&amp;gt; {
+                  eventHandle()
+              });
+          }
+      }
+  }
+
+  let vm = new EventEmitter()
+    
+  vm.$on(&#39;click&#39;,()=&amp;gt;{
+      console.log(&#39;click handler1&#39;)
+  })
+
+  vm.$on(&#39;click&#39;,()=&amp;gt;{
+      console.log(&#39;click handler2&#39;)
+  })
+
+  vm.$emit(&#39;click&#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>观察者模式VS订阅者模式</title>
+      <link>https://gzg.me/template/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/template/</guid>
+      
+        <description>&lt;p&gt;简介&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>【技术分享】配置开发环境脑壳痛，docker真香！</title>
-      <link>https://gzg.me/post/docker_mongo/</link>
+      <link>https://gzg.me/post/2020/docker_mongo/</link>
       <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/docker_mongo/</guid>
+      <guid>https://gzg.me/post/2020/docker_mongo/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;某一天习惯性的把电脑升级到最新版，升级完成后有一个软件打开崩溃，平时没有用到过。索性就直接删除。直到前段时间，想学习下MongoDB，按照官网教程安装时候就出现了问题。&lt;/p&gt;
@@ -168,10 +288,10 @@
     
     <item>
       <title>【技术笔记】vue中滑动事件触发怎么失灵了？！</title>
-      <link>https://gzg.me/post/scroll_fix/</link>
+      <link>https://gzg.me/post/2020/scroll_fix/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/scroll_fix/</guid>
+      <guid>https://gzg.me/post/2020/scroll_fix/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;理想中的滑动，写完列表加一个@scroll，监听一下。怎么有时候到了局部区域就不触发了呢？&lt;/p&gt;
@@ -273,10 +393,10 @@ overflow-y:scroll;    // overflow-x:scroll;
     
     <item>
       <title>【技术分享】函数式编程入门初探</title>
-      <link>https://gzg.me/post/functional_programming/</link>
+      <link>https://gzg.me/post/2020/functional_programming/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/functional_programming/</guid>
+      <guid>https://gzg.me/post/2020/functional_programming/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。&lt;/p&gt;
@@ -532,10 +652,10 @@ let r = readFile(&#39;package.json&#39;).map(fp.toUpper)
     
     <item>
       <title>【技术笔记】工具类css</title>
-      <link>https://gzg.me/post/util_css/</link>
+      <link>https://gzg.me/post/2020/util_css/</link>
       <pubDate>Sun, 08 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/util_css/</guid>
+      <guid>https://gzg.me/post/2020/util_css/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;总结一些常用的css工具类&lt;/p&gt;
@@ -681,10 +801,10 @@ transform: opacity(1);
     
     <item>
       <title>【生活感悟】2020疫情时代下的生活思考</title>
-      <link>https://gzg.me/post/life_status/</link>
+      <link>https://gzg.me/post/2020/life_status/</link>
       <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/life_status/</guid>
+      <guid>https://gzg.me/post/2020/life_status/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;从疫情爆发到现在，已经过了半年多。生活状态也算稳定下来，简单谈谈我的感受。&lt;/p&gt;
@@ -696,10 +816,10 @@ transform: opacity(1);
     
     <item>
       <title>【电脑优化】Window电脑优化运行速度技巧</title>
-      <link>https://gzg.me/post/computer/</link>
+      <link>https://gzg.me/post/2020/computer/</link>
       <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/computer/</guid>
+      <guid>https://gzg.me/post/2020/computer/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;本文针对Window系统总结一些常见的优化技巧，便于提高电脑运行速度；总共分为两大部分，硬件和软件部分。以及会说明一下市面常见所谓『优化系统』的弊端及推荐一些没有任何副作用的优化软件。&lt;/p&gt;
@@ -769,10 +889,10 @@ transform: opacity(1);
     
     <item>
       <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>https://gzg.me/post/mobile_debug/</link>
+      <link>https://gzg.me/post/2020/mobile_debug/</link>
       <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/mobile_debug/</guid>
+      <guid>https://gzg.me/post/2020/mobile_debug/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;移动端真机调试的方法&lt;/p&gt;
@@ -830,10 +950,10 @@ Fiddler2抓包工具&lt;a href=&#34;https://sm.myapp.com/original/Development/fi
     
     <item>
       <title>【前端技术】Vue递归组件的简单运用</title>
-      <link>https://gzg.me/post/recursion_compoent/</link>
+      <link>https://gzg.me/post/2020/recursion_compoent/</link>
       <pubDate>Mon, 03 Feb 2020 21:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/recursion_compoent/</guid>
+      <guid>https://gzg.me/post/2020/recursion_compoent/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;后台管理系统的菜单，树结构&amp;hellip;当需求超过二级菜单时候，就要考虑使用递归组件了。&lt;/p&gt;
@@ -909,10 +1029,10 @@ methods:{
     
     <item>
       <title>【非官方科普】谈谈中国互联网的历史和现状</title>
-      <link>https://gzg.me/post/china_network/</link>
+      <link>https://gzg.me/post/2020/china_network/</link>
       <pubDate>Thu, 30 Jan 2020 22:23:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/china_network/</guid>
+      <guid>https://gzg.me/post/2020/china_network/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;截止到2020年，互联网可以说是推动社会进步最重要的“产品&amp;rdquo;，中国的互联网也是近10年高速发展经历了很多，本文就来谈谈中国的互联网&amp;hellip;&lt;/p&gt;
@@ -960,10 +1080,10 @@ methods:{
     
     <item>
       <title>【生活感悟】做个有思想，有判断力的人</title>
-      <link>https://gzg.me/post/judge/</link>
+      <link>https://gzg.me/post/2020/judge/</link>
       <pubDate>Fri, 10 Jan 2020 23:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/judge/</guid>
+      <guid>https://gzg.me/post/2020/judge/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;从一个互联网从业者的角度来说说，怎么样做一个有判断力的人&lt;/p&gt;
@@ -985,10 +1105,10 @@ methods:{
     
     <item>
       <title>【技术笔记】JS的Array的各种API</title>
-      <link>https://gzg.me/post/array_handle-/</link>
+      <link>https://gzg.me/post/2019/array_handle-/</link>
       <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/array_handle-/</guid>
+      <guid>https://gzg.me/post/2019/array_handle-/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
@@ -1160,10 +1280,10 @@ Array.isArray(arr)  //true&lt;/code&gt;&lt;/pre&gt;</description>
     
     <item>
       <title>【技术笔记】了解Eslint及其常用规则配置</title>
-      <link>https://gzg.me/post/eslint_rules/</link>
+      <link>https://gzg.me/post/2019/eslint_rules/</link>
       <pubDate>Tue, 10 Dec 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/eslint_rules/</guid>
+      <guid>https://gzg.me/post/2019/eslint_rules/</guid>
       
         <description>&lt;p&gt;前几天用vue-cli3测试一个小功能，当我输入console.log以后，一直报错。。很纳闷，原来是在最新的脚手架工具中默认关闭了console。于是本篇文章总结一下Elint的配置规则。&lt;/p&gt;
 &lt;h2 id=&#34;1eslint是什么&#34;&gt;1.Eslint是什么&lt;/h2&gt;
@@ -1707,10 +1827,10 @@ Array.isArray(arr)  //true&lt;/code&gt;&lt;/pre&gt;</description>
     
     <item>
       <title>【前端技术】基于vue的webpack打包优化浅析</title>
-      <link>https://gzg.me/post/pack_opt/</link>
+      <link>https://gzg.me/post/2019/pack_opt/</link>
       <pubDate>Tue, 19 Nov 2019 13:24:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/pack_opt/</guid>
+      <guid>https://gzg.me/post/2019/pack_opt/</guid>
       
         <description>&lt;p&gt;在项目迭代的过程中，打包后的资源越来越大。于是我们通过一些优化手段减小打包后的静态资源&lt;/p&gt;
 &lt;h2 id=&#34;webpack优化基于vue-cli3&#34;&gt;webpack优化（基于vue-cli3）&lt;/h2&gt;
@@ -1743,10 +1863,10 @@ Vue-cli 配置https://cli.vuejs.org/zh/config/&lt;/p&gt;</description>
     
     <item>
       <title>【技术分享】前端异常监控之异常信息采集</title>
-      <link>https://gzg.me/post/front_error/</link>
+      <link>https://gzg.me/post/2019/front_error/</link>
       <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_error/</guid>
+      <guid>https://gzg.me/post/2019/front_error/</guid>
       
         <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;
 &lt;h2 id=&#34;1常见前端异常&#34;&gt;1.	常见前端异常&lt;/h2&gt;
@@ -1802,10 +1922,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术笔记】web页面构建标准及规范</title>
-      <link>https://gzg.me/post/dev_stand/</link>
+      <link>https://gzg.me/post/2019/dev_stand/</link>
       <pubDate>Sun, 20 Oct 2019 12:18:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/dev_stand/</guid>
+      <guid>https://gzg.me/post/2019/dev_stand/</guid>
       
         <description>&lt;p&gt;整理了一些前端开发时候需要注意的知识点&lt;/p&gt;
 &lt;h2 id=&#34;前端开发构建标准及规范&#34;&gt;前端开发构建标准及规范&lt;/h2&gt;
@@ -1872,10 +1992,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】vue-cli3脚手架工具搭建多页面应用</title>
-      <link>https://gzg.me/post/more_page/</link>
+      <link>https://gzg.me/post/2019/more_page/</link>
       <pubDate>Fri, 20 Sep 2019 21:02:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/more_page/</guid>
+      <guid>https://gzg.me/post/2019/more_page/</guid>
       
         <description>&lt;p&gt;公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。&lt;/p&gt;
 &lt;h3 id=&#34;第一步用脚手架搭建一个vue项目&#34;&gt;第一步：用脚手架搭建一个vue项目&lt;/h3&gt;
@@ -1902,10 +2022,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术笔记】JS的String的各种API</title>
-      <link>https://gzg.me/post/string_handle/</link>
+      <link>https://gzg.me/post/2019/string_handle/</link>
       <pubDate>Fri, 06 Sep 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/string_handle/</guid>
+      <guid>https://gzg.me/post/2019/string_handle/</guid>
       
         <description>&lt;p&gt;String是js最常用的数据结果，本文最常见操作做一个总结&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2039,10 +2159,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】从前端的角度，谈谈解决跨域的一些方案</title>
-      <link>https://gzg.me/post/front_cors/</link>
+      <link>https://gzg.me/post/2019/front_cors/</link>
       <pubDate>Sat, 31 Aug 2019 23:08:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_cors/</guid>
+      <guid>https://gzg.me/post/2019/front_cors/</guid>
       
         <description>&lt;p&gt;跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。&lt;/p&gt;
 &lt;h2 id=&#34;前端跨域研究&#34;&gt;前端跨域研究&lt;/h2&gt;
@@ -2195,10 +2315,10 @@ Sentry: &lt;a href=&#34;https://sentry.io/&#34;&gt;https://sentry.io/&lt;/a&gt;&
     
     <item>
       <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
-      <link>https://gzg.me/post/front_debug/</link>
+      <link>https://gzg.me/post/2019/front_debug/</link>
       <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_debug/</guid>
+      <guid>https://gzg.me/post/2019/front_debug/</guid>
       
         <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;
 &lt;h2 id=&#34;前端调试研究分析&#34;&gt;前端调试研究分析&lt;/h2&gt;
@@ -2444,10 +2564,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【技术分享】rap2接口管理工具使用分享</title>
-      <link>https://gzg.me/post/rap2_util/</link>
+      <link>https://gzg.me/post/2019/rap2_util/</link>
       <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/rap2_util/</guid>
+      <guid>https://gzg.me/post/2019/rap2_util/</guid>
       
         <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;
 &lt;h2 id=&#34;1-什么是rap2&#34;&gt;1. 什么是rap2&lt;/h2&gt;
@@ -2739,10 +2859,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【出行游乐】广州塔一日游，来看看广州的地标</title>
-      <link>https://gzg.me/post/gz_pagoda/</link>
+      <link>https://gzg.me/post/2019/gz_pagoda/</link>
       <pubDate>Fri, 07 Jun 2019 22:21:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/gz_pagoda/</guid>
+      <guid>https://gzg.me/post/2019/gz_pagoda/</guid>
       
         <description>&lt;blockquote&gt;
 &lt;p&gt;端午节和朋友一起来广州塔看看，天天看屏幕也是不行的&lt;/p&gt;
@@ -2759,10 +2879,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【人生感悟】人生有多少四年值得纪念和奋斗？</title>
-      <link>https://gzg.me/post/perception/</link>
+      <link>https://gzg.me/post/2019/perception/</link>
       <pubDate>Thu, 09 May 2019 22:23:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/perception/</guid>
+      <guid>https://gzg.me/post/2019/perception/</guid>
       
         <description>&lt;p&gt;随着“咔嚓”教室门的一锁，2019届本科生论文答辩结束了。&lt;/p&gt;
 &lt;p&gt;时间过得真快，还在想自己踢正步的丑姿一下子就答辩完要走上社会。有的同学不慌不忙，有的同学为了请几天假和老板磨嘴商量。
@@ -2772,10 +2892,10 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
     
     <item>
       <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
-      <link>https://gzg.me/post/flex_box/</link>
+      <link>https://gzg.me/post/2019/flex_box/</link>
       <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/flex_box/</guid>
+      <guid>https://gzg.me/post/2019/flex_box/</guid>
       
         <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;
 &lt;p&gt;在传统css布局中，一般来说是采用float+margin+positon来解决常见问题。但是随着移动端的普及，尤其是各种“小程序&amp;quot;的出现显然传统的布局是由很多弊端的，比如垂直居中就不好实现。（flex布局兼容到ie10以上）&lt;/p&gt;
@@ -2899,17 +3019,6 @@ session Storage和local storage使用方法相同，不同的地方是只在一�
 &lt;p&gt;&lt;strong&gt;align-self&lt;/strong&gt;
 &lt;img src=&#34;https://s2.ax1x.com/2019/11/24/MOBcyF.jpg&#34; alt=&#34;align-self&#34;&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>模版文件</title>
-      <link>https://gzg.me/template/</link>
-      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://gzg.me/template/</guid>
-      
-        <description></description>
       
     </item>
     

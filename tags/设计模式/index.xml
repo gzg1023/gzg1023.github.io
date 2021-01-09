@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>设计模式 on 沽默清尘的博客</title>
+    <link>https://gzg.me/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on 沽默清尘的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>gzg1023</copyright>
+    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gzg.me/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【技术分享】观察者模式VS发布/订阅模式</title>
+      <link>https://gzg.me/post/2021/designpatterns/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/2021/designpatterns/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在vue中，观察者模式和发布/订阅模式被用到了方方面面，在刚开始了解时候感觉这两者总是分不清楚，本文对两者来个区分。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

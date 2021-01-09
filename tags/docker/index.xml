@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术分享】配置开发环境脑壳痛，docker真香！</title>
-      <link>https://gzg.me/post/docker_mongo/</link>
+      <link>https://gzg.me/post/2020/docker_mongo/</link>
       <pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/docker_mongo/</guid>
+      <guid>https://gzg.me/post/2020/docker_mongo/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;某一天习惯性的把电脑升级到最新版，升级完成后有一个软件打开崩溃，平时没有用到过。索性就直接删除。直到前段时间，想学习下MongoDB，按照官网教程安装时候就出现了问题。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

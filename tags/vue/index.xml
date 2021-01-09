@@ -14,10 +14,10 @@
     
     <item>
       <title>【技术笔记】vue中滑动事件触发怎么失灵了？！</title>
-      <link>https://gzg.me/post/scroll_fix/</link>
+      <link>https://gzg.me/post/2020/scroll_fix/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/scroll_fix/</guid>
+      <guid>https://gzg.me/post/2020/scroll_fix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;理想中的滑动，写完列表加一个@scroll，监听一下。怎么有时候到了局部区域就不触发了呢？&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>【前端技术】Vue递归组件的简单运用</title>
-      <link>https://gzg.me/post/recursion_compoent/</link>
+      <link>https://gzg.me/post/2020/recursion_compoent/</link>
       <pubDate>Mon, 03 Feb 2020 21:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/recursion_compoent/</guid>
+      <guid>https://gzg.me/post/2020/recursion_compoent/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;后台管理系统的菜单，树结构&amp;hellip;当需求超过二级菜单时候，就要考虑使用递归组件了。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

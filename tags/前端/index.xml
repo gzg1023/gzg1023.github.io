@@ -7,17 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>gzg1023</copyright>
-    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://gzg.me/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>【技术分享】观察者模式VS发布/订阅模式</title>
+      <link>https://gzg.me/post/2021/designpatterns/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://gzg.me/post/2021/designpatterns/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在vue中，观察者模式和发布/订阅模式被用到了方方面面，在刚开始了解时候感觉这两者总是分不清楚，本文对两者来个区分。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
       <title>【技术笔记】vue中滑动事件触发怎么失灵了？！</title>
-      <link>https://gzg.me/post/scroll_fix/</link>
+      <link>https://gzg.me/post/2020/scroll_fix/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/scroll_fix/</guid>
+      <guid>https://gzg.me/post/2020/scroll_fix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;理想中的滑动，写完列表加一个@scroll，监听一下。怎么有时候到了局部区域就不触发了呢？&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +36,10 @@
     
     <item>
       <title>【技术分享】函数式编程入门初探</title>
-      <link>https://gzg.me/post/functional_programming/</link>
+      <link>https://gzg.me/post/2020/functional_programming/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/functional_programming/</guid>
+      <guid>https://gzg.me/post/2020/functional_programming/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -36,10 +47,10 @@
     
     <item>
       <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>https://gzg.me/post/mobile_debug/</link>
+      <link>https://gzg.me/post/2020/mobile_debug/</link>
       <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/mobile_debug/</guid>
+      <guid>https://gzg.me/post/2020/mobile_debug/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;移动端真机调试的方法&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -47,10 +58,10 @@
     
     <item>
       <title>【技术笔记】JS的Array的各种API</title>
-      <link>https://gzg.me/post/array_handle-/</link>
+      <link>https://gzg.me/post/2019/array_handle-/</link>
       <pubDate>Wed, 25 Dec 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/array_handle-/</guid>
+      <guid>https://gzg.me/post/2019/array_handle-/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -58,91 +69,91 @@
     
     <item>
       <title>【技术笔记】了解Eslint及其常用规则配置</title>
-      <link>https://gzg.me/post/eslint_rules/</link>
+      <link>https://gzg.me/post/2019/eslint_rules/</link>
       <pubDate>Tue, 10 Dec 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/eslint_rules/</guid>
+      <guid>https://gzg.me/post/2019/eslint_rules/</guid>
       <description>&lt;p&gt;前几天用vue-cli3测试一个小功能，当我输入console.log以后，一直报错。。很纳闷，原来是在最新的脚手架工具中默认关闭了console。于是本篇文章总结一下Elint的配置规则。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【前端技术】基于vue的webpack打包优化浅析</title>
-      <link>https://gzg.me/post/pack_opt/</link>
+      <link>https://gzg.me/post/2019/pack_opt/</link>
       <pubDate>Tue, 19 Nov 2019 13:24:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/pack_opt/</guid>
+      <guid>https://gzg.me/post/2019/pack_opt/</guid>
       <description>&lt;p&gt;在项目迭代的过程中，打包后的资源越来越大。于是我们通过一些优化手段减小打包后的静态资源&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】前端异常监控之异常信息采集</title>
-      <link>https://gzg.me/post/front_error/</link>
+      <link>https://gzg.me/post/2019/front_error/</link>
       <pubDate>Thu, 31 Oct 2019 21:28:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_error/</guid>
+      <guid>https://gzg.me/post/2019/front_error/</guid>
       <description>&lt;p&gt;软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术笔记】web页面构建标准及规范</title>
-      <link>https://gzg.me/post/dev_stand/</link>
+      <link>https://gzg.me/post/2019/dev_stand/</link>
       <pubDate>Sun, 20 Oct 2019 12:18:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/dev_stand/</guid>
+      <guid>https://gzg.me/post/2019/dev_stand/</guid>
       <description>&lt;p&gt;整理了一些前端开发时候需要注意的知识点&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】vue-cli3脚手架工具搭建多页面应用</title>
-      <link>https://gzg.me/post/more_page/</link>
+      <link>https://gzg.me/post/2019/more_page/</link>
       <pubDate>Fri, 20 Sep 2019 21:02:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/more_page/</guid>
+      <guid>https://gzg.me/post/2019/more_page/</guid>
       <description>&lt;p&gt;公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术笔记】JS的String的各种API</title>
-      <link>https://gzg.me/post/string_handle/</link>
+      <link>https://gzg.me/post/2019/string_handle/</link>
       <pubDate>Fri, 06 Sep 2019 22:32:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/string_handle/</guid>
+      <guid>https://gzg.me/post/2019/string_handle/</guid>
       <description>&lt;p&gt;String是js最常用的数据结果，本文最常见操作做一个总结&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】从前端的角度，谈谈解决跨域的一些方案</title>
-      <link>https://gzg.me/post/front_cors/</link>
+      <link>https://gzg.me/post/2019/front_cors/</link>
       <pubDate>Sat, 31 Aug 2019 23:08:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_cors/</guid>
+      <guid>https://gzg.me/post/2019/front_cors/</guid>
       <description>&lt;p&gt;跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】前端调试（chrome开发者工具的使用）</title>
-      <link>https://gzg.me/post/front_debug/</link>
+      <link>https://gzg.me/post/2019/front_debug/</link>
       <pubDate>Wed, 07 Aug 2019 22:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/front_debug/</guid>
+      <guid>https://gzg.me/post/2019/front_debug/</guid>
       <description>&lt;p&gt;公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】rap2接口管理工具使用分享</title>
-      <link>https://gzg.me/post/rap2_util/</link>
+      <link>https://gzg.me/post/2019/rap2_util/</link>
       <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/rap2_util/</guid>
+      <guid>https://gzg.me/post/2019/rap2_util/</guid>
       <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术笔记】CSS之Flex弹性盒子属性详解</title>
-      <link>https://gzg.me/post/flex_box/</link>
+      <link>https://gzg.me/post/2019/flex_box/</link>
       <pubDate>Fri, 15 Mar 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/flex_box/</guid>
+      <guid>https://gzg.me/post/2019/flex_box/</guid>
       <description>&lt;p&gt;随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。&lt;/p&gt;</description>
     </item>
     
