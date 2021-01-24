@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】rap2接口管理工具使用分享 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】rap2接口管理工具使用分享",
+      "item":"/posts/2019/rap2_util/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/rap2_util/"
+    },
+    "headline": "【技术分享】rap2接口管理工具使用分享 | 沽默清尘","datePublished": "2019-07-05T21:50:00+00:00",
+    "dateModified": "2019-07-05T21:50:00+00:00",
+    "wordCount":  247 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003e公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术分享】rap2接口管理工具使用分享 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/rap2_util/" />
+
+
+
+
+<meta property="og:description" content="公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-07-05T21:50:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-07-05T21:50:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="工具" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2019/flex_box/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】rap2接口管理工具使用分享</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-07-05</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。</p>
+<h2 id="1-什么是rap2">1. 什么是rap2</h2>
+<p>RAP是一个可视化接口管理工具 通过分析接口结构，动态生成模拟数据，校验真实接口正确性， 围绕接口定义，通过一系列自动化工具提升我们团队开发的协作效率。</p>
+<h2 id="2-为什么要用rap">2. 为什么要用rap</h2>
+<p>在前端开发过程中，我们需要实时与后端进行数据交互。然而大多数时候，前端开发都是在没有后端数据提供的情况下进行的，这时我们就需要用到假数据模拟。rap2是一款在线模拟数据生成器，可以拦截Ajax请求，其作用在于帮助前端工程师独立于后端进行开发，实现前后端分离。</p>
+<ul>
+<li>支持mock.js语法：RAP本身基于mcok.js</li>
+<li>支持接口管理：可管理url地址，不同模块分类。</li>
+<li>支持团队协作：拥有团队仓库</li>
+<li>支持历史修改操作查看：可查看接口修改情况，但不支持操作回溯。</li>
+<li>接口共享：不需要重复编写接口</li>
+<li>自动化测试：一键测试接口情况</li>
+</ul>
+<h2 id="3-怎么使用rap">3. 怎么使用rap</h2>
+<p>3.1   搭建rap环境 
+3.2 用户使用Rap</p>
+<p><img src="https://s2.ax1x.com/2019/09/06/nQPdWF.jpg" alt="rap"></p>
+<p>如上图所示，在我们在定义好Rap接口后，在生成规则部分填写我们的Mock语句，Rap系统就会自动生成数据。
+如果我们前端想在项目中进行Mock，需要用npm在项目中安装Mockjs模块，然后在项目中的Mock.js中配置需要Mock的属性项
+3.3 Mock.js数据模板规则
+数据模板中的每个属性由 3 部分构成：属性名、生成规则、属性值：</p>
+<ul>
+<li>属性名   name</li>
+<li>生成规则 rule</li>
+<li>属性值   value
+生成的规则如 &lsquo;name|rule&rsquo;: value</li>
+</ul>
+<ol>
+<li>
+<p>name是规则的属性值，对应真实数据结构的key</p>
+</li>
+<li>
+<p>rule（生成规则）解析：必须写在|后面。生成规则依赖于属性值（value）的
+类型</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min-max</td>
+<td>最小值到最大值</td>
+</tr>
+<tr>
+<td>count</td>
+<td>数量</td>
+</tr>
+<tr>
+<td>min-max.dmin-dmax</td>
+<td>最小值到最大值及小数点后保留的位数范围</td>
+</tr>
+<tr>
+<td>min-max.dcount</td>
+<td>最小值到最大值及小数点后保留dcount位</td>
+</tr>
+<tr>
+<td>count.dmin-dmax</td>
+<td>数量及小数点后保留的位数范围</td>
+</tr>
+<tr>
+<td>count.dcount</td>
+<td>数量及小数点后保留dcount位</td>
+</tr>
+<tr>
+<td>+/-step</td>
+<td>从value递增/减</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>value解析</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>属性值是字符串</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>属性值是数字</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>属性值是布尔值</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>属性值是对象</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>属性值是数组</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>属性值是函数</td>
+</tr>
+<tr>
+<td>RegExp</td>
+<td>属性值是正则</td>
+</tr>
+<tr>
+<td>4.	数据占位符规范</td>
+<td></td>
+</tr>
+<tr>
+<td>占位符只是在属性值字符串中占个位置，并不会出现在最终的属性值中。</td>
+<td></td>
+</tr>
+<tr>
+<td>格式：</td>
+<td></td>
+</tr>
+<tr>
+<td>@占位符</td>
+<td></td>
+</tr>
+<tr>
+<td>@占位符(参数 [, 参数])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>用 @ 来标识其后的字符串是 占位符。</p>
+</li>
+<li>
+<p>占位符 引用的是 Mock.Random 中的方法。</p>
+</li>
+<li>
+<p>通过 Mock.Random.extend() 来扩展自定义占位符。</p>
+</li>
+<li>
+<p>占位符 也可以引用 数据模板 中的属性。</p>
+</li>
+<li>
+<p>占位符 会优先引用 数据模板 中的属性。</p>
+</li>
+<li>
+<p>占位符 支持 相对路径 和 绝对路径。
+3.4 Rap2-Mock数据模板规则
+如下表所示，如果需要特定的数据时候，只需在占位符前面加上@符合即可
+（例：@date,随机产生一个时间）。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>占位符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic（基础类）</td>
+<td>boolean, natural, integer, float, character, string, range, date, time, datetime, now</td>
+<td></td>
+</tr>
+<tr>
+<td>Image（图片）</td>
+<td>image, dataImage</td>
+<td>图片地址</td>
+</tr>
+<tr>
+<td>Color（颜色值）</td>
+<td>color</td>
+<td>16进制字符串</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>paragraph, sentence, word, title, cparagraph, csentence, cword, ctitle</td>
+<td>段落，标题等</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>first, last, name, cfirst, clast, cname</td>
+<td>姓名，姓，名占位符最前面是c的代表产生中文数据</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>url, domain, email, ip, tld</td>
+<td>地址，域名，邮箱，ip地址</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>area, region</td>
+<td>地区，方向</td>
+</tr>
+<tr>
+<td>Helper</td>
+<td>capitalize, upper, lower, pick, shuffle</td>
+<td></td>
+</tr>
+<tr>
+<td>Miscellaneous</td>
+<td>guid, id</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>特殊类型例示</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>初始值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纯数字</td>
+<td>@integer(1,100)</td>
+<td>括号里面1-100表示随机生成一个1-100里面的数字</td>
+</tr>
+<tr>
+<td>指定长度的字符串</td>
+<td>@string(5,8)</td>
+<td>括号里面5-8表示随机生成一个5-8位的字符串，写一个数字代表，指定长度</td>
+</tr>
+<tr>
+<td>指定类型的日期</td>
+<td>@date(yyyy-MM-dd)</td>
+<td>括号里面(yyyy-MM-dd)代表格式日期的规范，如果想要指定年份，月份直接修改字符串如@date(2019-01-dd)</td>
+</tr>
+<tr>
+<td>纯数字数组</td>
+<td>[5]</td>
+<td></td>
+</tr>
+<tr>
+<td>纯字符串数组</td>
+<td>[&lsquo;a&rsquo;,&lsquo;b&rsquo;]</td>
+<td>只需要给数据加上引号即可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4--维护和持续使用mock">4.  维护和持续使用Mock</h2>
+<p>持续使用rap需要前端和后端一起配合，当确定项目需求后，后端程序员开始定义数据库和rap接口的数据结构。由前端进行Mock的语法规则编写。Rap定义完成后，我们可以直接通过网页url来查询Mock数据是否自动生成。然后前后端就可以分别进行各自的开发工作了。
+如果在项目的开发过程中缺少参数或接口，要先沟通清楚产品需求，在进行Rap的更改，并标明哪些是新添加的字段或接口。</p>
+<p>通过rap平台，可以直接Mock数据供开发使用，我们直接点击接口地址，就可以打开Mock数据的链接了。
+<img src="https://s2.ax1x.com/2019/09/06/nQkPRU.jpg" alt="图4.3"></p>
+<p>当打开链接路径为http://192.168.1.24/api/app/mock/57/table 但是没有匹配到需要的数据，此时我们的请求是post请求，在postman中测试即可得到数据。如图4.4所示。就可以拿到想要的数据了。</p>
+<p><img src="https://s2.ax1x.com/2019/09/06/nQkkM4.jpg" alt="请输入图片描述"></p>
+<p>4.2.在Mock.js中使用</p>
+<p>1)获取列表数据Mock实例</p>
+<pre><code>router.post('/amdin/getOrderList', async (ctx) =&gt; {
+      let items = Mock.mock({
+       'items|10': [
+          {
+        'orderId|1-8': '1',
+        'applicantUserId|1-999': 1,
+        'productName': '@productName',
+        'productId|1-10': '2',
+        'departmentName': '@departmentName',
+        'departmentDn': '@departmentDn',
+        'applicationType|1-3': '1',
+        'description|1-3': '调整配置',
+        'applicationTime': '@time',
+        'applicationId': '@applicationId'
+          }
+    ]
+  })
+  await sleep(2000)
+  res.data = { ...page, ...items }
+  ctx.body = res
+})
+</code></pre>
+<h2 id="5附录">5.	附录</h2>
+<p>(1).Mock数据规则查询http://mockjs.com/examples.html <br>
+(2)Rap2官网http://rap2.taobao.org/</p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/%E5%B7%A5%E5%85%B7/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#工具</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2019/front_debug/" class="block">【技术分享】前端调试（chrome开发者工具的使用）</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2019/gz_pagoda/" class="block">【出行游乐】广州塔一日游，来看看广州的地标</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-什么是rap2">1. 什么是rap2</a></li>
+    <li><a href="#2-为什么要用rap">2. 为什么要用rap</a></li>
+    <li><a href="#3-怎么使用rap">3. 怎么使用rap</a></li>
+    <li><a href="#4--维护和持续使用mock">4.  维护和持续使用Mock</a></li>
+    <li><a href="#5附录">5.	附录</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2019/flex_box/">【技术笔记】CSS之Flex弹性盒子属性详解</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

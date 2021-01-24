@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端 on 沽默清尘</title>
+    <link>/categories/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on 沽默清尘</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
+    <lastBuildDate>Fri, 21 Feb 2020 12:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【前端技术】移动端h5项目调试技巧与总结</title>
+      <link>/posts/2020/mobile_debug/</link>
+      <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
+      
+      <guid>/posts/2020/mobile_debug/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;移动端真机调试的方法&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

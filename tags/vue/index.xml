@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vue on 沽默清尘的博客</title>
-    <link>https://gzg.me/tags/vue/</link>
-    <description>Recent content in vue on 沽默清尘的博客</description>
+    <title>vue on 沽默清尘</title>
+    <link>/tags/vue/</link>
+    <description>Recent content in vue on 沽默清尘</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>gzg1023</copyright>
+    <language>zh</language>
+    <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
     <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gzg.me/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/vue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【技术笔记】vue中滑动事件触发怎么失灵了？！</title>
-      <link>https://gzg.me/post/2020/scroll_fix/</link>
+      <link>/posts/2020/scroll_fix/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2020/scroll_fix/</guid>
+      <guid>/posts/2020/scroll_fix/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;理想中的滑动，写完列表加一个@scroll，监听一下。怎么有时候到了局部区域就不触发了呢？&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>【前端技术】Vue递归组件的简单运用</title>
-      <link>https://gzg.me/post/2020/recursion_compoent/</link>
+      <link>/posts/2020/recursion_compoent/</link>
       <pubDate>Mon, 03 Feb 2020 21:00:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2020/recursion_compoent/</guid>
+      <guid>/posts/2020/recursion_compoent/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;后台管理系统的菜单，树结构&amp;hellip;当需求超过二级菜单时候，就要考虑使用递归组件了。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

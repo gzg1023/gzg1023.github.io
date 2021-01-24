@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术笔记】JS的String的各种API | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="String是js最常用的数据结果，本文最常见操作做一个总结">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术笔记】JS的String的各种API",
+      "item":"/posts/2019/string_handle/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/string_handle/"
+    },
+    "headline": "【技术笔记】JS的String的各种API | 沽默清尘","datePublished": "2019-09-06T22:32:00+00:00",
+    "dateModified": "2019-09-06T22:32:00+00:00",
+    "wordCount":  199 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003eString是js最常用的数据结果，本文最常见操作做一个总结\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术笔记】JS的String的各种API | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/string_handle/" />
+
+
+
+
+<meta property="og:description" content="String是js最常用的数据结果，本文最常见操作做一个总结" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-09-06T22:32:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-09-06T22:32:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="JavaScript" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2019/front_cors/" />
+
+<meta property="og:see_also" content="/posts/2019/front_debug/" />
+
+<meta property="og:see_also" content="/posts/2019/rap2_util/" />
+
+<meta property="og:see_also" content="/posts/2019/flex_box/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术笔记】JS的String的各种API</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-09-06</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>String是js最常用的数据结果，本文最常见操作做一个总结</p>
+<blockquote>
+<p>操作字符串是前端开发中最常见的任务之一，本文总结操作字符串的一些方法，包括ES5,ES6版本及一些常见业务场景的例示</p>
+</blockquote>
+<p><span style="font-size:24px;color:#000;">方法开头有<b style="color:red">改</b>字的代表该方法会改变原Srting。
+有<b style="color:#CC9900">原</b>字的代表，该方法不会改变原Srting</span></p>
+<h3 id="基础知识">基础知识</h3>
+<ul>
+<li>字符串可以视为字符数组可以用下标来访问（只读属性）。如：str[0]。## 标题文字 ##</li>
+<li>通过String(5)把任意类型转为字符串</li>
+</ul>
+<h3 id="静态方法">静态方法</h3>
+<h4 id="charat方法">charAt方法</h4>
+<blockquote>
+<p><b style="color:red">改</b>String.prototype.charAt() 方法返回指定位置的字符</p>
+</blockquote>
+<pre><code>  'hello'.charAt(1) // &quot;e&quot;
+</code></pre>
+<h4 id="concat方法">concat方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.concat() 方法用于连字符串，可以多选</p>
+</blockquote>
+<pre><code>   'hello'.concat('world') // &quot;helloworld&quot;
+</code></pre>
+<h4 id="slice方法">slice方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.slice() 方法用原字符串提取子字符串。第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）</p>
+</blockquote>
+<pre><code>  'hello'.slice(0,2) // he
+</code></pre>
+<h4 id="substr方法">substr方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.substr()可在字符串中抽取从 start 下标开始的指定数目的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  'hello'.substr(3) // lo
+</code></pre>
+<h4 id="substring方法">substring方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.substring() 方法用于提取字符串中介于两个指定下标之间的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  hello'.substring(3) // lo
+</code></pre>
+<h4 id="indexof方法">indexOf方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.indexOf() / lastIndexOf()  方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配 (lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。)</p>
+</blockquote>
+<pre><code>  'hello world'.indexOf('o') // 4
+  'hello world'.lastindexOf('o') // 7
+</code></pre>
+<h4 id="trim方法">trim方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b>String.prototype.trim()方法用于去除字符串两端的空格</p>
+</blockquote>
+<pre><code>  ' fdf '.trim()  //'fdf'
+</code></pre>
+<h4 id="tolowercase方法">toLowerCase方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b>String.prototype.toLowerCase()  / toUpperCase() 将一个字符串全部转为小写 / 大写</p>
+</blockquote>
+<pre><code>  'Hello World'.toLowerCase()// &quot;hello world&quot;
+  'Hello World'.toUpperCase()// &quot;HELLO WORLD&quot;
+</code></pre>
+<h4 id="match方法">match方法</h4>
+<blockquote>
+<p><b style="color:#CC9900">原</b>String.prototype.match()方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null</p>
+</blockquote>
+<pre><code>  var matches = 'cat, bat, sat, fat'.match('at'); &lt;br&gt;
+  matches.index // 1
+  matches.input // &quot;cat, bat, sat, fat&quot;
+</code></pre>
+<h4 id="split方法">split方法</h4>
+<blockquote>
+<p>String.prototype.split() 方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组. 第一个参数是分割规则，第二个参数，限定返回数组的最大成员数。</p>
+</blockquote>
+<pre><code>  'a|b|c'.split('|') // [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+</code></pre>
+<h4 id="relapce方法">relapce方法</h4>
+<blockquote>
+<p>String.prototype.relapce()  用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+</blockquote>
+<pre><code>  'Im your father'.replace('father','mother') // Im your mother
+</code></pre>
+<h4 id="search方法">search方法</h4>
+<blockquote>
+<p>\ String.prototype.search() 强于indxOf)  检索字符串中指定的子字符串，或检索<b>正则表达式</b>相匹配的子字符串。</p>
+</blockquote>
+<pre><code>  '123456ONE'.search('O') // 6
+</code></pre>
+<h4 id="localecompare方法">localeCompare方法</h4>
+<blockquote>
+<p>String.prototype.localeCompare()方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串</p>
+</blockquote>
+<pre><code>  'apple'.localeCompare('banana') // -1
+  'apple'.localeCompare('apple') // 0
+</code></pre>
+<h4 id="includes方法">includes方法</h4>
+<blockquote>
+<p>String.prototype.includes() 方法用于判断一个字符串是否包含在另一个字符串中，根据情况返回 true 或 false。第一个参数是要在此字符串中搜索的字符串，第二个参数是从当前字符串的哪个索引位置开始搜寻子字符串，默认值为0 (区分大小写)</p>
+</blockquote>
+<pre><code>  'Blue Whale'.includes('blue'); // returns false
+</code></pre>
+<h4 id="startswith方法">startsWith方法</h4>
+<blockquote>
+<p>String.prototype.startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false (区分大小写)</p>
+</blockquote>
+<pre><code>  &quot;To be, or not to &quot;.startsWith(&quot;To be&quot;); // returns true
+</code></pre>
+<h4 id="padstart方法">padStart方法</h4>
+<blockquote>
+<p>String.prototype.padStart() / padEnd() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。填充从当前字符串的开始(左侧) / (右侧)应用的。 第一个参数 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身，第二个参数 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 &quot; &ldquo;（U+0020）</p>
+</blockquote>
+<pre><code>  'abc'.padStart(10, &quot;foo&quot;);  // &quot;foofoofabc&quot;
+  'abc'.padEnd(10, &quot;foo&quot;);   // &quot;abcfoofoof&quot;
+</code></pre>
+<h3 id="其他方法">其他方法</h3>
+<h4 id="btoa方法">btoa方法</h4>
+<blockquote>
+<p>btoa() 把任意值转为Base编码</p>
+</blockquote>
+<pre><code>  btoa('hello world') // &quot;SGVsbG8gV29ybGQh&quot;
+</code></pre>
+<h4 id="atob方法">atob方法</h4>
+<blockquote>
+<p>atob() 把Base64编码转为原来的值</p>
+</blockquote>
+<pre><code>  atob(&quot;SGVsbG8gV29ybGQh&quot;) // 'hello world'
+</code></pre>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/javascript/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#JavaScript</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2019/more_page/" class="block">【技术分享】vue-cli3脚手架工具搭建多页面应用</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2019/front_cors/" class="block">【技术分享】从前端的角度，谈谈解决跨域的一些方案</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基础知识">基础知识</a></li>
+        <li><a href="#静态方法">静态方法</a>
+          <ul>
+            <li><a href="#charat方法">charAt方法</a></li>
+            <li><a href="#concat方法">concat方法</a></li>
+            <li><a href="#slice方法">slice方法</a></li>
+            <li><a href="#substr方法">substr方法</a></li>
+            <li><a href="#substring方法">substring方法</a></li>
+            <li><a href="#indexof方法">indexOf方法</a></li>
+            <li><a href="#trim方法">trim方法</a></li>
+            <li><a href="#tolowercase方法">toLowerCase方法</a></li>
+            <li><a href="#match方法">match方法</a></li>
+            <li><a href="#split方法">split方法</a></li>
+            <li><a href="#relapce方法">relapce方法</a></li>
+            <li><a href="#search方法">search方法</a></li>
+            <li><a href="#localecompare方法">localeCompare方法</a></li>
+            <li><a href="#includes方法">includes方法</a></li>
+            <li><a href="#startswith方法">startsWith方法</a></li>
+            <li><a href="#padstart方法">padStart方法</a></li>
+          </ul>
+        </li>
+        <li><a href="#其他方法">其他方法</a>
+          <ul>
+            <li><a href="#btoa方法">btoa方法</a></li>
+            <li><a href="#atob方法">atob方法</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2019/front_cors/">【技术分享】从前端的角度，谈谈解决跨域的一些方案</a>
+            <br />
+            
+            <a href="/posts/2019/front_debug/">【技术分享】前端调试（chrome开发者工具的使用）</a>
+            <br />
+            
+            <a href="/posts/2019/rap2_util/">【技术分享】rap2接口管理工具使用分享</a>
+            <br />
+            
+            <a href="/posts/2019/flex_box/">【技术笔记】CSS之Flex弹性盒子属性详解</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

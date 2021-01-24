@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术笔记】CSS之Flex弹性盒子属性详解 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术笔记】CSS之Flex弹性盒子属性详解",
+      "item":"/posts/2019/flex_box/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/flex_box/"
+    },
+    "headline": "【技术笔记】CSS之Flex弹性盒子属性详解 | 沽默清尘","datePublished": "2019-03-15T15:14:00+00:00",
+    "dateModified": "2019-03-15T15:14:00+00:00",
+    "wordCount":  106 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003e随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术笔记】CSS之Flex弹性盒子属性详解 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/flex_box/" />
+
+
+
+
+<meta property="og:description" content="随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-03-15T15:14:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-03-15T15:14:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="CSS" />
+
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术笔记】CSS之Flex弹性盒子属性详解</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-03-15</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。</p>
+<p>在传统css布局中，一般来说是采用float+margin+positon来解决常见问题。但是随着移动端的普及，尤其是各种“小程序&quot;的出现显然传统的布局是由很多弊端的，比如垂直居中就不好实现。（flex布局兼容到ie10以上）</p>
+<p>flex弹性盒子的结构是父容器和子元素组成的，由父元素包裹，子元素组成基本结构如下。需要注意的是在flex布局中，有的属性是作用在父元素，有的属性是作用在子元素，以下介绍相关的属性。</p>
+<pre><code>&lt;div class=&quot;FatherWrap&quot; style=&quot;display:flex&quot;&gt;
+    &lt;div class=&quot;Child1&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Child2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>开门见山，比如使用flex布局实现一个垂直居中,只需要把父类盒子设置为flex，然后给子属性添加margin:0;即可</p>
+<pre><code>&lt;div style=&quot;display:flex&quot;&gt;
+    &lt;div style=&quot;margin:auto&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOwNp8.png" alt="请输入图片描述"></p>
+<h2 id="flexb-colorred父b容器布局属性">flex<b color="red">父</b>容器布局属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th align="center">详细说明</th>
+<th align="left">属性值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-direction</td>
+<td align="center">决定主轴的方向（即项目的排列方向）</td>
+<td align="left">row(水平方向，起点在左端) ，row-reverse(起点在右端)  ，column(主轴为垂直方向，起点在上沿)  ，column-reverse(起点在下沿)</td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td align="center">控制Flex容器是单行显示还是多行显示，而交叉轴的方向就决定着新线的排列方向</td>
+<td align="left">nowrap(不换行) , wrap(换行) , wrap-reverse(换行与wrap相似，但行的顺序是倒过来的)</td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td align="center">flex-flow属性是flex-direction属性和flex-wrap属性的简写</td>
+<td align="left">flex-flow属性是flex-direction属性和flex-wrap属性的简写</td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td align="center">定义了Flex项目在主轴方向上的对齐方式</td>
+<td align="left">flex-start(类似于左浮动) , flex-end(类似于右浮动) , center(Flex项居中) , space-between(两端对齐容器，各个Flex项目之间的间距相等) , space-around(每一个Flex项目两侧的间隔相等)</td>
+</tr>
+<tr>
+<td>align-items</td>
+<td align="center">定义项目在交叉轴上的对齐方式</td>
+<td align="left">flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , baseline(Flex项目第一行文字基线对齐) ,  stretch(如果Flex项目未定义高度或者设置为auto，Flex项目将占满整个窗口的高度)</td>
+</tr>
+<tr>
+<td>align-content</td>
+<td align="center">定义了多根轴线的对齐方式，如果只有一条轴线，那么此属性不起作用</td>
+<td align="left">flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , space-between(交叉轴两端对齐，轴线这间的间隔平均分布) , space-around(Flex项目（沿交叉轴方向）之间的间隔相等) , stretch(Flex项目（沿交叉轴方向）占满整个交叉轴)</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>juestify-conent</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBszT.jpg" alt="juestify-conent"></p>
+<blockquote>
+<p><strong>align-items图示</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBrWV.jpg" alt="align-items"></p>
+<blockquote>
+<p><strong>align-conent图示</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBDJ0.jpg" alt="align-conent"></p>
+<h2 id="flexb-colorred子b元素布局属性">flex<b color="red">子</b>元素布局属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>order</td>
+<td>length</td>
+<td>设置子元素排列顺序。数值越小，排列越靠前,（默认为0）</td>
+</tr>
+<tr>
+<td>flex-grow</td>
+<td>length</td>
+<td>设置字元素放大占比。数值越大，占比越大（默认为0）</td>
+</tr>
+<tr>
+<td>flex-shrink</td>
+<td>length</td>
+<td>设置字元素缩小占比。数值越大，占比越小（默认为1）</td>
+</tr>
+<tr>
+<td>flex-basis</td>
+<td>length</td>
+<td>设置字元素占比宽度。默认为auto</td>
+</tr>
+<tr>
+<td>flex</td>
+<td>flex-grow, flex-shrink , flex-basis</td>
+<td>默认值为0 1 auto。后两个属性可选。</td>
+</tr>
+<tr>
+<td>align-self</td>
+<td>auto,flex-start,flex-end,center,baseline,stretch</td>
+<td>设置字元素的对其方式</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<blockquote>
+<p><strong>flex-grow</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBBiq.jpg" alt="flex-grow图"></p>
+<blockquote>
+<p><strong>flex-shrink</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBwon.jpg" alt="flex-shrink"></p>
+<blockquote>
+<p><strong>flex-basis</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOB6QU.jpg" alt="flex-basis"></p>
+<blockquote>
+<p><strong>align-self</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBcyF.jpg" alt="align-self"></p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/css/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#CSS</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2019/perception/" class="block">【人生感悟】人生有多少四年值得纪念和奋斗？</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flexb-colorred父b容器布局属性">flex<b color="red">父</b>容器布局属性</a></li>
+    <li><a href="#flexb-colorred子b元素布局属性">flex<b color="red">子</b>元素布局属性</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

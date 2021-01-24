@@ -1,347 +1,343 @@
-<?xml-stylesheet type="text/xsl" href="https://gzg.me/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://gzg.me/post/2020/2020_summary/</loc>
+    <loc>/posts/2020/2020_summary/</loc>
     <lastmod>2020-12-27T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/about/</loc>
-    <lastmod>2020-11-28T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://gzg.me/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/</loc>
+    <loc>/posts/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2021/designpatterns/</loc>
+    <loc>/tags/vue%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>/posts/2021/designpatterns/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <loc>/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/</loc>
+    <loc>/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/template/</loc>
+    <loc>/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/docker/</loc>
+    <loc>/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2021-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%B1%95%E6%9C%9B/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/docker/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/mongdb/</loc>
+    <loc>/categories/docker/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/docker_mongo/</loc>
+    <loc>/tags/mongdb/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E8%B0%83%E8%AF%95/</loc>
+    <loc>/posts/2020/docker_mongo/</loc>
     <lastmod>2020-12-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/css/</loc>
+    <loc>/tags/%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2020-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/css/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/vue/</loc>
+    <loc>/tags/vue/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/scroll_fix/</loc>
+    <loc>/categories/vue/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/javascript/</loc>
+    <loc>/posts/2020/scroll_fix/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/javascript/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/functional_programming/</loc>
+    <loc>/posts/2020/functional_programming/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</loc>
+    <loc>/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/util_css/</loc>
+    <loc>/posts/2020/util_css/</loc>
     <lastmod>2020-11-09T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/life_status/</loc>
+    <loc>/docs/example-doc/chapter-1/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/example-doc/nested-chapter/chapter-1/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/example-doc/chapter-2/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/example-doc/nested-chapter/chapter-2/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/example-doc/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/example-doc/nested-chapter/</loc>
+    <lastmod>2020-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020/life_status/</loc>
     <lastmod>2020-11-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E6%84%9F%E6%82%9F/</loc>
+    <loc>/tags/%E6%84%9F%E6%82%9F/</loc>
     <lastmod>2020-11-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/it/</loc>
+    <loc>/tags/it/</loc>
     <lastmod>2020-03-29T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/computer/</loc>
+    <loc>/categories/it/</loc>
     <lastmod>2020-03-29T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E4%BC%98%E5%8C%96/</loc>
+    <loc>/posts/2020/computer/</loc>
     <lastmod>2020-03-29T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/mobile_debug/</loc>
+    <loc>/tags/%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E7%94%B5%E8%84%91%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020/mobile_debug/</loc>
     <lastmod>2020-02-21T12:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/recursion_compoent/</loc>
+    <loc>/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2020-02-21T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2020-02-21T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020/recursion_compoent/</loc>
     <lastmod>2020-02-03T21:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/china_network/</loc>
+    <loc>/posts/2020/china_network/</loc>
     <lastmod>2020-01-30T22:23:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2020/judge/</loc>
+    <loc>/tags/%E4%BA%92%E8%81%94%E7%BD%91/</loc>
+    <lastmod>2020-01-30T22:23:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020/judge/</loc>
     <lastmod>2020-01-10T23:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/array_handle-/</loc>
+    <loc>/posts/2019/array_handle-/</loc>
     <lastmod>2019-12-25T22:32:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/webpack/</loc>
+    <loc>/tags/webpack/</loc>
     <lastmod>2019-12-10T15:14:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/eslint_rules/</loc>
+    <loc>/posts/2019/eslint_rules/</loc>
     <lastmod>2019-12-10T15:14:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/pack_opt/</loc>
+    <loc>/posts/2019/pack_opt/</loc>
     <lastmod>2019-11-19T13:24:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/front_error/</loc>
+    <loc>/posts/2019/front_error/</loc>
     <lastmod>2019-10-31T21:28:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</loc>
+    <loc>/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/</loc>
     <lastmod>2019-10-31T21:28:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/dev_stand/</loc>
+    <loc>/posts/2019/dev_stand/</loc>
     <lastmod>2019-10-20T12:18:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E8%A7%84%E8%8C%83/</loc>
+    <loc>/tags/%E8%A7%84%E8%8C%83/</loc>
     <lastmod>2019-10-20T12:18:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/more_page/</loc>
+    <loc>/posts/2019/more_page/</loc>
     <lastmod>2019-09-20T21:02:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/string_handle/</loc>
+    <loc>/posts/2019/string_handle/</loc>
     <lastmod>2019-09-06T22:32:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/front_cors/</loc>
+    <loc>/posts/2019/front_cors/</loc>
     <lastmod>2019-08-31T23:08:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/front_debug/</loc>
+    <loc>/posts/2019/front_debug/</loc>
     <lastmod>2019-08-07T22:50:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/rap2_util/</loc>
+    <loc>/posts/2019/rap2_util/</loc>
     <lastmod>2019-07-05T21:50:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2019-07-05T21:50:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/gz_pagoda/</loc>
+    <loc>/posts/2019/gz_pagoda/</loc>
     <lastmod>2019-06-07T22:21:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2019-06-07T22:21:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/perception/</loc>
+    <loc>/posts/2019/perception/</loc>
     <lastmod>2019-05-09T22:23:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://gzg.me/post/2019/flex_box/</loc>
+    <loc>/posts/2019/flex_box/</loc>
     <lastmod>2019-03-15T15:14:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>/series/</loc>
   </url>
   
 </urlset>

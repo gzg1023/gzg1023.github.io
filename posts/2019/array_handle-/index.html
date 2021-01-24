@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术笔记】JS的Array的各种API | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="
+操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6&#43;版本及一些常见业务场景的例示
+">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术笔记】JS的Array的各种API",
+      "item":"/posts/2019/array_handle-/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/array_handle-/"
+    },
+    "headline": "【技术笔记】JS的Array的各种API | 沽默清尘","datePublished": "2019-12-25T22:32:00+00:00",
+    "dateModified": "2019-12-25T22:32:00+00:00",
+    "wordCount":  287 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cblockquote\u003e\n\u003cp\u003e操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6\u002b版本及一些常见业务场景的例示\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+}
+</script><meta property="og:title" content="【技术笔记】JS的Array的各种API | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/array_handle-/" />
+
+
+
+
+<meta property="og:description" content="
+操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6&#43;版本及一些常见业务场景的例示
+" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-12-25T22:32:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-12-25T22:32:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="JavaScript" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2019/string_handle/" />
+
+<meta property="og:see_also" content="/posts/2019/eslint_rules/" />
+
+<meta property="og:see_also" content="/posts/2019/pack_opt/" />
+
+<meta property="og:see_also" content="/posts/2019/front_error/" />
+
+<meta property="og:see_also" content="/posts/2019/dev_stand/" />
+
+<meta property="og:see_also" content="/posts/2019/more_page/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术笔记】JS的Array的各种API</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-12-25</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>操作Array是日常业务最长接触，也是用到最多的数据结构。本文总结操作Array，包括ES5,ES6+版本及一些常见业务场景的例示</p>
+</blockquote>
+<h4 id="属性">属性</h4>
+<blockquote>
+<p>Array.prototype.constructor</p>
+</blockquote>
+<p>所有的数组实例都继承了这个属性，它的值就是 Array，表明了所有的数组都是由 Array 构造出来的。</p>
+<blockquote>
+<p>Array.prototype.length</p>
+</blockquote>
+<p>因为 Array.prototype 也是个数组，所以它也有 length 属性，这个值为 0，因为它是个空数组。</p>
+<h4 id="静态方法">静态方法</h4>
+<h5 id="concat方法">concat方法</h5>
+<blockquote>
+<p>concat 连接 2 个或更多数组，并返回结果</p>
+</blockquote>
+<pre><code>    [1,2,3].concat([4,5,6]) // [1,2,3,4,5,6]
+</code></pre>
+<h5 id="every方法">every方法</h5>
+<blockquote>
+<p>every 对数组中的每个元素运行给定函数，如果该函数对每个元素都返回 true ，则返回 true</p>
+</blockquote>
+<pre><code>    var arr = [1,2,3,4,5,6]
+    arr.every((item)=&gt; item !== 7) //true
+</code></pre>
+<h5 id="some方法">some方法</h5>
+<blockquote>
+<p>some 对数组中的每个元素运行给定函数，如果该函数有一个元素都返回 true ，则返回 true</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.some((item)=&gt; item === 7 )  // false
+</code></pre>
+<h5 id="foreach方法">forEach方法</h5>
+<blockquote>
+<p>forEach 对数组中的每个元素运行给定函数。这个方法没有返回值</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.forEach((item)=&gt; console.log(item)) // 1 2 3 4 5 6
+</code></pre>
+<h5 id="map方法">map方法</h5>
+<blockquote>
+<p>map 对数组中的每个元素运行给定函数，返回每次函数调用的结果组成的数组</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.map((item)=&gt; console.log(item)) // 1 2 3 4 5 6
+</code></pre>
+<h5 id="filter方法">filter方法</h5>
+<blockquote>
+<p>filter 对数组中的每个元素运行给定函数，返回该函数会返回 true 的元素组成的数组</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.filter((item)=&gt; item &gt; 3) // [4,5,6]
+</code></pre>
+<h5 id="reduce方法">reduce方法</h5>
+<blockquote>
+<p>reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.reduce((item,item2)=&gt; item+item2) // 21
+</code></pre>
+<h5 id="join方法">join方法</h5>
+<blockquote>
+<p>join 将所有的数组元素连接成一个字符串</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.join() // 1,2,3,4,5,6
+</code></pre>
+<h5 id="indexof方法">indexOf方法</h5>
+<blockquote>
+<p>indexOf 返回第一个与给定参数相等的数组元素的索引，没有找到则返回 -1</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.indexOf(1) // 0
+</code></pre>
+<h5 id="lastindexof方法">lastIndexOf方法</h5>
+<blockquote>
+<p>lastIndexOf 返回在数组中搜索到的与给定参数相等的元素的索引里最大的值</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6,1]
+arr.lastIndexOf(1) // 6
+</code></pre>
+<h5 id="reverse方法">reverse方法</h5>
+<blockquote>
+<p>reverse 颠倒数组中元素的顺序，原先第一个元素现在变成最后一个，同样原先的最后一个元素变成了现在的第一个</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.reverse() // [6,5,4,3,2,1]
+</code></pre>
+<h5 id="slice方法">slice方法</h5>
+<blockquote>
+<p>slice 传入索引值，将数组里对应索引范围内的元素作为新数组返回</p>
+</blockquote>
+<pre><code>var arr = [1,2,3,4,5,6]
+arr.slice(2) // [3,4,5,6]
+</code></pre>
+<h5 id="splice方法">splice方法</h5>
+<blockquote>
+<p>splice 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组</p>
+</blockquote>
+<pre><code> var arr = [1,2,3,4,5,6]
+arr.splice(2,1) //[3]
+</code></pre>
+<h5 id="sort方法">sort方法</h5>
+<blockquote>
+<p>sort 按照字母顺序对数组排序，支持传入指定排序方法的函数作为参数(有bug)</p>
+</blockquote>
+<pre><code> var arr = [6,5,4,3,2,1]
+arr.sort() // [1,2,3,4,5,6]
+</code></pre>
+<h5 id="tostring方法">toString方法</h5>
+<blockquote>
+<p>toString 将数组作为字符串返回</p>
+</blockquote>
+<pre><code> var arr =  [1,2,3,4,5,6]
+arr.toString() // &quot;1,2,3,4,5,6&quot;
+</code></pre>
+<h5 id="copywithin方法">copyWithin方法</h5>
+<blockquote>
+<p>copyWithin 复制数组中一系列元素到同一数组指定的起始位置(浅拷贝)</p>
+</blockquote>
+<p>var arr =  [1,2,3,4,5,6]
+arr.copyWithin(1,2) // [1, 3, 4, 5, 6, 6]</p>
+<h5 id="includes方法">includes方法</h5>
+<blockquote>
+<p>includes 如果数组中存在某个元素则返回 true ，否则返回 false</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5,6]
+arr.includes(1) // true
+</code></pre>
+<h5 id="find方法">find方法</h5>
+<blockquote>
+<p>find 根据回调函数给定的条件从数组中查找元素，如果找到则返回该元素</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5,6]
+arr.find(item=&gt;item &gt; 1) // 2
+</code></pre>
+<h5 id="findindex方法">findIndex方法</h5>
+<blockquote>
+<p>findIndex 根据回调函数给定的条件从数组中查找元素，如果找到则返回该元素在数组中的索引</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5,6]
+arr.findIndex(item=&gt;item == 3) // 2
+</code></pre>
+<h5 id="fill方法">fill方法</h5>
+<blockquote>
+<p>fill() 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5]
+arr.fill(0,2,4) //  [1, 2, 0, 0, 5]
+</code></pre>
+<h4 id="其他方法">其他方法</h4>
+<h5 id="arrayfrom方法">Array.from方法</h5>
+<blockquote>
+<p>from 根据已有数组创建一个新数组(浅拷贝)</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5]
+var arr2 = Array.from(arr)  //  [1, 2, 3, 4, 5]
+</code></pre>
+<h5 id="arrayisarray方法">Array.isArray方法</h5>
+<blockquote>
+<p>Array.isArray() 用于确定传递的值是否是一个 Array</p>
+</blockquote>
+<pre><code>var arr =  [1,2,3,4,5]
+Array.isArray(arr)  //true</code></pre>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/javascript/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#JavaScript</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2020/judge/" class="block">【生活感悟】做个有思想，有判断力的人</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2019/eslint_rules/" class="block">【技术笔记】了解Eslint及其常用规则配置</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#属性">属性</a></li>
+            <li><a href="#静态方法">静态方法</a>
+              <ul>
+                <li><a href="#concat方法">concat方法</a></li>
+                <li><a href="#every方法">every方法</a></li>
+                <li><a href="#some方法">some方法</a></li>
+                <li><a href="#foreach方法">forEach方法</a></li>
+                <li><a href="#map方法">map方法</a></li>
+                <li><a href="#filter方法">filter方法</a></li>
+                <li><a href="#reduce方法">reduce方法</a></li>
+                <li><a href="#join方法">join方法</a></li>
+                <li><a href="#indexof方法">indexOf方法</a></li>
+                <li><a href="#lastindexof方法">lastIndexOf方法</a></li>
+                <li><a href="#reverse方法">reverse方法</a></li>
+                <li><a href="#slice方法">slice方法</a></li>
+                <li><a href="#splice方法">splice方法</a></li>
+                <li><a href="#sort方法">sort方法</a></li>
+                <li><a href="#tostring方法">toString方法</a></li>
+                <li><a href="#copywithin方法">copyWithin方法</a></li>
+                <li><a href="#includes方法">includes方法</a></li>
+                <li><a href="#find方法">find方法</a></li>
+                <li><a href="#findindex方法">findIndex方法</a></li>
+                <li><a href="#fill方法">fill方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#其他方法">其他方法</a>
+              <ul>
+                <li><a href="#arrayfrom方法">Array.from方法</a></li>
+                <li><a href="#arrayisarray方法">Array.isArray方法</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2019/string_handle/">【技术笔记】JS的String的各种API</a>
+            <br />
+            
+            <a href="/posts/2019/eslint_rules/">【技术笔记】了解Eslint及其常用规则配置</a>
+            <br />
+            
+            <a href="/posts/2019/pack_opt/">【前端技术】基于vue的webpack打包优化浅析</a>
+            <br />
+            
+            <a href="/posts/2019/front_error/">【技术分享】前端异常监控之异常信息采集</a>
+            <br />
+            
+            <a href="/posts/2019/dev_stand/">【技术笔记】web页面构建标准及规范</a>
+            <br />
+            
+            <a href="/posts/2019/more_page/">【技术分享】vue-cli3脚手架工具搭建多页面应用</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

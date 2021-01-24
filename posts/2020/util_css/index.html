@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术笔记】工具类css | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="
+总结一些常用的css工具类
+">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术笔记】工具类css",
+      "item":"/posts/2020/util_css/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2020/util_css/"
+    },
+    "headline": "【技术笔记】工具类css | 沽默清尘","datePublished": "2020-11-08T00:00:00+00:00",
+    "dateModified": "2020-11-09T00:00:00+00:00",
+    "wordCount":  237 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cblockquote\u003e\n\u003cp\u003e总结一些常用的css工具类\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+}
+</script><meta property="og:title" content="【技术笔记】工具类css | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2020/util_css/" />
+
+
+
+
+<meta property="og:description" content="
+总结一些常用的css工具类
+" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-11-08T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-11-09T00:00:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术笔记】工具类css</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-08</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>总结一些常用的css工具类</p>
+</blockquote>
+<h3 id="省略号控制">省略号控制</h3>
+<h4 id="单行显示省略号">单行显示省略号</h4>
+<pre><code>.ellipsis{
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+</code></pre>
+<h5 id="n行显示省略号">n行显示省略号</h5>
+<pre><code>.ellipsis-wrap {
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;   
+    -webkit-line-clamp: 3;
+}
+</code></pre>
+<h3 id="文字换行控制">文字换行控制</h3>
+<h5 id="不换行">不换行</h5>
+<pre><code>.nowrap {
+  white-space:nowrap;
+}
+</code></pre>
+<h5 id="自动换行">自动换行</h5>
+<pre><code>.wrap-auto {
+  word-wrap: break-word;
+  word-break: normal;
+}
+</code></pre>
+<h5 id="强制换行">强制换行</h5>
+<pre><code>.break-wrap {
+  word-break:break-all;
+}
+</code></pre>
+<h4 id="文本两端对齐">文本两端对齐</h4>
+<pre><code>.text-justify {
+    text-align: justify;
+    text-justify: distribute-all-lines;  
+    text-align-last: justify; 
+}
+</code></pre>
+<h3 id="操作控制">操作控制</h3>
+<h4 id="禁止用户双击屏幕或者选中某些内容">禁止用户双击屏幕或者选中某些内容</h4>
+<pre><code>.none-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-none: none;
+}
+</code></pre>
+<h4 id="不同的鼠标图案">不同的鼠标图案</h4>
+<pre><code>  cursor：pointer; //小手指；
+  cursor：help; //箭头加问号；
+  cursor：wait; //转圈圈；
+  cursor：move; //移动光标；
+  cursor：crosshair; //十字光标
+  cursor: not-allowed; // 禁止选中
+</code></pre>
+<h4 id="css使用硬件加速">css使用硬件加速</h4>
+<pre><code>.fast-machine{
+  transform: translateZ(0);
+}
+</code></pre>
+<h4 id="css转换文字大小">css转换文字大小</h4>
+<pre><code>.text-opp {text-transform: uppercase}  // 将所有字母变成大写字母
+.text-low {text-transform: lowercase}  // 将所有字母变成小写字母
+.text-cap {text-transform: capitalize} // 首字母大写
+.text-small {font-variant: small-caps}   // 将字体变成小型的大写字母
+</code></pre>
+<h4 id="小于10px的字体显示">小于10px的字体显示</h4>
+<pre><code>  font-size: 20px;
+  transform: scale(0.5);
+</code></pre>
+<h4 id="自定义滚动条">自定义滚动条</h4>
+<pre><code>overflow-y: scroll;
+</code></pre>
+<p>整个滚动条</p>
+<pre><code>::-webkit-scrollbar {
+    width: 5px;
+}
+</code></pre>
+<h4 id="滚动条的轨道">滚动条的轨道</h4>
+<pre><code>::-webkit-scrollbar-track {
+    background-color: #ffa336;
+    border-radius: 5px;
+}
+</code></pre>
+<h4 id="滚动条的滑块">滚动条的滑块</h4>
+<pre><code>::-webkit-scrollbar-thumb {
+    background-color: #ffc076;
+    border-radius: 5px;
+}
+</code></pre>
+<h3 id="flex相关">flex相关</h3>
+<h5 id="设置为flex">设置为flex</h5>
+<pre><code>.flex{
+  display: flex;
+}
+</code></pre>
+<h5 id="flex垂直居中">flex垂直居中</h5>
+<pre><code>.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</code></pre>
+<h5 id="flex居中分侧">flex居中，分侧</h5>
+<pre><code>.flex-center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</code></pre>
+<h4 id="常用动画">常用动画</h4>
+<h5 id="转圈圈">转圈圈</h5>
+<p>animation: rotaCircle 1.5s linear infinite;
+@keyframes rotaCircle {
+0% {
+transform: rotate(0deg);
+}
+25% {
+transform: rotate(90deg);
+}
+50% {
+transform: rotate(180deg);
+}
+75% {
+transform: rotate(270deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}</p>
+<h5 id="渐变">渐变</h5>
+<p>animation: gradientOpacity 1.5s linear infinite;
+@keyframes gradientOpacity {
+0% {
+transform: opacity(0);
+}
+25% {
+transform: opacity(0.2);
+}
+50% {
+transform: opacity(0.6);
+}
+75% {
+transform: opacity(0.8);
+}
+100% {
+transform: opacity(1);
+}
+}</p>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2020/functional_programming/" class="block">【技术分享】函数式编程入门初探</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2020/life_status/" class="block">【生活感悟】2020疫情时代下的生活思考</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#省略号控制">省略号控制</a>
+          <ul>
+            <li><a href="#单行显示省略号">单行显示省略号</a>
+              <ul>
+                <li><a href="#n行显示省略号">n行显示省略号</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#文字换行控制">文字换行控制</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#不换行">不换行</a></li>
+                <li><a href="#自动换行">自动换行</a></li>
+                <li><a href="#强制换行">强制换行</a></li>
+              </ul>
+            </li>
+            <li><a href="#文本两端对齐">文本两端对齐</a></li>
+          </ul>
+        </li>
+        <li><a href="#操作控制">操作控制</a>
+          <ul>
+            <li><a href="#禁止用户双击屏幕或者选中某些内容">禁止用户双击屏幕或者选中某些内容</a></li>
+            <li><a href="#不同的鼠标图案">不同的鼠标图案</a></li>
+            <li><a href="#css使用硬件加速">css使用硬件加速</a></li>
+            <li><a href="#css转换文字大小">css转换文字大小</a></li>
+            <li><a href="#小于10px的字体显示">小于10px的字体显示</a></li>
+            <li><a href="#自定义滚动条">自定义滚动条</a></li>
+            <li><a href="#滚动条的轨道">滚动条的轨道</a></li>
+            <li><a href="#滚动条的滑块">滚动条的滑块</a></li>
+          </ul>
+        </li>
+        <li><a href="#flex相关">flex相关</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#设置为flex">设置为flex</a></li>
+                <li><a href="#flex垂直居中">flex垂直居中</a></li>
+                <li><a href="#flex居中分侧">flex居中，分侧</a></li>
+              </ul>
+            </li>
+            <li><a href="#常用动画">常用动画</a>
+              <ul>
+                <li><a href="#转圈圈">转圈圈</a></li>
+                <li><a href="#渐变">渐变</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

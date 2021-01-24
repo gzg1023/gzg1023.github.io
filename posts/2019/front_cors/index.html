@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】从前端的角度，谈谈解决跨域的一些方案 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】从前端的角度，谈谈解决跨域的一些方案",
+      "item":"/posts/2019/front_cors/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/front_cors/"
+    },
+    "headline": "【技术分享】从前端的角度，谈谈解决跨域的一些方案 | 沽默清尘","datePublished": "2019-08-31T23:08:00+00:00",
+    "dateModified": "2019-08-31T23:08:00+00:00",
+    "wordCount":  221 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003e跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术分享】从前端的角度，谈谈解决跨域的一些方案 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/front_cors/" />
+
+
+
+
+<meta property="og:description" content="跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-08-31T23:08:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-08-31T23:08:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2019/front_debug/" />
+
+<meta property="og:see_also" content="/posts/2019/rap2_util/" />
+
+<meta property="og:see_also" content="/posts/2019/flex_box/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】从前端的角度，谈谈解决跨域的一些方案</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-08-31</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。</p>
+<h2 id="前端跨域研究">前端跨域研究</h2>
+<h2 id="1-什么是跨域">1. 什么是跨域</h2>
+<p>在所有支持JavaScript的浏览器中，都有一个约定叫同源策略。所谓同源是指&quot;协议+域名+端口&quot;三者相同。如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。如果应用程序违反了同源策略进行通信，那么就会产生跨域问题。</p>
+<blockquote>
+<p>同源策略有以下几种行为限制：</p>
+</blockquote>
+<ul>
+<li>Cookie、Local Storage 和 Index DB 无法读取</li>
+<li>DOM和JS对象无法获得</li>
+<li>AJAX 请求不能发送</li>
+</ul>
+<p>在DOM结构中，有三个标签可以进行跨域行为<code>&lt;link&gt;</code>，<code>&lt;img&gt;</code>，<code>&lt;script&gt;</code>，有一种解决跨域的方式叫JSONP，利用的就是script可以跨域的特性。解决跨域有很多办法，如果是在企业内部开发中，最推荐的是设置CORS和跨域代理。
+前端项目设置跨域代理都是通过<code>http-proxy-middleware</code>模块实现的。</p>
+<h2 id="2-cors配置跨域">2. CORS配置跨域</h2>
+<p>由后端程序员直接设置CORS响应字段，这种情况不支持IE10以下的浏览器。
+1）	<code>Access-Control-Allow-Origin</code>：必选
+  它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。
+2）	<code>Access-Control-Allow-Credentials</code>：可选
+  它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。
+3）	<code>Access-Control-Expose-Headers</code>：可选
+  CORS请求时，XMLHttpRequest对象的<code>getResponseHeader()</code>方法只能拿到6个基本字段：<code>Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma</code>。如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定。上面的例子指定，<code>getResponseHeader('FooBar')</code>可以返回<code>FooBar</code>字段的值。
+&lt;</p>
+<h2 id="3vue-cli2配置跨域代理">3.	Vue-cli2配置跨域代理</h2>
+<p>由于vue-cli2是配合webpack2使用的，首先需要找到config文件夹的index.js文件然后配置proxyTable参数，如下所示，具体参数如表1.1所示参数说明：</p>
+<pre><code>proxyTable: {
+      '/api/': {
+        target: 'http://192.168.1.22:9001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/': ''
+      }
+      }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lsquo;/api&rsquo;</td>
+<td>api对象</td>
+<td>捕获API的标志，如果API中有这个字符串，那么就开始匹配代理比如API请求/api/users, 会被代理到请求 http:baidu.com/api/users</td>
+</tr>
+<tr>
+<td>target</td>
+<td>域名/IP地址</td>
+<td>代理的API地址，就是需要跨域的API地址，地址可以是域名,如：http://www.baidu.com 也可以是IP地址：http://192.168.1.22:9001</td>
+</tr>
+<tr>
+<td>pathRewrite</td>
+<td>&lsquo;^/api/': ' '</td>
+<td>路径重写，也就是说会修改最终请求的API路径比如访问的API路径：/api/users, 设置pathRewrite: {&lsquo;^/api&rsquo; : &lsquo;'},后，最终代理访问http://www.baidu.com/users， 这个参数的目的是给代理命名后，在访问时把命名删除掉</td>
+</tr>
+<tr>
+<td>changeOrigin</td>
+<td>布尔值</td>
+<td>如果后端服务是一个IP对应多个域名。需要通过域名区分服务，则该值必须是true</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>布尔值</td>
+<td>设置false(默认)后，可以接受运行在 HTTPS 上，可以使用无效证书的后端服务器</td>
+</tr>
+</tbody>
+</table>
+<p>(表1.1)</p>
+<h2 id="4vue-cli3配置跨域代理">4.	Vue-cli3配置跨域代理</h2>
+<p>Vue-cli3的配置项目没有cli2那么多文件结构了，只需要在devServe对象(所有 webpack-dev-server都可以在这配置)里面配置proxy对象即可，如下所示。具体参数和表1.1相同。</p>
+<pre><code>proxy: {
+    '/api': {
+      target: 'http://192.168.1.21:9101/daas',
+      changeOrigin: true,
+      pathRewrite: {
+        '/api': ''
+       }
+      }
+  }
+</code></pre>
+<h2 id="5koa配置跨域代理">5.	Koa配置跨域代理</h2>
+<p>我们创建一个js文件(例如proxy.js)，来构建代理服务，先实例化一个koa对象，然后配置app对象的proxy属性，详情参数见表1.1。配置到代理属性，需要本地启动一个node服务，然后我们通过命令行启动该服务node  proxy.js</p>
+<pre><code>const app = new Koa()  // 创建koa对象
+  app.use(async (ctx, next) =&gt; {
+    ctx.respond = false //绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response
+      return proxy({
+        target: 'http://192.168.1.21:9003',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+        '^/proxyAPI': ''
+        }
+      })(ctx.req, ctx.res, next)
+    }
+    return next()
+  })
+  app.listen(3000, () =&gt; {
+      console.log('Listening 3000...')
+  })
+</code></pre>
+<h2 id="6nuxtjs配置跨域代理">6.	Nuxt.js配置跨域代理</h2>
+<p>在nuxt项目中首先安装proxy代理库 npm i @nuxtjs/proxy -D 然后在next.config.js配置文件中添加模块设置代理</p>
+<pre><code> modules: [
+    '@nuxtjs/axios',
+     '@nuxtjs/proxy'
+  ],
+   axios: {
+    proxy: true
+  },
+    proxy: {
+      '/api': {
+          target: 'http://example.com',
+        pathRewrite: {
+       '^/api' : '/'
+     }
+   }
+  }
+</code></pre>
+<h2 id="7nginx配置跨域代理">7.	Nginx配置跨域代理</h2>
+<p>通过nginx的反向代理，把客户端的请求转发到服务端，然后服务端返回数据以后，在转发回客户端。
+如果是开发环境需要配置两个代理，一个是把项目代理到本地nginx服务器，另一个是代理服务器传来的数据。
+如果是打包线上环境，那么只要配置一个代理做转发即可。</p>
+<pre><code>  server {
+    listen       8085;
+    server_name  localhost;
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+    location /daas/api {
+        proxy_pass http://192.168.1.21:9097/daas;
+        rewrite ^/api/(.*)$ /$1 break;
+    }
+ }
+</code></pre>
+<h2 id="8apache配置跨域代理">8.	Apache配置跨域代理</h2>
+<p>Apache和nginx原理相同，都是做反向代理。只是需要修改相关的配置文件来完成
+&lt;<code>proxy </code> <code>http://192.168.1.21:9091/daas</code>&gt;
+<code>AllowOverride None</code>
+<code> Order Deny,Allow</code>
+<code>Allow from all</code>
+&lt;/<code>proxy</code>&gt;</p>
+<h2 id="9chrome插件配置跨域代理">9.	Chrome插件配置跨域代理</h2>
+<p>通过安装<code>Allow-Control-Allow-Origin</code>浏览器插件，来解决跨域问题，前提是后端会判断你是否存在跨域权限，发送一个options请求先预判断，然后在进行跨域处理。</p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2019/string_handle/" class="block">【技术笔记】JS的String的各种API</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2019/front_debug/" class="block">【技术分享】前端调试（chrome开发者工具的使用）</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前端跨域研究">前端跨域研究</a></li>
+    <li><a href="#1-什么是跨域">1. 什么是跨域</a></li>
+    <li><a href="#2-cors配置跨域">2. CORS配置跨域</a></li>
+    <li><a href="#3vue-cli2配置跨域代理">3.	Vue-cli2配置跨域代理</a></li>
+    <li><a href="#4vue-cli3配置跨域代理">4.	Vue-cli3配置跨域代理</a></li>
+    <li><a href="#5koa配置跨域代理">5.	Koa配置跨域代理</a></li>
+    <li><a href="#6nuxtjs配置跨域代理">6.	Nuxt.js配置跨域代理</a></li>
+    <li><a href="#7nginx配置跨域代理">7.	Nginx配置跨域代理</a></li>
+    <li><a href="#8apache配置跨域代理">8.	Apache配置跨域代理</a></li>
+    <li><a href="#9chrome插件配置跨域代理">9.	Chrome插件配置跨域代理</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2019/front_debug/">【技术分享】前端调试（chrome开发者工具的使用）</a>
+            <br />
+            
+            <a href="/posts/2019/rap2_util/">【技术分享】rap2接口管理工具使用分享</a>
+            <br />
+            
+            <a href="/posts/2019/flex_box/">【技术笔记】CSS之Flex弹性盒子属性详解</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

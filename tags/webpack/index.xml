@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>webpack on 沽默清尘的博客</title>
-    <link>https://gzg.me/tags/webpack/</link>
-    <description>Recent content in webpack on 沽默清尘的博客</description>
+    <title>webpack on 沽默清尘</title>
+    <link>/tags/webpack/</link>
+    <description>Recent content in webpack on 沽默清尘</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>gzg1023</copyright>
+    <language>zh</language>
+    <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
     <lastBuildDate>Tue, 10 Dec 2019 15:14:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gzg.me/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【技术笔记】了解Eslint及其常用规则配置</title>
-      <link>https://gzg.me/post/2019/eslint_rules/</link>
+      <link>/posts/2019/eslint_rules/</link>
       <pubDate>Tue, 10 Dec 2019 15:14:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2019/eslint_rules/</guid>
+      <guid>/posts/2019/eslint_rules/</guid>
       <description>&lt;p&gt;前几天用vue-cli3测试一个小功能，当我输入console.log以后，一直报错。。很纳闷，原来是在最新的脚手架工具中默认关闭了console。于是本篇文章总结一下Elint的配置规则。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【前端技术】基于vue的webpack打包优化浅析</title>
-      <link>https://gzg.me/post/2019/pack_opt/</link>
+      <link>/posts/2019/pack_opt/</link>
       <pubDate>Tue, 19 Nov 2019 13:24:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2019/pack_opt/</guid>
+      <guid>/posts/2019/pack_opt/</guid>
       <description>&lt;p&gt;在项目迭代的过程中，打包后的资源越来越大。于是我们通过一些优化手段减小打包后的静态资源&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>【技术分享】vue-cli3脚手架工具搭建多页面应用</title>
-      <link>https://gzg.me/post/2019/more_page/</link>
+      <link>/posts/2019/more_page/</link>
       <pubDate>Fri, 20 Sep 2019 21:02:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2019/more_page/</guid>
+      <guid>/posts/2019/more_page/</guid>
       <description>&lt;p&gt;公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。&lt;/p&gt;</description>
     </item>
     

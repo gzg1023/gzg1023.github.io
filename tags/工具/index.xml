@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>工具 on 沽默清尘的博客</title>
-    <link>https://gzg.me/tags/%E5%B7%A5%E5%85%B7/</link>
-    <description>Recent content in 工具 on 沽默清尘的博客</description>
+    <title>工具 on 沽默清尘</title>
+    <link>/tags/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on 沽默清尘</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>gzg1023</copyright>
+    <language>zh</language>
+    <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
     <lastBuildDate>Fri, 05 Jul 2019 21:50:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gzg.me/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【技术分享】rap2接口管理工具使用分享</title>
-      <link>https://gzg.me/post/2019/rap2_util/</link>
+      <link>/posts/2019/rap2_util/</link>
       <pubDate>Fri, 05 Jul 2019 21:50:00 +0000</pubDate>
       
-      <guid>https://gzg.me/post/2019/rap2_util/</guid>
+      <guid>/posts/2019/rap2_util/</guid>
       <description>&lt;p&gt;公司用的淘宝的rap2来作为接口管理工具，一方面方便前后端联调，另一方面可以为前端开发Mock数据。也能保证在维护项目的过程中，提高效率。&lt;/p&gt;</description>
     </item>
     

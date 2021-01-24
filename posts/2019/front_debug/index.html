@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】前端调试（chrome开发者工具的使用） | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】前端调试（chrome开发者工具的使用）",
+      "item":"/posts/2019/front_debug/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2019/front_debug/"
+    },
+    "headline": "【技术分享】前端调试（chrome开发者工具的使用） | 沽默清尘","datePublished": "2019-08-07T22:50:00+00:00",
+    "dateModified": "2019-08-07T22:50:00+00:00",
+    "wordCount":  239 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003e公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术分享】前端调试（chrome开发者工具的使用） | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2019/front_debug/" />
+
+
+
+
+<meta property="og:description" content="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-08-07T22:50:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-08-07T22:50:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="调试" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2019/rap2_util/" />
+
+<meta property="og:see_also" content="/posts/2019/flex_box/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】前端调试（chrome开发者工具的使用）</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2019-08-07</span>
+    </div>
+    
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。</p>
+<h2 id="前端调试研究分析">前端调试研究分析</h2>
+<h2 id="1-什么是调试">1. 什么是调试</h2>
+<p>用手工或编译程序等方法进行测试，修正语法错误和逻辑错误的过程称为调试，前端调试主要分为CSS（DOM）调试和JavaScript调试。Javascript我们主要用Chrome Devtools进行调试。</p>
+<h2 id="2cssdom调试">2.	CSS(DOM)调试</h2>
+<p>CSS调试用于页面样式和DOM结构调试，通过开发者工具选中DOM元素（如图1.1），整个页面的结构都在Elements功能模块渲染。
+<img src="https://s2.ax1x.com/2019/09/08/n8w7Ue.png" alt="请输入图片描述"></p>
+<p>（图1.1）</p>
+<p>如图1.2所示，我们在Elements调试功能面板（Styles模块），可以看到已选择元素的所有CSS属性，可以在element.style {  }里面动态为当前DOM元素添加我们需要测试的样式，也可以选择某个CSS选择器来为整个存在该选择器的CSS添加样式。通过勾选CSS伪类属性，可以看到元素触发伪类后的样式内容。
+<img src="https://s2.ax1x.com/2019/09/08/n8wH4H.png" alt="请输入图片描述"></p>
+<p>（图1.2）</p>
+<p>如图1.3所示，我们在Elements调试功能面板（Computed模块），可以看到当前选中元素的CSS盒子模型和当前元素的所有CSS属性，并且通过点击每个属性，可以定位到该属性在文件的位置</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wIHO.png" alt="请输入图片描述"></p>
+<p>（图1.3）<br>
+如图1.4所示，我们在Elements调试功能面板（Event Lissteners模块），可以看到当前元素所绑定的事件都会在列表里面展现，并且根据自己的需求进行筛选。
+<img src="https://s2.ax1x.com/2019/09/08/n8w5DK.png" alt="请输入图片描述"></p>
+<p>（图1.4）<br>
+如图1.5所示，我们在Elements调试功能面板（DOM  Breakpoints模块），可以看到我们设置的DOM断点，当元素触发时，就会自动转跳到实施该事件的源码地址处（图1.6）</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wTED.png" alt="请输入图片描述"></p>
+<p>（图1.5）<br></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wqCd.png" alt="请输入图片描述"></p>
+<p>（图1.6）
+如图1.7所示，我们在Elements调试功能面板（Properties模块），可以看到当前dom元素节点的各种属性，方面我们查询调试。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n80pVS.png" alt="请输入图片描述"></p>
+<p>（图1.7）</p>
+<h2 id="3chrome-devtools调试">3.	Chrome DevTools调试</h2>
+<p>Chrome开发者工具集成了前端调试所用到的全部功能，如下图所示，我们可以切换不同的面板来调试不同的功能。
+<img src="https://s2.ax1x.com/2019/09/08/n809Ug.png" alt="请输入图片描述"></p>
+<h3 id="31console面板">3.1	Console面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wXvt.png" alt="请输入图片描述"></p>
+<p>（图2.1）<br>
+在日常开发者，我们会在程序里输入console.log来打印日志内容，除了打印我们预先设定好的内容外，还可以在控制台输入代码段来运行。除了正常文本或变量的值，我们还可以加上一个参数来格式化打印效果。如下图（图2.2）所示</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wzb8.png" alt="描述"></p>
+<p>（图2.2）</p>
+<p>除了console.log意外， console对象还有其他方法，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log()</td>
+<td>输出信息</td>
+<td>console.log(&ldquo;123&rdquo;)</td>
+</tr>
+<tr>
+<td>error()</td>
+<td>输出错误信息，并显示错误发生的堆栈</td>
+<td>console.error(&ldquo;Error: %s (%i)&rdquo;, &ldquo;err&rdquo;,500)</td>
+</tr>
+<tr>
+<td>group()</td>
+<td>用于将显示的信息分组</td>
+<td>console.group(&lsquo;第一层&rsquo;);<br>console.group(&lsquo;第二层&rsquo;);</td>
+</tr>
+<tr>
+<td>table()</td>
+<td>将类型已表格形式输出</td>
+<td>var obj= { a:{ num: &ldquo;1&rdquo;}}; <br>console.table(obj);</td>
+</tr>
+<tr>
+<td>time()<br>timeEnd()</td>
+<td>输出程序运行时间，配合使用，在开头和结尾</td>
+<td>console.time(&lsquo;开始&rsquo;);<br>for (var i = 0; i &lt; 100; i++) {} <br>console.timeEnd(&lsquo;结束&rsquo;);</td>
+</tr>
+<tr>
+<td>trace()</td>
+<td>追踪函数的调用过程</td>
+<td>function d(a) { <br>console.trace();<br>return a;<br>}<br>function b(a) {<br> return c(a);<br>}<br>function c(a) {<br> return d(a);<br>}<br>var a = b(&lsquo;123&rsquo;);</td>
+</tr>
+<tr>
+<td>warn()</td>
+<td>输出警告信息</td>
+<td>console.warn(&ldquo;警告&rdquo;)</td>
+</tr>
+</tbody>
+</table>
+<p>在console面板也可以通过选择器来操作元素，查看相关的属性，直接在控制台面板输入相关的命令即可。具体用法见下表</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>参数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelector()返回第一个匹配dom的引用</td>
+</tr>
+<tr>
+<td>$$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelectorAll()返回全部匹配dom引用的数组</td>
+</tr>
+<tr>
+<td>$x(xpath)</td>
+<td>Xpath路径</td>
+<td>返回一个与给定 XPath 表达式匹配的 DOM 元素数组</td>
+</tr>
+<tr>
+<td>copy(object)</td>
+<td>Dom节点对象</td>
+<td>将指定DOM对象的字符串表示形式复制到剪贴板</td>
+</tr>
+<tr>
+<td>$_</td>
+<td>&ndash;</td>
+<td>返回最近评估的表达式的值,  $0~$4	0-4	最近5个你选择过的DOM节点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-network面板">3.2	 Network面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BYSs.png" alt="请输入图片描述"></p>
+<p>（图2.3）
+程序运行环境，网络请求是必不可少的，由上图我们可以看到一个完成网络请求的构成部分，一般情况下我们会选择XHR请求来调试。如图2.4所示，我们可以在header看请求的参数以及配置的请求头信息等。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BlTS.png" alt="请输入图片描述"></p>
+<p>（图2.4） <br>
+在用户的操作环境中，我们不知道网络情况怎么样，可以用开发者工具的网络模拟功能，来测试在不同网络情况下网站能否正常运行。如图2.5所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Btln.png" alt="请输入图片描述"></p>
+<p>（图2.5）</p>
+<h3 id="33application面板">3.3	Application面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BNyq.png" alt="请输入图片描述"></p>
+<p>（图2.6）
+如图2.6所示，我们在Elements调试功能面板（Application模块），在子模块Storage可以看到当前网站存储的信息,比如cookie，local Storage等信息，并可以直观的进行增删改查。子模块Cache可以看到缓存的数据。Frames可以看到当前网站的一些静态资源。</p>
+<h3 id="34sources面板">3.4	Sources面板</h3>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BdmV.png" alt="请输入图片描述"></p>
+<p>（图2.7）
+在日常开发中，调试程序可以通过直接在代码中加上debugger（如图2.7所示），然后刷新页面，浏览器就会自己跳入断点，然后就可以进行调试。而如果想在浏览器中加入断点调试，我们需要先定位到改行代码，然后点击行号即可添加断点。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BUO0.png" alt="请输入图片描述"></p>
+<p>（图2.8）
+当我们添加好断点后，就可以一步一步调试代码了，如图2.9所示，我们可以一步一步运行调试，也可以跳过功能，详细操作如图2.10所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BwwT.png" alt="请输入图片描述"></p>
+<p>（图2.9）</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Dc4g.png" alt="请输入图片描述"></p>
+<p>（图2.10）</p>
+<h3 id="35vue-devtools工具">3.5	vue-devtools工具</h3>
+<p>vue开发者工具是vue官方开发的chrome插件，只能在chrome浏览器上使用，可以通过Select来选中自己要调试的组件，vuex可以看到当前组件的集中管理的状态。Event可以查看当前组件所触发的事件，Routing可以看到当前浏览过的路由和所有路由信息。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DyE8.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DDDP.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DrHf.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DBut.png" alt="请输入图片描述"></p>
+<h3 id="36其他功能">3.6	其他功能</h3>
+<p>如果需要调试移动设备的页面，就可以切换开发者工具到移动端，可以选择不同的设备，或者是切换网络，横批显示等功能。如图2.12所示</p>
+<p><img src="https://s2.ax1x.com/2019/09/14/nsyJdP.png" alt="请输入图片描述"></p>
+<p>（图2.12）</p>
+<p>Chrome开发者工具也有自己的命令行窗口，我们按键盘的shift+ctrl+p即可调出窗口。如图2.13所示.可以找到自己需要的功能。命令行的功能大部分是控制一些功能的显示，或者一些快捷功能，可根据名称自由控制。比如我们要通过浏览器截屏，那么可以直接在命令窗口输入screen,然后根据需要选择，如图2.14所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8D2CQ.png" alt="请输入图片描述"></p>
+<p>（图2.13）
+<img src="https://s2.ax1x.com/2019/09/08/n8DR3j.png" alt="请输入图片描述"></p>
+<p>（图2.14）</p>
+<h2 id="4ie浏览器调试">4.	IE浏览器调试</h2>
+<p>在开始IE浏览器调试之前，推荐使用管理员权限打开软件。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rLo8.png" alt="请输入图片描述"></p>
+<h3 id="41ie11异同">4.1	IE11+异同</h3>
+<p>在调试本地资源时，chrome开发者工具可以通过Application面板直观的管理cookie，local storage信息等，在IE浏览器中，如果我们要查看cookie，需要到网络面板，然后选中要查看的请求来查看Cookie，如图3.2所示，如果要查询Local Storage或者是Session Storage信息，我们需要在控制台打印输出，如图3.3所示。如果要清新存储信息，输入localStorage.clear（）即可。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8r7Lt.png" alt="请输入图片描述"></p>
+<p>(图3.2)</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rqdf.png" alt="请输入图片描述"></p>
+<p>(图3.3)</p>
+<p>IE浏览器自带仿真功能，你可以在文档模式切换不同的IE版本进行兼容性测试，如图3.4所示。选中版本后页面会自动根据你选中的版本进行渲染。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rTsI.png" alt="请输入图片描述"></p>
+<p>(图3.4)</p>
+<h2 id="5常见bug定位">5.	常见bug定位</h2>
+<h3 id="51状态码定位">5.1	状态码定位</h3>
+<p>在前后端交互中，我们通过接口交付数据，每一个接口都会返回一个状态码和一个提示信息，如图4.1所示，我们可以通过这两个数据来初步判断是服务器端(后端)产生了bug，还是客户端(前端)产生了bug。详细对照表如表4.1所示。</p>
+<p>（图4.1）</p>
+<blockquote>
+<p>本表是根据公司内部情况设置的状态码,非http状态码，根据实际情况匹配</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>前端</th>
+<th>后端</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>请求成功,如无数据则显示暂无数据，如果有数据没展示，则是前端问题</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td>&mdash;</td>
+<td>&mdash;</td>
+<td>需要结合errMsg来确定问题的发生</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td>有问题</td>
+<td>&mdash;</td>
+<td>一般是发生的数据不对或者没权限</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>&mdash;</td>
+<td>有问题</td>
+<td>后端服务器处理出问题</td>
+</tr>
+<tr>
+<td>（表4.1）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52控制台定位">5.2	控制台定位</h3>
+<p>如果页面白屏或者是有内容加载不出来，那么需要查看控制台的信息，如果是xxx is not undefined一般有两种情况，一种情况可能是前端没有做异常数据的错误处理，导致报错。还有可能就是后端返回的数据不规范而造成的。报错信息一般会展示堆栈调用记录，我们就可以看到具体的位置来解决bug。如果网络请求有问题也会在控制台看到报错。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8spyn.png" alt="请输入图片描述"></p>
+<p>（图4.2）</p>
+<h2 id="6基础常识">6.	基础常识</h2>
+<h3 id="61cookie和local-storage的区别">6.1	Cookie和Local Storage的区别</h3>
+<p>首先说明的是cookie，local Storage，session Storage都是客户端（浏览器）的存储技术，用来保存一些数据，每个网站都不会共用这些信息。 <br>
+Cookie一般来说是用来保存服务端传来的session信息，大小最多为4kb，可以设置有效期，域名信息，缓存等信息。 <br>
+local Storage是html5新出的标准前端存储技术，通过key-value的方式存储。大小一般为5M。提供了一系列的增删改查API，local Storage一直在浏览器存储，除了用户主动删除，是一直存在的。 <br>
+session Storage和local storage使用方法相同，不同的地方是只在一次会话过程中有效，如果关闭浏览器会自动清除。</p>
+<h3 id="62pxemremvw等单位的区别">6.2	px,em,rem,vw等单位的区别</h3>
+<p>这些都是CSS的长度单位，不同的是他们大小的计算方式不同，所展示的效果就不同，具体对比如下表 <br>
+单位	备注</p>
+<ul>
+<li>px	相对长度单位，相对于屏幕的分辨率而言的</li>
+<li>em	相对长度单位，相对于当前元素父类的字体大小（font-size）而言</li>
+<li>rem	相对长度单位，想对于当前文档根元素(html)的字体大小而言</li>
+<li>vw	相对长度单位，相对于当前视口而定,全部屏幕的width为100vw</li>
+</ul>
+<h2 id="7官方文档">7.官方文档</h2>
+<p>谷歌官方文档 <a href="https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn">https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn</a></p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/%E8%B0%83%E8%AF%95/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#调试</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2019/front_cors/" class="block">【技术分享】从前端的角度，谈谈解决跨域的一些方案</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2019/rap2_util/" class="block">【技术分享】rap2接口管理工具使用分享</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前端调试研究分析">前端调试研究分析</a></li>
+    <li><a href="#1-什么是调试">1. 什么是调试</a></li>
+    <li><a href="#2cssdom调试">2.	CSS(DOM)调试</a></li>
+    <li><a href="#3chrome-devtools调试">3.	Chrome DevTools调试</a>
+      <ul>
+        <li><a href="#31console面板">3.1	Console面板</a></li>
+        <li><a href="#32-network面板">3.2	 Network面板</a></li>
+        <li><a href="#33application面板">3.3	Application面板</a></li>
+        <li><a href="#34sources面板">3.4	Sources面板</a></li>
+        <li><a href="#35vue-devtools工具">3.5	vue-devtools工具</a></li>
+        <li><a href="#36其他功能">3.6	其他功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#4ie浏览器调试">4.	IE浏览器调试</a>
+      <ul>
+        <li><a href="#41ie11异同">4.1	IE11+异同</a></li>
+      </ul>
+    </li>
+    <li><a href="#5常见bug定位">5.	常见bug定位</a>
+      <ul>
+        <li><a href="#51状态码定位">5.1	状态码定位</a></li>
+        <li><a href="#52控制台定位">5.2	控制台定位</a></li>
+      </ul>
+    </li>
+    <li><a href="#6基础常识">6.	基础常识</a>
+      <ul>
+        <li><a href="#61cookie和local-storage的区别">6.1	Cookie和Local Storage的区别</a></li>
+        <li><a href="#62pxemremvw等单位的区别">6.2	px,em,rem,vw等单位的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#7官方文档">7.官方文档</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2019/rap2_util/">【技术分享】rap2接口管理工具使用分享</a>
+            <br />
+            
+            <a href="/posts/2019/flex_box/">【技术笔记】CSS之Flex弹性盒子属性详解</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
