@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,6 +21,15 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;2020时间飞逝，做一个年终总结。也对未来的2021年做一些计划。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</title>
+      <link>/posts/2021/input_html/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/input_html/</guid>
+      <description>&lt;p&gt;需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>前端 on 沽默清尘</title>
-    <link>/categories/%E5%89%8D%E7%AB%AF/</link>
-    <description>Recent content in 前端 on 沽默清尘</description>
+    <title>输入框 on 沽默清尘</title>
+    <link>/categories/%E8%BE%93%E5%85%A5%E6%A1%86/</link>
+    <description>Recent content in 输入框 on 沽默清尘</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E8%BE%93%E5%85%A5%E6%A1%86/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       
       <guid>/posts/2021/input_html/</guid>
       <description>&lt;p&gt;需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>【前端技术】移动端h5项目调试技巧与总结</title>
-      <link>/posts/2020/mobile_debug/</link>
-      <pubDate>Fri, 21 Feb 2020 12:00:00 +0000</pubDate>
-      
-      <guid>/posts/2020/mobile_debug/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;移动端真机调试的方法&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

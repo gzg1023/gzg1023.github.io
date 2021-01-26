@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框",
+      "item":"/posts/2021/input_html/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2021/input_html/"
+    },
+    "headline": "【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 | 沽默清尘","datePublished": "2021-01-26T00:00:00+00:00",
+    "dateModified": "2021-01-26T00:00:00+00:00",
+    "wordCount":  183 ,
+    "author": {
+        "@type": "Person",
+        "name": ["gzg1023"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cp\u003e需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)\u003c\/p\u003e"
+}
+</script><meta property="og:title" content="【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2021/input_html/" />
+
+
+
+
+<meta property="og:description" content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-01-26T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-01-26T00:00:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="html" />
+
+<meta property="article:tag" content="vue" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2020/scroll_fix/" />
+
+<meta property="og:see_also" content="/posts/2021/designpatterns/" />
+
+<meta property="og:see_also" content="/posts/2020/functional_programming/" />
+
+<meta property="og:see_also" content="/posts/2020/mobile_debug/" />
+
+<meta property="og:see_also" content="/posts/2020/recursion_compoent/" />
+
+<meta property="og:see_also" content="/posts/2019/array_handle-/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-01-26</span>
+    </div>
+    
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E5%89%8D%E7%AB%AF/" class="hover:text-eureka">前端</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/%E6%8A%80%E6%9C%AF/" class="hover:text-eureka">技术</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/%E8%BE%93%E5%85%A5%E6%A1%86/" class="hover:text-eureka">输入框</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)</p>
+<h2 id="需求补充">需求补充</h2>
+<p>运营通过添加按钮，为输入框内部添加 相应的标识符。添加完成的内容高亮显示，并且在发送给后端之前，把高亮的html代码字符转为约定的标识符。当进行编辑是，在重新把标识符匹配成相应高亮的文字。如下图所示。</p>
+<p><img src="https://ae04.alicdn.com/kf/Hec4a3fedb30f4a78934058db6e164e80T.png" alt="1111.png"></p>
+<h2 id="1-模拟输入框">1. 模拟输入框</h2>
+<p>第一部分很简单，就根据设计图或者原型模拟出来我们需要的文本框，这里我们在输入的时候添加一个有色边框，在未输入的情况，隐藏边框。尽量和真实文本框保持一致。</p>
+<pre><code class="language-html"> &lt;div class=&quot;input-wrapper&quot; :class=&quot;{ focus: msgTitleInputFocusFlag }&quot;&gt;
+    &lt;p
+      ref=&quot;inputRef&quot;
+      class=&quot;input-text
+      @focus=&quot;msgTitleInputFocusFlag = true&quot;
+      @blur=&quot;msgTitleInputFocusFlag = false&quot;
+    &gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">.input-wrapper{
+  width: 500px;
+  height: 300px;
+  padding: 0 15px;
+  border: 1px solid #c0c4cc;
+  border-radius: 4px;
+}
+.input-text {
+    height: 100%;
+    overflow: hidden;
+    color: #606266;
+    line-height: 30px;
+  }
+  &amp;.focus {
+    border-color: #409eff;
+  }
+</code></pre>
+<h2 id="2-修改dom性contenteditable">2. 修改DOM性contenteditable</h2>
+<p>在html标签中有一个contenteditable属性，对应两个布尔值，true表示可以编辑，false表示不可以编辑。该属性支持所有浏览器（没错包括ie6）。
+我们把容纳输入的地方修改为contenteditable=&quot;true&rdquo;，并且在我们处理高亮文本时候，把需要处理的文本contenteditable设置false，防止用户选中一半，或者是删除的过程中可以删除整个文本词组。</p>
+<pre><code class="language-html"> &lt;div&gt;
+    &lt;p
+      contenteditable=&quot;true&quot;
+    &gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>定义我们约定的高亮标示符。</p>
+<pre><code class="language-javascript">// 点击添加时候，插入到文本中
+const hightext =  '&lt;span class=&quot;fack-name&quot; contenteditable=&quot;false&quot;&gt;【动态名称】&lt;/span&gt;'
+</code></pre>
+<h2 id="3-修改innerhtml属性">3. 修改innerHtml属性</h2>
+<p>在vue中我们通过ref可以拿到DOM节点，然后获取innerHtml属性的内容，在我们输入的时候进行修改</p>
+<pre><code class="language-javascript">// 点击添加按钮时候，把高亮文本拼接到我们的editString变量中，并赋值给DOM节点的内容
+ addDynamicName() {
+      this.editString += hightext  
+      this.$refs.inputRef.innerHTML = this.editString
+    }
+</code></pre>
+<p>此时，我们在输入框就可以输入，并点击按钮可以添加高亮字符到页面中进行显示。</p>
+<h2 id="4-处理光标及后续匹配">4. 处理光标及后续匹配</h2>
+<p>在上面完成后，可以输入内容并且添加高亮内容了。但是我们会发现一个问题，添加完成高亮文本后，光标跑到了最前面，而且页面的内容，无法进行选择。如下图。</p>
+<p><img src="https://ae04.alicdn.com/kf/Hcdee460dc5f2445d9cb19d4f0d2587a7Y.png" alt="222.png"></p>
+<p>但是在输入完成后，我们还是需要输入内容的，所以为输入框解决输入问题。在之前添加名称完成后，我们再重置光标的位置。通过locateToLastIndex函数，我们手动更改光标的位置，传入的参数是DOM</p>
+<pre><code class="language-javascript">locateToLastIndex(obj) {
+    if (window.getSelection) {
+    obj.focus() // 解决ff不获取焦点无法定位问题
+    let range = window.getSelection() // 创建range
+    range.selectAllChildren(obj) // range 选择obj下所有子内容
+    range.collapseToEnd() // 光标移至最后
+    } else if (document.selection) {
+    let range = document.selection.createRange() // 创建选择对象
+    range.moveToElementText(obj) // range定位到obj
+    range.collapse(false) // 光标移至最后
+    range.select()
+    }
+}
+</code></pre>
+<pre><code class="language-javascript"> addDynamicName() {
+      this.editString += hightext  
+      this.$refs.inputRef.innerHTML = this.editString
+      // 补充移动光标函数
+      this.locateToLastIndex(this.$refs.inputRef)
+    }
+</code></pre>
+<p>光标问题完成后，在我们每次输入内容时候，都需要更新内容。
+通过绑定keydown和input事件，在每次输入完成后，我们把文本内容赋值给显示内容（相当于显示是用innerHtml，字符串用我们之前的editString来保存）</p>
+<pre><code class="language-html"> &lt;div&gt;
+    &lt;p
+      contenteditable=&quot;true&quot;
+      @keydown=&quot;inputMsgConent&quot;
+      @input=&quot;inputMsgConent&quot;
+    &gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-javascript">inputMsgConent() {
+      this.$nextTick(() =&gt; {
+        this.editString = this.$refs.inputRef.innerHTML
+      })
+    }
+</code></pre>
+<p>最后我们就完成了输入框的开发，在提交数据时候通过正则匹配，变成约定的字符串，在修改时候通过约定的内容匹配回来。这样就完成了。</p>
+<pre><code class="language-javascript">// 通过正则匹配高亮字符串，发送接口时候修改为相应的标识符
+const highReg = /\&lt;span class=&quot;fack-name&quot; contenteditable=&quot;false&quot;\&gt;【动态名称】\&lt;\/span\&gt;/g
+// #MSG_MARK 是和后端约定的字符串，用来标示高亮区域的内容
+let str = this.editString.replace(highReg, '#MSG_MARK')
+// 拿到str后发送给后端
+</code></pre>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/html/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#html</a>
+    
+    <a href="/tags/vue/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#vue</a>
+    
+</div>
+        
+        
+        
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/gzg1023/" class="w-24 h-24 md:mr-4">
+            
+            
+            <i class="fas fa-user-circle fa-6x"></i>
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/gzg1023/" class="block font-bold text-lg pb-1 mb-2 border-b">gzg1023</a>
+            <span class="block pb-2"></span>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2020/2020_summary/" class="block">【生活总结】2020年总结和2021年展望</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2021/designpatterns/" class="block">【技术分享】观察者模式VS发布/订阅模式</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#需求补充">需求补充</a></li>
+    <li><a href="#1-模拟输入框">1. 模拟输入框</a></li>
+    <li><a href="#2-修改dom性contenteditable">2. 修改DOM性contenteditable</a></li>
+    <li><a href="#3-修改innerhtml属性">3. 修改innerHtml属性</a></li>
+    <li><a href="#4-处理光标及后续匹配">4. 处理光标及后续匹配</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2020/scroll_fix/">【技术笔记】vue中滑动事件触发怎么失灵了？！</a>
+            <br />
+            
+            <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
+            <br />
+            
+            <a href="/posts/2020/functional_programming/">【技术分享】函数式编程入门初探</a>
+            <br />
+            
+            <a href="/posts/2020/mobile_debug/">【前端技术】移动端h5项目调试技巧与总结</a>
+            <br />
+            
+            <a href="/posts/2020/recursion_compoent/">【前端技术】Vue递归组件的简单运用</a>
+            <br />
+            
+            <a href="/posts/2019/array_handle-/">【技术笔记】JS的Array的各种API</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
