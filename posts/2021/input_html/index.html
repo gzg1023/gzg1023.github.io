@@ -45,7 +45,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
 
 <meta name="description"
-  content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)">
+  content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,7 +87,7 @@
             "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
         }
         },
-    "description": "\u003cp\u003e需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)\u003c\/p\u003e"
+    "description": "\u003cp\u003e需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)\u003c\/p\u003e"
 }
 </script><meta property="og:title" content="【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 | 沽默清尘" />
 <meta property="og:type" content="article" />
@@ -101,7 +101,7 @@
 
 
 
-<meta property="og:description" content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)" />
+<meta property="og:description" content="需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)" />
 
 
 
@@ -256,7 +256,7 @@
         
 
         <div class="content">
-            <p>需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)</p>
+            <p>需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)</p>
 <h2 id="需求补充">需求补充</h2>
 <p>运营通过添加按钮，为输入框内部添加 相应的标识符。添加完成的内容高亮显示，并且在发送给后端之前，把高亮的html代码字符转为约定的标识符。当进行编辑是，在重新把标识符匹配成相应高亮的文字。如下图所示。</p>
 <p><img src="https://ae04.alicdn.com/kf/Hec4a3fedb30f4a78934058db6e164e80T.png" alt="1111.png"></p>
@@ -290,7 +290,7 @@
 </code></pre>
 <h2 id="2-修改dom性contenteditable">2. 修改DOM性contenteditable</h2>
 <p>在html标签中有一个contenteditable属性，对应两个布尔值，true表示可以编辑，false表示不可以编辑。该属性支持所有浏览器（没错包括ie6）。
-我们把容纳输入的地方修改为contenteditable=&quot;true&rdquo;，并且在我们处理高亮文本时候，把需要处理的文本contenteditable设置false，防止用户选中一半，或者是删除的过程中可以删除整个文本词组。</p>
+我们把模拟的输入框修改为contenteditable=&quot;true&rdquo;，并且在我们处理高亮文本时候，把需要处理的文本contenteditable设置false，防止用户选中一半，或者是删除的过程中可以删除整个文本词组。</p>
 <pre><code class="language-html"> &lt;div&gt;
     &lt;p
       contenteditable=&quot;true&quot;

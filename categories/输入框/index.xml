@@ -18,7 +18,7 @@
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>/posts/2021/input_html/</guid>
-      <description>&lt;p&gt;需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容。(本文基于vue，原理通用)&lt;/p&gt;</description>
+      <description>&lt;p&gt;需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)&lt;/p&gt;</description>
     </item>
     
   </channel>
