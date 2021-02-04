@@ -74,7 +74,7 @@
     },
     "headline": "【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 | 沽默清尘","datePublished": "2021-01-26T00:00:00+00:00",
     "dateModified": "2021-01-26T00:00:00+00:00",
-    "wordCount":  183 ,
+    "wordCount":  241 ,
     "author": {
         "@type": "Person",
         "name": ["gzg1023"]
@@ -358,6 +358,39 @@ const highReg = /\&lt;span class=&quot;fack-name&quot; contenteditable=&quot;fal
 let str = this.editString.replace(highReg, '#MSG_MARK')
 // 拿到str后发送给后端
 </code></pre>
+<h2 id="5-处理复制来的文本">5. 处理复制来的文本</h2>
+<p>完成需求后，在测试阶段，发现当运营输入了内容页面没有办法进行正常当读取和显示。因为HTML的内容没有同步到我们的输入框绑定的值中。需要给
+模拟的输入添加paste事件，来监听用户的输入，然后同步用户复制的输入内容。</p>
+<h3 id="绑定paste事件">绑定paste事件</h3>
+<pre><code class="language-jsx">&lt;div class=&quot;msg-title-input-wrapper&quot; :class=&quot;{ focus: msgTitleInputFocusFlag }&quot;&gt;
+  &lt;p
+    ref=&quot;inputRef&quot;
+    class=&quot;msg-title-input&quot;
+    @keydown=&quot;inputMsgConent&quot;
+    @input=&quot;inputMsgConent&quot;
+    contenteditable=&quot;true&quot;
+    @paste=&quot;checkPastedMsgTitle&quot;
+    @focus=&quot;msgTitleInputFocusFlag = true&quot;
+    @blur=&quot;msgTitleInputFocusFlag = false&quot;
+  &gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="处理paste事件">处理paste事件</h3>
+<pre><code class="language-jsx">checkPastedMsgTitle(e) {
+     // 阻止末默认事件,手动获取剪切板的内容，同步到editString上
+      e.preventDefault()
+      let pasteData = (e.clipboardData || window.clipboardData).getData('text')
+      const selection = window.getSelection()
+      if (!selection.rangeCount) {
+        return false
+      }
+      selection.deleteFromDocument()
+      selection.getRangeAt(0).insertNode(document.createTextNode(pasteData))
+      this.$nextTick(() =&gt; {
+        this.editString = this.$refs.inputRef.innerHTML
+      })
+    }
+</code></pre>
         </div>
         
         <div class="my-4">
@@ -426,6 +459,12 @@ let str = this.editString.replace(highReg, '#MSG_MARK')
     <li><a href="#2-修改dom性contenteditable">2. 修改DOM性contenteditable</a></li>
     <li><a href="#3-修改innerhtml属性">3. 修改innerHtml属性</a></li>
     <li><a href="#4-处理光标及后续匹配">4. 处理光标及后续匹配</a></li>
+    <li><a href="#5-处理复制来的文本">5. 处理复制来的文本</a>
+      <ul>
+        <li><a href="#绑定paste事件">绑定paste事件</a></li>
+        <li><a href="#处理paste事件">处理paste事件</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div>
