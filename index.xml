@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -85,42 +85,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;总结一些常用的css工具类&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Chapter 1</title>
-      <link>/docs/example-doc/chapter-1/</link>
-      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/example-doc/chapter-1/</guid>
-      <description>&lt;p&gt;This is chapter 1 of example doc.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Chapter 1</title>
-      <link>/docs/example-doc/nested-chapter/chapter-1/</link>
-      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/example-doc/nested-chapter/chapter-1/</guid>
-      <description>&lt;p&gt;This is chapter 1 of nested chapter.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Chapter 2</title>
-      <link>/docs/example-doc/chapter-2/</link>
-      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/example-doc/chapter-2/</guid>
-      <description>&lt;p&gt;This is chapter 2 of example doc.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Chapter 2</title>
-      <link>/docs/example-doc/nested-chapter/chapter-2/</link>
-      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/example-doc/nested-chapter/chapter-2/</guid>
-      <description>&lt;p&gt;This is chapter 2 of nested chapter.&lt;/p&gt;</description>
     </item>
     
     <item>
