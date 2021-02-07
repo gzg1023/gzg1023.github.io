@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vue原理 on 沽默清尘</title>
-    <link>/tags/vue%E5%8E%9F%E7%90%86/</link>
-    <description>Recent content in vue原理 on 沽默清尘</description>
+    <title>virtual DOM on 沽默清尘</title>
+    <link>/categories/virtual-dom/</link>
+    <description>Recent content in virtual DOM on 沽默清尘</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
     <lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/vue%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/virtual-dom/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <guid>/posts/2021/snabbdomsource/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>【技术分享】观察者模式VS发布/订阅模式</title>
-      <link>/posts/2021/designpatterns/</link>
-      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2021/designpatterns/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;在vue中，观察者模式和发布/订阅模式被用到了方方面面，在刚开始了解时候感觉这两者总是分不清楚，本文对两者来个区分。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     

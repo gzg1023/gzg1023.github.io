@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,17 @@
       <guid>/posts/2020/2020_summary/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;2020时间飞逝，做一个年终总结。也对未来的2021年做一些计划。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【技术分享】virtual DOM的思考及snabbdom库源码解读</title>
+      <link>/posts/2021/snabbdomsource/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/snabbdomsource/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
