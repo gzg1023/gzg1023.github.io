@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width">
 
 
-<title>【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘</title>
+<title>【技术分享】javaScript面向对象之继承（多种实现方式） | 沽默清尘</title>
 <link rel="stylesheet" href="/css/eureka.min.css">
 <script defer src="/js/eureka.min.js"></script>
 
@@ -46,7 +46,7 @@
 
 <meta name="description"
   content="
-snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。
+javaScript的继承都是通过原型链来实现的，typeScript可以直接通过extends运算符实现继承，但背后依然是依靠js的原型链。本文来讨论多种继承的实现。
 ">
 <script type="application/ld+json">
 {
@@ -59,8 +59,8 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
       "item":"/posts/"},{
       "@type": "ListItem",
       "position": 2 ,
-      "name":"【技术分享】virtual DOM的思考及snabbdom库源码解读",
-      "item":"/posts/2021/snabbdomsource/"}]
+      "name":"【技术分享】javaScript面向对象之继承（多种实现方式）",
+      "item":"/posts/2021/js_inherit/"}]
 }
 </script>
 
@@ -72,11 +72,11 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
     "@type": "Article",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "/posts/2021/snabbdomsource/"
+        "@id": "/posts/2021/js_inherit/"
     },
-    "headline": "【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘","datePublished": "2021-02-05T00:00:00+00:00",
-    "dateModified": "2021-02-07T00:00:00+00:00",
-    "wordCount":  20 ,
+    "headline": "【技术分享】javaScript面向对象之继承（多种实现方式） | 沽默清尘","datePublished": "2021-02-08T00:00:00+00:00",
+    "dateModified": "2021-02-08T00:00:00+00:00",
+    "wordCount":  21 ,
     "publisher": {
         "@type": "Person",
         "name": "gzg1023",
@@ -85,22 +85,22 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
             "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
         }
         },
-    "description": "\u003cblockquote\u003e\n\u003cp\u003esnabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+    "description": "\u003cblockquote\u003e\n\u003cp\u003ejavaScript的继承都是通过原型链来实现的，typeScript可以直接通过extends运算符实现继承，但背后依然是依靠js的原型链。本文来讨论多种继承的实现。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
 }
-</script><meta property="og:title" content="【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘" />
+</script><meta property="og:title" content="【技术分享】javaScript面向对象之继承（多种实现方式） | 沽默清尘" />
 <meta property="og:type" content="article" />
 
 
 <meta property="og:image" content="/images/favicon.png">
 
 
-<meta property="og:url" content="/posts/2021/snabbdomsource/" />
+<meta property="og:url" content="/posts/2021/js_inherit/" />
 
 
 
 
 <meta property="og:description" content="
-snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。
+javaScript的继承都是通过原型链来实现的，typeScript可以直接通过extends运算符实现继承，但背后依然是依靠js的原型链。本文来讨论多种继承的实现。
 " />
 
 
@@ -118,10 +118,10 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
 
 
 
-<meta property="article:published_time" content="2021-02-05T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-02-08T00:00:00&#43;00:00" />
 
 
-<meta property="article:modified_time" content="2021-02-07T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-02-08T00:00:00&#43;00:00" />
 
 
 
@@ -130,27 +130,23 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
 
 <meta property="article:tag" content="前端" />
 
-<meta property="article:tag" content="virtual DOM" />
-
-<meta property="article:tag" content="vue原理" />
-
-<meta property="article:tag" content="源码" />
+<meta property="article:tag" content="js" />
 
 
 
 
 
-<meta property="og:see_also" content="/posts/2021/designpatterns/" />
+<meta property="og:see_also" content="/posts/2021/snabbdomsource/" />
 
 <meta property="og:see_also" content="/posts/2021/input_html/" />
+
+<meta property="og:see_also" content="/posts/2021/designpatterns/" />
 
 <meta property="og:see_also" content="/posts/2020/scroll_fix/" />
 
 <meta property="og:see_also" content="/posts/2020/functional_programming/" />
 
 <meta property="og:see_also" content="/posts/2020/mobile_debug/" />
-
-<meta property="og:see_also" content="/posts/2019/array_handle-/" />
 
 
 
@@ -227,11 +223,11 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
 <div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
     <div
         class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-        <h1 class="font-bold text-3xl text-primary-text">【技术分享】virtual DOM的思考及snabbdom库源码解读</h1>
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】javaScript面向对象之继承（多种实现方式）</h1>
         <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
     <div class="mr-6 my-2">
         <i class="fas fa-calendar mr-1"></i>
-        <span>2021-02-05</span>
+        <span>2021-02-08</span>
     </div>
     
     
@@ -243,7 +239,7 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
         
         
         <span>, </span>
-        <a href="/categories/virtual-dom/" class="hover:text-eureka">virtual DOM</a>
+        <a href="/categories/js/" class="hover:text-eureka">js</a>
         
     </div>
     
@@ -256,33 +252,30 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
 
         <div class="content">
             <blockquote>
-<p>snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是基于本库进行修改的，对vue源码的学习也有很大的帮助。</p>
+<p>javaScript的继承都是通过原型链来实现的，typeScript可以直接通过extends运算符实现继承，但背后依然是依靠js的原型链。本文来讨论多种继承的实现。</p>
 </blockquote>
-<h2 id="virtual-dom">virtual DOM</h2>
-<h3 id="什么是virtual-dom">什么是virtual DOM</h3>
-<h3 id="virtual-dom怎么用">virtual DOM怎么用</h3>
-<h3 id="virtual-dom优缺点">virtual DOM优缺点</h3>
-<h2 id="应用场景">应用场景</h2>
-<h3 id="实际应用场景">实际应用场景</h3>
-<h2 id="snabbdom源码">snabbdom源码</h2>
-<h3 id="demo例子">demo例子</h3>
-<h3 id="源码结构">源码结构</h3>
-<h3 id="init函数">init函数</h3>
-<h3 id="patch函数">patch函数</h3>
-<h3 id="updatechildren函数">updateChildren函数</h3>
-<p><a href="https://github.com/gzg1023/snabbdom-fork">https://github.com/gzg1023/snabbdom-fork</a></p>
-<p><a href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a></p>
+<p>继承是什么 有什么用，
+怎么实现。优缺点</p>
+<h2 id="什么是继承">什么是继承</h2>
+<p>继承可以使得子类具有父类别的各种属性和方法，而不需要再次编写相同的代码。在令子类别继承父类别的同时，可以重新定义某些属性，并重写某些方法，即覆盖父类别的原有属性和方法，使其获得与父类别不同的功能。</p>
+<h2 id="js的继承">js的继承</h2>
+<p>通过原型继承多个引用 类型的属性和方法</p>
+<p>子类有时候需要覆盖父类的方法，或者增加父类没有的方法</p>
+<h3 id="原型链">原型链</h3>
+<p>每个构造函数都有一个原型对象，原型有 一个属性指回构造函数，而实例有一个内部指针指向原型。
+如果原型是另一个类型的实例 那么这个原型本身有一个内部指针指向另一个原型，相应地另一个原型也有一个指针指向另一个构造函 数。这样就在实例和原型之间构造了一条原型链。</p>
+<p>读取实例上的属性时，首先会在实例上搜索 这个属性。如果没找到，则会继承搜索实例的原型。在通过原型链实现继承之后，搜索就可以继承向上，搜索原型的原型。</p>
+<h3 id="heading"></h3>
+<h2 id="实现继承">实现继承</h2>
+<h3 id="1">1</h3>
+<h3 id="2">2</h3>
         </div>
         
         <div class="my-4">
     
     <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
     
-    <a href="/tags/virtual-dom/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#virtual DOM</a>
-    
-    <a href="/tags/vue%E5%8E%9F%E7%90%86/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#vue原理</a>
-    
-    <a href="/tags/%E6%BA%90%E7%A0%81/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#源码</a>
+    <a href="/tags/js/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#js</a>
     
 </div>
         
@@ -296,13 +289,13 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
     <div>
         
         <span class="block font-bold">上一篇</span>
-        <a href="/posts/2021/js_inherit/" class="block">【技术分享】javaScript面向对象之继承（多种实现方式）</a>
+        <a href="/posts/2020/2020_summary/" class="block">【生活总结】2020年总结和2021年展望</a>
         
     </div>
     <div class="md:text-right mt-4 md:mt-0">
         
         <span class="block font-bold">下一篇</span>
-        <a href="/posts/2021/input_html/" class="block">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
+        <a href="/posts/2021/snabbdomsource/" class="block">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
         
     </div>
 </div>
@@ -319,25 +312,17 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
 <div class="sticky-toc hidden lg:block px-6 pb-6 ">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#virtual-dom">virtual DOM</a>
+    <li><a href="#什么是继承">什么是继承</a></li>
+    <li><a href="#js的继承">js的继承</a>
       <ul>
-        <li><a href="#什么是virtual-dom">什么是virtual DOM</a></li>
-        <li><a href="#virtual-dom怎么用">virtual DOM怎么用</a></li>
-        <li><a href="#virtual-dom优缺点">virtual DOM优缺点</a></li>
+        <li><a href="#原型链">原型链</a></li>
+        <li><a href="#heading"></a></li>
       </ul>
     </li>
-    <li><a href="#应用场景">应用场景</a>
+    <li><a href="#实现继承">实现继承</a>
       <ul>
-        <li><a href="#实际应用场景">实际应用场景</a></li>
-      </ul>
-    </li>
-    <li><a href="#snabbdom源码">snabbdom源码</a>
-      <ul>
-        <li><a href="#demo例子">demo例子</a></li>
-        <li><a href="#源码结构">源码结构</a></li>
-        <li><a href="#init函数">init函数</a></li>
-        <li><a href="#patch函数">patch函数</a></li>
-        <li><a href="#updatechildren函数">updateChildren函数</a></li>
+        <li><a href="#1">1</a></li>
+        <li><a href="#2">2</a></li>
       </ul>
     </li>
   </ul>
@@ -359,10 +344,13 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
         <h2 class="text-lg font-semibold mb-4">相关</h2>
         <div class="content">
             
-            <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
+            <a href="/posts/2021/snabbdomsource/">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
             <br />
             
             <a href="/posts/2021/input_html/">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
+            <br />
+            
+            <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
             <br />
             
             <a href="/posts/2020/scroll_fix/">【技术笔记】vue中滑动事件触发怎么失灵了？！</a>
@@ -372,9 +360,6 @@ snabbdom,一个简单，高效的virtual DOM库。在vue框架中虚拟DOM就是
             <br />
             
             <a href="/posts/2020/mobile_debug/">【前端技术】移动端h5项目调试技巧与总结</a>
-            <br />
-            
-            <a href="/posts/2019/array_handle-/">【技术笔记】JS的Array的各种API</a>
             <br />
             
         </div>

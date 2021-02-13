@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="
+virtual DOM的广泛运用革新了技术框架，带来了更多的可能。本文了解virtual DOM的本质及对snabbdom库的源码进行分析。
+">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】virtual DOM的思考及snabbdom库源码解读",
+      "item":"/posts/2021/snabbdom_source/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2021/snabbdom_source/"
+    },
+    "headline": "【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘","datePublished": "2021-02-05T00:00:00+00:00",
+    "dateModified": "2021-02-11T00:00:00+00:00",
+    "wordCount":  1827 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+        }
+        },
+    "description": "\u003cblockquote\u003e\n\u003cp\u003evirtual DOM的广泛运用革新了技术框架，带来了更多的可能。本文了解virtual DOM的本质及对snabbdom库的源码进行分析。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+}
+</script><meta property="og:title" content="【技术分享】virtual DOM的思考及snabbdom库源码解读 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2021/snabbdom_source/" />
+
+
+
+
+<meta property="og:description" content="
+virtual DOM的广泛运用革新了技术框架，带来了更多的可能。本文了解virtual DOM的本质及对snabbdom库的源码进行分析。
+" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-02-05T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-02-11T00:00:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="virtual DOM" />
+
+<meta property="article:tag" content="vue原理" />
+
+<meta property="article:tag" content="源码" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2021/designpatterns/" />
+
+<meta property="og:see_also" content="/posts/2021/input_html/" />
+
+<meta property="og:see_also" content="/posts/2020/scroll_fix/" />
+
+<meta property="og:see_also" content="/posts/2020/functional_programming/" />
+
+<meta property="og:see_also" content="/posts/2020/mobile_debug/" />
+
+<meta property="og:see_also" content="/posts/2019/array_handle-/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Tags</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】virtual DOM的思考及snabbdom库源码解读</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-05</span>
+    </div>
+    
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E6%8A%80%E6%9C%AF/" class="hover:text-eureka">技术</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/virtual-dom/" class="hover:text-eureka">virtual DOM</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>virtual DOM的广泛运用革新了技术框架，带来了更多的可能。本文了解virtual DOM的本质及对snabbdom库的源码进行分析。</p>
+</blockquote>
+<h2 id="virtual-dom">virtual DOM</h2>
+<h3 id="什么是virtual-dom">什么是virtual DOM</h3>
+<p>virtual DOM的本质是javaScript Object，是对浏览器真实DOM的一种关系映射。用js的对象描述真实DOM的内容，在页面需要重绘时只修改局部内容。从而提高渲染性能。</p>
+<h3 id="virtual-dom优缺点">virtual DOM优缺点</h3>
+<p>优点：</p>
+<ul>
+<li>保存VNode，在需要重新渲染页面内容时候，只需修改局部内容，也就是通过diff提高性能</li>
+<li>成功的打破了跨平台，可以在没有document对象的地方(node)进行伪DOM操作，如ssr应用的产生</li>
+<li>针对大量的DOM操作，浏览器渲染引擎是很消耗性能的，可以用过VNode提高性能</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>首次渲染更消耗性能，因为需要先转到VNode在转回来或把真实DOM转为v-dom</li>
+<li>关于svelte框架不使用v-dom的<a href="https://svelte.dev/blog/virtual-dom-is-pure-overhead">看法</a></li>
+</ul>
+<h3 id="virtual-dom场景">virtual DOM场景</h3>
+<p>一个单独的v-dom库很少直接运行，都是作为框架的一部分运行，如vue,和react框架。都是用到了v-dom。</p>
+<h2 id="snabbdom">snabbdom</h2>
+<h3 id="简介">简介</h3>
+<p>snabbdom一个简单，高效的virtual DOM库。<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js">在vue框架中，v-dom的核心也是基于本库进行二次开发的</a>。</p>
+<p>地址：<a href="https://github.com/snabbdom/snabbdom">https://github.com/snabbdom/snabbdom</a></p>
+<p>由于整个库的源码还是很多，本文只讨论核心部分的几个函数。</p>
+<h3 id="例子">例子</h3>
+<p>snabbdom用起来很简单,通过init生成patch函数进行DOM的渲染对比，通过h函数生成vNode，init接受一个数组，可以使用官方提供的模块，也可以自定义模块。</p>
+<pre><code class="language-jsx">import { h } from &quot;snabbdom/build/package/h&quot;
+import { init } from &quot;snabbdom/build/package/init&quot;
+import { styleModule } from &quot;snabbdom/build/package/modules/style&quot;;
+import { eventListenersModule } from &quot;snabbdom/build/package/modules/eventlisteners&quot;;
+
+const patch = init([
+    styleModule,
+    eventListenersModule
+])
+
+let vNode = h('div#container', [
+    h('h1', {
+        style: { backgroundColor: 'red' }
+    }, 'h1 texht'),
+    h('p', { on: { click: clickEventHandle } }, 'this p tag ')
+])
+
+function clickEventHandle() {
+    console.log('我被点了')
+}
+// 需要存在#app根节点作为入口
+const app = document.querySelector('#app')
+// 通过oldNode和newNode渲染页面
+patch(app, vNode)
+
+</code></pre>
+<p>如上创造了一个简单的内容，并添加点击事件。更多内容见<a href="https://gzg.me/docs/snabbdom/">文档</a>。</p>
+<h3 id="源码结构">源码结构</h3>
+<p><code> src/package</code></p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h.ts</td>
+<td>生成vNode</td>
+</tr>
+<tr>
+<td>hooks.ts</td>
+<td>整个vNode生命周期钩子函数</td>
+</tr>
+<tr>
+<td>htmldomapi.ts</td>
+<td>封装生成dom的原生api</td>
+</tr>
+<tr>
+<td>init.ts</td>
+<td>项目入口，处理vNode的关键</td>
+</tr>
+<tr>
+<td>is.ts</td>
+<td>判断类型工具函数</td>
+</tr>
+<tr>
+<td>jsx-global.ts</td>
+<td>jsx声明文件</td>
+</tr>
+<tr>
+<td>jsx.ts</td>
+<td>jsx解析文件</td>
+</tr>
+<tr>
+<td>thunk.ts</td>
+<td>优化处理，对复杂视图不可变化的处理</td>
+</tr>
+<tr>
+<td>tovnode.ts</td>
+<td>真实DOM转vNode工具函数</td>
+</tr>
+<tr>
+<td>vnode.ts</td>
+<td>定义vnode的类型</td>
+</tr>
+<tr>
+<td>helpers/attachto.ts</td>
+<td>定义了 vnode.ts 中 AttachData 的数据结构</td>
+</tr>
+<tr>
+<td>modules/attributes.ts</td>
+<td>操作DOM的属性</td>
+</tr>
+<tr>
+<td>modules/class.ts</td>
+<td>切换类样式</td>
+</tr>
+<tr>
+<td>modules/dataset.ts</td>
+<td>处理data-自定义属性</td>
+</tr>
+<tr>
+<td>modules/eventlisteners.ts</td>
+<td>注册和移除事件</td>
+</tr>
+<tr>
+<td>modules/hero.ts</td>
+<td>自定义钩子函数</td>
+</tr>
+<tr>
+<td>modules/module.ts</td>
+<td>导出各种模块</td>
+</tr>
+<tr>
+<td>modules/props.ts</td>
+<td>通过对象属性来设置，不处理布尔属性</td>
+</tr>
+<tr>
+<td>modules/style.ts</td>
+<td>设置行内样式及动画</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vnode结构">VNode结构</h3>
+<p>一个VNode节点完整的数据结构如下。</p>
+<pre><code class="language-jsx">export type Key = string | number
+/**
+ * @description 定义Vnode数据的接口类型
+ *  @param sel 元素选择器
+ *  @param data 节点数据:属性/样式/事件等
+ *  @param children 子节点，和 text 只能互斥
+ *  @param elm 记录 vnode 对应的真实 DOM
+ *  @param text 节点中的内容，和 children 只能互斥
+ *  @param key 数据的key对比dom时候用
+ * 
+ */
+export interface VNode {
+  sel: string | undefined
+  data: VNodeData | undefined
+  children: Array&lt;VNode | string&gt; | undefined
+  elm: Node | undefined
+  text: string | undefined
+  key: Key | undefined
+}
+</code></pre>
+<h3 id="h函数">h函数</h3>
+<p>h函数的作用是创建VNode节点并返回创建节点。在snabbdom中，h函数是基于ts的重载的定义的函数，参数具有不确定性。</p>
+<ul>
+<li>第一个参数是sel，可以是tag name(如：h1) 也可以是tag name联合标签选择器(如：div#container)。</li>
+<li>b参数是元素attributes集合，具有不确定性，可以选择性传入</li>
+<li>c参数是textConent或者子元素</li>
+</ul>
+<p><strong>为了更好理解运行原理，这里采用ts被编译后的js函数作为演示。</strong></p>
+<pre><code class="language-jsx">export function h(sel, b, c) {
+    var data = {};
+    var children;
+    var text;
+    var i;
+    if (c !== undefined) {
+        if (b !== null) {
+            data = b;
+        }
+        if (is.array(c)) {
+            children = c;
+        }
+        // typeof s === 'string' || typeof s === 'number';
+        else if (is.primitive(c)) {
+            text = c;
+        }
+        else if (c &amp;&amp; c.sel) {
+            children = [c];
+        }
+    }
+    else if (b !== undefined &amp;&amp; b !== null) {
+        if (is.array(b)) {
+            children = b;
+        }
+        else if (is.primitive(b)) {
+            text = b;
+        }
+        else if (b &amp;&amp; b.sel) {
+            children = [b];
+        }
+        else {
+            data = b;
+        }
+    }
+    if (children !== undefined) {
+        for (i = 0; i &lt; children.length; ++i) {
+            if (is.primitive(children[i]))
+                children[i] = vnode(undefined, undefined, undefined, children[i], undefined);
+        }
+    }
+    // 针对svg元素特殊处理
+    if (sel[0] === 's' &amp;&amp; sel[1] === 'v' &amp;&amp; sel[2] === 'g' &amp;&amp;
+        (sel.length === 3 || sel[3] === '.' || sel[3] === '#')) {
+        addNS(data, children, sel);
+    }
+    return vnode(sel, data, children, text, undefined);
+}
+</code></pre>
+<h3 id="init函数patch内部">init函数/patch(内部)</h3>
+<p>init函数是最核心的函数是一个高阶函数，会返回一个patch函数。用于渲染对比VNode变成真实DOM。</p>
+<h3 id="patch函数流程">patch函数流程</h3>
+<ol>
+<li>调用pre钩子</li>
+<li>如果不是Vnode，就创建一个空的vnode节点</li>
+<li>先判是否和旧的是用一个节点（判断key和sel）</li>
+<li>获取是否存在父节点（方便后续插入）</li>
+<li>调用createElm函数</li>
+<li>得到elm元素后，判断父节点是否存在，存在就插入到该父节点中</li>
+<li>调用removeVnodes函数移除掉旧的节点</li>
+<li>循环调用insert钩子函数</li>
+<li>循环调用post构造函数</li>
+<li>结束patch并返回vNode（下一次的oldNode）</li>
+</ol>
+<pre><code class="language-jsx">export function init (modules: Array&lt;Partial&lt;Module&gt;&gt;, domApi?: DOMAPI) {
+  // 初始化patch函数
+  let i: number
+  let j: number
+  // 初始化hooks回调
+  const cbs: ModuleHooks = {
+    create: [],
+    update: [],
+    remove: [],
+    destroy: [],
+    pre: [],
+    post: []
+  }
+  const api: DOMAPI = domApi !== undefined ? domApi : htmlDomApi
+
+  // 依次存储传入的hooks供后面调用
+  for (i = 0; i &lt; hooks.length; ++i) {
+    cbs[hooks[i]] = []
+    for (j = 0; j &lt; modules.length; ++j) {
+      const hook = modules[j][hooks[i]]
+      if (hook !== undefined) {
+        (cbs[hooks[i]] as any[]).push(hook)
+      }
+    }
+  }
+  // 创建空vNode的函数 
+  function emptyNodeAt (elm: Element) {
+    const id = elm.id ? '#' + elm.id : ''
+    const c = elm.className ? '.' + elm.className.split(' ').join('.') : ''
+    return vnode(api.tagName(elm).toLowerCase() + id + c, {}, [], undefined, elm)
+  }
+  /**
+   * @description /一个高阶函数，返回一个移除节点的函数
+   * @param childElm 子元素
+   * @param listeners 移除的key，确定移除顺序
+   */
+  function createRmCb (childElm: Node, listeners: number) {
+    return function rmCb () {
+      if (--listeners === 0) {
+        const parent = api.parentNode(childElm) as Node
+        api.removeChild(parent, childElm)
+      }
+    }
+  }
+  /**
+   * @description 添加vNode函数
+   * @param parentElm  父元素
+   * @param before  插入前的第一个元素
+   * @param vnodes 
+   * @param startIdx 
+   * @param endIdx 
+   * @param insertedVnodeQueue 
+   */
+  function addVnodes (
+    parentElm: Node,
+    before: Node | null,
+    vnodes: VNode[],
+    startIdx: number,
+    endIdx: number,
+    insertedVnodeQueue: VNodeQueue
+  ) {
+    for (; startIdx &lt;= endIdx; ++startIdx) {
+      const ch = vnodes[startIdx]
+      if (ch != null) {
+        api.insertBefore(parentElm, createElm(ch, insertedVnodeQueue), before)
+      }
+    }
+  }
+
+  function invokeDestroyHook (vnode: VNode) {
+    const data = vnode.data
+    if (data !== undefined) {
+      //移除节点的destroy钩子回调
+      data?.hook?.destroy?.(vnode)
+      for (let i = 0; i &lt; cbs.destroy.length; ++i) cbs.destroy[i](vnode)
+      if (vnode.children !== undefined) {
+        for (let j = 0; j &lt; vnode.children.length; ++j) {
+          const child = vnode.children[j]
+          if (child != null &amp;&amp; typeof child !== 'string') {
+            invokeDestroyHook(child)
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @description 返回一个patch函数，参数是旧节点 - 新节点
+   */
+  return function patch (oldVnode: VNode | Element, vnode: VNode): VNode {
+    let i: number, elm: Node, parent: Node
+    const insertedVnodeQueue: VNodeQueue = []
+    // 调用pre钩子
+    for (i = 0; i &lt; cbs.pre.length; ++i) cbs.pre[i]()
+    // 如果不是Vnode，就创建一个空的vnode节点
+    if (!isVnode(oldVnode)) {
+      oldVnode = emptyNodeAt(oldVnode)
+    }
+    // 先判是否和旧的是用一个节点（判断key和sel
+    if (sameVnode(oldVnode, vnode)) {
+      patchVnode(oldVnode, vnode, insertedVnodeQueue)
+    } else {
+      elm = oldVnode.elm!
+      // 获取是否存在父节点（方便后续插入）
+      parent = api.parentNode(elm) as Node
+      // 创建新的节点
+      createElm(vnode, insertedVnodeQueue)
+      // ，判断父节点是否存在，存在就插入到该父节点中
+      if (parent !== null) {
+        api.insertBefore(parent, vnode.elm!, api.nextSibling(elm))
+        // 调用removeVnodes函数移除掉旧的节点
+        removeVnodes(parent, [oldVnode], 0, 0)
+      }
+    }
+    // 循环调用insert钩子函数
+    for (i = 0; i &lt; insertedVnodeQueue.length; ++i) {
+      insertedVnodeQueue[i].data!.hook!.insert!(insertedVnodeQueue[i])
+    }
+    // 循环调用post构造函数
+    for (i = 0; i &lt; cbs.post.length; ++i) cbs.post[i]()
+    // 结束patch并返回vNode（下一次的oldNode）
+    return vnode
+  }
+}
+</code></pre>
+<h3 id="patchvnode函数">patchVnode函数</h3>
+<p><strong>patchVnode是对比节点函数的具体实现。</strong></p>
+<ol>
+<li>首先触发preptach钩子</li>
+<li>触发update钩子函数</li>
+<li>判断是否为文本节点，如果和旧的一样就不处理，如果是不一样的就设置新节点的textConent</li>
+<li>如果有chilcren，就对比新旧子元素是否相等，通过updateChildren函数，并更新差异</li>
+<li>如果新节点有childeren，就节点没有，那么就清空textConent，然后添加子节点进去</li>
+<li>如果老节点有children属性，新节点没有，那么直接移除老节点的内容</li>
+<li>判断老节点是否存在text属性，有的话直接清空</li>
+<li>触发postpatch钩子函数</li>
+</ol>
+<pre><code class="language-jsx">  /**
+   * @description 对比节点函数
+   * @param oldVnode  旧节点
+   * @param vnode  新节点
+   * @param insertedVnodeQueue 
+   */
+  function patchVnode (oldVnode: VNode, vnode: VNode, insertedVnodeQueue: VNodeQueue) {
+    const hook = vnode.data?.hook
+    // 首先触发preptach钩子
+    hook?.prepatch?.(oldVnode, vnode)
+    const elm = vnode.elm = oldVnode.elm!
+    const oldCh = oldVnode.children as VNode[]
+    const ch = vnode.children as VNode[]
+    // 如果一模一样直接返回
+    if (oldVnode === vnode) return
+    // 执行update钩子函数
+    if (vnode.data !== undefined) {
+      for (let i = 0; i &lt; cbs.update.length; ++i) cbs.update[i](oldVnode, vnode)
+      vnode.data.hook?.update?.(oldVnode, vnode)
+    }
+    // 判断是否为文本节点，如果和旧的一样就不处理，如果是不一样的就设置新节点的textConent
+    if (isUndef(vnode.text)) {
+      if (isDef(oldCh) &amp;&amp; isDef(ch)) {
+        // 如果有chilcren，就对比新旧子元素是否相等，通过updateChildren函数对象，并更新差异  diff核心
+        if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue)
+      } else if (isDef(ch)) {
+        // 如果新节点有childeren，就节点没有，那么就清空textConent，然后添加子节点进去
+        if (isDef(oldVnode.text)) api.setTextContent(elm, '')
+        addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+      } else if (isDef(oldCh)) {
+        // 如果老节点有children属性，新节点没有，那么直接移除老节点的内容
+        removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+      } else if (isDef(oldVnode.text)) {
+        // 判断老节点是否存在text属性，有的话直接清空
+        api.setTextContent(elm, '')
+      }
+      // 如果新旧节都是文本节点，且不一致，那么就移除旧节点的内容，并设置新的
+    } else if (oldVnode.text !== vnode.text) {
+      if (isDef(oldCh)) {
+        removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+      }
+      api.setTextContent(elm, vnode.text!)
+    }
+    // 触发postpatch钩子函数
+    hook?.postpatch?.(oldVnode, vnode)
+  }
+</code></pre>
+<h3 id="createelm函数">createElm函数</h3>
+<ol>
+<li>先判断是否为注释节点，是就直接渲染</li>
+<li>如果是DOM节点，先保存原节点的样式属性</li>
+<li>然后调用原生document.createElement创建标签，然后设置相关的id和class到该标签</li>
+<li>依次执行create钩子函数</li>
+<li>如果有子节点就递归调用该该函数，创建子节点</li>
+<li>没有子节点，判断该节点是否为文本节点，如果是就插入到当前vNode中</li>
+<li>最后返回该Vnode的elm元素</li>
+</ol>
+<pre><code class="language-jsx">  /**
+   * @description 创建新的元素节点
+   * @param vnode 
+   * @param insertedVnodeQueue 
+   */
+  function createElm (vnode: VNode, insertedVnodeQueue: VNodeQueue): Node {
+    let i: any
+    let data = vnode.data
+    if (data !== undefined) {
+      const init = data.hook?.init
+      if (isDef(init)) {
+        init(vnode)
+        data = vnode.data
+      }
+    }
+    const children = vnode.children
+    const sel = vnode.sel
+    // 如果是注释节点，直接创建一个空的注释节点
+    if (sel === '!') {
+      if (isUndef(vnode.text)) {
+        vnode.text = ''
+      }
+      vnode.elm = api.createComment(vnode.text!)
+    } else if (sel !== undefined) {
+      // 是非空节点
+      // 先保存原节点的属性
+      const hashIdx = sel.indexOf('#')
+      const dotIdx = sel.indexOf('.', hashIdx)
+      const hash = hashIdx &gt; 0 ? hashIdx : sel.length
+      const dot = dotIdx &gt; 0 ? dotIdx : sel.length
+      const tag = hashIdx !== -1 || dotIdx !== -1 ? sel.slice(0, Math.min(hash, dot)) : sel
+      // createElementNS一般创建svg标签
+      const elm = vnode.elm = isDef(data) &amp;&amp; isDef(i = data.ns)
+        ? api.createElementNS(i, tag)
+        : api.createElement(tag)
+      if (hash &lt; dot) elm.setAttribute('id', sel.slice(hash + 1, dot))
+      if (dotIdx &gt; 0) elm.setAttribute('class', sel.slice(dot + 1).replace(/\./g, ' '))
+      // 调用create钩子函数
+      for (i = 0; i &lt; cbs.create.length; ++i) cbs.create[i](emptyNode, vnode)
+      // 如果存在子节点，递归调用该函数创建节点
+      if (is.array(children)) {
+        for (i = 0; i &lt; children.length; ++i) {
+          const ch = children[i]
+          if (ch != null) {
+            api.appendChild(elm, createElm(ch as VNode, insertedVnodeQueue))
+          }
+        }
+        // 
+      } else if (is.primitive(vnode.text)) {
+        api.appendChild(elm, api.createTextNode(vnode.text))
+      }
+      const hook = vnode.data!.hook
+      if (isDef(hook)) {
+        hook.create?.(emptyNode, vnode)
+        // 如果存在insert钩子，添加到插入vNode的队列中
+        if (hook.insert) {
+          insertedVnodeQueue.push(vnode)
+        }
+      }
+    } else {
+      // 没有子节点，判断该节点是否为文本节点，如果是就插入到当前vNode中
+      vnode.elm = api.createTextNode(vnode.text!)
+    }
+    // 返回该Vnode的elm元素
+    return vnode.elm
+  }
+</code></pre>
+<h3 id="removevnodes函数">removeVnodes函数</h3>
+<ol>
+<li>循环处理要删除的节点内容</li>
+<li>如果是文本节点，直接通过removeChild方式移除</li>
+<li>如果是常规节点，先调用传入的destroy钩子函数（可选）</li>
+<li>把remove钩子函数的数量添加</li>
+<li>然后调用createRmCb高阶函数，并通过listeners来确定唯一的dom防止重复删除</li>
+<li>循环调用remove函数</li>
+<li>调用外部传入的remove钩子（可选）</li>
+<li>最后调用前面高阶函数返回的函数，真正执行删除</li>
+</ol>
+<pre><code class="language-jsx">  /**
+   * @description 移除Vnode函数
+   * @param parentElm 
+   * @param vnodes 
+   * @param startIdx 
+   * @param endIdx 
+   */
+  function removeVnodes (parentElm: Node,
+    vnodes: VNode[],
+    startIdx: number,
+    endIdx: number): void {
+      // 循环要删除的节点内容
+    for (; startIdx &lt;= endIdx; ++startIdx) {
+      let listeners: number
+      let rm: () =&gt; void
+      const ch = vnodes[startIdx]
+      if (ch != null) {
+        if (isDef(ch.sel)) {
+          // 如果是常规节点，先调用传入的destroy钩子函数（可选）
+          invokeDestroyHook(ch)
+          // remove钩子函数的数量添加
+          listeners = cbs.remove.length + 1
+          // rm是真实执行删除操作的函数
+          rm = createRmCb(ch.elm!, listeners)
+          // 循环执行remove的hooks钩子函数
+          for (let i = 0; i &lt; cbs.remove.length; ++i) cbs.remove[i](ch, rm)
+          // 调用外部传入的remove钩子（可选）
+          const removeHook = ch?.data?.hook?.remove
+          if (isDef(removeHook)) {
+            removeHook(ch, rm)
+          } else {
+            // 真正执行删除
+            rm()
+          }
+        } else { 
+          // 如果是文本节点，直接通过removeChild方式移除
+          api.removeChild(parentElm, ch.elm!)
+        }
+      }
+    }
+  }
+</code></pre>
+<h3 id="updatechildren函数diff核心">updateChildren函数（diff核心）</h3>
+<p>updateChildren是init内部的函数，也就是核心的diff算法。</p>
+<ul>
+<li>oldStartIdx（旧节点开始索引）</li>
+<li>newStartIdx（新节点开始索引）</li>
+<li>oldEndIdx（旧节点结束索引）</li>
+<li>newEndIdx（新节点结束索引）</li>
+</ul>
+<ol>
+<li>
+<p>先初始化索引和头尾节点的值</p>
+</li>
+<li>
+<p>分别判断新头/新，旧头/尾 是否为null，如果是那么就在节点队列里面创建一个/减少一个元素</p>
+</li>
+<li>
+<p>对比旧头和新头，如果是一个节点就处理内部的变化，并更新DOM</p>
+</li>
+<li>
+<p>对比旧尾和新尾，如果是一个节点就处理内部的变化，并更新DOM</p>
+</li>
+<li>
+<p>对比旧头和新尾，比较内部差异，把更新的内容移动到插入到旧节点的最后</p>
+</li>
+<li>
+<p>对比旧尾和新头，然后比较内部差异，把更新的内容移动到插入到旧节点的最前</p>
+</li>
+<li>
+<p>如果不是以上情况，说明开始节点 是一个全新的节点，而非对比的节点</p>
+<ul>
+<li>定义一个方便通过新节点的key找到旧节点数组的索引</li>
+<li>然后 用新节点的key 找到老节点的索引</li>
+<li>如果没有key，那么就创建dom，并插入到最前方</li>
+<li>如果有key。判断sel属性是否相同，如果不相同就创建新的dom，如果相同则代表是相同节点</li>
+<li>插入完成后，索引增加</li>
+</ul>
+</li>
+<li>
+<p>如果新节点/旧节点还有剩余</p>
+<ul>
+<li>如果是老节点的子节点先遍历完成，那么就把剩下的新节点元素，都插入到旧节点的后面</li>
+<li>如果新节点先完成，那么剩下的就是老节点需要移除的节点</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-jsx"> /**
+   * 
+   * @param parentElm 父亲元素
+   * @param oldCh 旧节点元素
+   * @param newCh 新节点元素
+   * @param insertedVnodeQueue 插入vNode的队列
+   * 
+   * 通过四个索引地址来进行diff
+   * 
+   */
+  function updateChildren (parentElm: Node,
+    oldCh: VNode[],
+    newCh: VNode[],
+    insertedVnodeQueue: VNodeQueue) {
+    // 旧开始节点
+    let oldStartIdx = 0
+    // 新开始节点
+    let newStartIdx = 0
+    // 旧结束节点
+    let oldEndIdx = oldCh.length - 1
+    let oldStartVnode = oldCh[0]
+    let oldEndVnode = oldCh[oldEndIdx]
+    // 新结束节点
+    let newEndIdx = newCh.length - 1
+    let newStartVnode = newCh[0]
+    let newEndVnode = newCh[newEndIdx]
+    let oldKeyToIdx: KeyToIndexMap | undefined
+    let idxInOld: number
+    let elmToMove: VNode
+    let before: any
+
+    while (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) {
+      /**
+       * 如果四个对比节点其中有为null的，那么就重新赋值，并且为元素数组中 添加/减少 一位
+       */
+      if (oldStartVnode == null) {
+        oldStartVnode = oldCh[++oldStartIdx] 
+      } else if (oldEndVnode == null) {
+        oldEndVnode = oldCh[--oldEndIdx]
+      } else if (newStartVnode == null) {
+        newStartVnode = newCh[++newStartIdx]
+      } else if (newEndVnode == null) {
+        newEndVnode = newCh[--newEndIdx]
+      /**
+       *  如果是同一个元素，就对比新旧节点内部的变化，然后修改dom
+       *  并且把Vnode内容分别添加一项（索引后移）
+       */
+      } else if (sameVnode(oldStartVnode, newStartVnode)) {
+        patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue)
+        oldStartVnode = oldCh[++oldStartIdx]
+        newStartVnode = newCh[++newStartIdx]
+        // 道理同前者
+      } else if (sameVnode(oldEndVnode, newEndVnode)) {
+        patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue)
+        oldEndVnode = oldCh[--oldEndIdx]
+        newEndVnode = newCh[--newEndIdx]
+        /**
+         * 对比旧开始和新结束节点，并更新dom
+         * 然后比较内部差异，把更新的内容移动到插入到旧节点的最后
+         * 旧的索引向后移动 新的索引向前移动
+         */
+      } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
+        patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue)
+        api.insertBefore(parentElm, oldStartVnode.elm!, api.nextSibling(oldEndVnode.elm!))
+        oldStartVnode = oldCh[++oldStartIdx]
+        newEndVnode = newCh[--newEndIdx]
+         /**
+         * 对比旧结束和新开始节点，并更新dom
+         * 然后比较内部差异，把更新的内容移动到插入到旧节点的最前
+         * 旧的索引向前移动 新的索引向后移动
+         */
+      } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
+        patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue)
+        api.insertBefore(parentElm, oldEndVnode.elm!, oldStartVnode.elm!)
+        oldEndVnode = oldCh[--oldEndIdx]
+        newStartVnode = newCh[++newStartIdx]
+        /**
+         * 如果不是以上情况，说明开始节点 是一个全新的节点，而非对比的节点
+         *  如果没有key，那么就创建dom，并插入到最前方（1）
+         *  如果有key。判断sel属性是否相同，如果不相同就创建新的dom，如果相同则代表是相同节点(2)
+         */
+      } else {
+        // 方便通过新节点的key找到旧节点数组的索引
+        if (oldKeyToIdx === undefined) {
+          oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
+        }
+        // 用新节点的key 找到老节点的索引
+        idxInOld = oldKeyToIdx[newStartVnode.key as string]
+        // （1）新节点
+        if (isUndef(idxInOld)) {
+          api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm!)
+        } else {
+        // (2) 旧节点
+        // 取出就节点
+          elmToMove = oldCh[idxInOld]
+          // 被修改过的元素，直接创建一个新的插入
+          if (elmToMove.sel !== newStartVnode.sel) {
+            api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm!)
+          } else {
+            // 没有修改过，同patchVnode内部差异并更新
+            patchVnode(elmToMove, newStartVnode, insertedVnodeQueue)
+            // 把旧节点相应位置的元素设置为undefined
+            oldCh[idxInOld] = undefined as any
+            // 把修改过的元素移动到盗猎的元素之前
+            api.insertBefore(parentElm, elmToMove.elm!, oldStartVnode.elm!)
+          }
+        }
+        // 插入完成后，索引增加
+        newStartVnode = newCh[++newStartIdx]
+      }
+    }
+    // 老节点的子节点先遍历完成。或者新节点的子节点先遍历完成
+    if (oldStartIdx &lt;= oldEndIdx || newStartIdx &lt;= newEndIdx) {
+      if (oldStartIdx &gt; oldEndIdx) {
+        // 如果是老节点的子节点先遍历完成，那么就把剩下的新节点元素，都插入到旧节点的后面
+        // before是需要插入的参考位置
+        before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].elm
+        addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
+      } else {
+        // 新节点先完成，那么剩下的就是老节点需要移除的节点
+        removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
+      }
+    }
+  }
+</code></pre>
+<h2 id="常见疑问">常见疑问</h2>
+<h3 id="为什么要设置key">为什么要设置key</h3>
+<p>通过阅读diff算法（updateChildren函数）源码我们可以知道，判断两个节点是否相同是通过sameVnode函数。</p>
+<pre><code class="language-jsx">function sameVnode(vnode1, vnode2) {
+    return vnode1.key === vnode2.key &amp;&amp; vnode1.sel === vnode2.sel;
+}
+</code></pre>
+<p>如上所示sameVnode是通过key和sel来区分两个节点是否相同，如果没有设置key那么两个VNode的key都是undefined，只需要sel相同即可，那么就会造成数据渲染错误的问题。</p>
+<p>在一定程度上设置key的过程更消耗性能，但是在页面渲染和diff过程中。key是不可或缺的。</p>
+<p><strong>源码分析地址： <a href="https://github.com/gzg1023/snabbdom-fork">https://github.com/gzg1023/snabbdom-fork</a></strong></p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/virtual-dom/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#virtual DOM</a>
+    
+    <a href="/tags/vue%E5%8E%9F%E7%90%86/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#vue原理</a>
+    
+    <a href="/tags/%E6%BA%90%E7%A0%81/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#源码</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">上一篇</span>
+        <a href="/posts/2020/2020_summary/" class="block">【生活总结】2020年总结和2021年展望</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2021/input_html/" class="block">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#virtual-dom">virtual DOM</a>
+      <ul>
+        <li><a href="#什么是virtual-dom">什么是virtual DOM</a></li>
+        <li><a href="#virtual-dom优缺点">virtual DOM优缺点</a></li>
+        <li><a href="#virtual-dom场景">virtual DOM场景</a></li>
+      </ul>
+    </li>
+    <li><a href="#snabbdom">snabbdom</a>
+      <ul>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#例子">例子</a></li>
+        <li><a href="#源码结构">源码结构</a></li>
+        <li><a href="#vnode结构">VNode结构</a></li>
+        <li><a href="#h函数">h函数</a></li>
+        <li><a href="#init函数patch内部">init函数/patch(内部)</a></li>
+        <li><a href="#patch函数流程">patch函数流程</a></li>
+        <li><a href="#patchvnode函数">patchVnode函数</a></li>
+        <li><a href="#createelm函数">createElm函数</a></li>
+        <li><a href="#removevnodes函数">removeVnodes函数</a></li>
+        <li><a href="#updatechildren函数diff核心">updateChildren函数（diff核心）</a></li>
+      </ul>
+    </li>
+    <li><a href="#常见疑问">常见疑问</a>
+      <ul>
+        <li><a href="#为什么要设置key">为什么要设置key</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
+            <br />
+            
+            <a href="/posts/2021/input_html/">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
+            <br />
+            
+            <a href="/posts/2020/scroll_fix/">【技术笔记】vue中滑动事件触发怎么失灵了？！</a>
+            <br />
+            
+            <a href="/posts/2020/functional_programming/">【技术分享】函数式编程入门初探</a>
+            <br />
+            
+            <a href="/posts/2020/mobile_debug/">【前端技术】移动端h5项目调试技巧与总结</a>
+            <br />
+            
+            <a href="/posts/2019/array_handle-/">【技术笔记】JS的Array的各种API</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
