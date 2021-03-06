@@ -84,7 +84,7 @@
         "name": "gzg1023",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://ae02.alicdn.com/kf/Hc12b72efe97141c4b21a7d0bc4b889dao.png"
+            "url": "https://i.loli.net/2021/03/06/kHzcVZrX2uDW6Jg.jpg"
         }
         },
     "description": "\u003cp\u003e需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)\u003c\/p\u003e"
@@ -260,7 +260,7 @@
             <p>需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)</p>
 <h2 id="需求补充">需求补充</h2>
 <p>运营通过添加按钮，为输入框内部添加 相应的标识符。添加完成的内容高亮显示，并且在发送给后端之前，把高亮的html代码字符转为约定的标识符。当进行编辑是，在重新把标识符匹配成相应高亮的文字。如下图所示。</p>
-<p><img src="https://ae04.alicdn.com/kf/Hec4a3fedb30f4a78934058db6e164e80T.png" alt="1111.png"></p>
+<p><img src="https://i.loli.net/2021/03/06/7EuogSaYpjZWicQ.png" alt="1111.png"></p>
 <h2 id="1-模拟输入框">1. 模拟输入框</h2>
 <p>第一部分很简单，就根据设计图或者原型模拟出来我们需要的文本框，这里我们在输入的时候添加一个有色边框，在未输入的情况，隐藏边框。尽量和真实文本框保持一致。</p>
 <pre><code class="language-html"> &lt;div class=&quot;input-wrapper&quot; :class=&quot;{ focus: msgTitleInputFocusFlag }&quot;&gt;
@@ -313,7 +313,7 @@ const hightext =  '&lt;span class=&quot;fack-name&quot; contenteditable=&quot;fa
 <p>此时，我们在输入框就可以输入，并点击按钮可以添加高亮字符到页面中进行显示。</p>
 <h2 id="4-处理光标及后续匹配">4. 处理光标及后续匹配</h2>
 <p>在上面完成后，可以输入内容并且添加高亮内容了。但是我们会发现一个问题，添加完成高亮文本后，光标跑到了最前面，而且页面的内容，无法进行选择。如下图。</p>
-<p><img src="https://ae04.alicdn.com/kf/Hcdee460dc5f2445d9cb19d4f0d2587a7Y.png" alt="222.png"></p>
+<p><img src="https://i.loli.net/2021/03/06/OrDjLzSKEmBcdi1.png" alt="222.png"></p>
 <p>但是在输入完成后，我们还是需要输入内容的，所以为输入框解决输入问题。在之前添加名称完成后，我们再重置光标的位置。通过locateToLastIndex函数，我们手动更改光标的位置，传入的参数是DOM</p>
 <pre><code class="language-javascript">locateToLastIndex(obj) {
     if (window.getSelection) {
