@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,17 @@
       <guid>/posts/2020/2020_summary/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;2020时间飞逝，做一个年终总结。也对未来的2021年做一些计划。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【生活感悟】再谈独立思考的能力-希望可以解决问题而不是解决问题</title>
+      <link>/posts/2021/about_mylife/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/about_mylife/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;关于独立思考，我觉得是一个非常重要的技能。有助于你了解事情的本质，或者可以从根本找到问题并解决。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
