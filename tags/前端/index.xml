@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【技术分享】入门浏览器里面的各种Observer对象</title>
+      <link>/posts/2021/observer/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/observer/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;日常开发者经常碰到需要优化的需求，除了一些日常的判断和循环及各种监听，了解一下浏览器里面的各种Observer对象。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单</title>
