@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width">
 
 
-<title>【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单 | 沽默清尘</title>
+<title>【原理探索】vue.js(2.x)框架底层原理- 实现mini vue | 沽默清尘</title>
 <link rel="stylesheet" href="/css/eureka.min.css">
 <script defer src="/js/eureka.min.js"></script>
 
@@ -46,7 +46,7 @@
 
 <meta name="description"
   content="
-vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。
+响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。
 ">
 <script type="application/ld+json">
 {
@@ -59,7 +59,7 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
       "item":"/posts/"},{
       "@type": "ListItem",
       "position": 2 ,
-      "name":"【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单",
+      "name":"【原理探索】vue.js(2.x)框架底层原理- 实现mini vue",
       "item":"/posts/2021/vue_principle_01/"}]
 }
 </script>
@@ -74,9 +74,9 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
         "@type": "WebPage",
         "@id": "/posts/2021/vue_principle_01/"
     },
-    "headline": "【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单 | 沽默清尘","datePublished": "2021-03-05T00:00:00+00:00",
-    "dateModified": "2021-03-05T00:00:00+00:00",
-    "wordCount":  52 ,
+    "headline": "【原理探索】vue.js(2.x)框架底层原理- 实现mini vue | 沽默清尘","datePublished": "2021-04-15T00:00:00+00:00",
+    "dateModified": "2021-04-15T00:00:00+00:00",
+    "wordCount":  870 ,
     "publisher": {
         "@type": "Person",
         "name": "gzg1023",
@@ -85,9 +85,9 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
             "url": "https://i.loli.net/2021/03/06/kHzcVZrX2uDW6Jg.jpg"
         }
         },
-    "description": "\u003cblockquote\u003e\n\u003cp\u003evue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+    "description": "\u003cblockquote\u003e\n\u003cp\u003e响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
 }
-</script><meta property="og:title" content="【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单 | 沽默清尘" />
+</script><meta property="og:title" content="【原理探索】vue.js(2.x)框架底层原理- 实现mini vue | 沽默清尘" />
 <meta property="og:type" content="article" />
 
 
@@ -100,7 +100,7 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
 
 <meta property="og:description" content="
-vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。
+响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。
 " />
 
 
@@ -118,10 +118,10 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
 
 
-<meta property="article:published_time" content="2021-03-05T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-04-15T00:00:00&#43;00:00" />
 
 
-<meta property="article:modified_time" content="2021-03-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-04-15T00:00:00&#43;00:00" />
 
 
 
@@ -138,17 +138,17 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
 
 
+<meta property="og:see_also" content="/posts/2021/vue_principle_main/" />
+
 <meta property="og:see_also" content="/posts/2021/snabbdom_source/" />
 
 <meta property="og:see_also" content="/posts/2021/designpatterns/" />
 
+<meta property="og:see_also" content="/posts/2021/observer/" />
+
 <meta property="og:see_also" content="/posts/2021/input_html/" />
 
 <meta property="og:see_also" content="/posts/2020/scroll_fix/" />
-
-<meta property="og:see_also" content="/posts/2020/functional_programming/" />
-
-<meta property="og:see_also" content="/posts/2020/mobile_debug/" />
 
 
 
@@ -225,11 +225,11 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 <div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
     <div
         class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-        <h1 class="font-bold text-3xl text-primary-text">【原理探索】vue.js超级全家桶--框架整体源码分析及技术学习清单</h1>
+        <h1 class="font-bold text-3xl text-primary-text">【原理探索】vue.js(2.x)框架底层原理- 实现mini vue</h1>
         <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
     <div class="mr-6 my-2">
         <i class="fas fa-calendar mr-1"></i>
-        <span>2021-03-05</span>
+        <span>2021-04-15</span>
     </div>
     
     
@@ -258,24 +258,345 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
         <div class="content">
             <blockquote>
-<p>vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。</p>
+<p>响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。</p>
 </blockquote>
-<h2 id="目录">目录</h2>
-<p>系列文章，针对vue超级全家桶原理进行分析及新技术的学习的清单，鞭策自己一步一步完成。</p>
+<h2 id="引言">引言</h2>
+<p>当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter/setter。这些 getter/setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。</p>
+<p>每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染。</p>
+<p><img src="https://cn.vuejs.org/images/data.png" alt="vue"></p>
+<p>以上内容摘自 vue 文档，可以看到 vue2.x 是通过 Object.defineProperty 对数据进行包裹，在通过内部的转换实现数据的双向绑定，让我们可以在使用 ui 组件(如：输入框)时候，可以非常便捷的操作数据。那么这一套流程是怎么实现的呢，让我们来模拟一个 mini 版本的 vue 了解他的本质。</p>
+<p>实现最终代码： <a href="https://github1s.com/gzg1023/fackAchieve/tree/main/framework/vue">mini vue github 地址</a></p>
+<h2 id="模拟实现">模拟实现</h2>
+<p>提到 vue 很容易想到的就是单向数据流和数据双向绑定，乍一看有点冲突。一会儿单向 一会儿双向，但是其实不然，单向数据流是指用户访问 View，View 发出用户交互的 Action，在 Action 里对 state 进行相应更新。state 更新后会触发 View 更新页面的过程。这样数据总是清晰的单向进行流动，便于维护并且可以预测。 而数据双向绑定是基于单向数据流之上（理解为业务层）的实现，通过 Model 和 View 进行绑定，保持一致的操作。</p>
+<p>我们从第一步开始模拟实现，在使用 vue 时候，我们通过 new 关键字创建实例,通过 el 指定一个 css 选择器或者是一个 DOM 对象，然后在 data 部分定义我们要操作的数据，就可以愉快的使用了。但是这背后 vue 做了很多工作。如下所示，通过<code>new Vue</code>创建了 vm 实例，也是整个框架的入口。</p>
+<pre><code class="language-javascript">const vm = new Vue({
+  el: &quot;#app&quot;,
+  data: {
+    message: &quot;Hello Vue.js!&quot;,
+  },
+});
+</code></pre>
+<p>我们通过 es6 语法 class 的方式实现整个 mini vue，用来了解整个响应式原理的基本结构和原理。</p>
+<h2 id="vue">Vue</h2>
+<p>创建 Vue 构造类，我们先来整理一下流程</p>
 <ol>
-<li>核心思想原理 实现mini vue</li>
-<li>vue原理 - vue对象实现流程（data.props,computed,methods,watch）</li>
-<li>vue原理 - Vue实例方法 vue.extend , Vue.observable, vue.use, vue.nextTick, vue.set</li>
-<li>vue原理 - Vue源码版本 生命周期分析</li>
-<li>vue原理 - Vue内置指令及内置组件（v-if, v-for , v-model,keep-alive, transition)</li>
-<li>vue-router - vue常用两种路由及原理</li>
-<li>vuex - Vue状态管理库 原理分析</li>
-<li>vue-cli - Vue官方脚手架工具源码分析</li>
-<li>vue-ssr - next.js 主流ssr框架源码分析</li>
-<li>vue3 - 新版本学习及原理分析</li>
-<li>vite2 - vue官方新开发工具使用及原理分析</li>
-<li>gridsome - vue主流ssg框架使用及原理</li>
+<li>创建 vue 实例，传入 el 选项来指定模版要替换的元素</li>
+<li>传入其他选项 data，methods，computed 等选项来使用 vue 提供的 api</li>
+<li>把传入的 data 变成响应式数据，激活数据的双向绑定</li>
+<li>通过 v-dom 和 Compiler 把 template 编译成 render</li>
+<li>通过 render 转为 AST 在转为 code，并通过 v-dom 的 diff 渲染页面</li>
 </ol>
+<p>我们模拟的话，就只涉及响应式原理部分。只处理，Observer 响应式，Compiler 对简单指令的解析 两个部分的实现。关于异常处理，在模拟过程中没有进行涉及，在 vue 中可以看到只要涉及到&quot;用户传入&quot;部分的内容都添加了异常处理和 log 异常日志的输出，这点在开发库类的项目中很值得学习。</p>
+<pre><code class="language-javascript">class Vue {
+  constructor(options) {
+    // 1. 通过属性保存选项的数据
+    this.$options = options || {};
+    this.$data = options.data || {};
+    // 如果是字符串就说明是选择器
+    this.$el =
+      typeof options.el === &quot;string&quot;
+        ? document.querySelector(options.el)
+        : options.el;
+    // 2. 把data的成员转化为getter和setter注入到vue实例
+    this._proxyData(this.$data);
+    // 3. 调用observer对象，把data属性转化为响应式数据，监听数据的变化
+    new Observer(this.$data);
+    // 4. 调用Compiler对象，处理模版编译
+    new Compiler(this);
+  }
+
+  _proxyData(data) {
+    // 遍历对象
+    Object.keys(data).forEach((key) =&gt; {
+      Object.defineProperty(this, key, {
+        enumerable: true,
+        configurable: true,
+        get() {
+          return data[key];
+        },
+        set(newValue) {
+          if (newValue === data[key]) return;
+          data[key] = newValue;
+        },
+      });
+    });
+  }
+}
+</code></pre>
+<h3 id="dep">Dep</h3>
+<p>我们知道 Vue 使用的设计模式是观察者模式，那么就需要观察者和发布者来完成，我们定义一个 Dep 对象内部包含一个 subs 数组用来存在所有的依赖对象，通过 addSub 方法添加依赖，通过 notify 方法来触发所有以来的更新（调用依赖的 update 方法）</p>
+<pre><code class="language-javascript">// 观察者模式的 发布者
+class Dep {
+  constructor() {
+    // 收集依赖对象
+    this.subs = [];
+  }
+  // 添加依赖对象
+  addSub(sub) {
+    if (sub &amp;&amp; sub.update) {
+      this.subs.push(sub);
+    }
+  }
+  // 通知方法
+  notify() {
+    this.subs.forEach((sub) =&gt; {
+      sub.update();
+    });
+  }
+}
+</code></pre>
+<h3 id="observer">Observer</h3>
+<p>Observer 类搜集依赖，在 get 阶段搜集依赖，在 set 阶段触发依赖的更新。内置的 walk 方法就是递归的处理所有对象，添加依赖属性。</p>
+<pre><code class="language-javascript">class Observer {
+  constructor(targetData) {
+    this.walk(targetData);
+  }
+  // 遍历对象所有属性
+  walk(targetData) {
+    // 判断是否为对象
+    if (!targetData || typeof targetData !== &quot;object&quot;) {
+      return;
+    }
+    // 遍历所有属性
+    Object.keys(targetData).forEach((key) =&gt; {
+      this.defineReactive(targetData, key, targetData[key]);
+    });
+  }
+
+  // 定义响应式数据
+  defineReactive(obj, key, value) {
+    // 收集依赖，来统一更新
+    let dep = new Dep();
+    // 转化对象的内部属性
+    this.walk(value);
+    const _that = this;
+    Object.defineProperty(obj, key, {
+      enumerable: true,
+      configurable: true,
+      // 不返回obj[key]的原因是会递归触发
+      get() {
+        // 收集依赖
+        Dep.target &amp;&amp; dep.addSub(Dep.target);
+        return value;
+      },
+      set(newValue) {
+        if (newValue === value) return;
+        value = newValue;
+        // 处理普通值转为对象的情况
+        _that.walk(newValue);
+        // 发生通知
+        dep.notify();
+      },
+    });
+  }
+}
+</code></pre>
+<h3 id="watcher">Watcher</h3>
+<p>每一个组件对应一个 Watcher 对象，包含一个 update 方法，作用是调用传入的 callback 函数达到更新数据的目的。也是观察者模式中的观察者对象。</p>
+<pre><code class="language-javascript">class Watcher {
+  constructor(vm, key, cb) {
+    this.vm = vm;
+    this.key = key;
+    this.cb = cb;
+    // 把watcher对象记录到Dep类的静态属性target
+    Dep.target = this;
+    // 触发get方法，在get方法中会调用addSub
+    this.oldValue = vm[key];
+    // 重制依赖对象，防止数据混乱
+    Dep.target = null;
+  }
+  update() {
+    let newValue = this.vm[this.key];
+    // 如果数据发现变化则更新
+    if (this.oldValue === newValue) {
+      return;
+    }
+    this.cb(newValue);
+  }
+}
+</code></pre>
+<h3 id="compiler">Compiler</h3>
+<p>Compiler 是处理模版编译的对象，在 vue 中处理 template 对象编译成 render 函数并解析指令，大括号语法，等 vue 内置对象。我们这里只针对 html 模版进行简指令的解析。这个过程也是递归的，因为我们并不知道节点有多少层。</p>
+<p>在处理完成指令和大括号的解析后，我们可以得到对应的 data 值 然后通过 update 方法进行更新。关于 v-model 就是通过表单的 change 事件来进行双向数据的绑定操作。</p>
+<pre><code class="language-javascript">class Compiler {
+  constructor(vm) {
+    this.el = vm.$el;
+    this.vm = vm;
+    this.compiler(this.el);
+  }
+  // 编译模版，处理各种节点
+  compiler(el) {
+    const childNodes = el.childNodes;
+    Array.from(childNodes).forEach((node) =&gt; {
+      if (this.isTextNode(node)) {
+        // 处理文本
+        this.compilerText(node);
+      } else if (this.isElementNode(node)) {
+        // 处理元素
+        this.compilerElement(node);
+      }
+      // 处理多层节点
+      if (node.childNodes &amp;&amp; node.childNodes.length !== 0) {
+        this.compiler(node);
+      }
+    });
+  }
+  // 编译元素节点，处理指令
+  compilerElement(node) {
+    Array.from(node.attributes).forEach((attr) =&gt; {
+      let attrName = attr.name;
+      // 判断是否为指令
+      if (this.isDirective(attrName)) {
+        // 转化指令
+        attrName = attrName.substr(2);
+        let key = attr.value;
+        this.update(node, key, attrName);
+      }
+    });
+  }
+  // 编译文本节点，处理差值表达式
+  compilerText(node) {
+    let reg = /\{\{(.+?)}\}/;
+    let content = node.textContent;
+    if (reg.test(content)) {
+      // 获取正则匹配的第一个内容
+      let key = RegExp.$1.trim();
+      node.textContent = content.replace(reg, this.vm[key]);
+      // 触发依赖
+      new Watcher(this.vm, key, (newValue) =&gt; {
+        node.textContent = newValue;
+      });
+    }
+  }
+  // 判断元素是否为指令
+  isDirective(attrName) {
+    return attrName.startsWith(&quot;v-&quot;);
+  }
+  // 判断元素是否为文本节点
+  isTextNode(node) {
+    return node.nodeType === 3;
+  }
+  // 判断元素是否为元素节点
+  isElementNode(node) {
+    return node.nodeType === 1;
+  }
+  // 更新指令数据
+  update(node, key, attrName) {
+    let updateFn;
+    if (attrName.indexOf(&quot;:&quot;) !== -1) {
+      attrName = attrName.substr(3);
+      updateFn = this.onUpdater;
+      updateFn &amp;&amp; updateFn.call(this, node, key, this.vm[key], attrName);
+    } else {
+      updateFn = this[attrName + &quot;Updater&quot;];
+      // 此处的this的Compiler对象
+      updateFn &amp;&amp; updateFn.call(this, node, key, this.vm[key]);
+    }
+  }
+  // 处理v-text指令
+  textUpdater(node, key, value) {
+    // 文本节点的值用textContent
+    node.textContent = value;
+    // 收集依赖
+    new Watcher(this.vm, key, (newValue) =&gt; {
+      node.textContent = newValue;
+    });
+  }
+  // 处理v-model指令
+  modelUpdater(node, key, value) {
+    // 表单的值是value
+    node.value = value;
+    // 收集依赖
+    new Watcher(this.vm, key, (newValue) =&gt; {
+      node.value = newValue;
+    });
+    // 双向绑定
+    node.addEventListener(&quot;input&quot;, (e) =&gt; {
+      console.log(e);
+      this.vm[key] = node.value;
+    });
+  }
+
+  // 处理v-show
+  showUpdater(node, key, value) {
+    if (value) {
+      node.style.display = &quot;block&quot;;
+    } else {
+      node.style.display = &quot;none&quot;;
+    }
+    new Watcher(this.vm, key, (newValue) =&gt; {
+      node.style.display = newValue ? &quot;block&quot; : &quot;none&quot;;
+    });
+  }
+  // 处理v-on
+  onUpdater(node, key, value, handleType) {
+    // value = value.substr(2)
+    console.log(&quot;🚀 onUpdater&quot;, node, key, value);
+    node.addEventListener(handleType, (e) =&gt; {
+      this.vm[key]();
+    });
+  }
+}
+</code></pre>
+<h3 id="indexhtml">index.html</h3>
+<p>最后通过html文件创建实例来测试mini vue。</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;mini vue&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;h1&gt;差值表达式&lt;/h1&gt;
+        &lt;h3&gt;{{ msg }}&lt;/h3&gt;
+        &lt;div class=&quot;box&quot; data-img=&quot;http://google.com&quot;&gt;
+        &lt;h3&gt;{{ count }}&lt;/h3&gt;
+        &lt;h3&gt;{{ person }}&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;h1&gt;v-text&lt;/h1&gt;
+        &lt;div class=&quot;msg&quot; v-text=&quot;msg&quot;&gt;&lt;/div&gt;
+        &lt;h1&gt;v-model&lt;/h1&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;msg&quot;&gt;&lt;/input&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;count&quot;&gt;&lt;/input&gt;
+        &lt;h1&gt;v-if&lt;/h1&gt;
+        &lt;button v-show=&quot;showFlag&quot;&gt;测试&lt;/button&gt;
+        &lt;h1&gt;v-on&lt;/h1&gt;
+        &lt;button v-on:click=&quot;clickHandle&quot;&gt;测试&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;./dep.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./watcher.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./compiler.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./observer.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello mini vue',
+                count: 200,
+                showFlag:true,
+                person:{
+                    name:{
+                        alex:{
+                            age:19
+                        }
+                    }
+                },
+                clickHandle(){
+                    this.showFlag = !this.showFlag
+                    console.log('123',this)
+                }
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>我们可以看到整个vue进行响应式处理的流程是：（patch方法就是v-dom进行diff后更新为真实页面的操作）</p>
+<p>响应式触发<code>setter-&gt;Dep-&gt;Watcher-&gt;update-&gt;patch</code>。</p>
         </div>
         
         <div class="my-4">
@@ -298,13 +619,13 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
     <div>
         
         <span class="block font-bold">上一篇</span>
-        <a href="/posts/2021/about_mylife/" class="block">【生活感悟】再谈独立思考的能力-希望可以解决问题而不是解决问题</a>
+        <a href="/posts/2020/2020_summary/" class="block">【生活总结】2020年总结和2021年展望</a>
         
     </div>
     <div class="md:text-right mt-4 md:mt-0">
         
         <span class="block font-bold">下一篇</span>
-        <a href="/posts/2021/snabbdom_source/" class="block">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
+        <a href="/posts/2021/observer/" class="block">【技术分享】入门浏览器里面的各种Observer对象</a>
         
     </div>
 </div>
@@ -321,7 +642,18 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 <div class="sticky-toc hidden lg:block px-6 pb-6 ">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#目录">目录</a></li>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#模拟实现">模拟实现</a></li>
+    <li><a href="#vue">Vue</a>
+      <ul>
+        <li><a href="#dep">Dep</a></li>
+        <li><a href="#observer">Observer</a></li>
+        <li><a href="#watcher">Watcher</a></li>
+        <li><a href="#compiler">Compiler</a></li>
+        <li><a href="#indexhtml">index.html</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
 </div>
@@ -341,22 +673,22 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
         <h2 class="text-lg font-semibold mb-4">相关</h2>
         <div class="content">
             
+            <a href="/posts/2021/vue_principle_main/">【原理探索】vue.js超级全家桶--原理分析及技术学习清单</a>
+            <br />
+            
             <a href="/posts/2021/snabbdom_source/">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
             <br />
             
             <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
             <br />
             
+            <a href="/posts/2021/observer/">【技术分享】入门浏览器里面的各种Observer对象</a>
+            <br />
+            
             <a href="/posts/2021/input_html/">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
             <br />
             
             <a href="/posts/2020/scroll_fix/">【技术笔记】vue中滑动事件触发怎么失灵了？！</a>
-            <br />
-            
-            <a href="/posts/2020/functional_programming/">【技术分享】函数式编程入门初探</a>
-            <br />
-            
-            <a href="/posts/2020/mobile_debug/">【前端技术】移动端h5项目调试技巧与总结</a>
             <br />
             
         </div>
