@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/2020/2020_summary/</loc>
-    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
+    <loc>/posts/2021/vue_principle_main/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -103,11 +103,6 @@
   </url>
   
   <url>
-    <loc>/posts/2021/vue_principle_main/</loc>
-    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/docs/</loc>
     <lastmod>2020-02-06T00:00:00+00:00</lastmod>
   </url>
@@ -180,6 +175,11 @@
   <url>
     <loc>/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020/2020_summary/</loc>
+    <lastmod>2020-12-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -409,6 +409,10 @@
   
   <url>
     <loc>/series/</loc>
+  </url>
+  
+  <url>
+    <loc>/friend/</loc>
   </url>
   
 </urlset>
