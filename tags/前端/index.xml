@@ -7,24 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Apr 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>【原理探索】vue.js超级全家桶--原理分析及技术学习清单</title>
-      <link>/posts/2021/vue_principle_main/</link>
-      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      <title>vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</title>
+      <link>/posts/2021/vue_principle_02/</link>
+      <pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/2021/vue_principle_main/</guid>
+      <guid>/posts/2021/vue_principle_02/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。&lt;/p&gt;
+&lt;p&gt;在实现完成 mini vue 以后，对深入源码分析。本篇文章来理一理从 new Vue 开始都执行了哪些操作，并且基于源码对生命周期进行更深入的理解。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
     <item>
-      <title>【原理探索】vue.js(2.x)框架底层原理- 实现mini vue</title>
+      <title>【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」</title>
       <link>/posts/2021/vue_principle_01/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
       
@@ -42,6 +42,17 @@
       <guid>/posts/2021/observer/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;日常开发者经常碰到需要优化的需求，除了一些日常的判断和循环及各种监听，了解一下浏览器里面的各种Observer对象。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【原理探索】vue.js超级全家桶--原理分析及技术学习清单</title>
+      <link>/posts/2021/vue_principle_main/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/vue_principle_main/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     

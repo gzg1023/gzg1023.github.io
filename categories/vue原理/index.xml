@@ -7,10 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Apr 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/vue%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</title>
+      <link>/posts/2021/vue_principle_02/</link>
+      <pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/vue_principle_02/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在实现完成 mini vue 以后，对深入源码分析。本篇文章来理一理从 new Vue 开始都执行了哪些操作，并且基于源码对生命周期进行更深入的理解。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」</title>
+      <link>/posts/2021/vue_principle_01/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/vue_principle_01/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>【原理探索】vue.js超级全家桶--原理分析及技术学习清单</title>
@@ -20,17 +42,6 @@
       <guid>/posts/2021/vue_principle_main/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>【原理探索】vue.js(2.x)框架底层原理- 实现mini vue</title>
-      <link>/posts/2021/vue_principle_01/</link>
-      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2021/vue_principle_01/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
