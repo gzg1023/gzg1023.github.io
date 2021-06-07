@@ -4,56 +4,101 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/promise/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/promise/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2021/vue_principle_02/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/vue%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/vue%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/vue%E6%BA%90%E7%A0%81/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/vue%E6%BA%90%E7%A0%81/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <loc>/posts/2021/promise/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2021-04-25T00:00:00+00:00</lastmod>
+    <loc>/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%BC%82%E6%AD%A5/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E5%BC%82%E6%AD%A5/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2021-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2021/vue_principle_03/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/vue%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/vue%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/vue%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/vue%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2021-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2021/vue_principle_02/</loc>
     <lastmod>2021-04-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -64,11 +109,6 @@
   
   <url>
     <loc>/posts/2021/observer/</loc>
-    <lastmod>2021-04-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2021-04-01T00:00:00+00:00</lastmod>
   </url>
   

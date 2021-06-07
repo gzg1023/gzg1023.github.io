@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术分享】手写一个A&#43;规范的完整版Promise，让异步处理更流畅 | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="
+Promise 作为 ES6 系列的新特性，无疑是前端开发的重中之重。在 2021 年的现在无论是开源项目还是业务代码到处是 Promise 的身影。本文基于 A&#43;规范重写一个 Promise 及其静态方法的完整版，加深自己对异步代码的理解。
+">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术分享】手写一个A+规范的完整版Promise，让异步处理更流畅",
+      "item":"/posts/2021/promise/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2021/promise/"
+    },
+    "headline": "【技术分享】手写一个A\u002b规范的完整版Promise，让异步处理更流畅 | 沽默清尘","datePublished": "2021-06-03T00:00:00+00:00",
+    "dateModified": "2021-06-07T00:00:00+00:00",
+    "wordCount":  903 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://i.loli.net/2021/03/06/kHzcVZrX2uDW6Jg.jpg"
+        }
+        },
+    "description": "\u003cblockquote\u003e\n\u003cp\u003ePromise 作为 ES6 系列的新特性，无疑是前端开发的重中之重。在 2021 年的现在无论是开源项目还是业务代码到处是 Promise 的身影。本文基于 A\u002b规范重写一个 Promise 及其静态方法的完整版，加深自己对异步代码的理解。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+}
+</script><meta property="og:title" content="【技术分享】手写一个A&#43;规范的完整版Promise，让异步处理更流畅 | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2021/promise/" />
+
+
+
+
+<meta property="og:description" content="
+Promise 作为 ES6 系列的新特性，无疑是前端开发的重中之重。在 2021 年的现在无论是开源项目还是业务代码到处是 Promise 的身影。本文基于 A&#43;规范重写一个 Promise 及其静态方法的完整版，加深自己对异步代码的理解。
+" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-06-03T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-06-07T00:00:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="Promise" />
+
+<meta property="article:tag" content="异步" />
+
+<meta property="article:tag" content="手写代码" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_03/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_02/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_01/" />
+
+<meta property="og:see_also" content="/posts/2021/observer/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_main/" />
+
+<meta property="og:see_also" content="/posts/2021/snabbdom_source/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">文章</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">标签</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文档</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术分享】手写一个A&#43;规范的完整版Promise，让异步处理更流畅</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-06-03</span>
+    </div>
+    
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E5%89%8D%E7%AB%AF/" class="hover:text-eureka">前端</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/promise/" class="hover:text-eureka">Promise</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/%E5%BC%82%E6%AD%A5/" class="hover:text-eureka">异步</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" class="hover:text-eureka">手写代码</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>Promise 作为 ES6 系列的新特性，无疑是前端开发的重中之重。在 2021 年的现在无论是开源项目还是业务代码到处是 Promise 的身影。本文基于 A+规范重写一个 Promise 及其静态方法的完整版，加深自己对异步代码的理解。</p>
+</blockquote>
+<h2 id="手写前置">手写前置</h2>
+<p>都是手写代码了，肯定是经常使用并且熟悉各种方法。这里回顾一下 Promise 语法规则和静态的方法。</p>
+<h3 id="语法知识">语法知识</h3>
+<ol>
+<li>通过 new 创建（构造函数方式）,或者是 Promise.resolve()等静态方法直接创建</li>
+<li>只存在三种状态(<code>pending[初始等待状态]</code>,f<code>ulfilled[成功状态]</code>,<code>rejected[失败状态]</code>)</li>
+<li>Promise 状态一旦确定，<code>不可逆转</code>。不能再次修改</li>
+<li>通过 then/catch/finally 方法实现链式调用，都会返回新的 Promise</li>
+<li>两个回调函数形参 resolve,reject 分别是成功和失败 回调函数</li>
+<li>执行 then(..) 注册回调处理数组（then 方法可被同一个 Promise 调用多次）</li>
+<li>本质是在微任务队列进行执行</li>
+</ol>
+<p><img src="https://media.prod.mdn.mozit.cloud/attachments/2014/09/18/8633/51a934a714e191f53e588bff719bc321/promises.png" alt="Promise"></p>
+<p align="center">(来自MDN的Promise执行流程图)</p>
+<p>方法：</p>
+<ul>
+<li>
+<p>Promise.prototype.then(onFulfilled, onRejected) 添加成功或失败的 回调到当前 Promise, 并返回一个新的 Promise</p>
+</li>
+<li>
+<p>Promise.prototype.catch(onRejected) 添加失败的 回调到当前 Promise, 并返回一个新的 Promise</p>
+</li>
+<li>
+<p>Promise.prototype.finally(onFinally) 添加一个回调到当前 Promise（无论成功 或者失败）</p>
+</li>
+</ul>
+<p>静态方法（全部返回新 Promise）：</p>
+<ul>
+<li>
+<p>Promise.resolve(value)：返回一个状态为成功的 Promise 对象，并将给定的成功信息传递给对应的处理方法</p>
+</li>
+<li>
+<p>Promise.reject(reason)：返回一个状态为失败的 Promise 对象，并将给定的失败信息传递给对应的处理方法</p>
+</li>
+<li>
+<p>Promise.all(iterable) ：iterable 参数里所有的 Promise 对象都成功的时候才会触发成功，有一个失败则直接失败</p>
+</li>
+<li>
+<p>Promise.allSettled(iterable)：iterable 参数所有 Promises 都完成后（包含成功和失败）返回</p>
+</li>
+<li>
+<p>Promise.any(iterable)：接收一个 Promise 对象的集合，当其中的一个 Promise 成功，就返回那个成功的 Promise 的值</p>
+</li>
+<li>
+<p>Promise.race(iterable)：接收一个 Promise 对象的集合，当其中的一个 Promise 成功或者失败以后，就返回这个 Promise 的值</p>
+</li>
+</ul>
+<h2 id="手写代码">手写代码</h2>
+<p>这里用 es6 语法来构建 Promise</p>
+<h3 id="基本结构">基本结构</h3>
+<p>我们知道 Promise 总共有三种状态，这里通过静态常量的方式定义</p>
+<pre><code class="language-js">const PENDING = &quot;pending&quot;;
+const RESOLVE = &quot;fulfilled&quot;;
+const REJECT = &quot;rejected&quot;;
+</code></pre>
+<p>通过 class 语法来定义 Promise 并初始化状态，因为同一个 Promise 的 then 方法可以调用多次，所以失败和成功的回调都是数组，当<code>new Promise</code>时候会传入一个函数，函数有两个方法，分别是成功和失败的回调，我们通过定义一个 executor 来执行传入的回调。如果传入了错误的内容，那么同<code>try catch</code>直接捕获错误并通过<code>reject</code>返回错误信息。</p>
+<pre><code class="language-js">class Promise {
+  constructor(execurte) {
+    // 默认状态是等待
+    this.status = PENDING;
+    // 成功的回调默认值
+    this.value = undefined;
+    // 失败的回调默认值
+    this.resaon = undefined;
+    // 成功的回调,可以多次then，所以存在多个定义为数组
+    this.resolveCallBacks = [];
+    // 失败的回调
+    this.rejecteCallBacks = [];
+    // 针对函数执行器进行异常处理
+    try {
+      execurte(this.resolve, this.reject);
+    } catch (error) {
+      this.reject(error);
+    }
+  }
+}
+</code></pre>
+<p>编写完成基本结构，我们可以看到在使用如下例示代码,就可以进行第一步的创建了。</p>
+<pre><code class="language-js">let promise = new Promise((resolve, reject) =&gt; {
+  // executor（&quot;hello Promise&quot;）
+});
+</code></pre>
+<p>在执行 executor 过程中。我们需要处理 resolve, reject 函数的内容，对状态和数据进行处理。
+如果当前状态是 pending（也就是初始化状态），那么我们修改的相应的状态为成功或者失败。并保存成功或失败的值，然后在回调队列中以此执行。
+通过 <code>queueMicrotask</code> 我们来执行微任务</p>
+<pre><code class="language-js">resolve = (value) =&gt; {
+  queueMicrotask(() =&gt; {
+    if (this.status === PENDING) {
+      this.status = FULFILLED; // 修改状态
+      this.value = value;
+      this.resolveCallBacks.forEach((fn) =&gt; fn(this.value)); // 成功的回调
+    }
+  });
+};
+// 失败时候的回调
+reject = (resaon) =&gt; {
+  queueMicrotask(() =&gt; {
+    if (this.status === PENDING) {
+      this.status = REJECTED; // 修改状态
+      this.resaon = resaon;
+      this.rejecteCallBacks.forEach((fn) =&gt; fn(this.resaon)); // 失败的回调
+    }
+  });
+};
+</code></pre>
+<p>到这里基本的 Promise 结构就已经完成了，然后来实现最重要的链式调用</p>
+<h3 id="链式调用">链式调用</h3>
+<p>我们知道 Promise 是通过 then 来实现链式调用的，再来总结一下规则：</p>
+<ol>
+<li>每次 then 都会返回一个新的 Promise</li>
+<li>接受两个参数，类型都为 Function，分别在 Promise 改变状态时候调用，第一个参数在状态为 resolved 运行并接受结果，第二个参数在状态为 rejected 运行并接受结果</li>
+<li>除了接收两个函数参数，在 then 的后面可以继续的 then</li>
+<li>then 可能返回一个普通值，也可能返回一个 Promise</li>
+</ol>
+<p>如上，第 4 点在 then 的过程中，我们可能直接返回一个普通值：如：<code>return 100</code>，也可以返回一个 Promise 如：<code>return new Promise()</code>，那么先定义一个工具函数<code>_returnValue</code>，用来处理返回的值。
+需要注意的是，可能一种情况如下所示。创建当前对象，然后在 then 返回当前对象的情况，那么就产生了循环引用。所以需要添加一个循环引用的逻辑处理.</p>
+<pre><code class="language-js">// 循环引用测试
+let p1 = new MyPromise((resolve, reject) =&gt; {
+  resolve(&quot;yes&quot;);
+});
+let p2 = p1.then((res) =&gt; {
+  return p2;
+});
+// 从这then以后，产生了循环引用
+p2.then(
+  () =&gt; {},
+  (reson) =&gt; {
+    console.log(reson);
+  }
+);
+</code></pre>
+<p>然后就得到了一个处理返回值的工具函数<code>_returnValue</code></p>
+<pre><code class="language-js">/**
+ *
+ * @param {*} p 当前在运行的Promise
+ * @param {*} callbackValue  返回值（then出来的值）
+ * @param {*} resolve 成功回调
+ * @param {*} reject  失败回调
+ * @returns
+ */
+_returnValue(p, callbackValue, resolve, reject) {
+      // 如果p和x相等，则说明产生了循环引用
+      if (p === callbackValue) {
+          return reject(new TypeError('靓仔，你的代码循环引用了'))
+      }
+      // 判断x是不是Promise类型
+      if (callbackValue instanceof MyPromise) {
+          callbackValue.then(value =&gt; resolve(value), resaon =&gt; reject(resaon))
+      } else {
+          resolve(callbackValue)
+      }
+}
+</code></pre>
+<p>有了工具函数，在实现 then 的链式调用就可以直接进行结果的处理了。
+在该方法内接收两个之前提到的函数参数，如果是没有传递空值给我们，那么直接返回一个函数，或者是直接抛出错误供后续then的过程中拿到。
+在then的处理过程中状态总共分为3种</p>
+<ul>
+<li>成功状态</li>
+<li>失败状态</li>
+<li>等待状态</li>
+</ul>
+<p>关于成功和失败两个状态，我们直接执行相应的回调函数，或者是捕获异常处理即可。通过前面定义的<code>_returnValue</code>来直接返回值。</p>
+<p>如果是pending状态，说明在是通过异步的方式返回的callback函数，还没有调用<code>resolve或者reject</code>来改变状态，那么通过<code>resolveCallBacks 和 rejecteCallBacks</code>来存储需要执行的任务，并加入到微任务队列，等待结果的返回以后 然后执行想要的回调函数。 如果不存在这一步那么当<code>Promise</code>中存在异步任务时候，同步代码就会直接直接完成，而不会在异步任务完成后修改<code>Promise</code>的状态。</p>
+<pre><code class="language-js">then = (resolveCallBack, rejecteCallBack) =&gt; {
+  // 如果传递空值，则默认向后传递所以添加一个默认情况
+  resolveCallBack = resolveCallBack ? resolveCallBack : (value) =&gt; value;
+  // 参数可选
+  rejecteCallBack = rejecteCallBack ? rejecteCallBack : (reason) =&gt; { throw reason; };
+  let p = new MyPromise((resolve, reject) =&gt; {
+    // 处理不同的返回，如果是正常值直接返回，如果是Promise对象，则返回一个Promise供继续调用
+    // 成功
+    if (this.status === FULFILLED) {
+      // 开启一个微任务，等待p结果的返回。否则程序限制性后返回p的值
+      // 针对执行的函数进行异常处理
+      queueMicrotask(() =&gt; {
+        try {
+          let callbackValue = resolveCallBack(this.value);
+          this._returnValue(p, callbackValue, resolve, reject);
+        } catch (error) {
+          reject(error);
+        }
+      });
+      // 失败
+    } else if (this.status === REJECTED) {
+      queueMicrotask(() =&gt; {
+        try {
+          let callbackValue = rejecteCallBack(this.resaon);
+          this._returnValue(p, callbackValue, resolve, reject);
+        } catch (error) {
+          reject(error);
+        }
+      });
+      // 等待过程
+    } else {
+      // 判断为等待状态的情况，存储任务然后后续执行
+      // 存储成功的任务
+      this.resolveCallBacks.push(() =&gt; {
+        queueMicrotask(() =&gt; {
+          try {
+            let callbackValue = resolveCallBack(this.value);
+            this._returnValue(p, callbackValue, resolve, reject);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      });
+      // 存储失败的情况
+      this.rejecteCallBacks.push(() =&gt; {
+        queueMicrotask(() =&gt; {
+          try {
+            let callbackValue = rejecteCallBack(this.resaon);
+            this._returnValue(p, callbackValue, resolve, reject);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      });
+    }
+  });
+  return p;
+};
+</code></pre>
+<p>完成then之后catch就很容易实现了，直接调用then方法，传入一个失败的函数。</p>
+<pre><code class="language-js">// 注册一个非静态的方法,catch收集错误信息
+catch(rejecteCallBack) {
+    return this.then(undefined, rejecteCallBack)
+}
+</code></pre>
+<p>finally方法是无论成功或者失败都会执行的方法，直接通过then返回一个方法</p>
+<pre><code class="language-js">// 注册一个非静态的方法,无论成功或者失败finally都会执行
+finally(callback) {
+    return this.then((value) =&gt; {
+        return MyPromise.resolve(callback()).then(() =&gt; value)
+    }, (resaon) =&gt; {
+        return MyPromise.resolve(callback()).then(() =&gt; { throw resaon })
+    })
+}
+</code></pre>
+<h2 id="静态方法">静态方法</h2>
+<h3 id="resolve">resolve</h3>
+<p>这个就直接返回一个成功的Promise，没什么可说的</p>
+<pre><code class="language-js">static resolve(value) {
+    // 如果是promise对象则直接返回
+    if (value instanceof MyPromise) {
+        return value
+    } else {
+        // 如果不是promise对象，则重新创建一个
+        return new MyPromise((resolve) =&gt; {
+            resolve(value)
+        })
+    }
+}
+</code></pre>
+<h3 id="reject">reject</h3>
+<p>// 返回一个失败的Promise</p>
+<pre><code class="language-js">    // 静态方法，返回错误的Promise
+    static reject(resaon) {
+        if (resaon instanceof MyPromise) {
+            return resaon
+        } else {
+            // 如果不是promise对象，则重新创建一个
+            return new MyPromise((resolve, reject) =&gt; {
+                reject(resaon)
+            })
+        }
+    }
+</code></pre>
+<h3 id="all">all</h3>
+<p>all主要是保留每一个的结果，当结果全部完成后返回，用<code>then</code>来获取成功的Promise</p>
+<pre><code class="language-js">static all(promises) {
+    // 保存回调结果的数组
+    let result = [];
+    // 累加器，用来判断执行的方法队列是否执行完成
+    let count = 0;
+    // all 方法也返回一个promise对象
+    return new MyPromise((resolve, reject) =&gt; {
+        function pushResult(key, value) {
+            result[key] = value
+            count++
+            // 如果累加器和执行的任务列表长度相等，则说明已经完成了整个任务
+            if (count === promises.length) {
+                resolve(result)
+            }
+        }
+        // 循环处理要执行的任务
+        promises.forEach((s, index) =&gt; {
+            if (s instanceof MyPromise) {
+                s.then((v) =&gt; pushResult(index, v), (resaon) =&gt; reject(resaon))
+            } else {
+                pushResult(index, promises[index])
+            }
+        })
+    })
+}
+</code></pre>
+<h3 id="allsettled">allSettled</h3>
+<p>allSettled不管成功或者失败，反正都给你返回出去，所以在处理的时候直接使用<code>finally</code>关键字。如果是普通类型直接存value</p>
+<pre><code class="language-js">static allSettled(promises) {
+    return new MyPromise((resolve) =&gt; {
+        let results = []
+        let count = 0
+        promises.forEach((s, index) =&gt; {
+            if (s instanceof MyPromise) {
+                s.finally(_ =&gt; {
+                    count++
+                    results[index] = {
+                        status: s.status,
+                        value: s.value || s.resaon
+                    }
+                    if (count === promises.length) {
+                        resolve(results)
+                    }
+                })
+            } else {
+                count++
+                results[index] = {
+                    status: 'fulfilled',
+                    value: s
+                }
+                if (count === promises.length) {
+                    resolve(results)
+                }
+            }
+        })
+    })
+}
+</code></pre>
+<h3 id="any">any</h3>
+<p>只要有一个成功就返回，同样用<code>then</code>获取</p>
+<pre><code class="language-js">static any(promises) {
+    return new MyPromise((resolve) =&gt; {
+        promises.forEach((s) =&gt; {
+            if (s instanceof MyPromise) {
+                s.then(_ =&gt; {
+                    resolve(s.value)
+                })
+            } else {
+                resolve(s)
+            }
+        })
+    })
+}
+</code></pre>
+<h3 id="race">race</h3>
+<p>只要有一个成功或者就返回，用<code>finally</code>获取</p>
+<pre><code class="language-js">static race(promises) {
+    return new MyPromise((resolve) =&gt; {
+        promises.forEach((s) =&gt; {
+            if (s instanceof MyPromise) {
+                s.finally(_ =&gt; {
+                    resolve(s.value || s.resaon)
+                })
+            } else {
+                resolve(s)
+            }
+        })
+    })
+}
+</code></pre>
+<h3 id="添加测试配置">添加测试配置</h3>
+<p>然后添加defer用例，执行测试用例</p>
+<pre><code class="language-js">promises-aplus-tests Promise.js 
+</code></pre>
+<pre><code class="language-js">MyPromise.defer = MyPromise.deferred = function () {
+    let testObj = {}
+    testObj.promise = new Promise((resolve, reject) =&gt; {
+        testObj.resolve = resolve
+        testObj.reject = reject
+    })
+    return testObj
+}
+module.exports = MyPromise
+</code></pre>
+<h2 id="完整代码">完整代码</h2>
+<p>完整代码 <a href="https://github.com/gzg1023/fackAchieve/blob/main/feature/attribute/MyPromise.js">GitHub地址</a></p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/promise/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Promise</a>
+    
+    <a href="/tags/%E5%BC%82%E6%AD%A5/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#异步</a>
+    
+    <a href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#手写代码</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2021/vue_principle_03/" class="block">vue.js(2.x)原理 - Vue响应式核心Dep及Watcher和异步更新队列「03」</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#手写前置">手写前置</a>
+      <ul>
+        <li><a href="#语法知识">语法知识</a></li>
+      </ul>
+    </li>
+    <li><a href="#手写代码">手写代码</a>
+      <ul>
+        <li><a href="#基本结构">基本结构</a></li>
+        <li><a href="#链式调用">链式调用</a></li>
+      </ul>
+    </li>
+    <li><a href="#静态方法">静态方法</a>
+      <ul>
+        <li><a href="#resolve">resolve</a></li>
+        <li><a href="#reject">reject</a></li>
+        <li><a href="#all">all</a></li>
+        <li><a href="#allsettled">allSettled</a></li>
+        <li><a href="#any">any</a></li>
+        <li><a href="#race">race</a></li>
+        <li><a href="#添加测试配置">添加测试配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#完整代码">完整代码</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2021/vue_principle_03/">vue.js(2.x)原理 - Vue响应式核心Dep及Watcher和异步更新队列「03」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_02/">vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_01/">【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」</a>
+            <br />
+            
+            <a href="/posts/2021/observer/">【技术分享】入门浏览器里面的各种Observer对象</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_main/">【原理探索】vue.js超级全家桶--原理分析及技术学习清单</a>
+            <br />
+            
+            <a href="/posts/2021/snabbdom_source/">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
