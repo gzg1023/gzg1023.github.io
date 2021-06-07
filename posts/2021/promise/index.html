@@ -330,11 +330,11 @@ const REJECT = &quot;rejected&quot;;
     this.value = undefined;
     // 失败的回调默认值
     this.resaon = undefined;
-    // 成功的回调,可以多次then，所以存在多个定义为数组
+    // 成功的回调队列,可以多次then，所以存在多个定义为数组
     this.resolveCallBacks = [];
     // 失败的回调
     this.rejecteCallBacks = [];
-    // 针对函数执行器进行异常处理
+    // 针对执行器进行异常处理
     try {
       execurte(this.resolve, this.reject);
     } catch (error) {
@@ -407,11 +407,11 @@ p2.then(
  * @returns
  */
 _returnValue(p, callbackValue, resolve, reject) {
-      // 如果p和x相等，则说明产生了循环引用
+      // 如果p和callbackValue相等，则说明产生了循环引用
       if (p === callbackValue) {
           return reject(new TypeError('靓仔，你的代码循环引用了'))
       }
-      // 判断x是不是Promise类型
+      // 判断callbackValue是不是Promise类型
       if (callbackValue instanceof MyPromise) {
           callbackValue.then(value =&gt; resolve(value), resaon =&gt; reject(resaon))
       } else {
@@ -551,9 +551,9 @@ finally(callback) {
             }
         }
         // 循环处理要执行的任务
-        promises.forEach((s, index) =&gt; {
-            if (s instanceof MyPromise) {
-                s.then((v) =&gt; pushResult(index, v), (resaon) =&gt; reject(resaon))
+        promises.forEach((task, index) =&gt; {
+            if (task instanceof MyPromise) {
+                task.then((v) =&gt; pushResult(index, v), (resaon) =&gt; reject(resaon))
             } else {
                 pushResult(index, promises[index])
             }
@@ -567,13 +567,13 @@ finally(callback) {
     return new MyPromise((resolve) =&gt; {
         let results = []
         let count = 0
-        promises.forEach((s, index) =&gt; {
-            if (s instanceof MyPromise) {
-                s.finally(_ =&gt; {
+        promises.forEach((task, index) =&gt; {
+            if (task instanceof MyPromise) {
+                task.finally(_ =&gt; {
                     count++
                     results[index] = {
-                        status: s.status,
-                        value: s.value || s.resaon
+                        status: task.status,
+                        value: task.value || task.resaon
                     }
                     if (count === promises.length) {
                         resolve(results)
@@ -583,7 +583,7 @@ finally(callback) {
                 count++
                 results[index] = {
                     status: 'fulfilled',
-                    value: s
+                    value: task
                 }
                 if (count === promises.length) {
                     resolve(results)
@@ -597,13 +597,13 @@ finally(callback) {
 <p>只要有一个成功就返回，同样用<code>then</code>获取</p>
 <pre><code class="language-js">static any(promises) {
     return new MyPromise((resolve) =&gt; {
-        promises.forEach((s) =&gt; {
-            if (s instanceof MyPromise) {
-                s.then(_ =&gt; {
-                    resolve(s.value)
+        promises.forEach((task) =&gt; {
+            if (task instanceof MyPromise) {
+                task.then(_ =&gt; {
+                    resolve(task.value)
                 })
             } else {
-                resolve(s)
+                resolve(task)
             }
         })
     })
@@ -613,13 +613,13 @@ finally(callback) {
 <p>只要有一个成功或者就返回，用<code>finally</code>获取</p>
 <pre><code class="language-js">static race(promises) {
     return new MyPromise((resolve) =&gt; {
-        promises.forEach((s) =&gt; {
-            if (s instanceof MyPromise) {
-                s.finally(_ =&gt; {
-                    resolve(s.value || s.resaon)
+        promises.forEach((task) =&gt; {
+            if (task instanceof MyPromise) {
+                task.finally(_ =&gt; {
+                    resolve(task.value || task.resaon)
                 })
             } else {
-                resolve(s)
+                resolve(task)
             }
         })
     })
