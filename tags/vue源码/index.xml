@@ -7,19 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Thu, 29 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 Jun 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/vue%E6%BA%90%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>vue.js(2.x)原理 - Vue响应式核心Dep及Watcher和异步更新队列「03」</title>
+      <title>vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」</title>
+      <link>/posts/2021/vue_principle_04/</link>
+      <pubDate>Sat, 12 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/vue_principle_04/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>vue.js(2.x)原理 - Vue响应式核心Observer,Dep及Watcher和异步更新队列「03」</title>
       <link>/posts/2021/vue_principle_03/</link>
-      <pubDate>Thu, 29 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate>
       
       <guid>/posts/2021/vue_principle_03/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;Vue核心对象Dep和Watcher到底是干啥的，怎么样让整个框架运行起来的。已经操作页面有时候数据没变化必须使用到的$nextTick是怎么工作的？本篇文章来浅析谈谈。&lt;/p&gt;
+&lt;p&gt;Vue 核心对象 Observer, Dep 和 Watcher 到底是干啥的，怎么样让整个框架运行起来的。已经操作页面有时候数据没变化必须使用到的nextTick 是怎么工作的？本篇文章来浅析谈谈。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     

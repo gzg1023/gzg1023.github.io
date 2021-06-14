@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width">
 
 
-<title>【原理探索】vue.js超级全家桶--原理分析及技术学习清单 | 沽默清尘</title>
+<title>vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」 | 沽默清尘</title>
 <link rel="stylesheet" href="/css/eureka.min.css">
 <script defer src="/js/eureka.min.js"></script>
 
@@ -46,7 +46,7 @@
 
 <meta name="description"
   content="
-vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。
+分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。
 ">
 <script type="application/ld+json">
 {
@@ -59,8 +59,8 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
       "item":"/posts/"},{
       "@type": "ListItem",
       "position": 2 ,
-      "name":"【原理探索】vue.js超级全家桶--原理分析及技术学习清单",
-      "item":"/posts/2021/vue_principle_main/"}]
+      "name":"vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」",
+      "item":"/posts/2021/vue_principle_04/"}]
 }
 </script>
 
@@ -72,11 +72,11 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
     "@type": "Article",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "/posts/2021/vue_principle_main/"
+        "@id": "/posts/2021/vue_principle_04/"
     },
-    "headline": "【原理探索】vue.js超级全家桶--原理分析及技术学习清单 | 沽默清尘","datePublished": "2021-03-05T00:00:00+00:00",
-    "dateModified": "2021-04-25T00:00:00+00:00",
-    "wordCount":  110 ,
+    "headline": "vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」 | 沽默清尘","datePublished": "2021-06-12T00:00:00+00:00",
+    "dateModified": "2021-06-13T00:00:00+00:00",
+    "wordCount":  379 ,
     "publisher": {
         "@type": "Person",
         "name": "gzg1023",
@@ -85,22 +85,22 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
             "url": "https://i.loli.net/2021/03/06/kHzcVZrX2uDW6Jg.jpg"
         }
         },
-    "description": "\u003cblockquote\u003e\n\u003cp\u003evue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+    "description": "\u003cblockquote\u003e\n\u003cp\u003e分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
 }
-</script><meta property="og:title" content="【原理探索】vue.js超级全家桶--原理分析及技术学习清单 | 沽默清尘" />
+</script><meta property="og:title" content="vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」 | 沽默清尘" />
 <meta property="og:type" content="article" />
 
 
 <meta property="og:image" content="/images/favicon.png">
 
 
-<meta property="og:url" content="/posts/2021/vue_principle_main/" />
+<meta property="og:url" content="/posts/2021/vue_principle_04/" />
 
 
 
 
 <meta property="og:description" content="
-vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。
+分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。
 " />
 
 
@@ -118,10 +118,10 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
 
 
-<meta property="article:published_time" content="2021-03-05T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-06-12T00:00:00&#43;00:00" />
 
 
-<meta property="article:modified_time" content="2021-04-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-06-13T00:00:00&#43;00:00" />
 
 
 
@@ -138,17 +138,17 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
 
 
+<meta property="og:see_also" content="/posts/2021/vue_principle_03/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_02/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_01/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_main/" />
+
 <meta property="og:see_also" content="/posts/2021/snabbdom_source/" />
 
 <meta property="og:see_also" content="/posts/2021/designpatterns/" />
-
-<meta property="og:see_also" content="/posts/2021/input_html/" />
-
-<meta property="og:see_also" content="/posts/2020/scroll_fix/" />
-
-<meta property="og:see_also" content="/posts/2020/functional_programming/" />
-
-<meta property="og:see_also" content="/posts/2020/mobile_debug/" />
 
 
 
@@ -225,11 +225,11 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 <div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
     <div
         class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-        <h1 class="font-bold text-3xl text-primary-text">【原理探索】vue.js超级全家桶--原理分析及技术学习清单</h1>
+        <h1 class="font-bold text-3xl text-primary-text">vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」</h1>
         <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
     <div class="mr-6 my-2">
         <i class="fas fa-calendar mr-1"></i>
-        <span>2021-03-05</span>
+        <span>2021-06-12</span>
     </div>
     
     
@@ -258,117 +258,150 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 
         <div class="content">
             <blockquote>
-<p>vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。</p>
+<p>分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。</p>
 </blockquote>
-<h2 id="目录">目录</h2>
-<p>系列文章，针对vue超级全家桶原理进行分析及新技术的学习的清单，鞭策自己一步一步完成。根据时间和学习进度同步修改。系列文章并不是详细的针对Vue源码的分析 深入到什么行实现了什么功能，而是个人对Vue框架的一些理解和常用api的一些解析。能帮助自己更好的使用Vue框架。</p>
-<ol>
-<li><a href="https://gzg.me/posts/2021/vue_principle_01/">vue.js(2.x)框架底层原理- 实现mini vue </a></li>
-<li><a href="https://gzg.me/posts/2021/vue_principle_02/">vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析</a></li>
-<li><a href="https://gzg.me/posts/2021/vue_principle_03/">vue.js(2.x)原理 - Vue响应式核心Observer,Dep及Watcher和异步更新队列</a></li>
-<li><a href="https://gzg.me/posts/2021/vue_principle_04/">vue.js(2.x)原理 -  Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)</a></li>
-<li>vue.js(2.x)原理 - Virtual dom及Compile模版编译器原理分析</li>
-<li>vue-router(3.x) - vue官方路由库原理学习</li>
-<li>vuex(3.x) - Vue官方状态管理库源码分析</li>
-<li>vue-ssr(2.x) - vue主流ssr框架手动搭建及主流nuxt.js原理学习</li>
-<li>vue-cli(3.x) - Vue官方脚手架工具源码分析</li>
-<li>vue.js(3.x) - vue3新版本学习及原理分析</li>
-<li>vite2 - vue官方新开发工具使用及原理分析</li>
-<li>gridsome - vue主流ssg框架使用及原理</li>
-</ol>
-<h2 id="源码附录">源码附录</h2>
-<table>
-<thead>
-<tr>
-<th>文件名</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>.circleci</td>
-<td>持续集成/持续部署(ci/cd)配置</td>
-</tr>
-<tr>
-<td>.github</td>
-<td>存放针对项目开发/贡献代码的文档（基于github）</td>
-</tr>
-<tr>
-<td>benchmarks</td>
-<td>vue的一些性能测试文件和demo （好几年没维护了）</td>
-</tr>
-<tr>
-<td>dist</td>
-<td>打包后的vue源码（多种构建/规范版本）</td>
-</tr>
-<tr>
-<td>examples</td>
-<td>基于vue的一些demo小项目（好几年没维护）</td>
-</tr>
-<tr>
-<td>flow</td>
-<td>类型检查工具flow定义的地方（各种内置功能的类型定义）</td>
-</tr>
-<tr>
-<td>packages</td>
-<td>vue插件包，在配合开发工具项目时候按需使用</td>
-</tr>
-<tr>
-<td>scripts</td>
-<td>vue打包的配置文件及一些自动化脚本</td>
-</tr>
-<tr>
-<td>src</td>
-<td>源码目录结构</td>
-</tr>
-<tr>
-<td>test</td>
-<td>单元测试/e2e测试用例目录</td>
-</tr>
-<tr>
-<td>types</td>
-<td>针对typeScript的类型声明文件及配置</td>
-</tr>
-</tbody>
-</table>
-<h3 id="源码核心模块">源码核心模块</h3>
-<pre><code class="language-javascript"> src/
+<h2 id="v-show">v-show</h2>
+<p>渲染原理是，无论是true还是false都会渲染组件实例，当值为false时候，改变元素的<code>display</code>属性，第一次始终会创建，切换时候性能高。</p>
+<ul>
+<li>本质是切换display 为none或者display</li>
+<li>如果存在过渡属性，那么触发动画组件的生命周期</li>
+</ul>
+<pre><code class="language-js">export default {
+  bind (el:, { value }, vnode) {
+    const transition = vnode.data &amp;&amp; vnode.data.transition
+    const originalDisplay = el.__vOriginalDisplay =
+      el.style.display === 'none' ? '' : el.style.display
+    if (value &amp;&amp; transition) {
+      vnode.data.show = true
+      enter(vnode, () =&gt; {
+        el.style.display = originalDisplay
+      })
+    } else {
+      el.style.display = value ? originalDisplay : 'none'
+    }
+  },
+  // 
+  update (el, { value, oldValue }, vnode) {
+    if (!value === !oldValue) return
+    vnode = locateNode(vnode)
+    const transition = vnode.data &amp;&amp; vnode.data.transition
+    if (transition) {
+      vnode.data.show = true
+      if (value) {
+        enter(vnode, () =&gt; {
+          el.style.display = el.__vOriginalDisplay
+        })
+      } else {
+        leave(vnode, () =&gt; {
+          el.style.display = 'none'
+        })
+      }
+    } else {
+      el.style.display = value ? el.__vOriginalDisplay : 'none'
+    }
+  },
 
-- compiler：编译源码相关文件夹
-- core：核心代码文件夹
-- platforms：不同平台支持文件夹
-- server：支持服务端渲染文件夹
-- sfc：.vue单文件解析文件夹
-- shared: 共享代码
+  unbind (
+    el: any,
+    binding: VNodeDirective,
+    vnode: VNodeWithData,
+    oldVnode: VNodeWithData,
+    isDestroy: boolean
+  ) {
+    if (!isDestroy) {
+      el.style.display = el.__vOriginalDisplay
+    }
+  }
+}
 
 </code></pre>
-<h3 id="构建后的版本">构建后的版本</h3>
-<p>打包后会产生很多类型的文件，默认的vue是Runtime +  UMD 版本的构建，也是vue-cli默认导出的版本。</p>
-<p>runtime版本是不包含Compiler的版本。其中带min的是压缩版本，适用于线上生产环境。</p>
-<table>
-<thead>
-<tr>
-<th>模块类型</th>
-<th>UMD 规范</th>
-<th>CommonJS 规范</th>
-<th>ES Module 规范</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>全部</strong></td>
-<td>vue.js</td>
-<td>vue.common.js</td>
-<td>vue.esm.js</td>
-</tr>
-<tr>
-<td><strong>Runtime版本</strong></td>
-<td>vue.runtime.js</td>
-<td>vue.runtime.common.js</td>
-<td>vue.runtime.esm.js</td>
-</tr>
-</tbody>
-</table>
+<h2 id="v-if">v-if</h2>
+<h2 id="v-model">v-model</h2>
+<h2 id="keep-alive">keep-alive</h2>
+<p><code>keep-alive</code>是一个内置的组件，用于缓存我们的vue组件，提高加载的性能。以下是option api的源码部分</p>
+<ul>
+<li>可以看到通过include和exclude来定义要缓存的组件</li>
+<li>通过cache对象和keys来保存缓存的实例（非响应式）</li>
+<li>维护一个pruneCacheEntry结构，用来管理保存和删除 缓存内容</li>
+<li>用max来指定最大的缓存数量，如果超过该数量 那么清除掉，第一个保存的组件</li>
+<li>分为首次渲染和缓存渲染</li>
+<li>在 patch 过程中对于已缓存的组件不会执行 mounted，通过 activated 和 deactivated 钩子函数控制</li>
+<li>本质是LRU算法<a href="https://leetcode-cn.com/problems/lru-cache-lcci">https://leetcode-cn.com/problems/lru-cache-lcci</a></li>
+</ul>
+<pre><code class="language-js">/  keep-alive组件的option api
+export default {
+  name: 'keep-alive',
+  // 取消$child和$parent的裙带关系
+  abstract: true,
+
+  props: {
+    include: patternTypes,
+    exclude: patternTypes,
+    max: [String, Number] // 最大缓存数量
+  },
+
+  created () {
+    // 缓存对象 
+    this.cache = Object.create(null)
+    this.keys = []
+  },
+
+  destroyed () {
+    for (const key in this.cache) {
+      pruneCacheEntry(this.cache, key, this.keys)
+    }
+  },
+
+  mounted () {
+    // 处理包含或者未包含的组件，进行过滤
+    this.$watch('include', val =&gt; {
+      pruneCache(this, name =&gt; matches(val, name))
+    })
+    this.$watch('exclude', val =&gt; {
+      pruneCache(this, name =&gt; !matches(val, name))
+    })
+  },
+
+  render () {
+    const slot = this.$slots.default
+    // keep-alive&gt; 只处理第一个子元素，所以一般和它搭配使用的有 component 动态组件或者是 router-view
+    const vnode: VNode = getFirstComponentChild(slot)
+    const componentOptions: ?VNodeComponentOptions = vnode &amp;&amp; vnode.componentOptions
+    if (componentOptions) {
+      // check pattern
+      const name: ?string = getComponentName(componentOptions)
+      const { include, exclude } = this
+      if (
+        // not included
+        (include &amp;&amp; (!name || !matches(include, name))) ||
+        // excluded
+        (exclude &amp;&amp; name &amp;&amp; matches(exclude, name))
+      ) {
+        return vnode
+      }
+
+      const { cache, keys } = this
+      const key: ?string = vnode.key == null
+        ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+        : vnode.key
+      if (cache[key]) {
+        vnode.componentInstance = cache[key].componentInstance
+        remove(keys, key)
+        keys.push(key)
+      } else {
+        cache[key] = vnode
+        keys.push(key)
+        if (this.max &amp;&amp; keys.length &gt; parseInt(this.max)) {
+          pruneCacheEntry(cache, keys[0], keys, this._vnode)
+        }
+      }
+
+      vnode.data.keepAlive = true
+    }
+    return vnode || (slot &amp;&amp; slot[0])
+  }
+}
+</code></pre>
         </div>
         
         <div class="my-4">
@@ -390,14 +423,11 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 <div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
     <div>
         
-        <span class="block font-bold">上一篇</span>
-        <a href="/posts/2021/about_mylife/" class="block">【生活感悟】再谈独立思考的能力-希望可以解决问题而不是解决问题</a>
-        
     </div>
     <div class="md:text-right mt-4 md:mt-0">
         
         <span class="block font-bold">下一篇</span>
-        <a href="/posts/2021/snabbdom_source/" class="block">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
+        <a href="/posts/2021/promise/" class="block">【技术分享】手写一个A&#43;规范的完整版Promise，让异步处理更流畅</a>
         
     </div>
 </div>
@@ -414,13 +444,10 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
 <div class="sticky-toc hidden lg:block px-6 pb-6 ">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#目录">目录</a></li>
-    <li><a href="#源码附录">源码附录</a>
-      <ul>
-        <li><a href="#源码核心模块">源码核心模块</a></li>
-        <li><a href="#构建后的版本">构建后的版本</a></li>
-      </ul>
-    </li>
+    <li><a href="#v-show">v-show</a></li>
+    <li><a href="#v-if">v-if</a></li>
+    <li><a href="#v-model">v-model</a></li>
+    <li><a href="#keep-alive">keep-alive</a></li>
   </ul>
 </nav>
 </div>
@@ -440,22 +467,22 @@ vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架
         <h2 class="text-lg font-semibold mb-4">相关</h2>
         <div class="content">
             
+            <a href="/posts/2021/vue_principle_03/">vue.js(2.x)原理 - Vue响应式核心Observer,Dep及Watcher和异步更新队列「03」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_02/">vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_01/">【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_main/">【原理探索】vue.js超级全家桶--原理分析及技术学习清单</a>
+            <br />
+            
             <a href="/posts/2021/snabbdom_source/">【技术分享】virtual DOM的思考及snabbdom库源码解读</a>
             <br />
             
             <a href="/posts/2021/designpatterns/">【技术分享】观察者模式VS发布/订阅模式</a>
-            <br />
-            
-            <a href="/posts/2021/input_html/">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</a>
-            <br />
-            
-            <a href="/posts/2020/scroll_fix/">【技术笔记】vue中滑动事件触发怎么失灵了？！</a>
-            <br />
-            
-            <a href="/posts/2020/functional_programming/">【技术分享】函数式编程入门初探</a>
-            <br />
-            
-            <a href="/posts/2020/mobile_debug/">【前端技术】移动端h5项目调试技巧与总结</a>
             <br />
             
         </div>
