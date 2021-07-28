@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Jul 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【技术探索】SPA应用的页面加载优化及FPC时间计算</title>
+      <link>/posts/2021/firstscreen/</link>
+      <pubDate>Wed, 28 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/firstscreen/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;现代前端应用大部分采用 SPA 模式开发，而 SPA 最大的问题就是最开始只会下载一个空白的 html 文档，下载完成后浏览器开始解析文档（加载各种脚本，各种样式文件）当 vue 依赖加载完成，才会开始渲染页面。最大的问题也就体现出来了 会出现白屏问题 及首屏加载缓慢的问题，本文来谈谈前端页面的优化。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>vue.js(2.x)原理 - Virtual dom及Compile模版编译器原理分析)「05」</title>
