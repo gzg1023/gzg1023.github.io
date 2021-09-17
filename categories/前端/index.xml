@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Wed, 28 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Sep 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【技术总结】C端web开发经验总结及工作实用工具分享（webview侧）</title>
+      <link>/posts/2021/summary_client/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/summary_client/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>【技术探索】SPA应用的页面加载优化及FPC时间计算</title>

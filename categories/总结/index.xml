@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Sep 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【技术总结】C端web开发经验总结及工作实用工具分享（webview侧）</title>
+      <link>/posts/2021/summary_client/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2021/summary_client/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>【生活总结】2020年总结和2021年展望</title>

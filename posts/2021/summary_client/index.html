@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang='zh' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【技术总结】C端web开发经验总结及工作实用工具分享（webview侧） | 沽默清尘</title>
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_hu4dd3a7947c4cdf24f3f1440430310555_390_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="
+本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。
+">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【技术总结】C端web开发经验总结及工作实用工具分享（webview侧）",
+      "item":"/posts/2021/summary_client/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/2021/summary_client/"
+    },
+    "headline": "【技术总结】C端web开发经验总结及工作实用工具分享（webview侧） | 沽默清尘","datePublished": "2021-09-16T00:00:00+00:00",
+    "dateModified": "2021-09-17T00:00:00+00:00",
+    "wordCount":  145 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "gzg1023",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://i.loli.net/2021/03/06/kHzcVZrX2uDW6Jg.jpg"
+        }
+        },
+    "description": "\u003cblockquote\u003e\n\u003cp\u003e本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。\u003c\/p\u003e\n\u003c\/blockquote\u003e"
+}
+</script><meta property="og:title" content="【技术总结】C端web开发经验总结及工作实用工具分享（webview侧） | 沽默清尘" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/favicon.png">
+
+
+<meta property="og:url" content="/posts/2021/summary_client/" />
+
+
+
+
+<meta property="og:description" content="
+本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。
+" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="沽默清尘" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-09-16T00:00:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-09-17T00:00:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="前端" />
+
+<meta property="article:tag" content="C端" />
+
+<meta property="article:tag" content="总结" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/2021/firstscreen/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_05/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_04/" />
+
+<meta property="og:see_also" content="/posts/2021/promise/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_03/" />
+
+<meta property="og:see_also" content="/posts/2021/vue_principle_02/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">沽默清尘</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">文章</a>
+            <a href="/tags/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">标签</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文档</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【技术总结】C端web开发经验总结及工作实用工具分享（webview侧）</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-09-16</span>
+    </div>
+    
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E5%89%8D%E7%AB%AF/" class="hover:text-eureka">前端</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/c%E7%AB%AF/" class="hover:text-eureka">C端</a>
+        
+        
+        <span>, </span>
+        <a href="/categories/%E6%80%BB%E7%BB%93/" class="hover:text-eureka">总结</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>本文主要写一些在C端 webview侧（直白点就是app内部的页面）所碰到的一些坑和经验的一些总结。以及自己在开发过程中觉得比较舒适的工具推荐。</p>
+</blockquote>
+<h2 id="c端特供">C端特供</h2>
+<p>这里就是一些在pc系统或者是常规浏览器中不会接触到的一些内容，主要是嵌入到APP内部的webview页面相关的一些技术点的总结。</p>
+<h3 id="js-bridge">js bridge</h3>
+<p>在原生开发中，webview是一个基础组件。前端所开发的页面只需要丢给客户的一个链接。当用户进行相关操作时候，就可以初始化webview容器然后开始页面的加载渲染。 那么我的页面想要和客户端进行交互，就需要使用到js bridge了。</p>
+<p>通俗点说js bridge就是前端和客户端经过约定而封装的一些函数，通过互相调用的方式达到交互的目的。实现方式主要有以下几种。</p>
+<ul>
+<li>url scheme</li>
+</ul>
+<p>最常使用的是前两种，url scheme一般来说是通过前端自己创建iframe请求，客户端拦截的方式。通过约定的参数来达到交互的目的。优点就是兼容性好，缺点也很明显就是不能有太大长度数据否则浏览器会拦截（类似GET请求）</p>
+<pre><code class="language-js">const appBridge = function (type, data) {
+  var iframe = document.createElement('IFRAME')
+  // app-jsb是和公司客户端协商定的一个自定义字段
+  iframe.setAttribute('src', 'app-jsb://' + type + '/' + data)
+  document.documentElement.appendChild(iframe)
+  iframe.parentNode.removeChild(iframe)
+  iframe = null
+}
+</code></pre>
+<ul>
+<li>window对象注入</li>
+</ul>
+<p>window对象注入就更容易理解了，web侧可以注入方法供客户端使用，客户端也可以注入方法供web侧使用。还有一种情况就是可能客户端数据也是异步的那我们就需要使用到callback的方式等待数据的返回。通过window.addEventListener和window.removeEventListener来注册和接触自定义事件</p>
+<pre><code class="language-js">document.addEventListener(evt, callback)
+document.removeEventListener(evt, cb)
+</code></pre>
+<ul>
+<li>拦截浏览器行为</li>
+</ul>
+<p>拦截浏览器行为，主要是指<code>window.alert, window.prompt</code>等方法，通过和客户端协商的方式进行拦截，然后自定义相关的行为。</p>
+<h3 id="唤端">唤端</h3>
+<p>唤端主要指的是在外部浏览器或者其他app中，通过跳转的方式打开公司自己的app并定位到相应内容的一个行为，最常见的就是各种落地页（入拉新活动，邀请拼团等）实现唤端也是需要 客户端和web侧 配合来完成的工作。主要实现有以下几种（都有兼容性问题，需要大量测试）：</p>
+<ul>
+<li>url scheme</li>
+</ul>
+<p>这种方式实现起来兼容性好，缺点就是有一个对话框询问是否跳转。实现方式同样是通过iframe发送请求，通过约定好的参数跳转库客户端。如在浏览器输入：<code>weixin://</code>即可打开微信</p>
+<pre><code class="language-js">     行为(应用的某个功能)    
+            |
+scheme://[path][?query]
+   |               |
+应用标识       功能需要的参数
+</code></pre>
+<ul>
+<li>Intent</li>
+</ul>
+<p>Intent是安卓独有的一个协议，也是通过url方式跳转要遵循安卓所规定的格式进行交互。需要客户端在安装APP时候注册协议到系统内部（类似window系统的注册表内容）经过测试 如果需要兼容不同浏览器跳转需要看不同浏览器的文档和相关的参数进行设置 不能做到一劳永逸）</p>
+<pre><code class="language-js">intent://platformapi/startapp[?query]
+</code></pre>
+<ul>
+<li>Universal Link</li>
+</ul>
+<p>iOS机型独有的协议，在iOS9出现的，需要在苹果应用后台配置一个地址 然后通过转跳该地址打开app或者跳转应用商店。</p>
+<h3 id="js-sdk封装">js sdk封装</h3>
+<p>和app交互是家常便饭，所以封装一个js sdk供同事们使用也是必须要做的事。这里说一下要主动一些点。</p>
+<p>采用 <code>基础结构+ 按需方法</code>的方式进行封装，基础结构指的是js bridge的交互方式，按需方法指的是把方法和结构分类 不耦合在一个大的函数中，不然随着方法变多 我们很多页面可能只用到了一个方法就加载了全部资源 浪费资源加载体积。</p>
+<p>基础功能点：</p>
+<ul>
+<li>navigator.userAgent数据封装，使用时候方便获取</li>
+<li>url参数封装，直接通过方法获取地址栏参数（可能客户端会注入）</li>
+<li>屏幕的宽度(screen.width)，高度(screen.height)，及物理像素分辨率与CSS像素分辨率之比(devicePixelRatio)</li>
+<li>js bridge封装</li>
+<li>localStorage的封装（根据业务需求而定）</li>
+<li>获取app信息的封装（如app版本号，设备信息等）</li>
+<li>网络请求等统一封装</li>
+</ul>
+<p>按需功能点：</p>
+<ul>
+<li>微信二次分享内容封装</li>
+<li>加解密数据封装函数</li>
+<li>唤端 方法的兼容封装处理</li>
+<li>控制webview下拉刷新等操作</li>
+</ul>
+<h3 id="布局容器">布局容器</h3>
+<p>这里的布局容器主要是指wbeview在app中所占的比例及不同的情况。前面说到webview是客户端开发的一个组件，那么就可以自定义这个组件的大小，一般来说有三种：</p>
+<ul>
+<li>全屏webview（沉浸式体验，状态栏也包含在内）</li>
+<li>基础webview（最常用页面，上面有一个客户端的操作栏，下面全部的内容是wbeview页面）</li>
+<li>自定义大小webview（用于部分需求页面的特殊位置页面，如一个很小的的悬浮窗但是内容是显示网页）</li>
+</ul>
+<p>在日常开发者这三种情况最常见，可以和客户端协商好参数，通过前端url参数直接控制大小等内容。来适应不一样的需求。</p>
+<h2 id="兼容的坑">兼容的坑</h2>
+<h3 id="1px">1px</h3>
+<p>老生常谈的问题，移动端1px。解决问题大概就是如下：</p>
+<ul>
+<li>::after + transform:scale</li>
+<li>box-shadow</li>
+<li>图片</li>
+</ul>
+<h3 id="垂直居中">垂直居中</h3>
+<p>垂直居中这里主要是window.devicePixelRatio参数大于等于3的安卓机型， 不管是使用flex还是绝对定位，都会出现居中偏上的情况，就需要自己根据实际情况添加padding来做兼容处理了。</p>
+<h3 id="关于动画">关于动画</h3>
+<p>动画主要是通过 过渡,关键帧 来实现，如果是复杂动画会用到动画引擎。还有就是一些动画手写难以实现。那么会使用gif来代替（缺点就是有锯齿），或者是webp图片来代替（iOS有兼容问题）。还可以使用svga文件来解析动画，之前实践也比较多效果很不错）直接使用svga库解析文件即可。</p>
+<h3 id="微信分享">微信分享</h3>
+<p>客户端分享到微信的内容会存在一个对话框的内容，但是进入页面以后再分享给其他人就变成了一个很丑的链接地址。那么这里就需要对微信的二次分享做处理。需要使用<code>https://res.wx.qq.com/open/js/jweixin-1.0.0.js</code>并且在微信后台配置，然后对jsApiList进行设置，初始化二次分享的对话框（可以封装在js sdk中）</p>
+<h3 id="长按相关">长按相关</h3>
+<p>长安主要指的是一些文字内容和图片，当加载webview页面时候不控制的话会出现复制内容或者图片弹窗的情况。通过user-select来控制这个行为 提高用户体验。</p>
+<pre><code class="language-js">-webkit-user-select: none;
+ -moz-user-select: none;
+ -khtml-user-select: none;
+ user-select: none;
+</code></pre>
+<p>、</p>
+<h2 id="实用工具">实用工具</h2>
+<p>工具部分主要分享一些日常开发使用的好工具</p>
+<h3 id="网络代理">网络代理</h3>
+<p>网络代理主要是Charles，可以拦https界面也好看</p>
+<h3 id="调试">调试</h3>
+<p>webview内部页面调试用vconsole和eruda</p>
+<p>远程调试页面使用LightProxy</p>
+<h3 id="截图">截图</h3>
+<p>无敌截图Snipaste</p>
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/%E5%89%8D%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#前端</a>
+    
+    <a href="/tags/c%E7%AB%AF/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#C端</a>
+    
+    <a href="/tags/%E6%80%BB%E7%BB%93/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#总结</a>
+    
+</div>
+        
+        
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">下一篇</span>
+        <a href="/posts/2021/firstscreen/" class="block">【技术探索】SPA应用的页面加载优化及FPC时间计算</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">本页内容</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#c端特供">C端特供</a>
+      <ul>
+        <li><a href="#js-bridge">js bridge</a></li>
+        <li><a href="#唤端">唤端</a></li>
+        <li><a href="#js-sdk封装">js sdk封装</a></li>
+        <li><a href="#布局容器">布局容器</a></li>
+      </ul>
+    </li>
+    <li><a href="#兼容的坑">兼容的坑</a>
+      <ul>
+        <li><a href="#1px">1px</a></li>
+        <li><a href="#垂直居中">垂直居中</a></li>
+        <li><a href="#关于动画">关于动画</a></li>
+        <li><a href="#微信分享">微信分享</a></li>
+        <li><a href="#长按相关">长按相关</a></li>
+      </ul>
+    </li>
+    <li><a href="#实用工具">实用工具</a>
+      <ul>
+        <li><a href="#网络代理">网络代理</a></li>
+        <li><a href="#调试">调试</a></li>
+        <li><a href="#截图">截图</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">相关</h2>
+        <div class="content">
+            
+            <a href="/posts/2021/firstscreen/">【技术探索】SPA应用的页面加载优化及FPC时间计算</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_05/">vue.js(2.x)原理 - Virtual dom及Compile模版编译器原理分析)「05」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_04/">vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」</a>
+            <br />
+            
+            <a href="/posts/2021/promise/">【技术分享】手写一个A&#43;规范的完整版Promise，让异步处理更流畅</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_03/">vue.js(2.x)原理 - Vue响应式核心Observer,Dep及Watcher和异步更新队列「03」</a>
+            <br />
+            
+            <a href="/posts/2021/vue_principle_02/">vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019-2021   gzg1023 &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
