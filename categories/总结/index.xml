@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; 2019-2021   gzg1023</copyright>
-    <lastBuildDate>Thu, 16 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Jan 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【年终总结】2021年总结及2022未来展望</title>
+      <link>/posts/2022/2021summaryand2022future/</link>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2022/2021summaryand2022future/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;一年过得很快，一眨眼2021年就结束。2022已经结束一个月&amp;hellip; 时间不会等人，把握机会&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>【技术总结】C端web开发经验总结及工作实用工具分享（webview侧）</title>
