@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术笔记】web页面构建标准及规范 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术笔记】web页面构建标准及规范</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:05
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%A7%84%E8%8C%83/" title="规范">
+                    #规范
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>整理了一些前端开发时候需要注意的知识点</p>
+<span id="more"></span>
+
+<h2 id="前端开发构建标准及规范"><a href="#前端开发构建标准及规范" class="headerlink" title="前端开发构建标准及规范"></a>前端开发构建标准及规范</h2><p>本文章总结一些，前端开发过程中对页面的思考和一些规范化的标准，以提高自己的页面构建能力。这些内容都是日常开发经常用到的，平时有的地方会有遗漏，故整理出一篇内容。规范不仅是为了当下可以开发出程序，也是为了后期维护。<br>有的特殊部分会进行标注，比如移动端和pc不同的差异。</p>
+<h2 id="1-构建标准"><a href="#1-构建标准" class="headerlink" title="1. 构建标准"></a>1. 构建标准</h2><blockquote>
+<p>页面布局</p>
+</blockquote>
+<ol>
+<li>在不考虑IE9及以下浏览器的情况下，尽量使用flex布局。让页面更灵活</li>
+<li>考虑不同分辨率的屏幕，及刘海异形屏的兼容问题</li>
+<li>使用float布局时，考虑对其他元素的影响，及时清除浮动。</li>
+<li>尽量不定高，而是通过内容撑开盒子模型，也就是触发BFC</li>
+</ol>
+<blockquote>
+<p>表单</p>
+</blockquote>
+<ol>
+<li><p>表单校验和规范</p>
+<ul>
+<li>控制 《空值，极限值，特殊类型（邮箱，手机号…），空格，回车》的输入，并根据页面需求，设置不同的校验。</li>
+<li>表单元素设置的默认值，如果是单选那么需要设置一个初始默认选择态，部分表单元素内容添加清空按钮。</li>
+<li>当输入或选择内容后，用户关闭了该页面。要注意清空输入的值和校验状态。</li>
+</ul>
+</li>
+<li><p>页面适应</p>
+<ul>
+<li>在不同屏幕尺寸情况下，表单布局的正常显示，横纵的排列方式</li>
+<li>文本内容输入过多的显示方式，滚动还是修改布局长度或高度</li>
+<li>动态添加的表单，页面的显示方式等</li>
+<li>文本过长显示省略号</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>表格</p>
+</blockquote>
+<ul>
+<li>表格内容如果过长，需要显示省略号，并添加hover显示全部内容的效果</li>
+<li>注意不同需求，固定表头和表列的操作，以及合并单元格</li>
+</ul>
+<h2 id="2-开发标准"><a href="#2-开发标准" class="headerlink" title="2.开发标准"></a>2.开发标准</h2><blockquote>
+<p>变量命名</p>
+</blockquote>
+<ul>
+<li>JS变量名称 以，大驼峰或者小驼峰</li>
+<li>CSS命名 id以单个单词为准，class用 - 横线命名方式</li>
+<li>vue文件以 - 小写方式命名</li>
+<li>简洁清晰的注释内容</li>
+</ul>
+<h2 id="3-开发准备"><a href="#3-开发准备" class="headerlink" title="3.开发准备"></a>3.开发准备</h2><blockquote>
+<p>理解需求</p>
+</blockquote>
+<ul>
+<li>根据原型图</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/09/20/2019/more_page/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:05
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%A7%84%E8%8C%83/" title="规范">
+                        #规范
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/10/31/2019/front_error/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E6%9E%84%E5%BB%BA%E6%A0%87%E5%87%86%E5%8F%8A%E8%A7%84%E8%8C%83"><span class="toc-text">前端开发构建标准及规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%84%E5%BB%BA%E6%A0%87%E5%87%86"><span class="toc-text">1. 构建标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86"><span class="toc-text">2.开发标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87"><span class="toc-text">3.开发准备</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析「02」</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:52:22
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                    #vue原理
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>在实现完成 mini vue 以后，对深入源码分析。本篇文章来理一理从 new Vue 开始都执行了哪些操作，并且基于源码对生命周期进行更深入的理解。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="搭建调试环境"><a href="#搭建调试环境" class="headerlink" title="搭建调试环境"></a>搭建调试环境</h2><p>从本篇开始就是分析整个<a target="_blank" rel="noopener" href="https://github.com/gzg1023/vue2-fork">Vue 框架源码</a>的流程了，前面说过系列文章并非深入到行，而是自己对 Vue 的理解。首先开始搭建一个调试环境,我这里使用<code>anywhere</code>作为 web 服务器，然后在<code>package.json</code>添加一个命令生成我们的<code>sourcemap</code>版本的 vue 文件的<code>debug</code>命令。这里只分析 web 不分析 weex。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;debug&quot;</span>: <span class="string">&quot;rollup -w -c scripts/config.js --environment TARGET:web-full-dev --sourcemap&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 yarn debug 启动服务会生成 sourcemap，然后在通过 anywhere 开一个 web 服务器，在浏览器中通过 Sources 对代码进行断点就可以进行调试了。</p>
+<h2 id="分析入口文件"><a href="#分析入口文件" class="headerlink" title="分析入口文件"></a>分析入口文件</h2><p>vue 框架在使用 vue 的 template 语法时候，会用到<code>vue-template-compiler</code>来对模版进行编译，我们可以在脚手架开发项目时候，配置编译。或者是直接引入带有编译器版本的 vue cdn。分析源码需要走整个流程，以下文件就是要分析的入口文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src/platforms/web/entry-runtime-<span class="keyword">with</span>-compiler.<span class="property">js</span></span><br></pre></td></tr></table></figure>
+
+<p>经过一层一层的推进，最终在<code>src/core/instance/index.js</code>中找到了 Vue 的构造函数，看到该文件，对 Vue 整个初始化流程有了一个大概的认识。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Vue</span>(<span class="params">options</span>) &#123;</span><br><span class="line">  <span class="comment">// 由initMixin初始化，在创建实例时候调用</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_init</span>(options);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化vm</span></span><br><span class="line"><span class="title function_">initMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="comment">// 初始化 $data $props $set $delete $watch</span></span><br><span class="line"><span class="title function_">stateMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="comment">// 初始化@on @once @off @emit方法</span></span><br><span class="line"><span class="title function_">eventsMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="comment">// 初始化生命周期 update destory</span></span><br><span class="line"><span class="title function_">lifecycleMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="comment">// 处理$nextTick和render</span></span><br><span class="line"><span class="title function_">renderMixin</span>(<span class="title class_">Vue</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化流程-x2F-源码版生命周期分析"><a href="#初始化流程-x2F-源码版生命周期分析" class="headerlink" title="初始化流程&#x2F;源码版生命周期分析"></a>初始化流程&#x2F;源码版生命周期分析</h2><p>通过对构造函数分析，看到首先是调用<code>__init</code>方法，而<code>_init</code>方法是由<code>initMixin</code>进行添加的，先来看看这个初始化做了哪些操作。</p>
+<ol>
+<li><code>uid</code> 为每个实例都标记一个 uid 标识唯一的 id，并添加属性_isVue 标识是 vue 的实例</li>
+<li><code>mergeOptions等</code> 合并组件的 options(具体就是合并 Vue 配置与用户传入的配置，如 el，data，template 等)</li>
+<li><code>initProxy</code> 代理 vm 实例,在后续_render 函数执行中，提供更友好的错误检测能力和变量名称检测等<a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/5865c0921b69e6006b3145a1/spilt.2.src-%E5%9F%BA%E7%A1%80%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%90%86%E6%A3%80%E6%B5%8B.md">详见</a> 。</li>
+<li><code>initLifecycle</code> 把当前实例添加到父实例的 children 属性中，并设置自身的$parent 属性指向父实例，及初始化一些生命周期相关变量</li>
+<li><code>initEvents</code> 初始化当前组件的事件监听器 on 和 emit（如 @fatherEvent&#x3D;”myEvent”)</li>
+<li><code>initRender</code> 初始化 slot 插槽相关的内容，以及 render 函数的相关内容（h 函数核心）以及$attrs $listeners 属性</li>
+<li><code>callHook(vm, &#39;beforeCreate&#39;)</code> 触发 Vue 的<font color=blue><strong>beforeCreate</strong></font>生命周期钩子函数</li>
+<li><code>initInjections</code> 初始化<code>inject</code>并设置 shouldObserve 为 false 标识，标识数据为非响应式（可以传入对象，属性是响应式）</li>
+<li><code>initState</code> 依次初始化实例对象<font color=red><strong>props&#x3D;&gt;methods&#x3D;&gt;data&#x3D;&gt;computed&#x3D;&gt;watch</strong></font>，统一数据结构并判断重名</li>
+<li><code>initProvide</code>初始化<code>provide</code>并调用传入的 provide 方法</li>
+<li><code>callHook(vm, &#39;created&#39;)</code>触发 Vue 的<font color=blue><strong>created</strong></font>生命周期钩子函数</li>
+<li><code>mark measure</code> 可配置使用，标记 Vue.config.performance 配置开启后可以在开发者工具追踪性能</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initMixin函数删除了部分内容</span></span><br><span class="line"><span class="comment">// 实例的唯一标识</span></span><br><span class="line"><span class="keyword">let</span> uid = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initMixin</span>(<span class="params">Vue: Class&lt;Component&gt;</span>) &#123;</span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_init</span> = <span class="keyword">function</span> (<span class="params">options?: <span class="built_in">Object</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">vm</span>: <span class="title class_">Component</span> = <span class="variable language_">this</span>;</span><br><span class="line">    vm.<span class="property">_uid</span> = uid++;</span><br><span class="line">    <span class="comment">// 标识是vue实例，不需要被响应式处理</span></span><br><span class="line">    vm.<span class="property">_isVue</span> = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// merge options</span></span><br><span class="line">    <span class="keyword">if</span> (options &amp;&amp; options.<span class="property">_isComponent</span>) &#123;</span><br><span class="line">      <span class="title function_">initInternalComponent</span>(vm, options);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      vm.<span class="property">$options</span> = <span class="title function_">mergeOptions</span>(</span><br><span class="line">        <span class="comment">// vue本身的选项，如全局api，vue内置组件等</span></span><br><span class="line">        <span class="title function_">resolveConstructorOptions</span>(vm.<span class="property">constructor</span>),</span><br><span class="line">        <span class="comment">// 用户传入的option，如el，data，template等</span></span><br><span class="line">        options || &#123;&#125;,</span><br><span class="line">        vm</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">      <span class="title function_">initProxy</span>(vm);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 生产环境渲染对象就是自己</span></span><br><span class="line">      vm.<span class="property">_renderProxy</span> = vm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// expose real self</span></span><br><span class="line">    vm.<span class="property">_self</span> = vm;</span><br><span class="line">    <span class="comment">// 初始化vue实例的各种东西</span></span><br><span class="line">    <span class="comment">// 初始化生命周期相关变量</span></span><br><span class="line">    <span class="title function_">initLifecycle</span>(vm);</span><br><span class="line">    <span class="comment">// 初始化当前组件的事件监听器等内容</span></span><br><span class="line">    <span class="title function_">initEvents</span>(vm);</span><br><span class="line">    <span class="comment">// 初始化slot $attrs $listeners 相关属性</span></span><br><span class="line">    <span class="title function_">initRender</span>(vm);</span><br><span class="line">    <span class="comment">// 触发beforeCreate生命周期钩子函数</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&quot;beforeCreate&quot;</span>);</span><br><span class="line">    <span class="comment">// 实现依赖注入（start）</span></span><br><span class="line">    <span class="title function_">initInjections</span>(vm); <span class="comment">// resolve injections before data/props</span></span><br><span class="line">    <span class="comment">// 初始化props methods data computed watch</span></span><br><span class="line">    <span class="title function_">initState</span>(vm);</span><br><span class="line">    <span class="comment">// 实现依赖注入（end）</span></span><br><span class="line">    <span class="title function_">initProvide</span>(vm); <span class="comment">// resolve provide after data/props</span></span><br><span class="line">    <span class="comment">// 触发created生命周期钩子函数</span></span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&quot;created&quot;</span>);</span><br><span class="line">    <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">    <span class="comment">// 通过$mount挂载页面</span></span><br><span class="line">    <span class="keyword">if</span> (vm.<span class="property">$options</span>.<span class="property">el</span>) &#123;</span><br><span class="line">      vm.$mount(vm.<span class="property">$options</span>.<span class="property">el</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="13">
+<li><code>$mount</code> 调用 vm 的$mount 方法(内部调用 mountComponent 方法）</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$mount</span> = <span class="keyword">function</span> (<span class="params"></span></span><br><span class="line"><span class="params">  el?: string | Element,</span></span><br><span class="line"><span class="params">  hydrating?: boolean</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Component</span> &#123;</span><br><span class="line">  el = el &amp;&amp; inBrowser ? <span class="title function_">query</span>(el) : <span class="literal">undefined</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">mountComponent</span>(<span class="variable language_">this</span>, el, hydrating);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="14">
+<li><code>mountComponent</code>函数的作用是<font color=red>确认挂载节点,编译模板为 render 函数，渲染函数转换 Virtual DOM,创建真实节点。</font></li>
+<li><code>callHook(vm, &#39;beforeMount&#39;)</code>触发 Vue 的<font color=blue><strong>beforeMount</strong></font>生命周期钩子函数</li>
+<li><code>_update</code>通过vm实例调用update方法进行v-dom到真实dom的渲染，传入的<code>_render</code>是编译好的渲染函数(编译模板或传入的render，<strong>如果同时存在 template 和 render 会优先使用 render</strong>)</li>
+<li>然后首次初始化Watcher（此处为渲染Watcher），并且在更新Watcher的回调函数中注册beforeUpdate生命周期钩子函数</li>
+<li>当<code>$vnode</code>节点为null，则表明是new Vue创建的，触发Vue 的<font color=blue><strong>mounted</strong></font>生命周期钩子函数。如果是.vue文件的组件会在所有子组件的<code>mounted</code>钩子函数触发完成后触发<a target="_blank" rel="noopener" href="https://ustbhuangyi.github.io/vue-analysis/v2/components/lifecycle.html#beforemount-mounted">详见</a>，父&#x2F;根组件的<code>beforeMount</code>会比子组件先触发。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">mountComponent</span>(<span class="params"></span></span><br><span class="line"><span class="params">  vm: Component,</span></span><br><span class="line"><span class="params">  el: ?Element,</span></span><br><span class="line"><span class="params">  hydrating?: boolean</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Component</span> &#123;</span><br><span class="line">  vm.<span class="property">$el</span> = el;</span><br><span class="line">  <span class="keyword">if</span> (!vm.<span class="property">$options</span>.<span class="property">render</span>) &#123;</span><br><span class="line">    vm.<span class="property">$options</span>.<span class="property">render</span> = createEmptyVNode;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">callHook</span>(vm, <span class="string">&quot;beforeMount&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> updateComponent;</span><br><span class="line">  updateComponent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 接受Vnode对象和</span></span><br><span class="line">    vm.<span class="title function_">_update</span>(vm.<span class="title function_">_render</span>(), hydrating);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 首次初始化Watcher</span></span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Watcher</span>(</span><br><span class="line">    vm,</span><br><span class="line">    updateComponent,</span><br><span class="line">    noop,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="title function_">before</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vm.<span class="property">_isMounted</span> &amp;&amp; !vm.<span class="property">_isDestroyed</span>) &#123;</span><br><span class="line">          <span class="title function_">callHook</span>(vm, <span class="string">&quot;beforeUpdate&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 标识为渲染Watcher</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">true</span> <span class="comment">/* isRenderWatcher */</span></span><br><span class="line">  );</span><br><span class="line">  hydrating = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (vm.<span class="property">$vnode</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">    vm.<span class="property">_isMounted</span> = <span class="literal">true</span>;</span><br><span class="line">    <span class="title function_">callHook</span>(vm, <span class="string">&quot;mounted&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> vm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="19">
+<li>一次Vue初始化的过程就结束了,当我们修改data或者props会触发watcher的更新，进行虚拟dom的diff，然后vue会以最小的更新来刷新页面，但是这个刷新不是实时的，而且用Vue内部维护的刷新队列<code>queueWatcher</code>进行刷新</li>
+<li>queueWatcher通过<code>flushSchedulerQueue</code>方法来进行更新watcher队列，并用watch的id进行重新排序，来保证更新的顺序<a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/5865c0921b69e6006b3145a1/spilt.2.src-%E6%B7%B1%E5%85%A5%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA-%E4%B8%AD.md">详见</a></li>
+<li>通过循环的方式依次处理每一个watcher，首先触发Vue 的<font color=blue><strong>beforeUpdate</strong></font>生命周期钩子函数</li>
+<li>通过<code>has</code>对象保存该更新过的id，提高更新的效率，然后调用<code>watcher.run()</code>方法进行watcher的更新操作（如果watch一次性更新的次数超过100次，那么会被当成循环调用，会进行info提示）</li>
+<li>通过slice()方法，保存一份需要更新队列的数据备份，然后清空当前队列的数据&#x2F;</li>
+<li>如果是keep-alive组件内部的组件，会触发Vue的<font color=blue><strong>activated</strong></font>生命周期钩子函数。</li>
+<li>如果是常规的组件，触发Vue的<font color=blue><strong>updated</strong></font>生命周期钩子函数。此时一次diff更新的操作就已经全部完成。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">flushSchedulerQueue</span> () &#123;</span><br><span class="line">  currentFlushTimestamp = <span class="title function_">getNow</span>()</span><br><span class="line">   <span class="comment">// 设置正在刷新watcher队列</span></span><br><span class="line">  flushing = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">let</span> watcher, id</span><br><span class="line">  <span class="comment">// 排序队列，具体以下任务</span></span><br><span class="line">  <span class="comment">// 1.组件从父级更新为子级。（因为父母总是在子级之前创建）</span></span><br><span class="line">  <span class="comment">// 2.组件的用户监视程序在其呈现监视程序之前运行（因为用户观察者先于渲染观察者创建）</span></span><br><span class="line">  <span class="comment">// 3.如果在父组件的观察者运行期间某个组件被破坏，可以跳过其观察者。</span></span><br><span class="line">  queue.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.<span class="property">id</span> - b.<span class="property">id</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (index = <span class="number">0</span>; index &lt; queue.<span class="property">length</span>; index++) &#123;</span><br><span class="line">    watcher = queue[index]</span><br><span class="line">    <span class="keyword">if</span> (watcher.<span class="property">before</span>) &#123;</span><br><span class="line">       <span class="comment">// 在更新视图之前，触发beforeUpdate生命周期钩子函数</span></span><br><span class="line">      watcher.<span class="title function_">before</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    id = watcher.<span class="property">id</span></span><br><span class="line">    <span class="comment">// 标记id为null，已经在进行的数据</span></span><br><span class="line">    has[id] = <span class="literal">null</span></span><br><span class="line">    <span class="comment">// 运行</span></span><br><span class="line">    watcher.<span class="title function_">run</span>()</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; has[id] != <span class="literal">null</span>) &#123;</span><br><span class="line">      circular[id] = (circular[id] || <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">      <span class="comment">// 如果watch连续更新超过100次，那么可能存在watch嵌套的引用</span></span><br><span class="line">      <span class="keyword">if</span> (circular[id] &gt; <span class="variable constant_">MAX_UPDATE_COUNT</span>) &#123;</span><br><span class="line">        <span class="title function_">warn</span>(</span><br><span class="line">          <span class="string">&#x27;You may have an infinite update loop &#x27;</span> + (</span><br><span class="line">            watcher.<span class="property">user</span></span><br><span class="line">              ? <span class="string">`in watcher with expression &quot;<span class="subst">$&#123;watcher.expression&#125;</span>&quot;`</span></span><br><span class="line">              : <span class="string">`in a component render function.`</span></span><br><span class="line">          ),</span><br><span class="line">          watcher.<span class="property">vm</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 备份已经活动。更新的队列</span></span><br><span class="line">  <span class="keyword">const</span> activatedQueue = activatedChildren.<span class="title function_">slice</span>()</span><br><span class="line">  <span class="keyword">const</span> updatedQueue = queue.<span class="title function_">slice</span>()</span><br><span class="line">  <span class="comment">// 清空队列</span></span><br><span class="line">  <span class="title function_">resetSchedulerState</span>()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 触发keep-alive组件更新的activated生命周期钩子</span></span><br><span class="line">  <span class="title function_">callActivatedHooks</span>(activatedQueue)</span><br><span class="line">  <span class="comment">// 触发组件的updated生命周期钩子</span></span><br><span class="line">  <span class="title function_">callUpdatedHooks</span>(updatedQueue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="26">
+<li>分析完创建和更新的流程，就剩下组件销毁生命周期，在 切换路由, v-if,手动 $destroy() 几个场景中会触发<code>beforeDestroy</code>和<code>destroyed</code>生命周期</li>
+<li>先判断是否正在执行销毁如果是直接返回，否则触发Vue的<font color=blue><strong>beforeDestroy</strong></font>生命周期钩子函数，并标识为正在销毁</li>
+<li>然后移除<code>parent</code>的<code>$children</code>节点，调用watcher的<code>teardown</code>方法移除当前实例的所有watcher（_watchers），并删除dep依赖，标签为非活动组件。</li>
+<li>对Vue实例的__ob__的计数属性进行递减 ，标记<code>_isDestroyed</code>状态为已经注销状态，然后通过<code>__patch__</code>方向对节点的v-dom进行注销，重置为&#96;&#96;null&#96;</li>
+<li><code>callHook(vm, &#39;beforeMount&#39;)</code>触发 Vue 的<font color=blue><strong>destroyed</strong></font>生命周期钩子函数</li>
+<li>最后当前实例的绑定的事件进行注销，根据清空重置<code>$el.__vue__</code>和<code>$vnode.parent</code>属性。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$destroy</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">   <span class="keyword">const</span> <span class="attr">vm</span>: <span class="title class_">Component</span> = <span class="variable language_">this</span></span><br><span class="line">   <span class="keyword">if</span> (vm.<span class="property">_isBeingDestroyed</span>) &#123;</span><br><span class="line">     <span class="keyword">return</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="title function_">callHook</span>(vm, <span class="string">&#x27;beforeDestroy&#x27;</span>)</span><br><span class="line">   vm.<span class="property">_isBeingDestroyed</span> = <span class="literal">true</span></span><br><span class="line">   <span class="keyword">const</span> parent = vm.<span class="property">$parent</span></span><br><span class="line">   <span class="keyword">if</span> (parent &amp; &amp; !parent.<span class="property">_isBeingDestroyed</span> &amp;&amp; !vm.<span class="property">$options</span>.<span class="property">abstract</span>) &#123;</span><br><span class="line">     <span class="title function_">remove</span>(parent.<span class="property">$children</span>, vm)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (vm.<span class="property">_watcher</span>) &#123;</span><br><span class="line">     vm.<span class="property">_watcher</span>.<span class="title function_">teardown</span>()</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> i = vm.<span class="property">_watchers</span>.<span class="property">length</span></span><br><span class="line">   <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">     vm.<span class="property">_watchers</span>[i].<span class="title function_">teardown</span>()</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (vm.<span class="property">_data</span>.<span class="property">__ob__</span>) &#123;</span><br><span class="line">     vm.<span class="property">_data</span>.<span class="property">__ob__</span>.<span class="property">vmCount</span>--</span><br><span class="line">   &#125;</span><br><span class="line">   vm.<span class="property">_isDestroyed</span> = <span class="literal">true</span></span><br><span class="line">   vm.<span class="title function_">__patch__</span>(vm.<span class="property">_vnode</span>, <span class="literal">null</span>)</span><br><span class="line">   <span class="title function_">callHook</span>(vm, <span class="string">&#x27;destroyed&#x27;</span>)</span><br><span class="line">   vm.$off()</span><br><span class="line">   <span class="keyword">if</span> (vm.<span class="property">$el</span>) &#123;</span><br><span class="line">     vm.<span class="property">$el</span>.<span class="property">__vue__</span> = <span class="literal">null</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (vm.<span class="property">$vnode</span>) &#123;</span><br><span class="line">     vm.<span class="property">$vnode</span>.<span class="property">parent</span> = <span class="literal">null</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="32">
+<li>到此一个完整版本的Vue创建过程就分析完成了，keep-alive会另外有activated &amp; deactivated两个钩子可以自行调试分析</li>
+</ol>
+<h2 id="钩子附录"><a href="#钩子附录" class="headerlink" title="钩子附录"></a>钩子附录</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v-dom的生命周期钩子</span></span><br><span class="line"><span class="keyword">const</span> hooks = [<span class="string">&#x27;create&#x27;</span>, <span class="string">&#x27;activate&#x27;</span>, <span class="string">&#x27;update&#x27;</span>, <span class="string">&#x27;remove&#x27;</span>, <span class="string">&#x27;destroy&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// vue组件的生命周期钩子</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">LIFECYCLE_HOOKS</span> = [</span><br><span class="line">  <span class="string">&#x27;beforeCreate&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;created&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;beforeMount&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;mounted&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;beforeUpdate&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;updated&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;beforeDestroy&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;destroyed&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;activated&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;deactivated&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;errorCaptured&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;serverPrefetch&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/04/15/2021/vue_principle_01/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:52:22
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                        #vue原理
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/05/15/2021/vue_principle_03/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-text">搭建调试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="toc-text">分析入口文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B-x2F-%E6%BA%90%E7%A0%81%E7%89%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%88%86%E6%9E%90"><span class="toc-text">初始化流程&#x2F;源码版生命周期分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%A9%E5%AD%90%E9%99%84%E5%BD%95"><span class="toc-text">钩子附录</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

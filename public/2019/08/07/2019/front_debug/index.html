@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】前端调试（chrome开发者工具的使用） 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】前端调试（chrome开发者工具的使用）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:15
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                    #调试
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。前端调试研究分析"><a href="#公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。前端调试研究分析" class="headerlink" title="公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。前端调试研究分析"></a>公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。<br><span id="more"></span><br>前端调试研究分析</h2><h2 id="1-什么是调试"><a href="#1-什么是调试" class="headerlink" title="1. 什么是调试"></a>1. 什么是调试</h2><p>用手工或编译程序等方法进行测试，修正语法错误和逻辑错误的过程称为调试，前端调试主要分为CSS（DOM）调试和JavaScript调试。Javascript我们主要用Chrome Devtools进行调试。</p>
+<h2 id="2-CSS-DOM-调试"><a href="#2-CSS-DOM-调试" class="headerlink" title="2.	CSS(DOM)调试"></a>2.	CSS(DOM)调试</h2><p>CSS调试用于页面样式和DOM结构调试，通过开发者工具选中DOM元素（如图1.1），整个页面的结构都在Elements功能模块渲染。<br> <img src="https://s2.ax1x.com/2019/09/08/n8w7Ue.png" alt="请输入图片描述"></p>
+<p>（图1.1）</p>
+<p>如图1.2所示，我们在Elements调试功能面板（Styles模块），可以看到已选择元素的所有CSS属性，可以在element.style {  }里面动态为当前DOM元素添加我们需要测试的样式，也可以选择某个CSS选择器来为整个存在该选择器的CSS添加样式。通过勾选CSS伪类属性，可以看到元素触发伪类后的样式内容。<br> <img src="https://s2.ax1x.com/2019/09/08/n8wH4H.png" alt="请输入图片描述"></p>
+<p>（图1.2）</p>
+<p>如图1.3所示，我们在Elements调试功能面板（Computed模块），可以看到当前选中元素的CSS盒子模型和当前元素的所有CSS属性，并且通过点击每个属性，可以定位到该属性在文件的位置</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wIHO.png" alt="请输入图片描述"></p>
+<p>（图1.3）<br><br>如图1.4所示，我们在Elements调试功能面板（Event Lissteners模块），可以看到当前元素所绑定的事件都会在列表里面展现，并且根据自己的需求进行筛选。<br> <img src="https://s2.ax1x.com/2019/09/08/n8w5DK.png" alt="请输入图片描述"></p>
+<p>（图1.4）<br><br>如图1.5所示，我们在Elements调试功能面板（DOM  Breakpoints模块），可以看到我们设置的DOM断点，当元素触发时，就会自动转跳到实施该事件的源码地址处（图1.6）</p>
+<p> <img src="https://s2.ax1x.com/2019/09/08/n8wTED.png" alt="请输入图片描述"></p>
+<p>（图1.5）<br></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8wqCd.png" alt="请输入图片描述"></p>
+<p>（图1.6）<br>如图1.7所示，我们在Elements调试功能面板（Properties模块），可以看到当前dom元素节点的各种属性，方面我们查询调试。</p>
+<p> <img src="https://s2.ax1x.com/2019/09/08/n80pVS.png" alt="请输入图片描述"></p>
+<p>（图1.7）</p>
+<h2 id="3-Chrome-DevTools调试"><a href="#3-Chrome-DevTools调试" class="headerlink" title="3.	Chrome DevTools调试"></a>3.	Chrome DevTools调试</h2><p>Chrome开发者工具集成了前端调试所用到的全部功能，如下图所示，我们可以切换不同的面板来调试不同的功能。<br> <img src="https://s2.ax1x.com/2019/09/08/n809Ug.png" alt="请输入图片描述"></p>
+<h3 id="3-1Console面板"><a href="#3-1Console面板" class="headerlink" title="3.1	Console面板"></a>3.1	Console面板</h3><p>  <img src="https://s2.ax1x.com/2019/09/08/n8wXvt.png" alt="请输入图片描述"></p>
+<p>（图2.1）<br><br>在日常开发者，我们会在程序里输入console.log来打印日志内容，除了打印我们预先设定好的内容外，还可以在控制台输入代码段来运行。除了正常文本或变量的值，我们还可以加上一个参数来格式化打印效果。如下图（图2.2）所示</p>
+<p> <img src="https://s2.ax1x.com/2019/09/08/n8wzb8.png" alt="描述"></p>
+<p>（图2.2）</p>
+<p>除了console.log意外， console对象还有其他方法，如下表所示。 </p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Log()</td>
+<td>输出信息</td>
+<td>console.log(“123”)</td>
+</tr>
+<tr>
+<td>error()</td>
+<td>输出错误信息，并显示错误发生的堆栈</td>
+<td>console.error(“Error: %s (%i)”, “err”,500)</td>
+</tr>
+<tr>
+<td>group()</td>
+<td>用于将显示的信息分组</td>
+<td>console.group(‘第一层’);<br>console.group(‘第二层’);</td>
+</tr>
+<tr>
+<td>table()</td>
+<td>将类型已表格形式输出</td>
+<td>var obj&#x3D; { a:{ num: “1”}}; <br>console.table(obj);</td>
+</tr>
+<tr>
+<td>time()<br>timeEnd()</td>
+<td>输出程序运行时间，配合使用，在开头和结尾</td>
+<td>console.time(‘开始’);<br>for (var i &#x3D; 0; i &lt; 100; i++) {} <br>console.timeEnd(‘结束’);</td>
+</tr>
+<tr>
+<td>trace()</td>
+<td>追踪函数的调用过程</td>
+<td>function d(a) { <br>console.trace();<br>return a;<br>}<br>function b(a) {<br> return c(a);<br>}<br>function c(a) {<br> return d(a);<br>}<br>var a &#x3D; b(‘123’);</td>
+</tr>
+<tr>
+<td>warn()</td>
+<td>输出警告信息</td>
+<td>console.warn(“警告”)</td>
+</tr>
+</tbody></table>
+<p>在console面板也可以通过选择器来操作元素，查看相关的属性，直接在控制台面板输入相关的命令即可。具体用法见下表</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>参数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelector()返回第一个匹配dom的引用</td>
+</tr>
+<tr>
+<td>$$(selector)</td>
+<td>Css选择器</td>
+<td>相当于js中的document.querySelectorAll()返回全部匹配dom引用的数组</td>
+</tr>
+<tr>
+<td>$x(xpath)</td>
+<td>Xpath路径</td>
+<td>返回一个与给定 XPath 表达式匹配的 DOM 元素数组</td>
+</tr>
+<tr>
+<td>copy(object)</td>
+<td>Dom节点对象</td>
+<td>将指定DOM对象的字符串表示形式复制到剪贴板</td>
+</tr>
+<tr>
+<td>$_</td>
+<td>–</td>
+<td>返回最近评估的表达式的值,  $0~$4	0-4	最近5个你选择过的DOM节点</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-Network面板"><a href="#3-2-Network面板" class="headerlink" title="3.2	 Network面板"></a>3.2	 Network面板</h3><p><img src="https://s2.ax1x.com/2019/09/08/n8BYSs.png" alt="请输入图片描述"></p>
+<p>（图2.3）<br>程序运行环境，网络请求是必不可少的，由上图我们可以看到一个完成网络请求的构成部分，一般情况下我们会选择XHR请求来调试。如图2.4所示，我们可以在header看请求的参数以及配置的请求头信息等。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BlTS.png" alt="请输入图片描述"></p>
+<p>（图2.4） <br><br>    在用户的操作环境中，我们不知道网络情况怎么样，可以用开发者工具的网络模拟功能，来测试在不同网络情况下网站能否正常运行。如图2.5所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Btln.png" alt="请输入图片描述"></p>
+<p>（图2.5）</p>
+<h3 id="3-3Application面板"><a href="#3-3Application面板" class="headerlink" title="3.3	Application面板"></a>3.3	Application面板</h3><p><img src="https://s2.ax1x.com/2019/09/08/n8BNyq.png" alt="请输入图片描述"></p>
+<p>（图2.6）<br>如图2.6所示，我们在Elements调试功能面板（Application模块），在子模块Storage可以看到当前网站存储的信息,比如cookie，local Storage等信息，并可以直观的进行增删改查。子模块Cache可以看到缓存的数据。Frames可以看到当前网站的一些静态资源。</p>
+<h3 id="3-4Sources面板"><a href="#3-4Sources面板" class="headerlink" title="3.4	Sources面板"></a>3.4	Sources面板</h3><p><img src="https://s2.ax1x.com/2019/09/08/n8BdmV.png" alt="请输入图片描述"> </p>
+<p>（图2.7）<br>在日常开发中，调试程序可以通过直接在代码中加上debugger（如图2.7所示），然后刷新页面，浏览器就会自己跳入断点，然后就可以进行调试。而如果想在浏览器中加入断点调试，我们需要先定位到改行代码，然后点击行号即可添加断点。</p>
+<p> <img src="https://s2.ax1x.com/2019/09/08/n8BUO0.png" alt="请输入图片描述"></p>
+<p>（图2.8）<br>当我们添加好断点后，就可以一步一步调试代码了，如图2.9所示，我们可以一步一步运行调试，也可以跳过功能，详细操作如图2.10所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8BwwT.png" alt="请输入图片描述"> </p>
+<p>（图2.9）</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8Dc4g.png" alt="请输入图片描述"> </p>
+<p>（图2.10）</p>
+<h3 id="3-5vue-devtools工具"><a href="#3-5vue-devtools工具" class="headerlink" title="3.5	vue-devtools工具"></a>3.5	vue-devtools工具</h3><p>vue开发者工具是vue官方开发的chrome插件，只能在chrome浏览器上使用，可以通过Select来选中自己要调试的组件，vuex可以看到当前组件的集中管理的状态。Event可以查看当前组件所触发的事件，Routing可以看到当前浏览过的路由和所有路由信息。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DyE8.png" alt="请输入图片描述"></p>
+<p> <img src="https://s2.ax1x.com/2019/09/08/n8DDDP.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DrHf.png" alt="请输入图片描述"></p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8DBut.png" alt="请输入图片描述"></p>
+<h3 id="3-6其他功能"><a href="#3-6其他功能" class="headerlink" title="3.6	其他功能"></a>3.6	其他功能</h3><p>如果需要调试移动设备的页面，就可以切换开发者工具到移动端，可以选择不同的设备，或者是切换网络，横批显示等功能。如图2.12所示</p>
+<p><img src="https://s2.ax1x.com/2019/09/14/nsyJdP.png" alt="请输入图片描述"> </p>
+<p>（图2.12）</p>
+<p>Chrome开发者工具也有自己的命令行窗口，我们按键盘的shift+ctrl+p即可调出窗口。如图2.13所示.可以找到自己需要的功能。命令行的功能大部分是控制一些功能的显示，或者一些快捷功能，可根据名称自由控制。比如我们要通过浏览器截屏，那么可以直接在命令窗口输入screen,然后根据需要选择，如图2.14所示。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8D2CQ.png" alt="请输入图片描述"> </p>
+<p>（图2.13）<br> <img src="https://s2.ax1x.com/2019/09/08/n8DR3j.png" alt="请输入图片描述"></p>
+<p>（图2.14）</p>
+<h2 id="4-IE浏览器调试"><a href="#4-IE浏览器调试" class="headerlink" title="4.	IE浏览器调试"></a>4.	IE浏览器调试</h2><p>在开始IE浏览器调试之前，推荐使用管理员权限打开软件。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rLo8.png" alt="请输入图片描述"> </p>
+<h3 id="4-1IE11-异同"><a href="#4-1IE11-异同" class="headerlink" title="4.1	IE11+异同"></a>4.1	IE11+异同</h3><p>在调试本地资源时，chrome开发者工具可以通过Application面板直观的管理cookie，local storage信息等，在IE浏览器中，如果我们要查看cookie，需要到网络面板，然后选中要查看的请求来查看Cookie，如图3.2所示，如果要查询Local Storage或者是Session Storage信息，我们需要在控制台打印输出，如图3.3所示。如果要清新存储信息，输入localStorage.clear（）即可。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8r7Lt.png" alt="请输入图片描述"></p>
+<p>(图3.2)</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rqdf.png" alt="请输入图片描述"> </p>
+<p>(图3.3)</p>
+<p>IE浏览器自带仿真功能，你可以在文档模式切换不同的IE版本进行兼容性测试，如图3.4所示。选中版本后页面会自动根据你选中的版本进行渲染。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8rTsI.png" alt="请输入图片描述"></p>
+<p>(图3.4)</p>
+<h2 id="5-常见bug定位"><a href="#5-常见bug定位" class="headerlink" title="5.	常见bug定位"></a>5.	常见bug定位</h2><h3 id="5-1状态码定位"><a href="#5-1状态码定位" class="headerlink" title="5.1	状态码定位"></a>5.1	状态码定位</h3><p>在前后端交互中，我们通过接口交付数据，每一个接口都会返回一个状态码和一个提示信息，如图4.1所示，我们可以通过这两个数据来初步判断是服务器端(后端)产生了bug，还是客户端(前端)产生了bug。详细对照表如表4.1所示。</p>
+<p>（图4.1）</p>
+<blockquote>
+<p> 本表是根据公司内部情况设置的状态码,非http状态码，根据实际情况匹配</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>前端</th>
+<th>后端</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>—</td>
+<td>—</td>
+<td>请求成功,如无数据则显示暂无数据，如果有数据没展示，则是前端问题</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td>—</td>
+<td>—</td>
+<td>需要结合errMsg来确定问题的发生</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td>有问题</td>
+<td>—</td>
+<td>一般是发生的数据不对或者没权限</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>—</td>
+<td>有问题</td>
+<td>后端服务器处理出问题</td>
+</tr>
+<tr>
+<td>（表4.1）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="5-2控制台定位"><a href="#5-2控制台定位" class="headerlink" title="5.2	控制台定位"></a>5.2	控制台定位</h3><p>如果页面白屏或者是有内容加载不出来，那么需要查看控制台的信息，如果是xxx is not undefined一般有两种情况，一种情况可能是前端没有做异常数据的错误处理，导致报错。还有可能就是后端返回的数据不规范而造成的。报错信息一般会展示堆栈调用记录，我们就可以看到具体的位置来解决bug。如果网络请求有问题也会在控制台看到报错。</p>
+<p><img src="https://s2.ax1x.com/2019/09/08/n8spyn.png" alt="请输入图片描述"></p>
+<p>（图4.2）</p>
+<h2 id="6-基础常识"><a href="#6-基础常识" class="headerlink" title="6.	基础常识"></a>6.	基础常识</h2><h3 id="6-1Cookie和Local-Storage的区别"><a href="#6-1Cookie和Local-Storage的区别" class="headerlink" title="6.1	Cookie和Local Storage的区别"></a>6.1	Cookie和Local Storage的区别</h3><p>首先说明的是cookie，local Storage，session Storage都是客户端（浏览器）的存储技术，用来保存一些数据，每个网站都不会共用这些信息。 <br><br>Cookie一般来说是用来保存服务端传来的session信息，大小最多为4kb，可以设置有效期，域名信息，缓存等信息。 <br><br>local Storage是html5新出的标准前端存储技术，通过key-value的方式存储。大小一般为5M。提供了一系列的增删改查API，local Storage一直在浏览器存储，除了用户主动删除，是一直存在的。 <br><br>session Storage和local storage使用方法相同，不同的地方是只在一次会话过程中有效，如果关闭浏览器会自动清除。</p>
+<h3 id="6-2px-em-rem-vw等单位的区别"><a href="#6-2px-em-rem-vw等单位的区别" class="headerlink" title="6.2	px,em,rem,vw等单位的区别"></a>6.2	px,em,rem,vw等单位的区别</h3><p>这些都是CSS的长度单位，不同的是他们大小的计算方式不同，所展示的效果就不同，具体对比如下表 <br><br>单位	备注</p>
+<ul>
+<li>px	相对长度单位，相对于屏幕的分辨率而言的</li>
+<li>em	相对长度单位，相对于当前元素父类的字体大小（font-size）而言</li>
+<li>rem	相对长度单位，想对于当前文档根元素(html)的字体大小而言</li>
+<li>vw	相对长度单位，相对于当前视口而定,全部屏幕的width为100vw</li>
+</ul>
+<h2 id="7-官方文档"><a href="#7-官方文档" class="headerlink" title="7.官方文档"></a>7.官方文档</h2><p>谷歌官方文档 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn">https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn</a> </p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/07/05/2019/rap2_util/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:15
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                        #调试
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/08/31/2019/front_cors/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%8F%B8%E9%9C%80%E8%A6%81%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E6%A1%A3%E7%BB%99%E6%B5%8B%E8%AF%95%E7%9C%8B%EF%BC%8C%E4%BB%A5%E4%BE%BF%E8%83%BD%E6%9B%B4%E5%BF%AB%E7%9A%84%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E6%96%B9%E4%BE%BF%E5%8F%8D%E9%A6%88%E7%BB%99%E5%BC%80%E5%8F%91%EF%BC%8C%E4%BA%8E%E6%98%AF%E6%9C%89%E4%BA%86%E8%BF%99%E7%AF%87%E6%96%87%E6%A1%A3%E3%80%82%E5%89%8D%E7%AB%AF%E8%B0%83%E8%AF%95%E7%A0%94%E7%A9%B6%E5%88%86%E6%9E%90"><span class="toc-text">公司需要写一个简单的文档给测试看，以便能更快的定位问题产生的原因，方便反馈给开发，于是有了这篇文档。前端调试研究分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B0%83%E8%AF%95"><span class="toc-text">1. 什么是调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CSS-DOM-%E8%B0%83%E8%AF%95"><span class="toc-text">2.	CSS(DOM)调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Chrome-DevTools%E8%B0%83%E8%AF%95"><span class="toc-text">3.	Chrome DevTools调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1Console%E9%9D%A2%E6%9D%BF"><span class="toc-text">3.1	Console面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Network%E9%9D%A2%E6%9D%BF"><span class="toc-text">3.2	 Network面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3Application%E9%9D%A2%E6%9D%BF"><span class="toc-text">3.3	Application面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4Sources%E9%9D%A2%E6%9D%BF"><span class="toc-text">3.4	Sources面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5vue-devtools%E5%B7%A5%E5%85%B7"><span class="toc-text">3.5	vue-devtools工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="toc-text">3.6	其他功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IE%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B0%83%E8%AF%95"><span class="toc-text">4.	IE浏览器调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1IE11-%E5%BC%82%E5%90%8C"><span class="toc-text">4.1	IE11+异同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B8%B8%E8%A7%81bug%E5%AE%9A%E4%BD%8D"><span class="toc-text">5.	常见bug定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E7%8A%B6%E6%80%81%E7%A0%81%E5%AE%9A%E4%BD%8D"><span class="toc-text">5.1	状态码定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%AE%9A%E4%BD%8D"><span class="toc-text">5.2	控制台定位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%9F%BA%E7%A1%80%E5%B8%B8%E8%AF%86"><span class="toc-text">6.	基础常识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1Cookie%E5%92%8CLocal-Storage%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">6.1	Cookie和Local Storage的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2px-em-rem-vw%E7%AD%89%E5%8D%95%E4%BD%8D%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">6.2	px,em,rem,vw等单位的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-text">7.官方文档</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】产品要在输入框输入高亮文字！？除了使用MD解析器，自己来模拟一个文本输入框</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:50:25
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/HTML/" title="HTML">
+                    #HTML
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Vue/" title="Vue">
+                    #Vue
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>需求是这样的，运营需要在输入框输入高亮的文本用来表示一个动态的文本（如用户名），后端去匹配相应动态的内容用来给客户端推送动态内容。(本文基于vue，原理通用)</p>
+<span id="more"></span>
+
+<h2 id="需求补充"><a href="#需求补充" class="headerlink" title="需求补充"></a>需求补充</h2><p>运营通过添加按钮，为输入框内部添加 相应的标识符。添加完成的内容高亮显示，并且在发送给后端之前，把高亮的html代码字符转为约定的标识符。当进行编辑是，在重新把标识符匹配成相应高亮的文字。如下图所示。</p>
+<p><img src="https://i.loli.net/2021/03/06/7EuogSaYpjZWicQ.png" alt="1111.png"></p>
+<h2 id="1-模拟输入框"><a href="#1-模拟输入框" class="headerlink" title="1. 模拟输入框"></a>1. 模拟输入框</h2><p>第一部分很简单，就根据设计图或者原型模拟出来我们需要的文本框，这里我们在输入的时候添加一个有色边框，在未输入的情况，隐藏边框。尽量和真实文本框保持一致。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-wrapper&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123; focus: msgTitleInputFocusFlag &#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span></span></span><br><span class="line"><span class="tag">      <span class="attr">ref</span>=<span class="string">&quot;inputRef&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;input-text</span></span></span><br><span class="line"><span class="string"><span class="tag">      @focus=&quot;</span><span class="attr">msgTitleInputFocusFlag</span> = <span class="string">true</span>&quot;</span></span><br><span class="line"><span class="tag">      @<span class="attr">blur</span>=<span class="string">&quot;msgTitleInputFocusFlag = false&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.input-wrapper</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#c0c4cc</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.input-text</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#606266</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;<span class="selector-class">.focus</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#409eff</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改DOM性contenteditable"><a href="#2-修改DOM性contenteditable" class="headerlink" title="2. 修改DOM性contenteditable"></a>2. 修改DOM性contenteditable</h2><p>在html标签中有一个contenteditable属性，对应两个布尔值，true表示可以编辑，false表示不可以编辑。该属性支持所有浏览器（没错包括ie6）。<br>我们把模拟的输入框修改为contenteditable&#x3D;”true”，并且在我们处理高亮文本时候，把需要处理的文本contenteditable设置false，防止用户选中一半，或者是删除的过程中可以删除整个文本词组。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span></span></span><br><span class="line"><span class="tag">      <span class="attr">contenteditable</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>定义我们约定的高亮标示符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 点击添加时候，插入到文本中</span></span><br><span class="line"><span class="keyword">const</span> hightext =  <span class="string">&#x27;&lt;span class=&quot;fack-name&quot; contenteditable=&quot;false&quot;&gt;【动态名称】&lt;/span&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-修改innerHtml属性"><a href="#3-修改innerHtml属性" class="headerlink" title="3. 修改innerHtml属性"></a>3. 修改innerHtml属性</h2><p>在vue中我们通过ref可以拿到DOM节点，然后获取innerHtml属性的内容，在我们输入的时候进行修改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 点击添加按钮时候，把高亮文本拼接到我们的editString变量中，并赋值给DOM节点的内容</span></span><br><span class="line"> <span class="title function_">addDynamicName</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">editString</span> += hightext  </span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>.<span class="property">innerHTML</span> = <span class="variable language_">this</span>.<span class="property">editString</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，我们在输入框就可以输入，并点击按钮可以添加高亮字符到页面中进行显示。</p>
+<h2 id="4-处理光标及后续匹配"><a href="#4-处理光标及后续匹配" class="headerlink" title="4. 处理光标及后续匹配"></a>4. 处理光标及后续匹配</h2><p>在上面完成后，可以输入内容并且添加高亮内容了。但是我们会发现一个问题，添加完成高亮文本后，光标跑到了最前面，而且页面的内容，无法进行选择。如下图。</p>
+<p><img src="https://i.loli.net/2021/03/06/OrDjLzSKEmBcdi1.png" alt="222.png"></p>
+<p>但是在输入完成后，我们还是需要输入内容的，所以为输入框解决输入问题。在之前添加名称完成后，我们再重置光标的位置。通过locateToLastIndex函数，我们手动更改光标的位置，传入的参数是DOM</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">locateToLastIndex</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">getSelection</span>) &#123;</span><br><span class="line">    obj.<span class="title function_">focus</span>() <span class="comment">// 解决ff不获取焦点无法定位问题</span></span><br><span class="line">    <span class="keyword">let</span> range = <span class="variable language_">window</span>.<span class="title function_">getSelection</span>() <span class="comment">// 创建range</span></span><br><span class="line">    range.<span class="title function_">selectAllChildren</span>(obj) <span class="comment">// range 选择obj下所有子内容</span></span><br><span class="line">    range.<span class="title function_">collapseToEnd</span>() <span class="comment">// 光标移至最后</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">selection</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> range = <span class="variable language_">document</span>.<span class="property">selection</span>.<span class="title function_">createRange</span>() <span class="comment">// 创建选择对象</span></span><br><span class="line">    range.<span class="title function_">moveToElementText</span>(obj) <span class="comment">// range定位到obj</span></span><br><span class="line">    range.<span class="title function_">collapse</span>(<span class="literal">false</span>) <span class="comment">// 光标移至最后</span></span><br><span class="line">    range.<span class="title function_">select</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addDynamicName</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">editString</span> += hightext  </span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>.<span class="property">innerHTML</span> = <span class="variable language_">this</span>.<span class="property">editString</span></span><br><span class="line">     <span class="comment">// 补充移动光标函数</span></span><br><span class="line">     <span class="variable language_">this</span>.<span class="title function_">locateToLastIndex</span>(<span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>光标问题完成后，在我们每次输入内容时候，都需要更新内容。<br>通过绑定keydown和input事件，在每次输入完成后，我们把文本内容赋值给显示内容（相当于显示是用innerHtml，字符串用我们之前的editString来保存）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span></span></span><br><span class="line"><span class="tag">      <span class="attr">contenteditable</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">keydown</span>=<span class="string">&quot;inputMsgConent&quot;</span></span></span><br><span class="line"><span class="tag">      @<span class="attr">input</span>=<span class="string">&quot;inputMsgConent&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">inputMsgConent</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">editString</span> = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>.<span class="property">innerHTML</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们就完成了输入框的开发，在提交数据时候通过正则匹配，变成约定的字符串，在修改时候通过约定的内容匹配回来。这样就完成了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过正则匹配高亮字符串，发送接口时候修改为相应的标识符</span></span><br><span class="line"><span class="keyword">const</span> highReg = <span class="regexp">/\&lt;span class=&quot;fack-name&quot; contenteditable=&quot;false&quot;\&gt;【动态名称】\&lt;\/span\&gt;/g</span></span><br><span class="line"><span class="comment">// #MSG_MARK 是和后端约定的字符串，用来标示高亮区域的内容</span></span><br><span class="line"><span class="keyword">let</span> str = <span class="variable language_">this</span>.<span class="property">editString</span>.<span class="title function_">replace</span>(highReg, <span class="string">&#x27;#MSG_MARK&#x27;</span>)</span><br><span class="line"><span class="comment">// 拿到str后发送给后端</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-处理复制来的文本"><a href="#5-处理复制来的文本" class="headerlink" title="5. 处理复制来的文本"></a>5. 处理复制来的文本</h2><p>完成需求后，在测试阶段，发现当运营输入了内容页面没有办法进行正常当读取和显示。因为HTML的内容没有同步到我们的输入框绑定的值中。需要给<br>模拟的输入添加paste事件，来监听用户的输入，然后同步用户复制的输入内容。</p>
+<h3 id="绑定paste事件"><a href="#绑定paste事件" class="headerlink" title="绑定paste事件"></a>绑定paste事件</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;msg-title-input-wrapper&quot;</span> :<span class="keyword">class</span>=<span class="string">&quot;&#123; focus: msgTitleInputFocusFlag &#125;&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">p</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">ref</span>=<span class="string">&quot;inputRef&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">class</span>=<span class="string">&quot;msg-title-input&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">keydown</span>=<span class="string">&quot;inputMsgConent&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">input</span>=<span class="string">&quot;inputMsgConent&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">contenteditable</span>=<span class="string">&quot;true&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">paste</span>=<span class="string">&quot;checkPastedMsgTitle&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">focus</span>=<span class="string">&quot;msgTitleInputFocusFlag = true&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">blur</span>=<span class="string">&quot;msgTitleInputFocusFlag = false&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  &gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理paste事件"><a href="#处理paste事件" class="headerlink" title="处理paste事件"></a>处理paste事件</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">checkPastedMsgTitle</span>(<span class="params">e</span>) &#123;</span><br><span class="line">     <span class="comment">// 阻止末默认事件,手动获取剪切板的内容，同步到editString上</span></span><br><span class="line">      e.<span class="title function_">preventDefault</span>()</span><br><span class="line">      <span class="keyword">let</span> pasteData = (e.<span class="property">clipboardData</span> || <span class="variable language_">window</span>.<span class="property">clipboardData</span>).<span class="title function_">getData</span>(<span class="string">&#x27;text&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> selection = <span class="variable language_">window</span>.<span class="title function_">getSelection</span>()</span><br><span class="line">      <span class="keyword">if</span> (!selection.<span class="property">rangeCount</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">      selection.<span class="title function_">deleteFromDocument</span>()</span><br><span class="line">      selection.<span class="title function_">getRangeAt</span>(<span class="number">0</span>).<span class="title function_">insertNode</span>(<span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(pasteData))</span><br><span class="line">      <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">editString</span> = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">inputRef</span>.<span class="property">innerHTML</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/01/09/2021/designPatterns/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:50:25
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/HTML/" title="HTML">
+                        #HTML
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Vue/" title="Vue">
+                        #Vue
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/02/05/2021/snabbdom_source/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%A1%A5%E5%85%85"><span class="toc-text">需求补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A8%A1%E6%8B%9F%E8%BE%93%E5%85%A5%E6%A1%86"><span class="toc-text">1. 模拟输入框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9DOM%E6%80%A7contenteditable"><span class="toc-text">2. 修改DOM性contenteditable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9innerHtml%E5%B1%9E%E6%80%A7"><span class="toc-text">3. 修改innerHtml属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%A4%84%E7%90%86%E5%85%89%E6%A0%87%E5%8F%8A%E5%90%8E%E7%BB%AD%E5%8C%B9%E9%85%8D"><span class="toc-text">4. 处理光标及后续匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A4%84%E7%90%86%E5%A4%8D%E5%88%B6%E6%9D%A5%E7%9A%84%E6%96%87%E6%9C%AC"><span class="toc-text">5. 处理复制来的文本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9Apaste%E4%BA%8B%E4%BB%B6"><span class="toc-text">绑定paste事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86paste%E4%BA%8B%E4%BB%B6"><span class="toc-text">处理paste事件</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

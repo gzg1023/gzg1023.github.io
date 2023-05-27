@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】函数式编程入门初探 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】函数式编程入门初探</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:50
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/JavaScript/" title="JavaScript">
+                    #JavaScript
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="函数式编程">
+                    #函数式编程
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p> JavaScript作为一门“灵活的语言，在使用过程中有很多”骚操作“，但是带来的问题也是很多的。通过FP编程，让代码健壮。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>函数式编程用来描述数据（函数）之间的映射关系。简单点来说就是把操作数据的过程用函数封装起来，就是函数式编程的思维。<br>FP编程特点：子任务，纯函数、函子、无状态。</p>
+<p>部分手写代码地址： <a target="_blank" rel="noopener" href="https://github.com/gzg1023/fackAchieve">https://github.com/gzg1023/fackAchieve</a> </p>
+<h2 id="使用FP思维开发的产物"><a href="#使用FP思维开发的产物" class="headerlink" title="使用FP思维开发的产物"></a>使用FP思维开发的产物</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://fe.rualc.com/note/redux.html">Redux</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://immutable-js.github.io/immutable-js/">Immutable</a></strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//传统方式计算两数之和</span><br><span class="line">let result1 = a + b</span><br><span class="line">let result2 = c + d</span><br><span class="line"></span><br><span class="line">// 函数式编程计算两数之和</span><br><span class="line">function addFun(a,b)&#123;</span><br><span class="line">   return a + b</span><br><span class="line">&#125;</span><br><span class="line">let result3 = addFun(e,f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数式编程特点"><a href="#函数式编程特点" class="headerlink" title="函数式编程特点"></a>函数式编程特点</h2><h3 id="1-函数是”一等公民”"><a href="#1-函数是”一等公民”" class="headerlink" title="1.函数是”一等公民”"></a>1.函数是”一等公民”</h3><ul>
+<li>函数可以存储在变量中</li>
+<li>函数作为参数</li>
+<li>函数作为返回值</li>
+</ul>
+<blockquote>
+<p>高阶函数</p>
+</blockquote>
+<p>如：map, filter, forEach</p>
+<p>实现见 <a target="_blank" rel="noopener" href="https://github.com/gzg1023/fackAchieve">https://github.com/gzg1023/fackAchieve</a></p>
+<h3 id="2-纯函数（数学上的函数）"><a href="#2-纯函数（数学上的函数）" class="headerlink" title="2.纯函数（数学上的函数）"></a>2.纯函数（数学上的函数）</h3><p>相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用。</p>
+<p>好处：</p>
+<ul>
+<li>可缓存，因为每次输入会输入一样的结果。</li>
+<li>可测试，纯函数可以让测试更方便</li>
+<li>并行处理，纯函数不需要共享变量（用在web worker）</li>
+</ul>
+<p>副作用包括不限于：</p>
+<ul>
+<li>更改文件系统</li>
+<li>往数据库插入记录</li>
+<li>发送一个 http 请求</li>
+<li>可变数据</li>
+<li>打印&#x2F;log</li>
+<li>获取用户输入</li>
+<li>DOM 查询</li>
+<li>访问系统状态</li>
+</ul>
+<h3 id="3-柯里化"><a href="#3-柯里化" class="headerlink" title="3.柯里化"></a>3.柯里化</h3><ol>
+<li>只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。</li>
+<li>内部使用闭包缓存参数，让函数变的更灵活，函数的粒度更小</li>
+<li>当一个函数有多个参数的时候先传递一部分参数调用它(这部分参数以后永远不变)当一个函数有多个参数的时候先传递一部分参数调用它(这部分参数以后永远不变)</li>
+</ol>
+<p>  然后返回一个新的函数接收剩余的参数，返回结果.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const _ = require(&#x27;lodash&#x27;) // 要柯里化的函数</span><br><span class="line">function getSum (a, b, c) &#123;</span><br><span class="line">  return a + b + c</span><br><span class="line">&#125;</span><br><span class="line">// 柯里化后的函数</span><br><span class="line">let curried = _.curry(getSum) // 测试</span><br><span class="line">console.log(curried(1, 2, 3)) </span><br><span class="line">console.log(curried(1)(2)(3))</span><br><span class="line">console.log(curried(1, 2)(3))</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-函数组合"><a href="#4-函数组合" class="headerlink" title="4.函数组合"></a>4.函数组合</h3><ol>
+<li>函数就像是数据的管道，函数组合就是把这些管道连接起来，让数据穿过多个管道形成最终结果</li>
+<li>函数组合默认是从右到左执行</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var loudLastUpper = compose(exclaim, toUpperCase, head, reverse)</span><br><span class="line"></span><br><span class="line">loudLastUpper([&#x27;jumpkick&#x27;, &#x27;roundhouse&#x27;, &#x27;uppercut&#x27;]);</span><br><span class="line">//=&gt; &#x27;UPPERCUT!&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="pointfree"><a href="#pointfree" class="headerlink" title="pointfree"></a>pointfree</h3><p>概念：不使用所要处理的值，只合成运算过程</p>
+<p>特点：函数无须提及将要操作的数据是什么样的，pointfree 模式能够帮助我们减少不必要的命名，让代码保持简洁和通用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const fp = require(&#x27;lodash/fp&#x27;)</span><br><span class="line">// pointfree</span><br><span class="line">// 字符提取</span><br><span class="line">const firstLetterToUpper = fp.flowRight(join(&#x27;. &#x27;),</span><br><span class="line"></span><br><span class="line">fp.map(fp.flowRight(fp.first, fp.toUpper)), split(&#x27; &#x27;))</span><br><span class="line"></span><br><span class="line">console.log(firstLetterToUpper(&#x27;world wild web&#x27;)) // =&gt; W. W. W</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-debug"><a href="#5-debug" class="headerlink" title="5. debug"></a>5. debug</h3><p>定义trace函数，然后插入到要调试到函数位置后面进行打印。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var trace = curry(function(tag, x)&#123;</span><br><span class="line">  console.log(tag, x);</span><br><span class="line">  return x;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Functor-函子"><a href="#6-Functor-函子" class="headerlink" title="6. Functor 函子"></a>6. Functor 函子</h3><p>容器:包含值和值的变形关系(这个变形关系就是函数) </p>
+<p>函子:是一个特殊的容器，通过一个普通的对象来实现，该对象具有 map 方法，map 方法可以运 行一个函数对值进行处理(变形关系)</p>
+<p>其中实现了of方法的函子就是<em>Pointed函子</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 函子容器</span><br><span class="line">class Containser &#123;</span><br><span class="line">    constructor(value)&#123;</span><br><span class="line">        this._value = value</span><br><span class="line">    &#125;</span><br><span class="line">    static of (value)&#123;</span><br><span class="line">        return new Containser(value)</span><br><span class="line">    &#125;</span><br><span class="line">    map(fn)&#123;</span><br><span class="line">        return Containser.of(fn(this._value))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let a =  Containser.of(5).map(x=&gt;x+1).map(x=&gt;x*x)</span><br><span class="line">console.log(a)</span><br></pre></td></tr></table></figure>
+
+<p>特性总结：</p>
+<ul>
+<li>函数式编程的运算不直接操作值，而是由函子完成</li>
+<li>函子就是一个实现了 map 契约的对象</li>
+<li>我们可以把函子想象成一个盒子，这个盒子里封装了一个值</li>
+<li>想要处理盒子中的值，我们需要给盒子的 map 方法传递一个处理值的函数(纯函数)，由这<br>个函数来对值进行处理</li>
+<li>最终 map 方法返回一个包含新值的盒子(函子)</li>
+</ul>
+<h3 id="MayBe函子"><a href="#MayBe函子" class="headerlink" title="MayBe函子"></a>MayBe函子</h3><p>进行异常处理的函子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class MayBe &#123;</span><br><span class="line">    constructor(value)&#123;</span><br><span class="line">        this._value = value</span><br><span class="line">    &#125;</span><br><span class="line">    static  of (value)&#123;</span><br><span class="line">        return new MayBe(value)</span><br><span class="line">    &#125;</span><br><span class="line">     map (fn) &#123;</span><br><span class="line">        return this.isNot() ? MayBe.of(null) : MayBe.of(fn(this._value)) </span><br><span class="line">    &#125;</span><br><span class="line">    isNot()&#123;</span><br><span class="line">        return this._value === undefined || this._value === null</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">let a =  MayBe.of(null).map(x =&gt; x.toUpperCase())</span><br><span class="line">let b =  MayBe.of(&#x27;tset Maybe&#x27;).map(x =&gt; x.toUpperCase())</span><br><span class="line">console.log(a)</span><br><span class="line">console.log(b)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Either函子"><a href="#Either函子" class="headerlink" title="Either函子"></a>Either函子</h3><p>Either函子容器,可以进行异常处理的函子，Either定义两个子函数（可以定义多个，类似if&#x2F;else）作为处理数据的基准， 如果正确进入右函子继续执行，如果报错，进入左函子打印出异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class leftEither &#123;</span><br><span class="line">    constructor(value) &#123;</span><br><span class="line">        this._value = value</span><br><span class="line">    &#125;</span><br><span class="line">    static of(value) &#123;</span><br><span class="line">        return new leftEither(value)</span><br><span class="line">    &#125;</span><br><span class="line">    map(fn) &#123;</span><br><span class="line">        return this._value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class rightEither &#123;</span><br><span class="line">    constructor(value) &#123;</span><br><span class="line">        this._value = value</span><br><span class="line">    &#125;</span><br><span class="line">    static of(value) &#123;</span><br><span class="line">        return new rightEither(value)</span><br><span class="line">    &#125;</span><br><span class="line">    map(fn) &#123;</span><br><span class="line">        return rightEither.of((this._value))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function parseJSON(json) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        return rightEither.of(JSON.parse(json));</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        return leftEither.of(&#123; error: e.message &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let l = parseJSON(&#x27;&#123; &quot;name&quot;: zs &#125;&#x27;).map(x =&gt; x.name.toUpperCase())</span><br><span class="line">let r = parseJSON(&#x27;&#123; &quot;name&quot;: &quot;zs&quot; &#125;&#x27;).map(x =&gt; x.name.toUpperCase())</span><br><span class="line">console.log(l)</span><br><span class="line">console.log(r)</span><br></pre></td></tr></table></figure>
+
+<h3 id="log（调试函子技巧）"><a href="#log（调试函子技巧）" class="headerlink" title="log（调试函子技巧）"></a>log（调试函子技巧）</h3><p>通过一个中间函数，打打印日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const _ = require(&#x27;lodash&#x27;)</span><br><span class="line">const trace = _.curry((tag, v) =&gt; &#123; console.log(tag, v)</span><br><span class="line">return v</span><br><span class="line">&#125;)</span><br><span class="line">const split = _.curry((sep, str) =&gt; _.split(str, sep)) </span><br><span class="line">const join = _.curry((sep, array) =&gt; _.join(array, sep)) </span><br><span class="line">const map = _.curry((fn, array) =&gt; _.map(array, fn))</span><br><span class="line">const f = _.flowRight(join(&#x27;-&#x27;), trace(&#x27;map 之后&#x27;), map(_.toLower), trace(&#x27;split 之后&#x27;), split(&#x27; &#x27;))</span><br><span class="line">console.log(f(&#x27;NEVER SAY DIE&#x27;))</span><br></pre></td></tr></table></figure>
+
+<h3 id="IO函子（惰性执行）"><a href="#IO函子（惰性执行）" class="headerlink" title="IO函子（惰性执行）"></a>IO函子（惰性执行）</h3><ul>
+<li>IO 函子中的 _value 是一个函数，在io函子中把函数作为值来处理</li>
+<li>IO 函子可以把不纯的动作存储到 _value 中，延迟执行这个不纯的操作(惰性执行)，包装当前的操作纯</li>
+<li>把不纯的操作交给调用者来处理</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class IO &#123;</span><br><span class="line">    constructor(fn) &#123;</span><br><span class="line">        this._value = fn</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static of(value) &#123;</span><br><span class="line">        return new IO(function () &#123;</span><br><span class="line">            return value</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    map(fn) &#123;</span><br><span class="line">      return  new IO(_flowRight(fn, this._value))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    msg: &#x27;hello io&#x27;</span><br><span class="line">&#125;</span><br><span class="line">let a = IO.of(obj).map(p =&gt; p.msg)</span><br><span class="line">console.log(a._value())</span><br></pre></td></tr></table></figure>
+
+<h3 id="monad（单子）函子"><a href="#monad（单子）函子" class="headerlink" title="monad（单子）函子"></a>monad（单子）函子</h3><p><em>Monad 函子是可以变扁的 Pointed 函子，IO(IO(x))，一个函子如果具有 join 和 of 两个方法并遵守一些定律就是一个 Monad</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;)</span><br><span class="line">const fp = require(&#x27;lodash/fp&#x27;) // IO Monad</span><br><span class="line">class IO &#123;</span><br><span class="line">    static of(x) &#123;</span><br><span class="line">        return new IO(function () &#123;</span><br><span class="line">            return x</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    constructor(fn) &#123;</span><br><span class="line">        this._value = fn</span><br><span class="line">    &#125;</span><br><span class="line">    map(fn) &#123;</span><br><span class="line">        return new IO(fp.flowRight(fn, this._value))</span><br><span class="line">    &#125;</span><br><span class="line">    join() &#123;</span><br><span class="line">        return this._value()</span><br><span class="line">    &#125;</span><br><span class="line">    flatMap(fn) &#123;</span><br><span class="line">        return this.map(fn).join()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let readFile = function (filename) &#123; return new IO(function() &#123;</span><br><span class="line">    return fs.readFileSync(filename, &#x27;utf-8&#x27;) &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    let print = function(x) &#123; return new IO(function() &#123;</span><br><span class="line">        console.log(x)</span><br><span class="line">    return x &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">let r = readFile(&#x27;package.json&#x27;).map(fp.toUpper)</span><br><span class="line">    .flatMap(print)</span><br><span class="line">    .join()</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/11/08/2020/util_css/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:50
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/JavaScript/" title="JavaScript">
+                        #JavaScript
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="函数式编程">
+                        #函数式编程
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/12/09/2020/scroll_fix/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8FP%E6%80%9D%E7%BB%B4%E5%BC%80%E5%8F%91%E7%9A%84%E4%BA%A7%E7%89%A9"><span class="toc-text">使用FP思维开发的产物</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%89%B9%E7%82%B9"><span class="toc-text">函数式编程特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%87%BD%E6%95%B0%E6%98%AF%E2%80%9D%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91%E2%80%9D"><span class="toc-text">1.函数是”一等公民”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BA%AF%E5%87%BD%E6%95%B0%EF%BC%88%E6%95%B0%E5%AD%A6%E4%B8%8A%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">2.纯函数（数学上的函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-text">3.柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0%E7%BB%84%E5%90%88"><span class="toc-text">4.函数组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pointfree"><span class="toc-text">pointfree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-debug"><span class="toc-text">5. debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Functor-%E5%87%BD%E5%AD%90"><span class="toc-text">6. Functor 函子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MayBe%E5%87%BD%E5%AD%90"><span class="toc-text">MayBe函子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Either%E5%87%BD%E5%AD%90"><span class="toc-text">Either函子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#log%EF%BC%88%E8%B0%83%E8%AF%95%E5%87%BD%E5%AD%90%E6%8A%80%E5%B7%A7%EF%BC%89"><span class="toc-text">log（调试函子技巧）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO%E5%87%BD%E5%AD%90%EF%BC%88%E6%83%B0%E6%80%A7%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">IO函子（惰性执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#monad%EF%BC%88%E5%8D%95%E5%AD%90%EF%BC%89%E5%87%BD%E5%AD%90"><span class="toc-text">monad（单子）函子</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

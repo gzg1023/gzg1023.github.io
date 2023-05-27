@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】vue-cli3脚手架工具搭建多页面应用 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】vue-cli3脚手架工具搭建多页面应用</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:23
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/webpack/" title="webpack">
+                    #webpack
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>公司需要做一个新的项目，需要用vue构建一个多页面应用，网上看了一些博客不是写了一半，就是写的很高深。于是自己摸索搭建了项目，现在来总结一下。</p>
+<span id="more"></span>
+
+
+<h3 id="第一步：用脚手架搭建一个vue项目"><a href="#第一步：用脚手架搭建一个vue项目" class="headerlink" title="第一步：用脚手架搭建一个vue项目"></a>第一步：用脚手架搭建一个vue项目</h3><blockquote>
+<p>话不多说先创建项目 vue create 项目名称   这里我们选sfa默认配置，然后直接把项目跑起来</p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/09/20/nvBzrT.png" alt="请输入图片描述"></p>
+<h3 id="第二步：手动添加一个vue-config-js来配置webpack"><a href="#第二步：手动添加一个vue-config-js来配置webpack" class="headerlink" title="第二步：手动添加一个vue.config.js来配置webpack"></a>第二步：手动添加一个vue.config.js来配置webpack</h3><p><img src="https://s2.ax1x.com/2019/09/20/nvrvHU.png" alt="请输入图片描述"></p>
+<h4 id="在vue-cli3的项目中，我们通过pages对象来配置多页应用"><a href="#在vue-cli3的项目中，我们通过pages对象来配置多页应用" class="headerlink" title="在vue-cli3的项目中，我们通过pages对象来配置多页应用"></a>在vue-cli3的项目中，我们通过pages对象来配置多页应用</h4><blockquote>
+<p>参考链接  <a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/#pages">https://cli.vuejs.org/zh/config/#pages</a> </p>
+</blockquote>
+<p>如下所示，我们通过pages对象来配置多页应用的入口及其他参数，project1和project2是两个单页，我们分别对其进行配置入口文件及模板来源，其他配置信息可点击上方参考链接。</p>
+<p><img src="https://s2.ax1x.com/2019/09/20/nvgCdK.png" alt="请输入图片描述"></p>
+<h3 id="第三步：配置项目结构"><a href="#第三步：配置项目结构" class="headerlink" title="第三步：配置项目结构"></a>第三步：配置项目结构</h3><p>  在配置为入口后，我们现在pulic文件夹建好模板文件 project1.html 和 project2.html ,然后在我们的src目录建一个文件夹pages 里面放我们两个应用的源码。正常项目vuex和vue-router都是封装起来的，这边我们只演示内容。</p>
+<p><img src="https://s2.ax1x.com/2019/09/21/nvg4YD.png" alt="请输入图片描述"></p>
+<h3 id="第四步：重启项目，访问"><a href="#第四步：重启项目，访问" class="headerlink" title="第四步：重启项目，访问"></a>第四步：重启项目，访问</h3><p>我们在最初的项目url上加上相应页面的路由信息，就可以访问了。</p>
+<p><img src="https://s2.ax1x.com/2019/09/21/nv20Bt.png" alt="请输入图片描述"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/09/06/2019/string_handle/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:23
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/webpack/" title="webpack">
+                        #webpack
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/10/20/2019/dev_stand/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%94%A8%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AAvue%E9%A1%B9%E7%9B%AE"><span class="toc-text">第一步：用脚手架搭建一个vue项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AAvue-config-js%E6%9D%A5%E9%85%8D%E7%BD%AEwebpack"><span class="toc-text">第二步：手动添加一个vue.config.js来配置webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8vue-cli3%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E9%80%9A%E8%BF%87pages%E5%AF%B9%E8%B1%A1%E6%9D%A5%E9%85%8D%E7%BD%AE%E5%A4%9A%E9%A1%B5%E5%BA%94%E7%94%A8"><span class="toc-text">在vue-cli3的项目中，我们通过pages对象来配置多页应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">第三步：配置项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E9%87%8D%E5%90%AF%E9%A1%B9%E7%9B%AE%EF%BC%8C%E8%AE%BF%E9%97%AE"><span class="toc-text">第四步：重启项目，访问</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

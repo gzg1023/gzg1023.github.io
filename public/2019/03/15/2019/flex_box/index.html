@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术笔记】CSS之Flex弹性盒子属性详解 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术笔记】CSS之Flex弹性盒子属性详解</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-25 00:01:57
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/CSS/" title="CSS">
+                    #CSS
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>随着移动端软件系统的普及，传统布局方式在很多功能上受到了限制，本文详解flex布局各个属性，在工作中熟练使用flex布局。</p>
+<span id="more"></span>
+
+
+<p>在传统css布局中，一般来说是采用float+margin+positon来解决常见问题。但是随着移动端的普及，尤其是各种“小程序”的出现显然传统的布局是由很多弊端的，比如垂直居中就不好实现。（flex布局兼容到ie10以上）</p>
+<p>flex弹性盒子的结构是父容器和子元素组成的，由父元素包裹，子元素组成基本结构如下。需要注意的是在flex布局中，有的属性是作用在父元素，有的属性是作用在子元素，以下介绍相关的属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;FatherWrap&quot; style=&quot;display:flex&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;Child1&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;Child2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>开门见山，比如使用flex布局实现一个垂直居中,只需要把父类盒子设置为flex，然后给子属性添加margin:0;即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;display:flex&quot;&gt;</span><br><span class="line">    &lt;div style=&quot;margin:auto&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2019/11/24/MOwNp8.png" alt="请输入图片描述"></p>
+<h2 id="flex父容器布局属性"><a href="#flex父容器布局属性" class="headerlink" title="flex父容器布局属性"></a>flex<b color="red">父</b>容器布局属性</h2><table>
+<thead>
+<tr>
+<th>属性</th>
+<th align="center">详细说明</th>
+<th align="left">属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-direction</td>
+<td align="center">决定主轴的方向（即项目的排列方向）</td>
+<td align="left">row(水平方向，起点在左端) ，row-reverse(起点在右端)  ，column(主轴为垂直方向，起点在上沿)  ，column-reverse(起点在下沿)</td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td align="center">控制Flex容器是单行显示还是多行显示，而交叉轴的方向就决定着新线的排列方向</td>
+<td align="left">nowrap(不换行) , wrap(换行) , wrap-reverse(换行与wrap相似，但行的顺序是倒过来的)</td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td align="center">flex-flow属性是flex-direction属性和flex-wrap属性的简写</td>
+<td align="left">flex-flow属性是flex-direction属性和flex-wrap属性的简写</td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td align="center">定义了Flex项目在主轴方向上的对齐方式</td>
+<td align="left">flex-start(类似于左浮动) , flex-end(类似于右浮动) , center(Flex项居中) , space-between(两端对齐容器，各个Flex项目之间的间距相等) , space-around(每一个Flex项目两侧的间隔相等)</td>
+</tr>
+<tr>
+<td>align-items</td>
+<td align="center">定义项目在交叉轴上的对齐方式</td>
+<td align="left">flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , baseline(Flex项目第一行文字基线对齐) ,  stretch(如果Flex项目未定义高度或者设置为auto，Flex项目将占满整个窗口的高度)</td>
+</tr>
+<tr>
+<td>align-content</td>
+<td align="center">定义了多根轴线的对齐方式，如果只有一条轴线，那么此属性不起作用</td>
+<td align="left">flex-start(对齐交叉轴的起点) , flex-end(对齐交叉轴的终点) , center(以交叉轴为参考，居中对齐) , space-between(交叉轴两端对齐，轴线这间的间隔平均分布) , space-around(Flex项目（沿交叉轴方向）之间的间隔相等) , stretch(Flex项目（沿交叉轴方向）占满整个交叉轴)</td>
+</tr>
+<tr>
+<td><br></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>juestify-conent</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBszT.jpg" alt="juestify-conent"></p>
+<blockquote>
+<p><strong>align-items图示</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBrWV.jpg" alt="align-items"></p>
+<blockquote>
+<p><strong>align-conent图示</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBDJ0.jpg" alt="align-conent"></p>
+<h2 id="flex子元素布局属性"><a href="#flex子元素布局属性" class="headerlink" title="flex子元素布局属性"></a>flex<b color="red">子</b>元素布局属性</h2><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>order</td>
+<td>length</td>
+<td>设置子元素排列顺序。数值越小，排列越靠前,（默认为0）</td>
+</tr>
+<tr>
+<td>flex-grow</td>
+<td>length</td>
+<td>设置字元素放大占比。数值越大，占比越大（默认为0）</td>
+</tr>
+<tr>
+<td>flex-shrink</td>
+<td>length</td>
+<td>设置字元素缩小占比。数值越大，占比越小（默认为1）</td>
+</tr>
+<tr>
+<td>flex-basis</td>
+<td>length</td>
+<td>设置字元素占比宽度。默认为auto</td>
+</tr>
+<tr>
+<td>flex</td>
+<td>flex-grow, flex-shrink , flex-basis</td>
+<td>默认值为0 1 auto。后两个属性可选。</td>
+</tr>
+<tr>
+<td>align-self</td>
+<td>auto,flex-start,flex-end,center,baseline,stretch</td>
+<td>设置字元素的对其方式</td>
+</tr>
+</tbody></table>
+<hr>
+
+<blockquote>
+<p><strong>flex-grow</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBBiq.jpg" alt="flex-grow图"></p>
+<blockquote>
+<p><strong>flex-shrink</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBwon.jpg" alt="flex-shrink"></p>
+<blockquote>
+<p><strong>flex-basis</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOB6QU.jpg" alt="flex-basis"></p>
+<blockquote>
+<p><strong>align-self</strong></p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/11/24/MOBcyF.jpg" alt="align-self"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-25 00:01:57
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/CSS/" title="CSS">
+                        #CSS
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/05/09/2019/perception/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E7%88%B6%E5%AE%B9%E5%99%A8%E5%B8%83%E5%B1%80%E5%B1%9E%E6%80%A7"><span class="toc-text">flex父容器布局属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex%E5%AD%90%E5%85%83%E7%B4%A0%E5%B8%83%E5%B1%80%E5%B1%9E%E6%80%A7"><span class="toc-text">flex子元素布局属性</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

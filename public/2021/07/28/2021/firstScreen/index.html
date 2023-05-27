@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术探索】SPA应用的页面加载优化及FPC时间计算 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术探索】SPA应用的页面加载优化及FPC时间计算</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:47:11
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化">
+                    #性能优化
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%A6%96%E5%B1%8F/" title="首屏">
+                    #首屏
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>现代前端应用大部分采用 SPA 模式开发，而 SPA 最大的问题就是最开始只会下载一个空白的 html 文档，下载完成后浏览器开始解析文档（加载各种脚本，各种样式文件）当 vue 依赖加载完成，才会开始渲染页面。最大的问题也就体现出来了 会出现白屏问题 及首屏加载缓慢的问题，本文来谈谈前端页面的优化。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="什么是首屏"><a href="#什么是首屏" class="headerlink" title="什么是首屏"></a>什么是首屏</h2><p>首屏这个概念目前来说没有一个官方的定义，一般来说都以约定俗成的说法为准即 从输入 URL 开始到第一屏（可视区域）的内容加载完毕的时间。根据业务场景的不同，也有不同的指标和规范。以我目前的规范来说就是首屏最大的一张图片加载完成的时间。</p>
+<p>从业务场景来说加载页面大概有这些步骤： 客户端 webview 初始化 &#x3D;&gt; webview 初始化完毕,开始加载 SPA 应用 &#x3D;&gt; 查询 DNS 及建立 TCP 连接 &#x3D;&gt; SPA 根 html 下载完成开始加载 js 和 CSS（白屏时间开始）&#x3D;&gt; 加载 vue 库，CSS 文件 &#x3D;&gt; vue 开始编译 template 或直接开始执行 render &#x3D;&gt; 渲染第一个字符出现,(白屏时间结束)&#x3D;&gt; 开始加载 html 结构及样式解析（首屏计算中) &#x3D;&gt; 首屏中最大图片加载完毕(首屏时间结束）&#x3D;&gt; 加载剩余内容，异步组件等 &#x3D;&gt; 页面加载完毕</p>
+<p>我们要进行测试和优化的点，就是从 webview 初始化完毕开始，到首屏最大一张图片加载完毕 这段时间。</p>
+<h2 id="首屏优化"><a href="#首屏优化" class="headerlink" title="首屏优化"></a>首屏优化</h2><p>分析了页面加载的步骤，我们开始从第一步开始优化首屏的加载。具体实践需要考虑不同的业务场景和项目结构等各种因素。这里只给出一些通用的点，具体实践需要结合业务进行处理。关于网络缓存一般来说都是服务器设置，这理解就不进行展开了。</p>
+<h3 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h3><ul>
+<li>DNS 预获取 ：通过 link 标签的 dns-prefetch，提前解析域名，掩盖 DNS 解析延迟</li>
+<li>预连接：通过 link 标签的 preconnect，建立与服务器的连接。如果是 HTTPS，过程包括 DNS 解析，建立 TCP 连接以及执行 TLS 握手</li>
+<li>预加载：通过 link 标签的 preload 预加载资源，这个需要根据场景来做，比如字体 视频等</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">&quot;preconnect&quot;</span> href=<span class="string">&quot;https://static.admin.com/&quot;</span> crossorigin&gt;</span><br><span class="line">&lt;link rel=&quot;dns-prefetch&quot; href=&quot;https://static.admin.com/&quot;&gt;</span><br><span class="line">&lt;link rel=&quot;preload&quot; href=&quot;myVideo.mp4&quot; as=&quot;video&quot; type=&quot;video/mp4&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="页面优化"><a href="#页面优化" class="headerlink" title="页面优化"></a>页面优化</h3><ul>
+<li>CSS 放头部，js 放底部</li>
+<li>小图片用雪碧图或者 base64</li>
+<li>图片无损压缩，可兼容场景用 webp 格式代替（服务器走 ua 头判断（</li>
+<li>script 添加 defer async 标签</li>
+<li>translateZ 加速渲染</li>
+<li>用骨架屏延迟效果</li>
+<li>注意重排&#x2F;重绘的属性少用，找对应的代替方案</li>
+</ul>
+<h3 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h3><ul>
+<li>图片&#x2F;路由懒加载</li>
+<li>适量函数式组件</li>
+<li>不在首屏的用 异步组件</li>
+<li>keep-alive 组件</li>
+</ul>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><ul>
+<li>ebpack-bundle-analyzer 看依赖</li>
+<li>减少 vendors，懒加载</li>
+<li>预渲染</li>
+<li>按需加载</li>
+<li>资源压缩</li>
+</ul>
+<h3 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h3><ul>
+<li>资源 gizp 压缩</li>
+<li>多域名资源</li>
+<li>http2 &#x2F; 3</li>
+<li>合并请求</li>
+</ul>
+<h3 id="webview"><a href="#webview" class="headerlink" title="webview"></a>webview</h3><ul>
+<li>客户端预先初始化 webview</li>
+<li>客户端内置 vue 这种长期不变化的依赖</li>
+<li>首屏请求交给客户端代理请求</li>
+</ul>
+<h2 id="FCP-计算"><a href="#FCP-计算" class="headerlink" title="FCP 计算"></a>FCP 计算</h2><p>首屏时间计算主要是基于getBoundingClientRect和MutationObserver，通过观察在页面一段时间内DOM变化的情况，然后通过判断是否在首屏显示进行数据过滤，找出最大一张图片的加载时间。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FCP</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> details = [];</span><br><span class="line">  <span class="keyword">static</span> ignoreEleList = [<span class="string">&quot;script&quot;</span>, <span class="string">&quot;style&quot;</span>, <span class="string">&quot;link&quot;</span>, <span class="string">&quot;br&quot;</span>];</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">isEleInArray</span>(<span class="params">target, arr</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!target || target === <span class="variable language_">document</span>.<span class="property">documentElement</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr.<span class="title function_">indexOf</span>(target) !== -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">isEleInArray</span>(target.<span class="property">parentElement</span>, arr);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素是否在首屏内</span></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">isInFirstScreen</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!target || !target.<span class="property">getBoundingClientRect</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> rect = target.<span class="title function_">getBoundingClientRect</span>(),</span><br><span class="line">      screenHeight = <span class="variable language_">window</span>.<span class="property">innerHeight</span>,</span><br><span class="line">      screenWidth = <span class="variable language_">window</span>.<span class="property">innerWidth</span>;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      rect.<span class="property">left</span> &gt;= <span class="number">0</span> &amp;&amp;</span><br><span class="line">      rect.<span class="property">left</span> &lt; screenWidth &amp;&amp;</span><br><span class="line">      rect.<span class="property">top</span> &gt;= <span class="number">0</span> &amp;&amp;</span><br><span class="line">      rect.<span class="property">top</span> &lt; screenHeight</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getFCP</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 5s之内先收集所有的dom变化，并以key（时间戳）、value（dom list）的结构存起来。</span></span><br><span class="line">      <span class="keyword">var</span> observeDom = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutations</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!mutations || !mutations.<span class="property">forEach</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">var</span> detail = &#123;</span><br><span class="line">          <span class="attr">time</span>: performance.<span class="title function_">now</span>(),</span><br><span class="line">          <span class="attr">roots</span>: [],</span><br><span class="line">        &#125;;</span><br><span class="line">        mutations.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!mutation || !mutation.<span class="property">addedNodes</span> || !mutation.<span class="property">addedNodes</span>.<span class="property">forEach</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          mutation.<span class="property">addedNodes</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">ele</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (</span><br><span class="line">              <span class="comment">// nodeType = 1 代表元素节点</span></span><br><span class="line">              ele.<span class="property">nodeType</span> === <span class="number">1</span> &amp;&amp;</span><br><span class="line">              <span class="variable language_">this</span>.<span class="property">ignoreEleList</span>.<span class="title function_">indexOf</span>(ele.<span class="property">nodeName</span>.<span class="title function_">toLocaleLowerCase</span>()) ===</span><br><span class="line">                -<span class="number">1</span></span><br><span class="line">            ) &#123;</span><br><span class="line">              <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">isEleInArray</span>(ele, detail.<span class="property">roots</span>)) &#123;</span><br><span class="line">                detail.<span class="property">roots</span>.<span class="title function_">push</span>(ele);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (detail.<span class="property">roots</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">details</span>.<span class="title function_">push</span>(detail);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      observeDom.<span class="title function_">observe</span>(<span class="variable language_">document</span>, &#123;</span><br><span class="line">        <span class="attr">childList</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">subtree</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        observeDom.<span class="title function_">disconnect</span>();</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="variable language_">this</span>.<span class="property">details</span>);</span><br><span class="line">      &#125;, <span class="number">5000</span>);</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">details</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 分析上面收集到的数据，返回最终的结果</span></span><br><span class="line">      <span class="keyword">var</span> result;</span><br><span class="line">      details.<span class="title function_">forEach</span>(<span class="function">(<span class="params">detail</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; detail.<span class="property">roots</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isInFirstScreen</span>(detail.<span class="property">roots</span>[i])) &#123;</span><br><span class="line">            result = detail.<span class="property">time</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="comment">// 遍历当前请求的图片中，如果有开始请求时间在首屏dom渲染期间的，则表明该图片是首屏渲染中的一部分，</span></span><br><span class="line">      <span class="comment">// 所以dom渲染时间和图片返回时间中大的为首屏渲染时间</span></span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">performance</span></span><br><span class="line">        .<span class="title function_">getEntriesByType</span>(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">        .<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">resource</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (</span><br><span class="line">            resource.<span class="property">initiatorType</span> === <span class="string">&quot;img&quot;</span> &amp;&amp;</span><br><span class="line">            (resource.<span class="property">fetchStart</span> &lt; result || resource.<span class="property">startTime</span> &lt; result) &amp;&amp;</span><br><span class="line">            resource.<span class="property">responseEnd</span> &gt; result</span><br><span class="line">          ) &#123;</span><br><span class="line">            result = resource.<span class="property">responseEnd</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他优化"><a href="#其他优化" class="headerlink" title="其他优化"></a>其他优化</h2><ul>
+<li>整个项目接入ssr&#x2F;或重开新项目</li>
+<li>新开ssg项目vue如gridsome</li>
+<li>接入预加载webpack插件解决</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/07/22/2021/vue_principle_05/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:47:11
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化">
+                        #性能优化
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%A6%96%E5%B1%8F/" title="首屏">
+                        #首屏
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/09/16/2021/summary_client/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%A6%96%E5%B1%8F"><span class="toc-text">什么是首屏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E5%B1%8F%E4%BC%98%E5%8C%96"><span class="toc-text">首屏优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-text">网络优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E4%BC%98%E5%8C%96"><span class="toc-text">页面优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue"><span class="toc-text">vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webview"><span class="toc-text">webview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FCP-%E8%AE%A1%E7%AE%97"><span class="toc-text">FCP 计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E4%BC%98%E5%8C%96"><span class="toc-text">其他优化</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

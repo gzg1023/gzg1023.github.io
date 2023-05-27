@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】配置开发环境脑壳痛，docker真香！ 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】配置开发环境脑壳痛，docker真香！</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-25 00:07:47
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                    #调试
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/docker/" title="docker">
+                    #docker
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/mongdb/" title="mongdb">
+                    #mongdb
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>某一天习惯性的把电脑升级到最新版，升级完成后有一个软件打开崩溃，平时没有用到过。索性就直接删除。直到前段时间，想学习下MongoDB，按照官网教程安装时候就出现了问题。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>无效操作</p>
+<ol>
+<li><p>通过brew安装后，一直显示Mac系统版本高，然后服务运行不起来。</p>
+</li>
+<li><p>通过下载压缩包跑服务，运行起来以后还是显示stop服务。</p>
+</li>
+</ol>
+<p>搞了半天脑壳痛，还是安装不起来。查资料也没有太多Mac新系统的解决办法。于是就想到了用docker试一下，很早就听说过docker这个技术，但是自己一直没有接触过，这次就简单的基于docker安装一个mongo进行简单的了解。不得不说是真的很方便，安装简单，天然沙箱。</p>
+<h3 id="1-安装docker客户端"><a href="#1-安装docker客户端" class="headerlink" title="1. 安装docker客户端"></a>1. 安装docker客户端</h3><p>因为国内网络的问题，brew也总出现问题，这里直接下载dmg安装文件进行安装，下面是链接</p>
+<p><a target="_blank" rel="noopener" href="https://download.docker.com/mac/edge/Docker.dmg">https://download.docker.com/mac/edge/Docker.dmg</a></p>
+<p>直接拖动安装，就得到了这条小鲸鱼</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rgRvnS"><img src="https://s3.ax1x.com/2020/12/24/rgRvnS.png" alt="rgRvnS.png"></a></p>
+<h3 id="2-注册docker账号，并配置docker镜像"><a href="#2-注册docker账号，并配置docker镜像" class="headerlink" title="2. 注册docker账号，并配置docker镜像"></a>2. 注册docker账号，并配置docker镜像</h3><p>注册账号就不说了，直接输入邮箱，收个验证码就可以了，<br><a target="_blank" rel="noopener" href="https://www.docker.com/">https://www.docker.com/</a></p>
+<p>然后我们打开docker登陆账号，就看到下面的一个页面</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2ACq"><img src="https://s3.ax1x.com/2020/12/24/rg2ACq.md.png" alt="rg2ACq.md.png"></a></p>
+<p>依然是国内的网络问题，我们配置docker的镜像源，如下图所示，在Dashboard配置镜像，这里采用七牛云和网易的镜像源服务。</p>
+<pre><code>    &#123;
+    &quot;registry-mirrors&quot;: [
+        &quot;https://reg-mirror.qiniu.com&quot;,
+        &quot;https://hub-mirror.c.163.com/&quot;
+    ],
+    &quot;features&quot;: &#123;
+        &quot;buildkit&quot;: true
+    &#125;,
+    &quot;experimental&quot;: false
+    &#125;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2iUs"><img src="https://s3.ax1x.com/2020/12/24/rg2iUs.md.png" alt="rg2iUs.md.png"></a></p>
+<p>配置完成后，重启一下docker客户端。到这里docker安装配置就完成了。</p>
+<h3 id="3-docker下载MongoDB"><a href="#3-docker下载MongoDB" class="headerlink" title="3. docker下载MongoDB"></a>3. docker下载MongoDB</h3><p>打开命令行输入</p>
+<pre><code>docker pull mongo
+</code></pre>
+<p>可以下载mongo的docker镜像，稍等一下下。完成后在命令行输入，如下图可以看到电脑中所有的镜像。</p>
+<pre><code>docker images
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2E80"><img src="https://s3.ax1x.com/2020/12/24/rg2E80.png" alt="rg2E80.png"></a></p>
+<h4 id="4-运行docker镜像"><a href="#4-运行docker镜像" class="headerlink" title="4. 运行docker镜像"></a>4. 运行docker镜像</h4><p>在配置好环境，下载好镜像。我们通过命令行运行一个mongo的容器，默认不需要密码</p>
+<pre><code>docker run -itd --name mongo-name -p 27017:27017 mongo
+</code></pre>
+<p>参数解释</p>
+<pre><code>--name 是自己指定一个docker的名称如：mongo-name
+-p 27017:27017 ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。
+</code></pre>
+<p>然后在命令行输入</p>
+<pre><code>docker ps
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2mKU"><img src="https://s3.ax1x.com/2020/12/24/rg2mKU.md.png" alt="rg2mKU.md.png"></a></p>
+<p>如下图所示，就可以看到运行的docker容器了，同时我们也可以在docker客户端的面板看到刚创建的服务。</p>
+<p>创建好容器服务后，我们在命令行输入</p>
+<pre><code>docker exec -it mongo-name mongo admin
+</code></pre>
+<p>就进入了docker的mongo命令行后终端。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2ZvT"><img src="https://s3.ax1x.com/2020/12/24/rg2ZvT.md.png" alt="rg2ZvT.md.png"></a></p>
+<p>也可以通过面板直接可视化的点击启动。打开mongo服务并进入终端或停止服务等</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rg2F5n"><img src="https://s3.ax1x.com/2020/12/24/rg2F5n.md.png" alt="rg2F5n.md.png"></a></p>
+<h4 id="5-项目中使用"><a href="#5-项目中使用" class="headerlink" title="5. 项目中使用"></a>5. 项目中使用</h4><p>在前面，我们配置了-p 27017:27017 ，也就是docker的mongo服务端口号映射到本地一致的端口号上面，我们直接打开项目，连接运行即可。<br>如果映射了不同的端口号，或者多个服务，记得修改相关映射即可。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/12/09/2020/scroll_fix/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-25 00:07:47
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                        #调试
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/docker/" title="docker">
+                        #docker
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/mongdb/" title="mongdb">
+                        #mongdb
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/12/26/2020/2020_summary/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85docker%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">1. 安装docker客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B3%A8%E5%86%8Cdocker%E8%B4%A6%E5%8F%B7%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AEdocker%E9%95%9C%E5%83%8F"><span class="toc-text">2. 注册docker账号，并配置docker镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-docker%E4%B8%8B%E8%BD%BDMongoDB"><span class="toc-text">3. docker下载MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%BF%90%E8%A1%8Cdocker%E9%95%9C%E5%83%8F"><span class="toc-text">4. 运行docker镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-text">5. 项目中使用</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

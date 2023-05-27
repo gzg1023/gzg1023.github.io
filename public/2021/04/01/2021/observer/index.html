@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】入门浏览器里面的各种Observer对象 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】入门浏览器里面的各种Observer对象</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:47:11
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化">
+                    #性能优化
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p> 日常开发者经常碰到需要优化的需求，除了一些日常的判断和循环及各种监听，了解一下浏览器里面的各种Observer对象。</p>
+</blockquote>
+<span id="more"></span>
+
+
+<h2 id="需求来源"><a href="#需求来源" class="headerlink" title="需求来源"></a>需求来源</h2><p>很早之前产品有一个需求，需要在管理系统的页面制作一个水印，但是不允许用户手动更改页面接口，删除水印。那么就用到<code>MutationObserver</code>这个api了，可以监听DOM的变化，从而对用户的修改做出反应。 </p>
+<p>最近有一个需求，需要实时处理页面滚动内容的情况，于是想到了用<code>getComputedStyle</code>来获取DOM的位置，在chrome模拟器做了一个demo感觉效果也还行。于是打开app放到<code>webview</code>里面测试，刚访问页面的一瞬间app崩溃掉了。我还没反应过来，重新访问一次又崩溃了。百思不解，我注释了这段内容里面可以访问了，因为还需要找其他同事排查崩溃原因，于是寻找新的解决办法然后就搜索到了<code>IntersectionObserver</code> 这个api。几行代码就实现了监听，并且性能也还不错，app也没崩溃。</p>
+<p>解决了滑动的需求，发现自己对各种<code>Observer</code>的api不是很熟悉，有的甚至没听说过。于是写了本篇文章总结一些浏览器中好用的<code>Observer api</code>。</p>
+<h2 id="各种Observer"><a href="#各种Observer" class="headerlink" title="各种Observer"></a>各种Observer</h2><p>在没有搜索MDN之前，我只听说过个别api，没想到还有这么多(眼界太低了)。这些浏览器api都是浏览器提供的高性能api 专门针对某一些频繁操作&#x2F;消耗性能 专门进行优化的api，关于各种<code>Observer</code>都是微任务，在浏览器空闲阶段触发，所以性能要比同步任务高很多。浏览器兼容方面也很不错，除了老IE 大部分现代浏览器都可以用。在移动端更是可以大展身手。</p>
+<p>打开MDN搜索Observer可以看到有很多api，这里我拿出几个常用的进行分析，其他的有需求时候可以在看文档。</p>
+<ul>
+<li>MutationObserver 监视DOM树修改</li>
+<li>IntersectionObserver 观察目标元素状态</li>
+<li>PerformanceObserver 监测性能度量</li>
+<li>ResizeObserver 监视元素的大小更改</li>
+</ul>
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><p><code>MutationObserver</code>的作用是监听DOM树的变化，无论是修改<code>CSS</code>还是添加一个<code>p标签</code>，都在<code>MutationObserver</code>的管控下。对于DOM树的修改一般来说分为两种情况，一种是预设的dom路径，比如用户点击按钮动态创建一个弹窗，或者是滑动过程中，动态添加的数据项。<br>另外一种是预设之外的情况，比如用户打开<code>F12开发者面板</code>，在自己的浏览器对页面临时修改样式等。</p>
+<p>不同的情况对应不同的需求，如果是第一种我们可以通过<code>MutationObserver</code>来计划行动监听DOM区域的变化，而且不是实时判断一个DOM区域的值是否产生来变化来解决性能消耗的问题，第二种情况可以用网页水印，防止用户篡改。</p>
+<p>说了这么多，那就来看看怎么用吧.</p>
+<h3 id="创建MutationObserver配置和实例"><a href="#创建MutationObserver配置和实例" class="headerlink" title="创建MutationObserver配置和实例"></a>创建MutationObserver配置和实例</h3><p>对于观察DOM的需求，第一步肯定先指定targetNode作为需要观察的对象了，然后我们准备一个<code>observerOptions</code>配置对象，来配置<code>MutationObserver</code>的观察目标配置。然后就是通过new 来创建一个新的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;index-page&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> observerOptions = &#123;</span><br><span class="line">    <span class="attr">attributeFilter</span>: [<span class="string">&#x27;list&#x27;</span>, <span class="string">&#x27;attribute&#x27;</span>], <span class="comment">// 字符串数组，用于指定要监听变化的属性名称,如果指定了会无视attributes</span></span><br><span class="line">    <span class="attr">attributeOldValue</span>: <span class="literal">true</span>, <span class="comment">// 布尔值， 记录任何有改动的属性的上一个值</span></span><br><span class="line">    <span class="attr">childList</span>: <span class="literal">true</span>, <span class="comment">// 布尔值，观察目标子节点的变化，是否有添加或者删除</span></span><br><span class="line">    <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="comment">//  布尔值，观察元素的属性值变更</span></span><br><span class="line">    <span class="attr">characterData</span>: <span class="literal">false</span>, <span class="comment">// 布尔值， 监视指定目标节点或子节点树中节点所包含的字符数据的变化</span></span><br><span class="line">    <span class="attr">characterDataOldValue</span>: <span class="literal">false</span>, <span class="comment">// 布尔值， 在文本在受监视节点上发生更改时记录节点文本的先前值</span></span><br><span class="line">    <span class="attr">subtree</span>: <span class="literal">true</span> <span class="comment">// / 布尔值,观察所有后代节点(孙节点)，默认为 false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建观察对象，并指定callback函数</span></span><br><span class="line"><span class="keyword">let</span> observerObj = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(callback)</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-x2F-停止MutationObserver监听"><a href="#启动-x2F-停止MutationObserver监听" class="headerlink" title="启动&#x2F;停止MutationObserver监听"></a>启动&#x2F;停止MutationObserver监听</h3><p>在创建完MutationObserver和实例后，通过我们进行开始和停止的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过observe方法启动观察，第一个参数是需要观察的节点，第二个是观察配置信息</span></span><br><span class="line">observerObj.<span class="title function_">observe</span>(targetNode, observerOptions)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过disconnect来停止观察，并且可以再次调用observe开启</span></span><br><span class="line">observerObj.<span class="title function_">disconnect</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过takeRecords来清空当前的观察队列，并返回已检测到但尚未处理的DOM更改的列表</span></span><br><span class="line">observerObj.<span class="title function_">takeRecords</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="MutationObserver的calback"><a href="#MutationObserver的calback" class="headerlink" title="MutationObserver的calback"></a>MutationObserver的calback</h3><p>在创建完成后，并启动创建的实例后，每次变化都会调用<code>callback函数</code>，我们每次拿到的是DOM变化的<code>mutation数组</code>，每一对象都会存在以下的属性，然后就可以愉快的进行逻辑处理了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mutationsList DOM变化数组，每一项代表一个DOM的独立变化</span></span><br><span class="line"><span class="comment">// observer 观察者的实例</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">mutationsList, observer</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> mutation = mutationsList[<span class="number">0</span>] </span><br><span class="line">    <span class="comment">// 每一个返回mutation节点</span></span><br><span class="line">    mutation = &#123;</span><br><span class="line">        <span class="attr">addedNodes</span>: <span class="string">&#x27; NodeList [comment]&#x27;</span>, <span class="comment">// 被添加的节点</span></span><br><span class="line">        <span class="attr">attributeName</span>: <span class="literal">null</span>, <span class="comment">// 被修改的属性的属性名</span></span><br><span class="line">        <span class="attr">attributeNamespace</span>: <span class="literal">null</span>, <span class="comment">// 被修改属性的命名空间</span></span><br><span class="line">        <span class="attr">nextSibling</span>: <span class="string">&#x27;div&#x27;</span>, <span class="comment">// 被添加或移除的节点之后的兄弟节点</span></span><br><span class="line">        <span class="attr">oldValue</span>: <span class="literal">null</span>, <span class="comment">// 根据type返回值</span></span><br><span class="line">        <span class="attr">previousSibling</span>: <span class="string">&#x27;text&#x27;</span>, <span class="comment">// 被添加或移除的节点之前的兄弟节点</span></span><br><span class="line">        <span class="attr">removedNodes</span>: <span class="string">&#x27; NodeList []&#x27;</span>, <span class="comment">// 返回被移除的节点。</span></span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;div.limit-lottery-box&#x27;</span>, <span class="comment">// 变化影响的节点</span></span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;childList&#x27;</span> <span class="comment">// 变化的类型 。属性变化，返回 &quot;attributes&quot;</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="IntersectionObserver"><a href="#IntersectionObserver" class="headerlink" title="IntersectionObserver"></a>IntersectionObserver</h2><p><code>IntersectionObserver</code>学名叫 交叉观察器，简单来说就是指定一个DOM元素然后观察位置变化，然后根据自己的需求做出处理。</p>
+<h3 id="创建IntersectionObserver"><a href="#创建IntersectionObserver" class="headerlink" title="创建IntersectionObserver"></a>创建IntersectionObserver</h3><p>通过new创建<code>IntersectionObserver</code>实例，第一次参数是回调函数，在到达指定阀值的时候触发，第二个参数是配置对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;index-page&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> option = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>, <span class="comment">// 监听元素的祖先元素Element对象</span></span><br><span class="line">    <span class="attr">rootMargin</span>: <span class="string">&#x27;0px 0px 0px 0px&#x27;</span>, <span class="comment">//在计算交叉值时添加至根的边界盒中的一组偏移量</span></span><br><span class="line">    <span class="attr">threshold</span>:[<span class="number">0.1</span>，<span class="number">0.5</span><span class="number">.1</span><span class="number">.0</span>] <span class="comment">// 监听目标与边界盒交叉区域的比例(阈值)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> intersectionObj = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(callback,option)</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-x2F-关闭IntersectionObserver实例"><a href="#启动-x2F-关闭IntersectionObserver实例" class="headerlink" title="启动&#x2F;关闭IntersectionObserver实例"></a>启动&#x2F;关闭IntersectionObserver实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过observe方法启动观察,指定一个观察的元素节点,此元素必须是根元素的后代多次调用即可观察多个DOM节点</span></span><br><span class="line">intersectionObj.<span class="title function_">observe</span>(targetNode)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过disconnect来停止全部观察</span></span><br><span class="line">intersectionObj.<span class="title function_">disconnect</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过takeRecords清除挂起的相交状态列表。返回一个 IntersectionObserverEntry 对象数组, 每个对象的目标元素都包含每次相交的信息, 可以显式通过调用此方法或隐式地通过观察者的回调自动调用.</span></span><br><span class="line">intersectionObj.<span class="title function_">takeRecords</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止对一个元素的观察</span></span><br><span class="line">intersectionObj.<span class="title function_">unobserve</span>(targetNode)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="IntersectionObserver的callback"><a href="#IntersectionObserver的callback" class="headerlink" title="IntersectionObserver的callback"></a>IntersectionObserver的callback</h3><p>回调函数，当触发滑动距离发生偏差时候触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entriesList IntersectionObserverEntry对象的数组</span></span><br><span class="line"><span class="comment">// observer 观察者的实例</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">entriesList, observer</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> entrie = entriesList[<span class="number">0</span>] </span><br><span class="line">    entrie = &#123;</span><br><span class="line">        <span class="comment">// 包含目标元素的边界信息的值与  Element.getBoundingClientRect() 相同</span></span><br><span class="line">        <span class="attr">boundingClientRect</span>: <span class="title class_">DOMRectReadOnly</span> &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: -<span class="number">76</span>, <span class="attr">width</span>: <span class="number">1</span>, <span class="attr">height</span>: <span class="number">75</span>, <span class="attr">top</span>: -<span class="number">76</span> …&#125;</span><br><span class="line">        <span class="comment">// intersectionRect 与 boundingClientRect 的比例值.完全可见时为1，完全不可见时小于等于0</span></span><br><span class="line">        <span class="attr">intersectionRatio</span>: <span class="number">0</span></span><br><span class="line">        <span class="comment">// DOMRectReadOnly 用来描述根和目标元素的相交区域</span></span><br><span class="line">        <span class="attr">intersectionRect</span>: <span class="title class_">DOMRectReadOnly</span> &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">width</span>: <span class="number">0</span>, <span class="attr">height</span>: <span class="number">0</span>, <span class="attr">top</span>: <span class="number">0</span>, …&#125;</span><br><span class="line">        <span class="comment">// 布尔，目标元素与交叉区域观察者对象的根相交为true 否则false</span></span><br><span class="line">        <span class="attr">isIntersecting</span>: <span class="literal">false</span></span><br><span class="line">        <span class="comment">// 暂无介绍</span></span><br><span class="line">        <span class="attr">isVisible</span>: <span class="literal">false</span></span><br><span class="line">        <span class="comment">// 根元素的矩形区域的信息</span></span><br><span class="line">        <span class="attr">rootBounds</span>: <span class="title class_">DOMRectReadOnly</span> &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">width</span>: <span class="number">375</span>, <span class="attr">height</span>: <span class="number">812</span>, <span class="attr">top</span>: <span class="number">0</span>, …&#125;</span><br><span class="line">        <span class="comment">// 根出现相交区域改变的元素</span></span><br><span class="line">        <span class="attr">target</span>: <span class="variable constant_">DOM</span></span><br><span class="line">        <span class="comment">// 可见性发生变化的时间</span></span><br><span class="line">        <span class="attr">time</span>: <span class="number">3445.7450000045355</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="IntersectionObserver实现无限滚动"><a href="#IntersectionObserver实现无限滚动" class="headerlink" title="IntersectionObserver实现无限滚动"></a>IntersectionObserver实现无限滚动</h3><p>基于vue实现建议版高性能无限滚动组件,so easy 有木有！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// infiniteLoad.vue 组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;infiniteLoad&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">name</span>: <span class="string">&#x27;infiniteLoad&#x27;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  data () &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  mounted () &#123; </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">let</span> intersectionObserver = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>)=&gt;</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">console</span>.<span class="title function_">log</span>(entries)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">if</span> (entries[<span class="number">0</span>].<span class="property">intersectionRatio</span> &lt;= <span class="number">0</span>) <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.$emit(<span class="string">&#x27;loadmore&#x27;</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    intersectionObserver.<span class="title function_">observe</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.infiniteLoad&#x27;</span>));</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>  infiniteLoad  <span class="keyword">from</span> <span class="string">&quot;../components/infiniteLoad.vue&quot;</span></span><br><span class="line"></span><br><span class="line">&lt;infinite-load</span><br><span class="line">    @loadmore=<span class="string">&quot;loadmore&quot;</span></span><br><span class="line">&gt;&lt;/infinite-load&gt;</span><br><span class="line"></span><br><span class="line"><span class="title function_">loadmore</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;loadMore&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><p><code>PerformanceObserver</code>还不太熟悉，也没碰到应用场景。先知道有这个东西，下次一定。😬</p>
+<h2 id="ResizeObserver"><a href="#ResizeObserver" class="headerlink" title="ResizeObserver"></a>ResizeObserver</h2><p>这个api功能和<code>window.resize</code>类似，但是具有更高的性能。主要用来监听元素的大小更改，可以观察普通dom元素和svg元素。</p>
+<h3 id="创建ResizeObserver实例"><a href="#创建ResizeObserver实例" class="headerlink" title="创建ResizeObserver实例"></a>创建ResizeObserver实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resizeObserver = <span class="keyword">new</span> <span class="title class_">ResizeObserver</span>(callback)</span><br><span class="line">resizeObserver.<span class="title function_">observe</span>(<span class="variable language_">document</span>.<span class="property">documentElement</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-x2F-关闭ResizeObserver实例"><a href="#启动-x2F-关闭ResizeObserver实例" class="headerlink" title="启动&#x2F;关闭ResizeObserver实例"></a>启动&#x2F;关闭ResizeObserver实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始观察</span></span><br><span class="line">resizeObserver.<span class="title function_">observe</span>(targetNode)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过disconnect来停止全部观察</span></span><br><span class="line">resizeObserver.<span class="title function_">disconnect</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止对一个元素的观察</span></span><br><span class="line">resizeObserver.<span class="title function_">unobserve</span>(targetNode)</span><br></pre></td></tr></table></figure>
+<h3 id="ResizeObserver的callback"><a href="#ResizeObserver的callback" class="headerlink" title="ResizeObserver的callback"></a>ResizeObserver的callback</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entriesList IntersectionObserverEntry对象的数组</span></span><br><span class="line"><span class="comment">// observer 观察者的实例</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">entries, observer</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> entrie = entries[<span class="number">0</span>] </span><br><span class="line">    entrie = &#123;</span><br><span class="line">        <span class="comment">// 包含改变尺寸大小的元素的contentRect属性</span></span><br><span class="line">        <span class="attr">contentRect</span>: contentRect &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: -<span class="number">76</span>, <span class="attr">width</span>: <span class="number">1</span>, <span class="attr">height</span>: <span class="number">75</span>, <span class="attr">top</span>: -<span class="number">76</span> …&#125;</span><br><span class="line">        <span class="comment">// 当前改变尺寸大小的元素的 Element 引用</span></span><br><span class="line">        <span class="attr">target</span>:  <span class="variable constant_">DOM</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/03/27/2021/about_mylife/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:47:11
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="性能优化">
+                        #性能优化
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/15/2021/vue_principle_01/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E6%9D%A5%E6%BA%90"><span class="toc-text">需求来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8DObserver"><span class="toc-text">各种Observer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MutationObserver"><span class="toc-text">MutationObserver</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAMutationObserver%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AE%9E%E4%BE%8B"><span class="toc-text">创建MutationObserver配置和实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-x2F-%E5%81%9C%E6%AD%A2MutationObserver%E7%9B%91%E5%90%AC"><span class="toc-text">启动&#x2F;停止MutationObserver监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MutationObserver%E7%9A%84calback"><span class="toc-text">MutationObserver的calback</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IntersectionObserver"><span class="toc-text">IntersectionObserver</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAIntersectionObserver"><span class="toc-text">创建IntersectionObserver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-x2F-%E5%85%B3%E9%97%ADIntersectionObserver%E5%AE%9E%E4%BE%8B"><span class="toc-text">启动&#x2F;关闭IntersectionObserver实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IntersectionObserver%E7%9A%84callback"><span class="toc-text">IntersectionObserver的callback</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IntersectionObserver%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8"><span class="toc-text">IntersectionObserver实现无限滚动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PerformanceObserver"><span class="toc-text">PerformanceObserver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResizeObserver"><span class="toc-text">ResizeObserver</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAResizeObserver%E5%AE%9E%E4%BE%8B"><span class="toc-text">创建ResizeObserver实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-x2F-%E5%85%B3%E9%97%ADResizeObserver%E5%AE%9E%E4%BE%8B"><span class="toc-text">启动&#x2F;关闭ResizeObserver实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ResizeObserver%E7%9A%84callback"><span class="toc-text">ResizeObserver的callback</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

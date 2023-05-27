@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术笔记】JS的String的各种API 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术笔记】JS的String的各种API</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:35
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/JavaScript/" title="JavaScript">
+                    #JavaScript
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>String是js最常用的数据结果，本文最常见操作做一个总结</p>
+<span id="more"></span>
+
+
+<blockquote>
+<p>操作字符串是前端开发中最常见的任务之一，本文总结操作字符串的一些方法，包括ES5,ES6版本及一些常见业务场景的例示</p>
+</blockquote>
+<p><span style="font-size:24px;color:#000;">方法开头有<b style="color:red">改</b>字的代表该方法会改变原Srting。<br>有<b style="color:#CC9900">原</b>字的代表，该方法不会改变原Srting</span></p>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li>字符串可以视为字符数组可以用下标来访问（只读属性）。如：str[0]。## 标题文字 ##</li>
+<li>通过String(5)把任意类型转为字符串</li>
+</ul>
+<h3 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h3><h4 id="charAt方法"><a href="#charAt方法" class="headerlink" title="charAt方法"></a>charAt方法</h4><blockquote>
+<p><b style="color:red">改</b>String.prototype.charAt() 方法返回指定位置的字符 </p>
+</blockquote>
+<pre><code>  &#39;hello&#39;.charAt(1) // &quot;e&quot;
+</code></pre>
+<h4 id="concat方法"><a href="#concat方法" class="headerlink" title="concat方法"></a>concat方法</h4><blockquote>
+<p><b style="color:#CC9900">原</b> String.prototype.concat() 方法用于连字符串，可以多选</p>
+</blockquote>
+<pre><code>   &#39;hello&#39;.concat(&#39;world&#39;) // &quot;helloworld&quot;
+</code></pre>
+<h4 id="slice方法"><a href="#slice方法" class="headerlink" title="slice方法"></a>slice方法</h4><blockquote>
+<p> <b style="color:#CC9900">原</b> String.prototype.slice() 方法用原字符串提取子字符串。第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）</p>
+</blockquote>
+<pre><code>  &#39;hello&#39;.slice(0,2) // he
+</code></pre>
+<h4 id="substr方法"><a href="#substr方法" class="headerlink" title="substr方法"></a>substr方法</h4><blockquote>
+<p> <b style="color:#CC9900">原</b> String.prototype.substr()可在字符串中抽取从 start 下标开始的指定数目的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  &#39;hello&#39;.substr(3) // lo
+</code></pre>
+<h4 id="substring方法"><a href="#substring方法" class="headerlink" title="substring方法"></a>substring方法</h4><blockquote>
+<p> <b style="color:#CC9900">原</b> String.prototype.substring() 方法用于提取字符串中介于两个指定下标之间的字符。第一个参数是要抽取的子串的起始下标，第二个参数是子串中的字符数</p>
+</blockquote>
+<pre><code>  hello&#39;.substring(3) // lo
+</code></pre>
+<h4 id="indexOf方法"><a href="#indexOf方法" class="headerlink" title="indexOf方法"></a>indexOf方法</h4><blockquote>
+<p> <b style="color:#CC9900">原</b> String.prototype.indexOf() &#x2F; lastIndexOf()  方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配 (lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。)</p>
+</blockquote>
+<pre><code>  &#39;hello world&#39;.indexOf(&#39;o&#39;) // 4
+  &#39;hello world&#39;.lastindexOf(&#39;o&#39;) // 7
+</code></pre>
+<h4 id="trim方法"><a href="#trim方法" class="headerlink" title="trim方法"></a>trim方法</h4><blockquote>
+<p> <b style="color:#CC9900">原</b>String.prototype.trim()方法用于去除字符串两端的空格</p>
+</blockquote>
+<pre><code>  &#39; fdf &#39;.trim()  //&#39;fdf&#39;
+</code></pre>
+<h4 id="toLowerCase方法"><a href="#toLowerCase方法" class="headerlink" title="toLowerCase方法"></a>toLowerCase方法</h4><blockquote>
+<p><b style="color:#CC9900">原</b>String.prototype.toLowerCase()  &#x2F; toUpperCase() 将一个字符串全部转为小写 &#x2F; 大写</p>
+</blockquote>
+<pre><code>  &#39;Hello World&#39;.toLowerCase()// &quot;hello world&quot;
+  &#39;Hello World&#39;.toUpperCase()// &quot;HELLO WORLD&quot;
+</code></pre>
+<h4 id="match方法"><a href="#match方法" class="headerlink" title="match方法"></a>match方法</h4><blockquote>
+<p><b style="color:#CC9900">原</b>String.prototype.match()方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null</p>
+</blockquote>
+<pre><code>  var matches = &#39;cat, bat, sat, fat&#39;.match(&#39;at&#39;); &lt;br&gt;
+  matches.index // 1
+  matches.input // &quot;cat, bat, sat, fat&quot;
+</code></pre>
+<h4 id="split方法"><a href="#split方法" class="headerlink" title="split方法"></a>split方法</h4><blockquote>
+<p>String.prototype.split() 方法按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组. 第一个参数是分割规则，第二个参数，限定返回数组的最大成员数。</p>
+</blockquote>
+<pre><code>  &#39;a|b|c&#39;.split(&#39;|&#39;) // [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+</code></pre>
+<h4 id="relapce方法"><a href="#relapce方法" class="headerlink" title="relapce方法"></a>relapce方法</h4><blockquote>
+<p>String.prototype.relapce()  用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+</blockquote>
+<pre><code>  &#39;Im your father&#39;.replace(&#39;father&#39;,&#39;mother&#39;) // Im your mother
+</code></pre>
+<h4 id="search方法"><a href="#search方法" class="headerlink" title="search方法"></a>search方法</h4><blockquote>
+<p>\ String.prototype.search() 强于indxOf)  检索字符串中指定的子字符串，或检索<b>正则表达式</b>相匹配的子字符串。</p>
+</blockquote>
+<pre><code>  &#39;123456ONE&#39;.search(&#39;O&#39;) // 6
+</code></pre>
+<h4 id="localeCompare方法"><a href="#localeCompare方法" class="headerlink" title="localeCompare方法"></a>localeCompare方法</h4><blockquote>
+<p> String.prototype.localeCompare()方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串</p>
+</blockquote>
+<pre><code>  &#39;apple&#39;.localeCompare(&#39;banana&#39;) // -1
+  &#39;apple&#39;.localeCompare(&#39;apple&#39;) // 0
+</code></pre>
+<h4 id="includes方法"><a href="#includes方法" class="headerlink" title="includes方法"></a>includes方法</h4><blockquote>
+<p>String.prototype.includes() 方法用于判断一个字符串是否包含在另一个字符串中，根据情况返回 true 或 false。第一个参数是要在此字符串中搜索的字符串，第二个参数是从当前字符串的哪个索引位置开始搜寻子字符串，默认值为0 (区分大小写)</p>
+</blockquote>
+<pre><code>  &#39;Blue Whale&#39;.includes(&#39;blue&#39;); // returns false
+</code></pre>
+<h4 id="startsWith方法"><a href="#startsWith方法" class="headerlink" title="startsWith方法"></a>startsWith方法</h4><blockquote>
+<p>String.prototype.startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false (区分大小写)</p>
+</blockquote>
+<pre><code>  &quot;To be, or not to &quot;.startsWith(&quot;To be&quot;); // returns true
+</code></pre>
+<h4 id="padStart方法"><a href="#padStart方法" class="headerlink" title="padStart方法"></a>padStart方法</h4><blockquote>
+<p>String.prototype.padStart() &#x2F; padEnd() 方法用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。填充从当前字符串的开始(左侧) &#x2F; (右侧)应用的。 第一个参数 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身，第二个参数 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 “ “（U+0020）</p>
+</blockquote>
+<pre><code>  &#39;abc&#39;.padStart(10, &quot;foo&quot;);  // &quot;foofoofabc&quot;
+  &#39;abc&#39;.padEnd(10, &quot;foo&quot;);   // &quot;abcfoofoof&quot;
+</code></pre>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><h4 id="btoa方法"><a href="#btoa方法" class="headerlink" title="btoa方法"></a>btoa方法</h4><blockquote>
+<p>btoa() 把任意值转为Base编码</p>
+</blockquote>
+<pre><code>  btoa(&#39;hello world&#39;) // &quot;SGVsbG8gV29ybGQh&quot;
+  
+</code></pre>
+<h4 id="atob方法"><a href="#atob方法" class="headerlink" title="atob方法"></a>atob方法</h4><blockquote>
+<p>atob() 把Base64编码转为原来的值</p>
+</blockquote>
+<pre><code>  atob(&quot;SGVsbG8gV29ybGQh&quot;) // &#39;hello world&#39;
+</code></pre>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/08/31/2019/front_cors/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:35
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/JavaScript/" title="JavaScript">
+                        #JavaScript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/09/20/2019/more_page/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#charAt%E6%96%B9%E6%B3%95"><span class="toc-text">charAt方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#concat%E6%96%B9%E6%B3%95"><span class="toc-text">concat方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slice%E6%96%B9%E6%B3%95"><span class="toc-text">slice方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#substr%E6%96%B9%E6%B3%95"><span class="toc-text">substr方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#substring%E6%96%B9%E6%B3%95"><span class="toc-text">substring方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#indexOf%E6%96%B9%E6%B3%95"><span class="toc-text">indexOf方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#trim%E6%96%B9%E6%B3%95"><span class="toc-text">trim方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#toLowerCase%E6%96%B9%E6%B3%95"><span class="toc-text">toLowerCase方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match%E6%96%B9%E6%B3%95"><span class="toc-text">match方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#split%E6%96%B9%E6%B3%95"><span class="toc-text">split方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#relapce%E6%96%B9%E6%B3%95"><span class="toc-text">relapce方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#search%E6%96%B9%E6%B3%95"><span class="toc-text">search方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#localeCompare%E6%96%B9%E6%B3%95"><span class="toc-text">localeCompare方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#includes%E6%96%B9%E6%B3%95"><span class="toc-text">includes方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#startsWith%E6%96%B9%E6%B3%95"><span class="toc-text">startsWith方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#padStart%E6%96%B9%E6%B3%95"><span class="toc-text">padStart方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-text">其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#btoa%E6%96%B9%E6%B3%95"><span class="toc-text">btoa方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#atob%E6%96%B9%E6%B3%95"><span class="toc-text">atob方法</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

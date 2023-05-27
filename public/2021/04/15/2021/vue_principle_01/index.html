@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【原理探索】vue.js(2.x)框架底层原理- 实现mini vue「01」</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:52:07
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                    #vue原理
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>响应式思想，可以理解为自动回复消息，我发送消息给你，你会返回给我相应的回复。vue 通过响应式设计让数据得到自动的控制也就产生了 MVVM 的思想，从而实现数据双向绑定。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter&#x2F;setter。这些 getter&#x2F;setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。</p>
+<p>每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染。</p>
+<p><img src="https://cn.vuejs.org/images/data.png" alt="vue"></p>
+<p>以上内容摘自 vue 文档，可以看到 vue2.x 是通过 Object.defineProperty 对数据进行包裹，在通过内部的转换实现数据的双向绑定，让我们可以在使用 ui 组件(如：输入框)时候，可以非常便捷的操作数据。那么这一套流程是怎么实现的呢，让我们来模拟一个 mini 版本的 vue 了解他的本质。</p>
+<p>实现最终代码： <a target="_blank" rel="noopener" href="https://github1s.com/gzg1023/fackAchieve/tree/main/framework/vue">mini vue github 地址</a></p>
+<h2 id="模拟实现"><a href="#模拟实现" class="headerlink" title="模拟实现"></a>模拟实现</h2><p>提到 vue 很容易想到的就是单向数据流和数据双向绑定，乍一看有点冲突。一会儿单向 一会儿双向，但是其实不然，单向数据流是指用户访问 View，View 发出用户交互的 Action，在 Action 里对 state 进行相应更新。state 更新后会触发 View 更新页面的过程。这样数据总是清晰的单向进行流动，便于维护并且可以预测。 而数据双向绑定是基于单向数据流之上（理解为业务层）的实现，通过 Model 和 View 进行绑定，保持一致的操作。</p>
+<p>我们从第一步开始模拟实现，在使用 vue 时候，我们通过 new 关键字创建实例,通过 el 指定一个 CSS 选择器或者是一个 DOM 对象，然后在 data 部分定义我们要操作的数据，就可以愉快的使用了。但是这背后 vue 做了很多工作。如下所示，通过<code>new Vue</code>创建了 vm 实例，也是整个框架的入口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">message</span>: <span class="string">&quot;Hello Vue.js!&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们通过 es6 语法 class 的方式实现整个 mini vue，用来了解整个响应式原理的基本结构和原理。</p>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><p>创建 Vue 构造类，我们先来整理一下流程</p>
+<ol>
+<li>创建 vue 实例，传入 el 选项来指定模版要替换的元素</li>
+<li>传入其他选项 data，methods，computed 等选项来使用 vue 提供的 api</li>
+<li>把传入的 data 变成响应式数据，激活数据的双向绑定</li>
+<li>通过 v-dom 和 Compiler 把 template 编译成 render</li>
+<li>通过 render 转为 AST 在转为 code，并通过 v-dom 的 diff 渲染页面</li>
+</ol>
+<p>我们模拟的话，就只涉及响应式原理部分。只处理，Observer 响应式，Compiler 对简单指令的解析 两个部分的实现。关于异常处理，在模拟过程中没有进行涉及，在 vue 中可以看到只要涉及到”用户传入”部分的内容都添加了异常处理和 log 异常日志的输出，这点在开发库类的项目中很值得学习。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Vue</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 通过属性保存选项的数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$options</span> = options || &#123;&#125;;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$data</span> = options.<span class="property">data</span> || &#123;&#125;;</span><br><span class="line">    <span class="comment">// 如果是字符串就说明是选择器</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$el</span> =</span><br><span class="line">      <span class="keyword">typeof</span> options.<span class="property">el</span> === <span class="string">&quot;string&quot;</span></span><br><span class="line">        ? <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(options.<span class="property">el</span>)</span><br><span class="line">        : options.<span class="property">el</span>;</span><br><span class="line">    <span class="comment">// 2. 把data的成员转化为getter和setter注入到vue实例</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">_proxyData</span>(<span class="variable language_">this</span>.<span class="property">$data</span>);</span><br><span class="line">    <span class="comment">// 3. 调用observer对象，把data属性转化为响应式数据，监听数据的变化</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Observer</span>(<span class="variable language_">this</span>.<span class="property">$data</span>);</span><br><span class="line">    <span class="comment">// 4. 调用Compiler对象，处理模版编译</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Compiler</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">_proxyData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="comment">// 遍历对象</span></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(data).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">this</span>, key, &#123;</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> data[key];</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (newValue === data[key]) <span class="keyword">return</span>;</span><br><span class="line">          data[key] = newValue;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dep"><a href="#Dep" class="headerlink" title="Dep"></a>Dep</h3><p>我们知道 Vue 使用的设计模式是观察者模式，那么就需要观察者和发布者来完成，我们定义一个 Dep 对象内部包含一个 subs 数组用来存在所有的依赖对象，通过 addSub 方法添加依赖，通过 notify 方法来触发所有以来的更新（调用依赖的 update 方法）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 观察者模式的 发布者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dep</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 收集依赖对象</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">subs</span> = [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 添加依赖对象</span></span><br><span class="line">  <span class="title function_">addSub</span>(<span class="params">sub</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (sub &amp;&amp; sub.<span class="property">update</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">push</span>(sub);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 通知方法</span></span><br><span class="line">  <span class="title function_">notify</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">sub</span>) =&gt;</span> &#123;</span><br><span class="line">      sub.<span class="title function_">update</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p>Observer 类搜集依赖，在 get 阶段搜集依赖，在 set 阶段触发依赖的更新。内置的 walk 方法就是递归的处理所有对象，添加依赖属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">targetData</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">walk</span>(targetData);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历对象所有属性</span></span><br><span class="line">  <span class="title function_">walk</span>(<span class="params">targetData</span>) &#123;</span><br><span class="line">    <span class="comment">// 判断是否为对象</span></span><br><span class="line">    <span class="keyword">if</span> (!targetData || <span class="keyword">typeof</span> targetData !== <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历所有属性</span></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">keys</span>(targetData).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">defineReactive</span>(targetData, key, targetData[key]);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 定义响应式数据</span></span><br><span class="line">  <span class="title function_">defineReactive</span>(<span class="params">obj, key, value</span>) &#123;</span><br><span class="line">    <span class="comment">// 收集依赖，来统一更新</span></span><br><span class="line">    <span class="keyword">let</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>();</span><br><span class="line">    <span class="comment">// 转化对象的内部属性</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">walk</span>(value);</span><br><span class="line">    <span class="keyword">const</span> _that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">      <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="comment">// 不返回obj[key]的原因是会递归触发</span></span><br><span class="line">      <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 收集依赖</span></span><br><span class="line">        <span class="title class_">Dep</span>.<span class="property">target</span> &amp;&amp; dep.<span class="title function_">addSub</span>(<span class="title class_">Dep</span>.<span class="property">target</span>);</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">set</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue === value) <span class="keyword">return</span>;</span><br><span class="line">        value = newValue;</span><br><span class="line">        <span class="comment">// 处理普通值转为对象的情况</span></span><br><span class="line">        _that.<span class="title function_">walk</span>(newValue);</span><br><span class="line">        <span class="comment">// 发生通知</span></span><br><span class="line">        dep.<span class="title function_">notify</span>();</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h3><p>每一个组件对应一个 Watcher 对象，包含一个 update 方法，作用是调用传入的 callback 函数达到更新数据的目的。也是观察者模式中的观察者对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Watcher</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">vm, key, cb</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">vm</span> = vm;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cb</span> = cb;</span><br><span class="line">    <span class="comment">// 把watcher对象记录到Dep类的静态属性target</span></span><br><span class="line">    <span class="title class_">Dep</span>.<span class="property">target</span> = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="comment">// 触发get方法，在get方法中会调用addSub</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">oldValue</span> = vm[key];</span><br><span class="line">    <span class="comment">// 重制依赖对象，防止数据混乱</span></span><br><span class="line">    <span class="title class_">Dep</span>.<span class="property">target</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> newValue = <span class="variable language_">this</span>.<span class="property">vm</span>[<span class="variable language_">this</span>.<span class="property">key</span>];</span><br><span class="line">    <span class="comment">// 如果数据发现变化则更新</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">oldValue</span> === newValue) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">cb</span>(newValue);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Compiler"><a href="#Compiler" class="headerlink" title="Compiler"></a>Compiler</h3><p>Compiler 是处理模版编译的对象，在 vue 中处理 template 对象编译成 render 函数并解析指令，大括号语法，等 vue 内置对象。我们这里只针对 html 模版进行简指令的解析。这个过程也是递归的，因为我们并不知道节点有多少层。</p>
+<p>在处理完成指令和大括号的解析后，我们可以得到对应的 data 值 然后通过 update 方法进行更新。关于 v-model 就是通过表单的 change 事件来进行双向数据的绑定操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Compiler</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">vm</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">el</span> = vm.<span class="property">$el</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">vm</span> = vm;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">compiler</span>(<span class="variable language_">this</span>.<span class="property">el</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译模版，处理各种节点</span></span><br><span class="line">  <span class="title function_">compiler</span>(<span class="params">el</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> childNodes = el.<span class="property">childNodes</span>;</span><br><span class="line">    <span class="title class_">Array</span>.<span class="title function_">from</span>(childNodes).<span class="title function_">forEach</span>(<span class="function">(<span class="params">node</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isTextNode</span>(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理文本</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">compilerText</span>(node);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isElementNode</span>(node)) &#123;</span><br><span class="line">        <span class="comment">// 处理元素</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">compilerElement</span>(node);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 处理多层节点</span></span><br><span class="line">      <span class="keyword">if</span> (node.<span class="property">childNodes</span> &amp;&amp; node.<span class="property">childNodes</span>.<span class="property">length</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">compiler</span>(node);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译元素节点，处理指令</span></span><br><span class="line">  <span class="title function_">compilerElement</span>(<span class="params">node</span>) &#123;</span><br><span class="line">    <span class="title class_">Array</span>.<span class="title function_">from</span>(node.<span class="property">attributes</span>).<span class="title function_">forEach</span>(<span class="function">(<span class="params">attr</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> attrName = attr.<span class="property">name</span>;</span><br><span class="line">      <span class="comment">// 判断是否为指令</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isDirective</span>(attrName)) &#123;</span><br><span class="line">        <span class="comment">// 转化指令</span></span><br><span class="line">        attrName = attrName.<span class="title function_">substr</span>(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> key = attr.<span class="property">value</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">update</span>(node, key, attrName);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 编译文本节点，处理差值表达式</span></span><br><span class="line">  <span class="title function_">compilerText</span>(<span class="params">node</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)&#125;\&#125;/</span>;</span><br><span class="line">    <span class="keyword">let</span> content = node.<span class="property">textContent</span>;</span><br><span class="line">    <span class="keyword">if</span> (reg.<span class="title function_">test</span>(content)) &#123;</span><br><span class="line">      <span class="comment">// 获取正则匹配的第一个内容</span></span><br><span class="line">      <span class="keyword">let</span> key = <span class="title class_">RegExp</span>.<span class="property">$1</span>.<span class="title function_">trim</span>();</span><br><span class="line">      node.<span class="property">textContent</span> = content.<span class="title function_">replace</span>(reg, <span class="variable language_">this</span>.<span class="property">vm</span>[key]);</span><br><span class="line">      <span class="comment">// 触发依赖</span></span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">Watcher</span>(<span class="variable language_">this</span>.<span class="property">vm</span>, key, <span class="function">(<span class="params">newValue</span>) =&gt;</span> &#123;</span><br><span class="line">        node.<span class="property">textContent</span> = newValue;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素是否为指令</span></span><br><span class="line">  <span class="title function_">isDirective</span>(<span class="params">attrName</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> attrName.<span class="title function_">startsWith</span>(<span class="string">&quot;v-&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素是否为文本节点</span></span><br><span class="line">  <span class="title function_">isTextNode</span>(<span class="params">node</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.<span class="property">nodeType</span> === <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断元素是否为元素节点</span></span><br><span class="line">  <span class="title function_">isElementNode</span>(<span class="params">node</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> node.<span class="property">nodeType</span> === <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 更新指令数据</span></span><br><span class="line">  <span class="title function_">update</span>(<span class="params">node, key, attrName</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> updateFn;</span><br><span class="line">    <span class="keyword">if</span> (attrName.<span class="title function_">indexOf</span>(<span class="string">&quot;:&quot;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">      attrName = attrName.<span class="title function_">substr</span>(<span class="number">3</span>);</span><br><span class="line">      updateFn = <span class="variable language_">this</span>.<span class="property">onUpdater</span>;</span><br><span class="line">      updateFn &amp;&amp; updateFn.<span class="title function_">call</span>(<span class="variable language_">this</span>, node, key, <span class="variable language_">this</span>.<span class="property">vm</span>[key], attrName);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      updateFn = <span class="variable language_">this</span>[attrName + <span class="string">&quot;Updater&quot;</span>];</span><br><span class="line">      <span class="comment">// 此处的this的Compiler对象</span></span><br><span class="line">      updateFn &amp;&amp; updateFn.<span class="title function_">call</span>(<span class="variable language_">this</span>, node, key, <span class="variable language_">this</span>.<span class="property">vm</span>[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-text指令</span></span><br><span class="line">  <span class="title function_">textUpdater</span>(<span class="params">node, key, value</span>) &#123;</span><br><span class="line">    <span class="comment">// 文本节点的值用textContent</span></span><br><span class="line">    node.<span class="property">textContent</span> = value;</span><br><span class="line">    <span class="comment">// 收集依赖</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Watcher</span>(<span class="variable language_">this</span>.<span class="property">vm</span>, key, <span class="function">(<span class="params">newValue</span>) =&gt;</span> &#123;</span><br><span class="line">      node.<span class="property">textContent</span> = newValue;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-model指令</span></span><br><span class="line">  <span class="title function_">modelUpdater</span>(<span class="params">node, key, value</span>) &#123;</span><br><span class="line">    <span class="comment">// 表单的值是value</span></span><br><span class="line">    node.<span class="property">value</span> = value;</span><br><span class="line">    <span class="comment">// 收集依赖</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Watcher</span>(<span class="variable language_">this</span>.<span class="property">vm</span>, key, <span class="function">(<span class="params">newValue</span>) =&gt;</span> &#123;</span><br><span class="line">      node.<span class="property">value</span> = newValue;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 双向绑定</span></span><br><span class="line">    node.<span class="title function_">addEventListener</span>(<span class="string">&quot;input&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">vm</span>[key] = node.<span class="property">value</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理v-show</span></span><br><span class="line">  <span class="title function_">showUpdater</span>(<span class="params">node, key, value</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value) &#123;</span><br><span class="line">      node.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      node.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Watcher</span>(<span class="variable language_">this</span>.<span class="property">vm</span>, key, <span class="function">(<span class="params">newValue</span>) =&gt;</span> &#123;</span><br><span class="line">      node.<span class="property">style</span>.<span class="property">display</span> = newValue ? <span class="string">&quot;block&quot;</span> : <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理v-on</span></span><br><span class="line">  <span class="title function_">onUpdater</span>(<span class="params">node, key, value, handleType</span>) &#123;</span><br><span class="line">    <span class="comment">// value = value.substr(2)</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;🚀 onUpdater&quot;</span>, node, key, value);</span><br><span class="line">    node.<span class="title function_">addEventListener</span>(handleType, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">vm</span>[key]();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><p>最后通过html文件创建实例来测试mini vue。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>mini vue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>差值表达式<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">data-img</span>=<span class="string">&quot;http://google.com&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; person &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-text<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;msg&quot;</span> <span class="attr">v-text</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-model<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;count&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-if<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-show</span>=<span class="string">&quot;showFlag&quot;</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-on<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;clickHandle&quot;</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./dep.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./watcher.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./compiler.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./observer.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> vm = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">el</span>:<span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">data</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">msg</span>:<span class="string">&#x27;hello mini vue&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">200</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">showFlag</span>:<span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">person</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">alex</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="attr">age</span>:<span class="number">19</span></span></span><br><span class="line"><span class="language-javascript">                        &#125;</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;,</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">clickHandle</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">this</span>.<span class="property">showFlag</span> = !<span class="variable language_">this</span>.<span class="property">showFlag</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;123&#x27;</span>,<span class="variable language_">this</span>)</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们可以看到整个vue进行响应式处理的流程是：（patch方法就是v-dom进行diff后更新为真实页面的操作）</p>
+<p>响应式触发<code>setter-&gt;Dep-&gt;Watcher-&gt;update-&gt;patch</code>。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/04/01/2021/observer/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:52:07
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                        #vue原理
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/24/2021/vue_principle_02/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0"><span class="toc-text">模拟实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dep"><span class="toc-text">Dep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Observer"><span class="toc-text">Observer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Watcher"><span class="toc-text">Watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compiler"><span class="toc-text">Compiler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-html"><span class="toc-text">index.html</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

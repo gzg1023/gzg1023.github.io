@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【前端技术】Vue递归组件的简单运用 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【前端技术】Vue递归组件的简单运用</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:50:39
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Vue/" title="Vue">
+                    #Vue
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>后台管理系统的菜单，树结构…当需求超过二级菜单时候，就要考虑使用递归组件了。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>顾名思义，递归组件就是组件调用自身；从而不管数据包含基层，都能顺利遍历的结构。构建一个基础的递归组件主要是两个部分组成，其一就是有一份可循环递归的数据。然后就是调用自身的DOM结构。<br>优秀递归组件：ElementUI的Tree组件<a target="_blank" rel="noopener" href="https://github.com/ElemeFE/element/tree/dev/packages/tree">源码</a></p>
+<h3 id="DOM结构"><a href="#DOM结构" class="headerlink" title="DOM结构"></a>DOM结构</h3><pre><code>// menu-item.vue
+&lt;ul&gt;
+&lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt; // 循环遍历数据
+  &lt;p v-show=&quot;item.show&quot; class=&quot;title&quot; @click=&quot;clickHandle(item,index)&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/p&gt; // 子项
+  &lt;div&gt;
+        &lt;menu-item v-if=&quot;item.child&quot; :list=&quot;item.child&quot;&gt;&lt;/menu-item&gt; // 递归调用
+  &lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+// index.vue
+&lt;menu-item :list=&quot;info&quot;&gt;&lt;/menu-item&gt; // 父组件调用，并通过props传入数据
+</code></pre>
+<h3 id="JS结构"><a href="#JS结构" class="headerlink" title="JS结构"></a>JS结构</h3><pre><code> // menu-item.vue
+ props:&#123;
+  list: Array
+&#125;,
+methods:&#123;
+    clickHandle(item,index)&#123;
+        console.log(item,index)
+    &#125;
+&#125;
+
+// index.vue
+
+ info:[  // 组件需要遍历的数据，如果数组对象有child属性，说明包含子菜单
+    &#123;
+      name:&#39;超级菜单&#39;,
+      show:true,
+      child:[
+         &#123;
+           name : &#39;超级菜单二级菜单1&#39;,
+           show: false,
+         &#125;,
+         &#123;
+           name : &#39;超级菜单二级菜单2&#39;,
+           show: false,
+         &#125;
+      ]
+    &#125;,
+    &#123;
+    name:&#39;设置菜单&#39;,
+    show:true,
+    child:[
+         &#123;
+           name : &#39;设置菜单二级菜单1&#39;,
+           show: false,
+         &#125;,
+         &#123;
+           name : &#39;设置菜单二级菜单2&#39;,
+           show: false,
+         &#125;
+      ]
+    &#125;
+    ]
+</code></pre>
+<p>本文是一个简单例示，在示例项目中会存在各种情况。如果在处理数据事件处理时可以考虑以下优化方案</p>
+<ol>
+<li>使用event事件委托进行元素事件处理</li>
+<li>提取为两个组件，大层负责控制总统，内部负责每一项的展示和计算（参考ElementUI的Tree组件）</li>
+<li>添加CSS3过渡效果，提升用户体验</li>
+</ol>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/01/30/2020/china_network/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:50:39
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Vue/" title="Vue">
+                        #Vue
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/02/21/2020/mobile_debug/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E7%BB%93%E6%9E%84"><span class="toc-text">DOM结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS%E7%BB%93%E6%9E%84"><span class="toc-text">JS结构</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

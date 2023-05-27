@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术笔记】工具类css 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术笔记】工具类css</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:01:11
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>总结一些常用的css工具类</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="省略号控制"><a href="#省略号控制" class="headerlink" title="省略号控制"></a>省略号控制</h3><h4 id="单行显示省略号"><a href="#单行显示省略号" class="headerlink" title="单行显示省略号"></a>单行显示省略号</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.ellipsis&#123;</span><br><span class="line">overflow: hidden;</span><br><span class="line">text-overflow: ellipsis;</span><br><span class="line">white-space: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="n行显示省略号"><a href="#n行显示省略号" class="headerlink" title="n行显示省略号"></a>n行显示省略号</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.ellipsis-wrap &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    display: -webkit-box; </span><br><span class="line">    -webkit-box-orient: vertical;   </span><br><span class="line">    -webkit-line-clamp: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="文字换行控制"><a href="#文字换行控制" class="headerlink" title="文字换行控制"></a>文字换行控制</h3><h5 id="不换行"><a href="#不换行" class="headerlink" title="不换行"></a>不换行</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.nowrap &#123;</span><br><span class="line">  white-space:nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="自动换行"><a href="#自动换行" class="headerlink" title="自动换行"></a>自动换行</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap-auto &#123;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line">  word-break: normal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="强制换行"><a href="#强制换行" class="headerlink" title="强制换行"></a>强制换行</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.break-wrap &#123;</span><br><span class="line">  word-break:break-all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="文本两端对齐"><a href="#文本两端对齐" class="headerlink" title="文本两端对齐"></a>文本两端对齐</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.text-justify &#123;</span><br><span class="line">    text-align: justify;</span><br><span class="line">    text-justify: distribute-all-lines;  </span><br><span class="line">    text-align-last: justify; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作控制"><a href="#操作控制" class="headerlink" title="操作控制"></a>操作控制</h3><h4 id="禁止用户双击屏幕或者选中某些内容"><a href="#禁止用户双击屏幕或者选中某些内容" class="headerlink" title="禁止用户双击屏幕或者选中某些内容"></a>禁止用户双击屏幕或者选中某些内容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.none-select &#123;</span><br><span class="line">  -webkit-touch-callout: none;</span><br><span class="line">  -webkit-user-select: none;</span><br><span class="line">  -khtml-user-select: none;</span><br><span class="line">  -moz-user-select: none;</span><br><span class="line">  -ms-user-select: none;</span><br><span class="line">  user-none: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="不同的鼠标图案"><a href="#不同的鼠标图案" class="headerlink" title="不同的鼠标图案"></a>不同的鼠标图案</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cursor：pointer; //小手指；</span><br><span class="line">cursor：help; //箭头加问号；</span><br><span class="line">cursor：wait; //转圈圈；</span><br><span class="line">cursor：move; //移动光标；</span><br><span class="line">cursor：crosshair; //十字光标</span><br><span class="line">cursor: not-allowed; // 禁止选中</span><br></pre></td></tr></table></figure>
+<h4 id="css使用硬件加速"><a href="#css使用硬件加速" class="headerlink" title="css使用硬件加速"></a>css使用硬件加速</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.fast-machine&#123;</span><br><span class="line">  transform: translateZ(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="css转换文字大小"><a href="#css转换文字大小" class="headerlink" title="css转换文字大小"></a>css转换文字大小</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.text-opp &#123;text-transform: uppercase&#125;  // 将所有字母变成大写字母</span><br><span class="line">.text-low &#123;text-transform: lowercase&#125;  // 将所有字母变成小写字母</span><br><span class="line">.text-cap &#123;text-transform: capitalize&#125; // 首字母大写</span><br><span class="line">.text-small &#123;font-variant: small-caps&#125;   // 将字体变成小型的大写字母</span><br></pre></td></tr></table></figure>
+<h4 id="小于10px的字体显示"><a href="#小于10px的字体显示" class="headerlink" title="小于10px的字体显示"></a>小于10px的字体显示</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">font-size: 20px;</span><br><span class="line">transform: scale(0.5);</span><br></pre></td></tr></table></figure>
+<h4 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">overflow-y: scroll;</span><br></pre></td></tr></table></figure>
+<p>整个滚动条</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">::-webkit-scrollbar &#123;</span><br><span class="line">    width: 5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="滚动条的轨道"><a href="#滚动条的轨道" class="headerlink" title="滚动条的轨道"></a>滚动条的轨道</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">::-webkit-scrollbar-track &#123;</span><br><span class="line">    background-color: #ffa336;</span><br><span class="line">    border-radius: 5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="滚动条的滑块"><a href="#滚动条的滑块" class="headerlink" title="滚动条的滑块"></a>滚动条的滑块</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">::-webkit-scrollbar-thumb &#123;</span><br><span class="line">    background-color: #ffc076;</span><br><span class="line">    border-radius: 5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="flex相关"><a href="#flex相关" class="headerlink" title="flex相关"></a>flex相关</h3><h5 id="设置为flex"><a href="#设置为flex" class="headerlink" title="设置为flex"></a>设置为flex</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.flex&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="flex垂直居中"><a href="#flex垂直居中" class="headerlink" title="flex垂直居中"></a>flex垂直居中</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.flex-center&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="flex居中，分侧"><a href="#flex居中，分侧" class="headerlink" title="flex居中，分侧"></a>flex居中，分侧</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.flex-center&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  align-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="常用动画"><a href="#常用动画" class="headerlink" title="常用动画"></a>常用动画</h4><h5 id="转圈圈"><a href="#转圈圈" class="headerlink" title="转圈圈"></a>转圈圈</h5><p>animation: rotaCircle 1.5s linear infinite;<br>@keyframes rotaCircle {<br>  0% {<br>    transform: rotate(0deg);<br>  }<br>  25% {<br>    transform: rotate(90deg);<br>  }<br>  50% {<br>    transform: rotate(180deg);<br>  }<br>  75% {<br>    transform: rotate(270deg);<br>  }<br>  100% {<br>    transform: rotate(360deg);<br>  }<br>}</p>
+<h5 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h5><p>animation: gradientOpacity 1.5s linear infinite;<br>@keyframes gradientOpacity {<br>  0% {<br>    transform: opacity(0);<br>  }<br>  25% {<br>    transform: opacity(0.2);<br>  }<br>  50% {<br>    transform: opacity(0.6);<br>  }<br>  75% {<br>    transform: opacity(0.8);<br>  }<br>  100% {<br>    transform: opacity(1);<br>  }<br>}</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/09/05/2020/life_status/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:01:11
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/11/27/2020/functional_programming/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%81%E7%95%A5%E5%8F%B7%E6%8E%A7%E5%88%B6"><span class="toc-text">省略号控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="toc-text">单行显示省略号</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#n%E8%A1%8C%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="toc-text">n行显示省略号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E6%8D%A2%E8%A1%8C%E6%8E%A7%E5%88%B6"><span class="toc-text">文字换行控制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E6%8D%A2%E8%A1%8C"><span class="toc-text">不换行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C"><span class="toc-text">自动换行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E6%8D%A2%E8%A1%8C"><span class="toc-text">强制换行</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E4%B8%A4%E7%AB%AF%E5%AF%B9%E9%BD%90"><span class="toc-text">文本两端对齐</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%8E%A7%E5%88%B6"><span class="toc-text">操作控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A6%81%E6%AD%A2%E7%94%A8%E6%88%B7%E5%8F%8C%E5%87%BB%E5%B1%8F%E5%B9%95%E6%88%96%E8%80%85%E9%80%89%E4%B8%AD%E6%9F%90%E4%BA%9B%E5%86%85%E5%AE%B9"><span class="toc-text">禁止用户双击屏幕或者选中某些内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E9%BC%A0%E6%A0%87%E5%9B%BE%E6%A1%88"><span class="toc-text">不同的鼠标图案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css%E4%BD%BF%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F"><span class="toc-text">css使用硬件加速</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css%E8%BD%AC%E6%8D%A2%E6%96%87%E5%AD%97%E5%A4%A7%E5%B0%8F"><span class="toc-text">css转换文字大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E4%BA%8E10px%E7%9A%84%E5%AD%97%E4%BD%93%E6%98%BE%E7%A4%BA"><span class="toc-text">小于10px的字体显示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E6%9D%A1"><span class="toc-text">自定义滚动条</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%9D%A1%E7%9A%84%E8%BD%A8%E9%81%93"><span class="toc-text">滚动条的轨道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%9D%A1%E7%9A%84%E6%BB%91%E5%9D%97"><span class="toc-text">滚动条的滑块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex%E7%9B%B8%E5%85%B3"><span class="toc-text">flex相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BAflex"><span class="toc-text">设置为flex</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flex%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-text">flex垂直居中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#flex%E5%B1%85%E4%B8%AD%EF%BC%8C%E5%88%86%E4%BE%A7"><span class="toc-text">flex居中，分侧</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8A%A8%E7%94%BB"><span class="toc-text">常用动画</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AC%E5%9C%88%E5%9C%88"><span class="toc-text">转圈圈</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B8%90%E5%8F%98"><span class="toc-text">渐变</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

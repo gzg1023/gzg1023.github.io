@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【前端技术】移动端h5项目调试技巧与总结 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【前端技术】移动端h5项目调试技巧与总结</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-25 00:07:57
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                    #调试
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>移动端真机调试的方法</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><p>移动端调试工具<a target="_blank" rel="noopener" href="https://github.com/liriliri/eruda">eruda地址</a><br>Fiddler2抓包工具<a target="_blank" rel="noopener" href="https://sm.myapp.com/original/Development/fiddler2setup_2.6.2.3.exe">下载地址</a><br>草料二维码<a target="_blank" rel="noopener" href="https://cli.im/">官网</a></p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><h4 id="1-项目安装eruda"><a href="#1-项目安装eruda" class="headerlink" title="1. 项目安装eruda"></a>1. 项目安装eruda</h4><p> 1）方法一，通过npm安装</p>
+<pre><code>    npm install eruda 
+    import eruda from &#39;eruda&#39;
+    eruda.init()
+</code></pre>
+<ol start="2">
+<li><p>方法二，CDN加载</p>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script></li>
+</ol>
+<h4 id="2-修改host"><a href="#2-修改host" class="headerlink" title="2. 修改host"></a>2. 修改host</h4><p>先找到hosts文件(windows系统) &#x2F;c&#x2F;Windows&#x2F;System32&#x2F;drivers&#x2F;etc&#x2F;hosts，如果不存在就新建一个名为hosts的文件；没有后缀（如果不能新建就在桌面新建一个然后复制进来）<br>强烈推荐使用<a target="_blank" rel="noopener" href="https://github.com/oldj/SwitchHosts">SwitchHosts</a>工具</p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXQYT.png" alt="3uXQYT.png"></p>
+<p><strong>这里修改127.0.0.1本机地址为gzg1023.company.com</strong><br><strong>gzg1023是自己的名称，company.com是自定义公司的域名，方便共享Cooike。</strong>(也可以自定义任意的域名)<br>现在把项目跑起来。地址由localhost:8080改为gzg1023.company.com:8080,进行访问如果成功，如下图所示，说明host修改成功了。</p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXlfU.jpg" alt="3uXlfU.jpg"></p>
+<p>注意如果是vue-cli搭建的项目需要设置vue.config.js文件如下。关闭默认的host地址检测</p>
+<pre><code> devServer:&#123;
+    disableHostCheck:true
+&#125;
+</code></pre>
+<h4 id="3-Fiddler代理，修改手机代理"><a href="#3-Fiddler代理，修改手机代理" class="headerlink" title="3. Fiddler代理，修改手机代理"></a>3. Fiddler代理，修改手机代理</h4><pre><code>配置好电脑host以后，我们打开下载的Fiddler，如下图所示右上角有一个online，我们查看当前电脑的局域网IP。
+</code></pre>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXZOs.jpg" alt="3uXZOs.jpg"></p>
+<p>然后打开手机来配置代理，、如下图所示，先打开wifi找到与电脑同一个局域网，然后点击进入详情</p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXmmn.png" alt="3uXmmn.png"></p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXuT0.png" alt="3uXuT0.png"></p>
+<p>在详情最下方，找到配置代理，然后进去</p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXnwq.png" alt="3uXnwq.png"></p>
+<p>输入电脑的IP端口号默认为8888，然后我们手机随便访问一个网页，观察Fiddler是否有新的网络请求。</p>
+<h4 id="4-通过二维码访问"><a href="#4-通过二维码访问" class="headerlink" title="4. 通过二维码访问"></a>4. 通过二维码访问</h4><p>配置好代理后，我们通过草料二维码生成当前网站的二维码，通过手机来访问。这里推荐安装草料二维码的浏览器插件。</p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXElQ.png" alt="3uXElQ.png"></p>
+<p><img src="https://s2.ax1x.com/2020/02/21/3uXMkV.png" alt="3uXMkV.png"></p>
+<h3 id="项目调试"><a href="#项目调试" class="headerlink" title="项目调试"></a>项目调试</h3><p>配置好代理后，我们通过eruda来调试项目了，点击右下方的的小按钮，如下所示。展开工具可以看到调试面板，进行功能调试了。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/3uzdDH"><img src="https://s2.ax1x.com/2020/02/21/3uzdDH.md.jpg" alt="3uzdDH.md.jpg"></a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/02/03/2020/recursion_compoent/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-25 00:07:57
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%B0%83%E8%AF%95/" title="调试">
+                        #调试
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/03/29/2020/computer/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E5%85%B7"><span class="toc-text">准备工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-text">安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E5%AE%89%E8%A3%85eruda"><span class="toc-text">1. 项目安装eruda</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9host"><span class="toc-text">2. 修改host</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Fiddler%E4%BB%A3%E7%90%86%EF%BC%8C%E4%BF%AE%E6%94%B9%E6%89%8B%E6%9C%BA%E4%BB%A3%E7%90%86"><span class="toc-text">3. Fiddler代理，修改手机代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%80%9A%E8%BF%87%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%AE%BF%E9%97%AE"><span class="toc-text">4. 通过二维码访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%B0%83%E8%AF%95"><span class="toc-text">项目调试</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

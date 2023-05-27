@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">vue.js(2.x)原理 - Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive)「04」</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:52:30
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                    #vue原理
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>分析完成响应式原理后，vue的内置指令和组件就是日常开发中最熟悉的内容了，平时一直用组件，这次来看看这些指令到底是怎么实现的。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><p>渲染原理是，无论是true还是false都会渲染组件实例，当值为false时候，改变元素的<code>display</code>属性，第一次始终会创建，切换时候性能高。</p>
+<ul>
+<li>本质是切换display 为none或者display</li>
+<li>如果存在过渡属性，那么触发动画组件的生命周期</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  bind (<span class="attr">el</span>:, &#123; value &#125;, vnode) &#123;</span><br><span class="line">    <span class="keyword">const</span> transition = vnode.<span class="property">data</span> &amp;&amp; vnode.<span class="property">data</span>.<span class="property">transition</span></span><br><span class="line">    <span class="keyword">const</span> originalDisplay = el.<span class="property">__vOriginalDisplay</span> =</span><br><span class="line">      el.<span class="property">style</span>.<span class="property">display</span> === <span class="string">&#x27;none&#x27;</span> ? <span class="string">&#x27;&#x27;</span> : el.<span class="property">style</span>.<span class="property">display</span></span><br><span class="line">    <span class="keyword">if</span> (value &amp;&amp; transition) &#123;</span><br><span class="line">      vnode.<span class="property">data</span>.<span class="property">show</span> = <span class="literal">true</span></span><br><span class="line">      <span class="title function_">enter</span>(vnode, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        el.<span class="property">style</span>.<span class="property">display</span> = originalDisplay</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      el.<span class="property">style</span>.<span class="property">display</span> = value ? originalDisplay : <span class="string">&#x27;none&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// </span></span><br><span class="line">  update (el, &#123; value, oldValue &#125;, vnode) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!value === !oldValue) <span class="keyword">return</span></span><br><span class="line">    vnode = <span class="title function_">locateNode</span>(vnode)</span><br><span class="line">    <span class="keyword">const</span> transition = vnode.<span class="property">data</span> &amp;&amp; vnode.<span class="property">data</span>.<span class="property">transition</span></span><br><span class="line">    <span class="keyword">if</span> (transition) &#123;</span><br><span class="line">      vnode.<span class="property">data</span>.<span class="property">show</span> = <span class="literal">true</span></span><br><span class="line">      <span class="keyword">if</span> (value) &#123;</span><br><span class="line">        <span class="title function_">enter</span>(vnode, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          el.<span class="property">style</span>.<span class="property">display</span> = el.<span class="property">__vOriginalDisplay</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">leave</span>(vnode, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          el.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      el.<span class="property">style</span>.<span class="property">display</span> = value ? el.<span class="property">__vOriginalDisplay</span> : <span class="string">&#x27;none&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  unbind (</span><br><span class="line">    <span class="attr">el</span>: any,</span><br><span class="line">    <span class="attr">binding</span>: <span class="title class_">VNodeDirective</span>,</span><br><span class="line">    <span class="attr">vnode</span>: <span class="title class_">VNodeWithData</span>,</span><br><span class="line">    <span class="attr">oldVnode</span>: <span class="title class_">VNodeWithData</span>,</span><br><span class="line">    <span class="attr">isDestroy</span>: boolean</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isDestroy) &#123;</span><br><span class="line">      el.<span class="property">style</span>.<span class="property">display</span> = el.<span class="property">__vOriginalDisplay</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><h2 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h2><p><code>keep-alive</code>是一个内置的组件，用于缓存我们的vue组件，提高加载的性能。以下是option api的源码部分</p>
+<ul>
+<li>可以看到通过include和exclude来定义要缓存的组件</li>
+<li>通过cache对象和keys来保存缓存的实例（非响应式）</li>
+<li>维护一个pruneCacheEntry结构，用来管理保存和删除 缓存内容</li>
+<li>用max来指定最大的缓存数量，如果超过该数量 那么清除掉，第一个保存的组件</li>
+<li>分为首次渲染和缓存渲染</li>
+<li>在 patch 过程中对于已缓存的组件不会执行 mounted，通过 activated 和 deactivated 钩子函数控制</li>
+<li>本质是LRU算法<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache-lcci">https://leetcode-cn.com/problems/lru-cache-lcci</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">/  keep-alive组件的option api</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;keep-alive&#x27;</span>,</span><br><span class="line">  <span class="comment">// 取消$child和$parent的裙带关系</span></span><br><span class="line">  <span class="attr">abstract</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">include</span>: patternTypes,</span><br><span class="line">    <span class="attr">exclude</span>: patternTypes,</span><br><span class="line">    <span class="attr">max</span>: [<span class="title class_">String</span>, <span class="title class_">Number</span>] <span class="comment">// 最大缓存数量</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="comment">// 缓存对象 </span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cache</span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="literal">null</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">keys</span> = []</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  destroyed () &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> <span class="variable language_">this</span>.<span class="property">cache</span>) &#123;</span><br><span class="line">      <span class="title function_">pruneCacheEntry</span>(<span class="variable language_">this</span>.<span class="property">cache</span>, key, <span class="variable language_">this</span>.<span class="property">keys</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="comment">// 处理包含或者未包含的组件，进行过滤</span></span><br><span class="line">    <span class="variable language_">this</span>.$watch(<span class="string">&#x27;include&#x27;</span>, <span class="function"><span class="params">val</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">pruneCache</span>(<span class="variable language_">this</span>, <span class="function"><span class="params">name</span> =&gt;</span> <span class="title function_">matches</span>(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">this</span>.$watch(<span class="string">&#x27;exclude&#x27;</span>, <span class="function"><span class="params">val</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">pruneCache</span>(<span class="variable language_">this</span>, <span class="function"><span class="params">name</span> =&gt;</span> !<span class="title function_">matches</span>(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">const</span> slot = <span class="variable language_">this</span>.<span class="property">$slots</span>.<span class="property">default</span></span><br><span class="line">    <span class="comment">// keep-alive&gt; 只处理第一个子元素，所以一般和它搭配使用的有 component 动态组件或者是 router-view</span></span><br><span class="line">    <span class="keyword">const</span> <span class="attr">vnode</span>: <span class="title class_">VNode</span> = <span class="title function_">getFirstComponentChild</span>(slot)</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">componentOptions</span>: ?<span class="title class_">VNodeComponentOptions</span> = vnode &amp;&amp; vnode.<span class="property">componentOptions</span></span><br><span class="line">    <span class="keyword">if</span> (componentOptions) &#123;</span><br><span class="line">      <span class="comment">// check pattern</span></span><br><span class="line">      <span class="keyword">const</span> <span class="attr">name</span>: ?string = <span class="title function_">getComponentName</span>(componentOptions)</span><br><span class="line">      <span class="keyword">const</span> &#123; include, exclude &#125; = <span class="variable language_">this</span></span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        <span class="comment">// not included</span></span><br><span class="line">        (include &amp;&amp; (!name || !<span class="title function_">matches</span>(include, name))) ||</span><br><span class="line">        <span class="comment">// excluded</span></span><br><span class="line">        (exclude &amp;&amp; name &amp;&amp; <span class="title function_">matches</span>(exclude, name))</span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="keyword">return</span> vnode</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> &#123; cache, keys &#125; = <span class="variable language_">this</span></span><br><span class="line">      <span class="keyword">const</span> <span class="attr">key</span>: ?string = vnode.<span class="property">key</span> == <span class="literal">null</span></span><br><span class="line">        ? componentOptions.<span class="property">Ctor</span>.<span class="property">cid</span> + (componentOptions.<span class="property">tag</span> ? <span class="string">`::<span class="subst">$&#123;componentOptions.tag&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        : vnode.<span class="property">key</span></span><br><span class="line">      <span class="keyword">if</span> (cache[key]) &#123;</span><br><span class="line">        vnode.<span class="property">componentInstance</span> = cache[key].<span class="property">componentInstance</span></span><br><span class="line">        <span class="title function_">remove</span>(keys, key)</span><br><span class="line">        keys.<span class="title function_">push</span>(key)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cache[key] = vnode</span><br><span class="line">        keys.<span class="title function_">push</span>(key)</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">max</span> &amp;&amp; keys.<span class="property">length</span> &gt; <span class="built_in">parseInt</span>(<span class="variable language_">this</span>.<span class="property">max</span>)) &#123;</span><br><span class="line">          <span class="title function_">pruneCacheEntry</span>(cache, keys[<span class="number">0</span>], keys, <span class="variable language_">this</span>.<span class="property">_vnode</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      vnode.<span class="property">data</span>.<span class="property">keepAlive</span> = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> vnode || (slot &amp;&amp; slot[<span class="number">0</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/06/03/2021/Promise/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:52:30
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                        #vue原理
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/07/22/2021/vue_principle_05/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#v-show"><span class="toc-text">v-show</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-if"><span class="toc-text">v-if</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-model"><span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive"><span class="toc-text">keep-alive</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

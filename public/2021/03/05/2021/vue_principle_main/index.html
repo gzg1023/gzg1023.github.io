@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【原理探索】vue.js超级全家桶--原理分析及技术学习清单 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【原理探索】vue.js超级全家桶--原理分析及技术学习清单</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-27 15:54:06
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                    #vue原理
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>vue.js在2016年爆🔥，到现在在中国已经是非常主流的前端框架，使用框架已经2年时间从本文开始，啃源码，解析原理，学习超级全家桶。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>系列文章，针对vue超级全家桶原理进行分析及新技术的学习的清单，鞭策自己一步一步完成。根据时间和学习进度同步修改。系列文章并不是详细的针对Vue源码的分析 深入到什么行实现了什么功能，而是个人对Vue框架的一些理解和常用api的一些解析。能帮助自己更好的使用Vue框架。</p>
+<ol>
+<li>vue.js(2.x)框架底层原理- 实现mini vue</li>
+<li>vue.js(2.x)原理 - new Vue流程梳理 及源码版生命周期分析</li>
+<li>vue.js(2.x)原理 - Vue响应式核心Observer,Dep及Watcher和异步更新队列</li>
+<li>vue.js(2.x)原理 -  Vue内置指令及内置组件（v-show, v-if, v-for , v-model,keep-alive</li>
+<li>vue.js(2.x)原理 - Virtual dom及Compile模版编译器原理分析</li>
+<li>vue-router(3.x) - vue官方路由库原理学习</li>
+<li>vuex(3.x) - Vue官方状态管理库源码分析</li>
+<li>vue-ssr(2.x) - vue主流ssr框架手动搭建及主流nuxt.js原理学习</li>
+<li>vue-cli(3.x) - Vue官方脚手架工具源码分析</li>
+<li>vue.js(3.x) - vue3新版本学习及原理分析</li>
+<li>vite2 - vue官方新开发工具使用及原理分析</li>
+<li>gridsome - vue主流ssg框架使用及原理</li>
+</ol>
+<h2 id="源码附录"><a href="#源码附录" class="headerlink" title="源码附录"></a>源码附录</h2><table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.circleci</td>
+<td>持续集成&#x2F;持续部署(ci&#x2F;cd)配置</td>
+</tr>
+<tr>
+<td>.github</td>
+<td>存放针对项目开发&#x2F;贡献代码的文档（基于github）</td>
+</tr>
+<tr>
+<td>benchmarks</td>
+<td>vue的一些性能测试文件和demo （好几年没维护了）</td>
+</tr>
+<tr>
+<td>dist</td>
+<td>打包后的vue源码（多种构建&#x2F;规范版本）</td>
+</tr>
+<tr>
+<td>examples</td>
+<td>基于vue的一些demo小项目（好几年没维护）</td>
+</tr>
+<tr>
+<td>flow</td>
+<td>类型检查工具flow定义的地方（各种内置功能的类型定义）</td>
+</tr>
+<tr>
+<td>packages</td>
+<td>vue插件包，在配合开发工具项目时候按需使用</td>
+</tr>
+<tr>
+<td>scripts</td>
+<td>vue打包的配置文件及一些自动化脚本</td>
+</tr>
+<tr>
+<td>src</td>
+<td>源码目录结构</td>
+</tr>
+<tr>
+<td>test</td>
+<td>单元测试&#x2F;e2e测试用例目录</td>
+</tr>
+<tr>
+<td>types</td>
+<td>针对typeScript的类型声明文件及配置</td>
+</tr>
+</tbody></table>
+<h3 id="源码核心模块"><a href="#源码核心模块" class="headerlink" title="源码核心模块"></a>源码核心模块</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> src/</span><br><span class="line"></span><br><span class="line">- compiler：编译源码相关文件夹</span><br><span class="line">- core：核心代码文件夹</span><br><span class="line">- platforms：不同平台支持文件夹</span><br><span class="line">- server：支持服务端渲染文件夹</span><br><span class="line">- sfc：.<span class="property">vue</span>单文件解析文件夹</span><br><span class="line">- <span class="attr">shared</span>: 共享代码</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="构建后的版本"><a href="#构建后的版本" class="headerlink" title="构建后的版本"></a>构建后的版本</h3><p>打包后会产生很多类型的文件，默认的vue是Runtime +  UMD 版本的构建，也是vue-cli默认导出的版本。</p>
+<p>runtime版本是不包含Compiler的版本。其中带min的是压缩版本，适用于线上生产环境。</p>
+<table>
+<thead>
+<tr>
+<th>模块类型</th>
+<th>UMD 规范</th>
+<th>CommonJS 规范</th>
+<th>ES Module 规范</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>全部</strong></td>
+<td>vue.js</td>
+<td>vue.common.js</td>
+<td>vue.esm.js</td>
+</tr>
+<tr>
+<td><strong>Runtime版本</strong></td>
+<td>vue.runtime.js</td>
+<td>vue.runtime.common.js</td>
+<td>vue.runtime.esm.js</td>
+</tr>
+</tbody></table>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/02/05/2021/snabbdom_source/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-27 15:54:06
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/vue%E5%8E%9F%E7%90%86/" title="vue原理">
+                        #vue原理
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/03/27/2021/about_mylife/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E9%99%84%E5%BD%95"><span class="toc-text">源码附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-text">源码核心模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-text">构建后的版本</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

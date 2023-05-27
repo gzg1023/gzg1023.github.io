@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】从前端的角度，谈谈解决跨域的一些方案 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】从前端的角度，谈谈解决跨域的一些方案</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:12
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>跨域开发是web系统中前后端分离开发模式必须考虑的事情，本篇文章从前端角度谈谈跨域的解决办法。</p>
+<span id="more"></span>
+
+<h2 id="前端跨域研究"><a href="#前端跨域研究" class="headerlink" title="前端跨域研究"></a>前端跨域研究</h2><h2 id="1-什么是跨域"><a href="#1-什么是跨域" class="headerlink" title="1. 什么是跨域"></a>1. 什么是跨域</h2><p>在所有支持JavaScript的浏览器中，都有一个约定叫同源策略。所谓同源是指”协议+域名+端口”三者相同。如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。如果应用程序违反了同源策略进行通信，那么就会产生跨域问题。 </p>
+<blockquote>
+<p>同源策略有以下几种行为限制：</p>
+</blockquote>
+<ul>
+<li>Cookie、Local Storage 和 Index DB 无法读取</li>
+<li>DOM和JS对象无法获得</li>
+<li>AJAX 请求不能发送</li>
+</ul>
+<p>在DOM结构中，有三个标签可以进行跨域行为<code>&lt;link&gt;</code>，<code>&lt;img&gt;</code>，<code>&lt;script&gt;</code>，有一种解决跨域的方式叫JSONP，利用的就是script可以跨域的特性。解决跨域有很多办法，如果是在企业内部开发中，最推荐的是设置CORS和跨域代理。<br>前端项目设置跨域代理都是通过<code>http-proxy-middleware</code>模块实现的。</p>
+<h2 id="2-CORS配置跨域"><a href="#2-CORS配置跨域" class="headerlink" title="2. CORS配置跨域"></a>2. CORS配置跨域</h2><p>由后端程序员直接设置CORS响应字段，这种情况不支持IE10以下的浏览器。<br>1）	<code>Access-Control-Allow-Origin</code>：必选<br>  它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。<br>2）	<code>Access-Control-Allow-Credentials</code>：可选<br>  它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。<br>3）	<code>Access-Control-Expose-Headers</code>：可选<br>  CORS请求时，XMLHttpRequest对象的<code>getResponseHeader()</code>方法只能拿到6个基本字段：<code>Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma</code>。如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定。上面的例子指定，<code>getResponseHeader(&#39;FooBar&#39;)</code>可以返回<code>FooBar</code>字段的值。<br>&lt;</p>
+<h2 id="3-Vue-cli2配置跨域代理"><a href="#3-Vue-cli2配置跨域代理" class="headerlink" title="3.	Vue-cli2配置跨域代理"></a>3.	Vue-cli2配置跨域代理</h2><p>由于vue-cli2是配合webpack2使用的，首先需要找到config文件夹的index.js文件然后配置proxyTable参数，如下所示，具体参数如表1.1所示参数说明：</p>
+<pre><code>proxyTable: &#123;
+      &#39;/api/&#39;: &#123;
+        target: &#39;http://192.168.1.22:9001&#39;,
+        changeOrigin: true,
+        pathRewrite: &#123;
+          &#39;^/api/&#39;: &#39;&#39;
+      &#125;
+      &#125;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>‘&#x2F;api’</td>
+<td>api对象</td>
+<td>捕获API的标志，如果API中有这个字符串，那么就开始匹配代理比如API请求&#x2F;api&#x2F;users, 会被代理到请求 http:baidu.com&#x2F;api&#x2F;users</td>
+</tr>
+<tr>
+<td>target</td>
+<td>域名&#x2F;IP地址</td>
+<td>代理的API地址，就是需要跨域的API地址，地址可以是域名,如：<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a> 也可以是IP地址：<a target="_blank" rel="noopener" href="http://192.168.1.22:9001/">http://192.168.1.22:9001</a></td>
+</tr>
+<tr>
+<td>pathRewrite</td>
+<td>‘^&#x2F;api&#x2F;‘: ‘ ‘</td>
+<td>路径重写，也就是说会修改最终请求的API路径比如访问的API路径：&#x2F;api&#x2F;users, 设置pathRewrite: {‘^&#x2F;api’ : ‘’},后，最终代理访问<a target="_blank" rel="noopener" href="http://www.baidu.com/users%EF%BC%8C">http://www.baidu.com/users，</a> 这个参数的目的是给代理命名后，在访问时把命名删除掉</td>
+</tr>
+<tr>
+<td>changeOrigin</td>
+<td>布尔值</td>
+<td>如果后端服务是一个IP对应多个域名。需要通过域名区分服务，则该值必须是true</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>布尔值</td>
+<td>设置false(默认)后，可以接受运行在 HTTPS 上，可以使用无效证书的后端服务器</td>
+</tr>
+</tbody></table>
+<p>(表1.1) </p>
+<h2 id="4-Vue-cli3配置跨域代理"><a href="#4-Vue-cli3配置跨域代理" class="headerlink" title="4.	Vue-cli3配置跨域代理"></a>4.	Vue-cli3配置跨域代理</h2><p>Vue-cli3的配置项目没有cli2那么多文件结构了，只需要在devServe对象(所有 webpack-dev-server都可以在这配置)里面配置proxy对象即可，如下所示。具体参数和表1.1相同。</p>
+<pre><code>proxy: &#123;
+    &#39;/api&#39;: &#123;
+      target: &#39;http://192.168.1.21:9101/daas&#39;,
+      changeOrigin: true,
+      pathRewrite: &#123;
+        &#39;/api&#39;: &#39;&#39;
+       &#125;
+      &#125;
+  &#125;
+</code></pre>
+<h2 id="5-Koa配置跨域代理"><a href="#5-Koa配置跨域代理" class="headerlink" title="5.	Koa配置跨域代理"></a>5.	Koa配置跨域代理</h2><p>我们创建一个js文件(例如proxy.js)，来构建代理服务，先实例化一个koa对象，然后配置app对象的proxy属性，详情参数见表1.1。配置到代理属性，需要本地启动一个node服务，然后我们通过命令行启动该服务node  proxy.js</p>
+<pre><code>const app = new Koa()  // 创建koa对象
+  app.use(async (ctx, next) =&gt; &#123;
+    ctx.respond = false //绕过koa内置对象response ，写入原始res对象，而不是koa处理过的response
+      return proxy(&#123;
+        target: &#39;http://192.168.1.21:9003&#39;,
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: &#123;
+        &#39;^/proxyAPI&#39;: &#39;&#39;
+        &#125;
+      &#125;)(ctx.req, ctx.res, next)
+    &#125;
+    return next()
+  &#125;)
+  app.listen(3000, () =&gt; &#123;
+      console.log(&#39;Listening 3000...&#39;)
+  &#125;)
+</code></pre>
+<h2 id="6-Nuxt-js配置跨域代理"><a href="#6-Nuxt-js配置跨域代理" class="headerlink" title="6.	Nuxt.js配置跨域代理"></a>6.	Nuxt.js配置跨域代理</h2><p>在nuxt项目中首先安装proxy代理库 npm i @nuxtjs&#x2F;proxy -D 然后在next.config.js配置文件中添加模块设置代理</p>
+<pre><code> modules: [
+    &#39;@nuxtjs/axios&#39;,
+     &#39;@nuxtjs/proxy&#39;
+  ],
+   axios: &#123;
+    proxy: true
+  &#125;,
+    proxy: &#123;
+      &#39;/api&#39;: &#123;
+          target: &#39;http://example.com&#39;,
+        pathRewrite: &#123;
+       &#39;^/api&#39; : &#39;/&#39;
+     &#125;
+   &#125;
+  &#125;
+</code></pre>
+<h2 id="7-Nginx配置跨域代理"><a href="#7-Nginx配置跨域代理" class="headerlink" title="7.	Nginx配置跨域代理"></a>7.	Nginx配置跨域代理</h2><p>通过nginx的反向代理，把客户端的请求转发到服务端，然后服务端返回数据以后，在转发回客户端。<br>如果是开发环境需要配置两个代理，一个是把项目代理到本地nginx服务器，另一个是代理服务器传来的数据。<br>如果是打包线上环境，那么只要配置一个代理做转发即可。</p>
+<pre><code>  server &#123;
+    listen       8085;
+    server_name  localhost;
+    location / &#123;
+        proxy_pass http://localhost:8080;
+    &#125;
+    location /daas/api &#123;
+        proxy_pass http://192.168.1.21:9097/daas;
+        rewrite ^/api/(.*)$ /$1 break;
+    &#125;
+ &#125;
+</code></pre>
+<h2 id="8-Apache配置跨域代理"><a href="#8-Apache配置跨域代理" class="headerlink" title="8.	Apache配置跨域代理"></a>8.	Apache配置跨域代理</h2><p>Apache和nginx原理相同，都是做反向代理。只是需要修改相关的配置文件来完成<br>   &lt;<code>proxy </code> <code>http://192.168.1.21:9091/daas</code>&gt;<br>      <code>AllowOverride None</code><br>     <code> Order Deny,Allow</code><br>      <code>Allow from all</code><br>   &lt;&#x2F;<code>proxy</code>&gt;</p>
+<h2 id="9-Chrome插件配置跨域代理"><a href="#9-Chrome插件配置跨域代理" class="headerlink" title="9.	Chrome插件配置跨域代理"></a>9.	Chrome插件配置跨域代理</h2><p>通过安装<code>Allow-Control-Allow-Origin</code>浏览器插件，来解决跨域问题，前提是后端会判断你是否存在跨域权限，发送一个options请求先预判断，然后在进行跨域处理。
+ </p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/08/07/2019/front_debug/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:12
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/09/06/2019/string_handle/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E7%A0%94%E7%A9%B6"><span class="toc-text">前端跨域研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F"><span class="toc-text">1. 什么是跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CORS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F"><span class="toc-text">2. CORS配置跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Vue-cli2%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">3.	Vue-cli2配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Vue-cli3%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">4.	Vue-cli3配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Koa%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">5.	Koa配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Nuxt-js%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">6.	Nuxt.js配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Nginx%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">7.	Nginx配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Apache%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">8.	Apache配置跨域代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Chrome%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E4%BB%A3%E7%90%86"><span class="toc-text">9.	Chrome插件配置跨域代理</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

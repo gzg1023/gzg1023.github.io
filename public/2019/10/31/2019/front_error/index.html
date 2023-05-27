@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      【技术分享】前端异常监控之异常信息采集 
+      
+      
+      |
+    
+     Hexo
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">沽默清尘</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">【技术分享】前端异常监控之异常信息采集</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2021-01-24 23:00:17
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/" title="前端异常">
+                    #前端异常
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>软件在上线后，有时候会有我们没有预测到的问题，通过异常监控，可以提高我们软件的健壮性，更好的服务用户，本文简单介绍异常信息采集的基本方法。</p>
+<span id="more"></span>
+
+
+<h2 id="1-常见前端异常"><a href="#1-常见前端异常" class="headerlink" title="1.	常见前端异常"></a>1.	常见前端异常</h2><p>在软件开发过程中，会出现很多异常情况，在前端开发中，有以下一些常见的异常情况。在发生异常后，我们通过一些JavaScript的方法，来捕获不同的错误，达到监控的目的。<br>*	JS 语法错误、代码异常<br>*	AJAX 请求异常<br>*	静态资源加载异常<br>*	Promise 异常<br>*	Iframe 异常<br>*	跨域 Script error<br>*	崩溃和卡顿</p>
+<h2 id="2-捕获异常方案"><a href="#2-捕获异常方案" class="headerlink" title="2 捕获异常方案"></a>2 捕获异常方案</h2><p>在JavaScript程序中捕获异常有很多办法，下面我们依次对不同类型的错误，捕获的方法进行分析。通过下面不同的方法，可以捕获到软件系统在运行时所产生的异常，然后通过上报异常，来解决问题。</p>
+<h3 id="1）捕获try-x2F-catch的异常"><a href="#1）捕获try-x2F-catch的异常" class="headerlink" title="1）	捕获try&#x2F;catch的异常"></a>1）	捕获try&#x2F;catch的异常</h3><p>在开发过程中，我们通过try&#x2F;catch语句对有可能产生问题的地址进行错误捕获，然后获取程序本身运行的异常错误信息。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTiMn0.png" alt="请输入图片描述"></p>
+<h3 id="2）捕获同步代码的异常"><a href="#2）捕获同步代码的异常" class="headerlink" title="2）	捕获同步代码的异常"></a>2）	捕获同步代码的异常</h3><p>通过window.onerror可以捕获到程序运行时，同步的错误信息。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTi3AU.png" alt="请输入图片描述"></p>
+<h3 id="3）捕获静态资源的异常"><a href="#3）捕获静态资源的异常" class="headerlink" title="3）	捕获静态资源的异常"></a>3）	捕获静态资源的异常</h3><p>当一些图片资源加载失败后，会触发Event的error事件，我们通过addEventListener来对错误添加监听事件，然后进行错误的捕获。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTil7T.png" alt="请输入图片描述"></p>
+<h3 id="4）捕获promise的异常"><a href="#4）捕获promise的异常" class="headerlink" title="4）	捕获promise的异常"></a>4）	捕获promise的异常</h3><p>在promise中，我们可以通过catch来对错误信息进行捕获，但是有一些情况没有写catch，系统会通过unhandledrejection事件来触发Promise Error ,我们通过addEventListener来添加监听，然后进行错误的捕获。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTiQBV.png" alt="请输入图片描述"></p>
+<h3 id="5）捕获VUE项目的异常"><a href="#5）捕获VUE项目的异常" class="headerlink" title="5）	捕获VUE项目的异常"></a>5）	捕获VUE项目的异常</h3><p>Vue官方为我们提供了一个是错误捕获函数，通过errHandler来捕获相关的错误</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTiGh4.png" alt="请输入图片描述"></p>
+<h2 id="3-2异常上报"><a href="#3-2异常上报" class="headerlink" title="3.2异常上报"></a>3.2异常上报</h2><h3 id="1）通过程序上报"><a href="#1）通过程序上报" class="headerlink" title="1）通过程序上报"></a>1）通过程序上报</h3><p>当我们捕获到异常信息后，我们可以通过预先设计好的接口来上报程序运行中发生的异常信息，然后在后台管理处，查看相关的信息，并根据实际的情况，做相关的处理操作。</p>
+<h3 id="2）通过用户反馈上报"><a href="#2）通过用户反馈上报" class="headerlink" title="2）通过用户反馈上报"></a>2）通过用户反馈上报</h3><p>我们也可以在页面添加异常上报接口和页面，然后让用户主动反馈异常的信息，进行异常捕获并上报。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.	总结"></a>4.	总结</h2><p>前端异常监控，是一套完整的软件运行体系。流程如下。我们在捕获到程序运行中所产生的异常，目的是为了解决本次异常，并在下一次的开发过程中，预防异常的发生。提高软件的健壮性。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTiY9J.png" alt="请输入图片描述"></p>
+<p>业界流行系统：<br>fundebug: <a target="_blank" rel="noopener" href="https://www.fundebug.com/">https://www.fundebug.com/</a><br>Sentry: <a target="_blank" rel="noopener" href="https://sentry.io/">https://sentry.io/</a> </p>
+<h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.	实例解析"></a>5.	实例解析</h2><h3 id="5-1静态资源异常"><a href="#5-1静态资源异常" class="headerlink" title="5.1静态资源异常"></a>5.1静态资源异常</h3><p>我们在上线项目后，有时候图片未正常加载，如图所示，图片未显示。我们通过window.addEventListener(‘error’)添加静态资源错误的监听，就可以捕获到相关发生的位置。然后通过我们设定好的回调函数，把相关的错误信息反馈会管理平台。</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTit39.png" alt="请输入图片描述"></p>
+<h3 id="5-2网络请求异常"><a href="#5-2网络请求异常" class="headerlink" title="5.2网络请求异常"></a>5.2网络请求异常</h3><p>如下图所示，我们在进行异步请求的过程中，如果发生了异常信息，我们没有进行catch，那么可以通过window.addEventListener(‘unhandledrejection’)来监听异步错误信息的内容，然后我们根据需求，把所需要的参数提交后台.</p>
+<p><img src="https://s2.ax1x.com/2019/10/31/KTiNcR.png" alt="请输入图片描述"></p>
+<p>在捕获异常信息后，我们需要先对异常信息进行数据整理，然后把有效的信息发送回反馈平台。我们通过错误事件对象拿到改错误的具体信息，如下所示，对于一个网络请求错误来说，我们通过e.reason对象来获取相关的信息。下面我们对一个完整的网络请求进行有效参数整理。</p>
+<p> <img src="https://s2.ax1x.com/2019/10/31/KTiUj1.png" alt="请输入图片描述"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/10/20/2019/dev_stand/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2021-01-24 23:00:17
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8/" title="前端异常">
+                        #前端异常
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/11/19/2019/pack_opt/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E8%A7%81%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8"><span class="toc-text">1.	常见前端异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%E6%96%B9%E6%A1%88"><span class="toc-text">2 捕获异常方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E6%8D%95%E8%8E%B7try-x2F-catch%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="toc-text">1）	捕获try&#x2F;catch的异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E6%8D%95%E8%8E%B7%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="toc-text">2）	捕获同步代码的异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E6%8D%95%E8%8E%B7%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="toc-text">3）	捕获静态资源的异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%89%E6%8D%95%E8%8E%B7promise%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="toc-text">4）	捕获promise的异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%EF%BC%89%E6%8D%95%E8%8E%B7VUE%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="toc-text">5）	捕获VUE项目的异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2%E5%BC%82%E5%B8%B8%E4%B8%8A%E6%8A%A5"><span class="toc-text">3.2异常上报</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E9%80%9A%E8%BF%87%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%8A%A5"><span class="toc-text">1）通过程序上报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E9%80%9A%E8%BF%87%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88%E4%B8%8A%E6%8A%A5"><span class="toc-text">2）通过用户反馈上报</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93"><span class="toc-text">4.	总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90"><span class="toc-text">5.	实例解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%BC%82%E5%B8%B8"><span class="toc-text">5.1静态资源异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BC%82%E5%B8%B8"><span class="toc-text">5.2网络请求异常</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="Github" target="_blank" rel="noopener" href="https://github.com/gzg1023">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>
