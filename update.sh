@@ -1,4 +1,4 @@
-hexo build
+npm run build
 
 git add .
 git commit -m  "$1"
